@@ -26,8 +26,8 @@ import javafx.scene.paint.Color;
  */
 public class PlayerRobot extends GameObject {
 
-    private double worldPossitionX = 500;
-    private double worldpossitionY = 400;
+    private double worldPossitionX;
+    private double worldpossitionY;
 
     private double robotPositionChangeX = 0;
     private double robotPositionChangeY = 0;
@@ -50,6 +50,11 @@ public class PlayerRobot extends GameObject {
 
     public PlayerRobot(GraphicsContext robotGraphicsContext, Point possition) {
         super(possition, 64, 64);
+        worldPossitionX = possition.getCoordX() + 2048;
+        worldpossitionY = possition.getCoordY() + 9216;
+        
+        System.out.println("worldPossitionX: " + worldPossitionX);
+        
         this.robotGraphicsContext = robotGraphicsContext;
 
         robotImage = LoadAllResources.getMapOfAllImages().get("basePassive");
@@ -267,5 +272,20 @@ public class PlayerRobot extends GameObject {
     public PlayerRobotShield getPlayerRobotShield() {
         return playerRobotShield;
     }
+
+    public double getWorldPossitionX() {
+        return worldPossitionX;
+    }
+
+    public double getWorldpossitionY() {
+        return worldpossitionY;
+    }
+
+    @Override
+    public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
+        
+    }
+    
+    
 
 }

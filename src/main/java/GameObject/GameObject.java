@@ -25,6 +25,8 @@ public abstract class GameObject {
     }
     
     public abstract void paintGameObject();
+    
+    public abstract void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY);
 
     private void prepareObjectCorners(){
         Point topRight = new Point(possition.getCoordX() + width, possition.getCoordY());

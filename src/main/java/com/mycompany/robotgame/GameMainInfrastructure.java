@@ -6,6 +6,8 @@
 package com.mycompany.robotgame;
 
 import GameObject.Point;
+import MapGridTable.GridCell;
+import MapGridTable.GridTable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -47,9 +49,11 @@ public class GameMainInfrastructure {
 
     private Label robotHpValueLabel;
     private Label shieldHpValueLabel;
+    private Label playerWorldPossitionValueLabel;
     private Label gameOverLabel = new Label("");
     
     private PlayerRobot playerRobot;
+    private GridTable gridTable;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -67,6 +71,10 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(robotCanvas);
 
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
+        
+        gridTable = new GridTable(enviromentGraphicsContext);
+        CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
+        gridTable = createMap1.generatedObjectForGame(gridTable);
 
         HBox userProfilePanel = new HBox();
         Label robotHpLabel = new Label("Robot HP:");
@@ -77,14 +85,21 @@ public class GameMainInfrastructure {
 
         HBox playerShiedInformation = new HBox();
         Label shieldHpLabel = new Label("Shield Energy:");
-        shieldHpValueLabel = new Label(String.valueOf(playerRobot.getPlayerRobotShield()));
+        shieldHpValueLabel = new Label(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
         playerShiedInformation.getChildren().add(shieldHpLabel);
         playerShiedInformation.getChildren().add(shieldHpValueLabel);
+        
+        HBox playerWorldPossition = new HBox();
+        Label playerWorldPossitionLabel = new Label("World Possition:");
+        playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossitionX() + " " + playerRobot.getWorldpossitionY()));
+        playerWorldPossition.getChildren().add(playerWorldPossitionLabel);
+        playerWorldPossition.getChildren().add(playerWorldPossitionValueLabel);
 
         VBox gameVerticalPanel = new VBox();
         gameVerticalPanel.getChildren().add(gameCanvasPanel);
         gameVerticalPanel.getChildren().add(playerShiedInformation);
         gameVerticalPanel.getChildren().add(userProfilePanel);
+        gameVerticalPanel.getChildren().add(playerWorldPossition);
 
         gamePanel.getChildren().add(gameVerticalPanel);
 
@@ -94,7 +109,7 @@ public class GameMainInfrastructure {
 
         buildAndSetGameLoop(stage);
     }
-
+    
     private void changeCanvasWidthAndHeighToFullSize() {
         WINDOW_WIDTH = Screen.getPrimary().getVisualBounds().getMaxX();
         WINDOW_HEIGH = Screen.getPrimary().getVisualBounds().getMaxY() - 100;
@@ -185,10 +200,13 @@ public class GameMainInfrastructure {
                 windowPositionX = stage.getX();
                 windowPositionY = stage.getY();
                 
+                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossitionX(), playerRobot.getWorldpossitionY());
+                
                 movePlayerRobot();
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
-
+                
+                playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossitionX() + " " + playerRobot.getWorldpossitionY()));
             }
 
         });
