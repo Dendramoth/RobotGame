@@ -2,22 +2,31 @@ package com.mycompany.robotgame;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import static javafx.application.Application.launch;
 
 public class MainApp extends Application {
+    
+    public LoadAllResources loadAllImages = new LoadAllResources();
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+        VBox mainPanel = new VBox();
         
-        Scene scene = new Scene(root);
+        GameMainInfrastructure gameMainInfrastructure = new GameMainInfrastructure(stage, mainPanel);
+        gameMainInfrastructure.beginGameLoop();
+
+        Scene scene = new Scene(mainPanel);
         scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
+        scene.setCursor(new ImageCursor(LoadAllResources.getMapOfAllImages().get("cursorTarget"),
+                                LoadAllResources.getMapOfAllImages().get("cursorTarget").getWidth() / 2,
+                                LoadAllResources.getMapOfAllImages().get("cursorTarget").getHeight() /2));
+
+        stage.setTitle("Robot Awesome Game");
         stage.setScene(scene);
         stage.show();
     }
