@@ -17,6 +17,9 @@ import java.util.List;
 public class GridCell {
     private HashSet<GameObject> objectInCell = new HashSet<GameObject>();
     private HashSet<GameObject> objectsVisibleFromCell = new HashSet<GameObject>();
+    
+    private HashSet<GameObject> backgroundInCell = new HashSet<GameObject>();
+    private HashSet<GameObject> backgroundVisibleFromCell = new HashSet<GameObject>();
    // private HashSet<GameObject> backgroundVisibleFromCell = new HashSet<GameObject>();
 
     public GridCell() {
@@ -37,6 +40,26 @@ public class GridCell {
     public HashSet<GameObject> getObjectsVisibleFromCell() {
         return objectsVisibleFromCell;
     }
+    
+    public void addGameBackgroundHex(GameObject gameObject){
+        backgroundInCell.add(gameObject);
+    }
+    
+    public void addBackgroundHexVisibleFromCell(GameObject gameObject){
+        backgroundVisibleFromCell.add(gameObject);
+    }
+
+    public HashSet<GameObject> getBackgroundInCell() {
+        return backgroundInCell;
+    }
+
+    public HashSet<GameObject> getBackgroundVisibleFromCell() {
+        return backgroundVisibleFromCell;
+    }
+
+    
+    
+ 
     
     
     

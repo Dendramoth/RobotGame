@@ -52,9 +52,9 @@ public class PlayerRobot extends GameObject {
         super(possition, 64, 64);
         worldPossitionX = possition.getCoordX() + 2048;
         worldpossitionY = possition.getCoordY() + 9216;
-        
+
         System.out.println("worldPossitionX: " + worldPossitionX);
-        
+
         this.robotGraphicsContext = robotGraphicsContext;
 
         robotImage = LoadAllResources.getMapOfAllImages().get("basePassive");
@@ -83,11 +83,12 @@ public class PlayerRobot extends GameObject {
     }
 
     public void moveRobotForward() {
+
         robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 2.5;
         robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 2.5;
 
-        worldPossitionX = worldPossitionX - robotPositionChangeX;
-        worldpossitionY = worldpossitionY - robotPositionChangeY;
+        worldPossitionX = worldPossitionX + robotPositionChangeX;
+        worldpossitionY = worldpossitionY + robotPositionChangeY;
     }
 
     public void moveRobotBackward() {
@@ -283,9 +284,7 @@ public class PlayerRobot extends GameObject {
 
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
-        
+
     }
-    
-    
 
 }

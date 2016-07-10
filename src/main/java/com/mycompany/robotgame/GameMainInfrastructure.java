@@ -74,7 +74,8 @@ public class GameMainInfrastructure {
         
         gridTable = new GridTable(enviromentGraphicsContext);
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
-        gridTable = createMap1.generatedObjectForGame(gridTable);
+        createMap1.generatedObjectForGame(gridTable);
+        createMap1.generateBackground(gridTable);
 
         HBox userProfilePanel = new HBox();
         Label robotHpLabel = new Label("Robot HP:");
@@ -197,8 +198,8 @@ public class GameMainInfrastructure {
              */
             @Override
             public void handle(Event event) {
-                windowPositionX = stage.getX();
-                windowPositionY = stage.getY();
+            /*    windowPositionX = stage.getX();
+                windowPositionY = stage.getY();*/
                 
                 gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossitionX(), playerRobot.getWorldpossitionY());
                 
