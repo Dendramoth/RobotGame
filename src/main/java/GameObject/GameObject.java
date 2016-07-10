@@ -12,7 +12,7 @@ package GameObject;
 public abstract class GameObject {
 
     private CornerPointsOfObject cornerPointsOfObject;
-    private Point possition;
+    protected Point possition;
     private double width;
     private double heigh;
 

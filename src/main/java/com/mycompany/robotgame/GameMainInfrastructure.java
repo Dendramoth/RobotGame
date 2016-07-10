@@ -5,7 +5,7 @@
  */
 package com.mycompany.robotgame;
 
-import PlayerRobot.PlayerRobot;
+import GameObject.Point;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,6 +26,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Screen;
+import playerRobot.PlayerRobot;
 
 public class GameMainInfrastructure {
 
@@ -48,7 +49,7 @@ public class GameMainInfrastructure {
     private Label shieldHpValueLabel;
     private Label gameOverLabel = new Label("");
     
-    PlayerRobot playerRobot;
+    private PlayerRobot playerRobot;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -65,16 +66,18 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(enemiesCanvas);
         gameCanvasPanel.getChildren().add(robotCanvas);
 
+        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
+
         HBox userProfilePanel = new HBox();
         Label robotHpLabel = new Label("Robot HP:");
-    //    robotHpValueLabel = new Label(String.valueOf(playerRobot.getHitPoints()));
+        robotHpValueLabel = new Label(String.valueOf(playerRobot.getHitPoints()));
         userProfilePanel.getChildren().add(robotHpLabel);
         userProfilePanel.getChildren().add(robotHpValueLabel);
         userProfilePanel.getChildren().add(gameOverLabel);
-        
+
         HBox playerShiedInformation = new HBox();
         Label shieldHpLabel = new Label("Shield Energy:");
-  //      shieldHpValueLabel = new Label(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
+        shieldHpValueLabel = new Label(String.valueOf(playerRobot.getPlayerRobotShield()));
         playerShiedInformation.getChildren().add(shieldHpLabel);
         playerShiedInformation.getChildren().add(shieldHpValueLabel);
 
@@ -164,8 +167,8 @@ public class GameMainInfrastructure {
                 break;
             case "SPACE":
                 keySpacePressed = pressed;
-             
-        }       
+
+        }
     }
 
     private void buildAndSetGameLoop(final Stage stage) {
@@ -181,8 +184,11 @@ public class GameMainInfrastructure {
             public void handle(Event event) {
                 windowPositionX = stage.getX();
                 windowPositionY = stage.getY();
-
                 
+                movePlayerRobot();
+                playerRobot.paintGameObject();
+                playerRobot.shootFromRobotTurret(mousePressed);
+
             }
 
         });
@@ -194,7 +200,7 @@ public class GameMainInfrastructure {
     }
 
     private void movePlayerRobot() {
-    /*    playerRobot.setRobotPositionChangeX(0);
+        playerRobot.setRobotPositionChangeX(0);
         playerRobot.setRobotPositionChangeY(0);
         if (keyAPressed == true || keySPressed == true || keyWPressed == true || keyDPressed == true) {
             playerRobot.playRobotMovingSound();
@@ -216,7 +222,7 @@ public class GameMainInfrastructure {
             playerRobot.moveRobotRight();
         }
         
-        playerRobot.setShieldActive(keySpacePressed);*/
+        playerRobot.setShieldActive(keySpacePressed);
     }
 
     protected static void setGameLoop(Timeline gameLoop) {
