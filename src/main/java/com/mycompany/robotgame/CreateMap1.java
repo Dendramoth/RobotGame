@@ -7,9 +7,7 @@ package com.mycompany.robotgame;
 
 import EnviromentObjects.BackgroundHex;
 import EnviromentObjects.SpaceShipWreckage;
-import GameObject.GameObject;
 import GameObject.Point;
-import MapGridTable.GridCell;
 import MapGridTable.GridTable;
 import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,7 +26,7 @@ public class CreateMap1 {
     
     public void generatedObjectForGame(GridTable gridTable){
         SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 9216), 512, 512, graphicsContext);
-        gridTable.insertGameObjectIntoGrid(spaceShipWreckage, true);
+        gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
     }
     
     public void generateBackground(GridTable gridTable) {
@@ -87,7 +85,7 @@ public class CreateMap1 {
                         break;
                 }
                 BackgroundHex backgroundHex = new BackgroundHex(new Point(i * 256, j * 256), 256, 256, image, graphicsContext);
-                gridTable.insertGameObjectIntoGrid(backgroundHex, false);
+                gridTable.insertBackgroundIntoGridCell(backgroundHex);
             }
         }
     }

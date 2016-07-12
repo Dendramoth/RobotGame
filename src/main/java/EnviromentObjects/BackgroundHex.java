@@ -30,7 +30,7 @@ public class BackgroundHex extends GameObject{
 
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
-        graphicsContext.drawImage(hexImage, worldPossitionOfPlayerX - possition.getCoordX(), worldPossitionOfPlayerY - possition.getCoordY());
+        graphicsContext.drawImage(hexImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
     }
     
 }

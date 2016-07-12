@@ -27,13 +27,13 @@ public class SpaceShipWreckage extends GameObject {
 
     @Override
     public void paintGameObject() {
-        graphicsContext.drawImage(spaceShipWreckageImage, possition.getCoordX(), possition.getCoordY());
+        graphicsContext.drawImage(spaceShipWreckageImage, worldPossition.getCoordX(), worldPossition.getCoordY());
     }
 
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
      //   System.out.println((worldPossitionOfPlayerX - possition.getCoordX()) + "   " + (worldPossitionOfPlayerY - possition.getCoordY()));
-        graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - possition.getCoordX(), worldPossitionOfPlayerY - possition.getCoordY());
+        graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
     }
 
 }

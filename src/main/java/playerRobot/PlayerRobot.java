@@ -14,12 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Shape;
-import java.util.List;
-import javafx.scene.paint.Color;
 
-//super dendrova hra :)
-//doufam ze na ni bude elfa otrocit
 /**
  *
  * @author Dendra
@@ -129,11 +124,11 @@ public class PlayerRobot extends GameObject {
     private Polygon createPolygonForColisionDetection() {
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
-            0.0 + possition.getCoordX() - robotImage.getWidth() / 2, 0.0 + possition.getCoordY() - 32,
-            0.0 + possition.getCoordX() - robotImage.getWidth() / 2, 64.0 + possition.getCoordY() - 32,
-            64.0 + possition.getCoordX() - robotImage.getWidth() / 2, 64.0 + possition.getCoordY() - 32,
-            64.0 + possition.getCoordX() - robotImage.getWidth() / 2, 0.0 + possition.getCoordY() - 32,
-            0.0 + possition.getCoordX() - robotImage.getWidth() / 2, 0.0 + possition.getCoordY() - 32});
+            0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32,
+            0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 64.0 + worldPossition.getCoordY() - 32,
+            64.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 64.0 + worldPossition.getCoordY() - 32,
+            64.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32,
+            0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32});
 
         polygon.setRotate(facingAngle);
         return polygon;
@@ -180,7 +175,7 @@ public class PlayerRobot extends GameObject {
         robotGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
 
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(possition.getCoordX(), possition.getCoordY());
+        robotGraphicsContext.translate(worldPossition.getCoordX(), worldPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
         robotGraphicsContext.restore();
@@ -194,9 +189,9 @@ public class PlayerRobot extends GameObject {
 
     private void paintRobotTurret() {
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(possition.getCoordX(), possition.getCoordY());
+        robotGraphicsContext.translate(worldPossition.getCoordX(), worldPossition.getCoordY());
         robotGraphicsContext.rotate(playerRobotTurret.getTurretAngle());
-        playerRobotTurret.paintTurret(possition.getCoordX(), possition.getCoordY());
+        playerRobotTurret.paintTurret(worldPossition.getCoordX(), worldPossition.getCoordY());
         playerRobotTurret.moveToMouseCursor();
         robotGraphicsContext.restore();
     }
@@ -224,7 +219,7 @@ public class PlayerRobot extends GameObject {
         }
 
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(possition.getCoordX(), possition.getCoordY());
+        robotGraphicsContext.translate(worldPossition.getCoordX(), worldPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(shieldImage, -shieldImage.getWidth() / 2, -shieldImage.getHeight() / 2);
         robotGraphicsContext.restore();
