@@ -5,7 +5,7 @@
  */
 package MapGridTable;
 
-import GameObject.GameObject;
+import GameObject.GameStaticObject;
 import java.util.HashSet;
 
 /**
@@ -13,45 +13,45 @@ import java.util.HashSet;
  * @author Dendra
  */
 public class GridCell {
-    private final HashSet<GameObject> objectInCell = new HashSet<GameObject>();
-    private final HashSet<GameObject> objectsVisibleFromCell = new HashSet<GameObject>();
+    private final HashSet<GameStaticObject> objectInCell = new HashSet<GameStaticObject>();
+    private final HashSet<GameStaticObject> objectsVisibleFromCell = new HashSet<GameStaticObject>();
     
-    private final HashSet<GameObject> backgroundInCell = new HashSet<GameObject>();
-    private final HashSet<GameObject> backgroundVisibleFromCell = new HashSet<GameObject>();
+    private final HashSet<GameStaticObject> backgroundInCell = new HashSet<GameStaticObject>();
+    private final HashSet<GameStaticObject> backgroundVisibleFromCell = new HashSet<GameStaticObject>();
 
     public GridCell() {
     }
     
-    public void addGameObject(GameObject gameObject){
+    public void addGameObject(GameStaticObject gameObject){
         objectInCell.add(gameObject);
     }
     
-    public void addObjectVisibleFromCell(GameObject gameObject){
+    public void addObjectVisibleFromCell(GameStaticObject gameObject){
         objectsVisibleFromCell.add(gameObject);
     }
     
-    public void addGameBackgroundHex(GameObject gameObject){
+    public void addGameBackgroundHex(GameStaticObject gameObject){
         backgroundInCell.add(gameObject);
     }
     
-    public void addBackgroundHexVisibleFromCell(GameObject gameObject){
+    public void addBackgroundHexVisibleFromCell(GameStaticObject gameObject){
         backgroundVisibleFromCell.add(gameObject);
     }
     
 
-    public HashSet<GameObject> getObjectInCell() {
+    public HashSet<GameStaticObject> getObjectInCell() {
         return objectInCell;
     }
 
-    public HashSet<GameObject> getObjectsVisibleFromCell() {
+    public HashSet<GameStaticObject> getObjectsVisibleFromCell() {
         return objectsVisibleFromCell;
     }
 
-    public HashSet<GameObject> getBackgroundInCell() {
+    public HashSet<GameStaticObject> getBackgroundInCell() {
         return backgroundInCell;
     }
 
-    public HashSet<GameObject> getBackgroundVisibleFromCell() {
+    public HashSet<GameStaticObject> getBackgroundVisibleFromCell() {
         return backgroundVisibleFromCell;
     }
 

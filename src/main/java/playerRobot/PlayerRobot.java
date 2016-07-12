@@ -90,8 +90,8 @@ public class PlayerRobot extends GameObject {
         robotPositionChangeX = Math.cos(Math.toRadians(facingAngle - 90)) * 2.5;
         robotPositionChangeY = Math.sin(Math.toRadians(facingAngle - 90)) * 2.5;
 
-        worldPossitionX = worldPossitionX - robotPositionChangeX;
-        worldpossitionY = worldpossitionY - robotPositionChangeY;
+        worldPossitionX = worldPossitionX + robotPositionChangeX;
+        worldpossitionY = worldpossitionY + robotPositionChangeY;
     }
 
     public void moveRobotLeft() {
@@ -276,10 +276,4 @@ public class PlayerRobot extends GameObject {
     public double getWorldpossitionY() {
         return worldpossitionY;
     }
-
-    @Override
-    public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
-
-    }
-
 }

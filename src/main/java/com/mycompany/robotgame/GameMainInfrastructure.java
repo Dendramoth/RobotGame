@@ -6,7 +6,6 @@
 package com.mycompany.robotgame;
 
 import GameObject.Point;
-import MapGridTable.GridCell;
 import MapGridTable.GridTable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -26,7 +25,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Screen;
 import playerRobot.PlayerRobot;
 
@@ -194,18 +192,17 @@ public class GameMainInfrastructure {
 
             /**
              * Everything inside this handle is what will be repeated in every
-             * game loop. Move objects here, detect colisions etc.
+             * game loop. Move objects here, detect collisions etc.
              */
             @Override
             public void handle(Event event) {
-            /*    windowPositionX = stage.getX();
-                windowPositionY = stage.getY();*/
-                
-                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossitionX(), playerRobot.getWorldpossitionY());
+                windowPositionX = stage.getX();
+                windowPositionY = stage.getY();
                 
                 movePlayerRobot();
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
+                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossitionX(), playerRobot.getWorldpossitionY());
                 
                 playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossitionX() + " " + playerRobot.getWorldpossitionY()));
             }

@@ -5,7 +5,7 @@
  */
 package EnviromentObjects;
 
-import GameObject.GameObject;
+import GameObject.GameStaticObject;
 import GameObject.Point;
 import com.mycompany.robotgame.LoadAllResources;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,7 +15,7 @@ import javafx.scene.image.Image;
  *
  * @author Dendra
  */
-public class SpaceShipWreckage extends GameObject {
+public class SpaceShipWreckage extends GameStaticObject {
 
     GraphicsContext graphicsContext;
     Image spaceShipWreckageImage = LoadAllResources.getMapOfAllImages().get("spaceShipWreckage");
@@ -32,7 +32,6 @@ public class SpaceShipWreckage extends GameObject {
 
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
-     //   System.out.println((worldPossitionOfPlayerX - possition.getCoordX()) + "   " + (worldPossitionOfPlayerY - possition.getCoordY()));
         graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
     }
 
