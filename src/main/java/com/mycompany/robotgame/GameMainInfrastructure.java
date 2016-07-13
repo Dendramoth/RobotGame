@@ -8,6 +8,7 @@ package com.mycompany.robotgame;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TimelineBuilder;
@@ -32,11 +33,12 @@ public class GameMainInfrastructure {
 
     public static double WINDOW_WIDTH = 1024;
     public static double WINDOW_HEIGH = 720;
-    public static int FRAMERATE = 60;
+    //public static int FRAMERATE = 60;
     public static double windowPositionX = 0.0;
     public static double windowPositionY = 0.0;
 
-    private static Timeline gameLoop;
+    //private static Timeline gameLoop;
+    private static AnimationTimer gameLoop;
 
     private boolean mousePressed = false;
     private boolean keyAPressed = false;
@@ -186,16 +188,13 @@ public class GameMainInfrastructure {
     }
 
     private void buildAndSetGameLoop(final Stage stage) {
-        final Duration oneFrameDuration = Duration.millis(1000 / FRAMERATE);
-        final KeyFrame oneFrame = new KeyFrame(oneFrameDuration,
-                new EventHandler() {
-
+        setGameLoop(new AnimationTimer(){
             /**
              * Everything inside this handle is what will be repeated in every
              * game loop. Move objects here, detect collisions etc.
              */
             @Override
-            public void handle(Event event) {
+            public void handle(long now) {
                 windowPositionX = stage.getX();
                 windowPositionY = stage.getY();
                 
@@ -208,11 +207,6 @@ public class GameMainInfrastructure {
             }
 
         });
-
-        setGameLoop(TimelineBuilder.create()
-                .cycleCount(Animation.INDEFINITE)
-                .keyFrames(oneFrame)
-                .build());
     }
 
     private void movePlayerRobot() {
@@ -241,12 +235,12 @@ public class GameMainInfrastructure {
         playerRobot.setShieldActive(keySpacePressed);
     }
 
-    protected static void setGameLoop(Timeline gameLoop) {
+    protected static void setGameLoop(AnimationTimer gameLoop) {
         GameMainInfrastructure.gameLoop = gameLoop;
     }
 
     public void beginGameLoop() {
-        gameLoop.play();
+        gameLoop.start();
     }
 
     public void stopGameLoop() {
