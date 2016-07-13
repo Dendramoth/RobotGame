@@ -9,10 +9,11 @@ package GameObject;
  *
  * @author Dendra
  */
-public abstract class GameObject {
+public abstract class GameObject implements Comparable<GameObject>{
 
     private CornerPointsOfObject cornerPointsOfObject;
     protected Point worldPossition;
+    private Point objectForComparison;
     private double width;
     private double heigh;
 
@@ -37,5 +38,27 @@ public abstract class GameObject {
     public CornerPointsOfObject getCornerPointsOfObject() {
         return cornerPointsOfObject;
     }
+
+    public Point getWorldPossition() {
+        return worldPossition;
+    }
+
+    public Point getObjectForComparison() {
+        return objectForComparison;
+    }
+
+    public void setObjectForComparison(Point objectForComparison) {
+        this.objectForComparison = objectForComparison;
+    }
     
+    @Override
+    public int compareTo(GameObject o) {
+        double myDistance = Math.sqrt(Math.pow(this.getWorldPossition().getCoordX()- this.getObjectForComparison().getCoordX(), 2) + Math.pow(this.getWorldPossition().getCoordY()- this.getObjectForComparison().getCoordY(), 2));
+        double otherDistance = Math.sqrt(Math.pow(o.getWorldPossition().getCoordX()- o.getObjectForComparison().getCoordX(), 2) + Math.pow(o.getWorldPossition().getCoordY()- o.getObjectForComparison().getCoordY(), 2));
+        if (myDistance < otherDistance) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
 }

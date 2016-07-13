@@ -5,6 +5,7 @@
  */
 package MapGridTable;
 
+import GameObject.BackgroundObject;
 import GameObject.CornerPointsOfObject;
 import GameObject.GameObject;
 import GameObject.GameStaticObject;
@@ -47,8 +48,8 @@ public class GridTable {
         int y = indexInGrid(playerWorldCoordY);
 
         if (x < cellCountX - 1 && x >= 0 && y < cellCountY - 1 && y >= 0) {
-            HashSet<GameStaticObject> visibleBackground = gridCellField[x][y].getBackgroundVisibleFromCell();
-            for (GameStaticObject gameObject : visibleBackground) {
+            HashSet<BackgroundObject> visibleBackground = gridCellField[x][y].getBackgroundVisibleFromCell();
+            for (BackgroundObject gameObject : visibleBackground) {
                 gameObject.paintStaticGameObject(playerWorldCoordX, playerWorldCoordY);
             }
 
@@ -91,7 +92,7 @@ public class GridTable {
         addVisibleObjectToCell(gameObject, x1, x2, y1, y2);
     }
 
-    public void insertBackgroundIntoGridCell(GameStaticObject gameObject) {
+    public void insertBackgroundIntoGridCell(BackgroundObject gameObject) {
         int switchValue = 0;
         CornerPointsOfObject cornerPointsOfObject = gameObject.getCornerPointsOfObject();
 
@@ -123,7 +124,7 @@ public class GridTable {
         }
     }
 
-    private void addBackgroundToCell(GameStaticObject gameObject, int x1, int x2, int y1, int y2) {
+    private void addBackgroundToCell(BackgroundObject gameObject, int x1, int x2, int y1, int y2) {
         for (int indexX = x1; indexX <= x2; indexX++) {
             for (int indexY = y1; indexY <= y2; indexY++) {
                 gridCellField[indexX][indexY].addGameBackgroundHex(gameObject);
@@ -159,7 +160,7 @@ public class GridTable {
         }
     }
 
-    private void addVisibleBackgroundToCell(GameStaticObject gameObject, int cellX1, int cellX2, int cellY1, int cellY2) {
+    private void addVisibleBackgroundToCell(BackgroundObject gameObject, int cellX1, int cellX2, int cellY1, int cellY2) {
         int x1 = cellX1 - cellVisibility;
         if (x1 < 0) {
             x1 = 0;

@@ -5,7 +5,7 @@
  */
 package EnviromentObjects;
 
-import GameObject.GameStaticObject;
+import GameObject.BackgroundObject;
 import GameObject.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
  *
  * @author Dendra
  */
-public class BackgroundHex extends GameStaticObject{
+public class BackgroundHex extends BackgroundObject{
     private Image hexImage;
     private GraphicsContext graphicsContext;
 

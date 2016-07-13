@@ -8,8 +8,11 @@ package EnviromentObjects;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import com.mycompany.robotgame.LoadAllResources;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -21,8 +24,17 @@ public class SpaceShipWreckage extends GameStaticObject {
     Image spaceShipWreckageImage = LoadAllResources.getMapOfAllImages().get("spaceShipWreckage");
 
     public SpaceShipWreckage(Point possition, double width, double heigh, GraphicsContext graphicsContext) {
-        super(possition, width, heigh);
+        super(getPoints(possition),possition, width, heigh,graphicsContext,Color.BLACK);
         this.graphicsContext = graphicsContext;
+    }
+    
+    private static List<Point> getPoints(Point possition){
+        List<Point> pointList = new ArrayList<Point>();
+        pointList.add(new Point(600 + possition.getCoordX(), 100 + possition.getCoordY()));
+        pointList.add(new Point(800 + possition.getCoordX(), 100 + possition.getCoordY()));
+        pointList.add(new Point(800 + possition.getCoordX(), 600 + possition.getCoordY()));
+        pointList.add(new Point(600 + possition.getCoordX(), 600 + possition.getCoordY()));
+        return pointList;
     }
 
     @Override
