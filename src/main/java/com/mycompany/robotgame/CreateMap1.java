@@ -25,7 +25,7 @@ public class CreateMap1 {
     }
     
     public void generatedObjectForGame(GridTable gridTable){
-        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 9216), 512, 512, graphicsContext);
+        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
     }
     

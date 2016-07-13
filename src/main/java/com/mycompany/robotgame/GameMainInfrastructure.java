@@ -5,6 +5,7 @@
  */
 package com.mycompany.robotgame;
 
+import Enemy.EvilDroneMarkOne;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import javafx.animation.Animation;
@@ -54,6 +55,7 @@ public class GameMainInfrastructure {
     
     private PlayerRobot playerRobot;
     private GridTable gridTable;
+    private EvilDroneMarkOne evilDroneMarkOne;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -70,7 +72,8 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(enemiesCanvas);
         gameCanvasPanel.getChildren().add(robotCanvas);
 
-        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
+        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(2048, 8216), new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
+        evilDroneMarkOne = new EvilDroneMarkOne(new Point(2048, 8216), 64, 64, 1, 20, 30, enemyGraphicsContext);
         
         gridTable = new GridTable(enviromentGraphicsContext);
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
@@ -92,7 +95,7 @@ public class GameMainInfrastructure {
         
         HBox playerWorldPossition = new HBox();
         Label playerWorldPossitionLabel = new Label("World Possition:");
-        playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossitionX() + " " + playerRobot.getWorldpossitionY()));
+        playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossition().getCoordX()+ " " + playerRobot.getWorldPossition().getCoordY()));
         playerWorldPossition.getChildren().add(playerWorldPossitionLabel);
         playerWorldPossition.getChildren().add(playerWorldPossitionValueLabel);
 
@@ -201,9 +204,11 @@ public class GameMainInfrastructure {
                 movePlayerRobot();
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
-                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossitionX(), playerRobot.getWorldpossitionY());
+                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
                 
-                playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossitionX() + " " + playerRobot.getWorldpossitionY()));
+                evilDroneMarkOne.moveEnemy(playerRobot.getWorldPossition().getCoordX() - WINDOW_WIDTH / 2, playerRobot.getWorldPossition().getCoordY() - WINDOW_HEIGH / 2);
+                evilDroneMarkOne.paintEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
+                playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
             }
 
         });

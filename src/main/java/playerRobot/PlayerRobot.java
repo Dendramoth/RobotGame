@@ -21,11 +21,9 @@ import javafx.scene.shape.Polygon;
  */
 public class PlayerRobot extends GameObject {
 
-    private double worldPossitionX;
-    private double worldpossitionY;
-
     private double robotPositionChangeX = 0;
     private double robotPositionChangeY = 0;
+    private Point screenPossition;
 
     private int hitPoints = 100;
     private double facingAngle = 0.0;
@@ -43,12 +41,12 @@ public class PlayerRobot extends GameObject {
     private AudioClip idleRobotSound = LoadAllResources.getMapOfAllSounds().get("idleRobotSound");
     private AudioClip movingRobotSound = LoadAllResources.getMapOfAllSounds().get("movingRobotSound");
 
-    public PlayerRobot(GraphicsContext robotGraphicsContext, Point possition) {
-        super(possition, 64, 64);
-        worldPossitionX = possition.getCoordX() + 2048;
-        worldpossitionY = possition.getCoordY() + 9216;
-
-        System.out.println("worldPossitionX: " + worldPossitionX);
+    public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition) {
+        super(worldPossition, 64, 64);
+        this.screenPossition = screenPossition;
+        System.out.println(worldPossition.getCoordX());
+       // worldPossitionX = possition.getCoordX() + 2048;
+       // worldpossitionY = possition.getCoordY() + 8216;
 
         this.robotGraphicsContext = robotGraphicsContext;
 
@@ -82,16 +80,16 @@ public class PlayerRobot extends GameObject {
         robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 2.5;
         robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 2.5;
 
-        worldPossitionX = worldPossitionX + robotPositionChangeX;
-        worldpossitionY = worldpossitionY + robotPositionChangeY;
+        worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
+        worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
     }
 
     public void moveRobotBackward() {
         robotPositionChangeX = Math.cos(Math.toRadians(facingAngle - 90)) * 2.5;
         robotPositionChangeY = Math.sin(Math.toRadians(facingAngle - 90)) * 2.5;
 
-        worldPossitionX = worldPossitionX + robotPositionChangeX;
-        worldpossitionY = worldpossitionY + robotPositionChangeY;
+        worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
+        worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
     }
 
     public void moveRobotLeft() {
@@ -103,7 +101,7 @@ public class PlayerRobot extends GameObject {
     }
 
     public void shootFromRobotTurret(boolean shoot) {
-        playerRobotTurret.shootTurret(shoot);
+        playerRobotTurret.shootTurret(shoot, screenPossition);
     }
 
     public void moveTracks() {
@@ -175,7 +173,7 @@ public class PlayerRobot extends GameObject {
         robotGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
 
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(worldPossition.getCoordX(), worldPossition.getCoordY());
+        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
         robotGraphicsContext.restore();
@@ -189,10 +187,10 @@ public class PlayerRobot extends GameObject {
 
     private void paintRobotTurret() {
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(worldPossition.getCoordX(), worldPossition.getCoordY());
+        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         robotGraphicsContext.rotate(playerRobotTurret.getTurretAngle());
-        playerRobotTurret.paintTurret(worldPossition.getCoordX(), worldPossition.getCoordY());
-        playerRobotTurret.moveToMouseCursor();
+        playerRobotTurret.paintTurret(screenPossition.getCoordX(), screenPossition.getCoordY());
+        playerRobotTurret.moveToMouseCursor(screenPossition);
         robotGraphicsContext.restore();
     }
 
@@ -219,7 +217,7 @@ public class PlayerRobot extends GameObject {
         }
 
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(worldPossition.getCoordX(), worldPossition.getCoordY());
+        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(shieldImage, -shieldImage.getWidth() / 2, -shieldImage.getHeight() / 2);
         robotGraphicsContext.restore();
@@ -267,13 +265,6 @@ public class PlayerRobot extends GameObject {
 
     public PlayerRobotShield getPlayerRobotShield() {
         return playerRobotShield;
-    }
-
-    public double getWorldPossitionX() {
-        return worldPossitionX;
-    }
-
-    public double getWorldpossitionY() {
-        return worldpossitionY;
-    }
+    } 
+    
 }

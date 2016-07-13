@@ -25,13 +25,12 @@ public class PlayerRobotTurret {
     private Image turretCurrentImage;
     private double turretAngle = 0;
     private GraphicsContext robotGraphicsContext;
-    private double possitionX = 0;
-    private double possitionY = 0;
     private int shootingCounter = 0;
     private Image shootingMinigunFireImage;
     private ArrayList<ShotsFromMinigun> allShotsFromMinigun = new ArrayList<ShotsFromMinigun>();
     private int minigunImageCounter = 0;
     private boolean turretIsShooting = false;
+    private GameObject.Point screenPosition = new GameObject.Point(0, 0);
     
     private AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
 
@@ -43,12 +42,8 @@ public class PlayerRobotTurret {
     }
 
     public void paintTurret(double possitionX, double possitionY) {
-        this.possitionX = possitionX;
-        this.possitionY = possitionY;
-
-        Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
-        mouseLocation.getX();
-        mouseLocation.getY();
+        this.screenPosition.setCoordX(possitionX);
+        this.screenPosition.setCoordY(possitionY);
 
         robotGraphicsContext.drawImage(turretCurrentImage, -turretCurrentImage.getWidth() / 2, -turretCurrentImage.getHeight() / 2);
         
@@ -91,12 +86,12 @@ public class PlayerRobotTurret {
         return turretAngle;
     }
 
-    public void shootTurret(boolean shoot) {
+    public void shootTurret(boolean shoot, GameObject.Point screenPosition) {
         turretIsShooting = shoot;
         if (shoot) {
             shootingCounter++;
             if (shootingCounter == 6) {
-                shootMinigunProjectile();
+                shootMinigunProjectile(screenPosition);
             }
             if (shootingCounter > 8) {
                 if (turretCurrentImage == turretIdleImage) {
@@ -112,17 +107,17 @@ public class PlayerRobotTurret {
         }
     }
 
-    private void shootMinigunProjectile() {
-        allShotsFromMinigun.add(new ShotsFromMinigun(possitionX, possitionY, turretAngle));
+    private void shootMinigunProjectile(GameObject.Point screenPosition) {
+        allShotsFromMinigun.add(new ShotsFromMinigun(screenPosition.getCoordX(), screenPosition.getCoordY(), turretAngle));
     }
 
-    public void moveToMouseCursor() {
+    public void moveToMouseCursor(GameObject.Point screenPosition) {
         Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
         mouseLocation.getX();
         mouseLocation.getY();
 
-        double xMovement = mouseLocation.getX() - possitionX - GameMainInfrastructure.windowPositionX - turretCurrentImage.getWidth() / 2;
-        double yMovement = mouseLocation.getY() - possitionY - GameMainInfrastructure.windowPositionY - turretCurrentImage.getHeight() / 2;
+        double xMovement = mouseLocation.getX() - screenPosition.getCoordX() - GameMainInfrastructure.windowPositionX - turretCurrentImage.getWidth() / 2;
+        double yMovement = mouseLocation.getY() - screenPosition.getCoordY() - GameMainInfrastructure.windowPositionY - turretCurrentImage.getHeight() / 2;
 
         double angleToMouse = calculateAngleForDrawingRotatedTurret(xMovement, yMovement);
         angleToMouse = (angleToMouse + 360) % 360;
