@@ -36,33 +36,34 @@ public class EvilDroneMarkOne extends Enemy {
         damagedStateTreshold = 25;
     }
 
- /*   @Override
-    public boolean doOnCollision(GraphicsContext enemyGraphicsContext) {
-        return paintDyingEnemyAnimation(enemyGraphicsContext);
-    }
+    /*   @Override
+     public boolean doOnCollision(GraphicsContext enemyGraphicsContext) {
+     return paintDyingEnemyAnimation(enemyGraphicsContext);
+     }
 
+     @Override
+     public void doOnBeingHit(String weaponType) {
+     switch (weaponType) {
+     case "rocket":
+     hitPoints = hitPoints - 20;
+     break;
+     case "minigun":
+     hitPoints = hitPoints - 1;
+     allExplosionsOnEnemy.add(new Explosion());
+     break;
+     default:
+     hitPoints--;
+     }
+     if (hitPoints < damagedStateTreshold) {
+     movementSpeed = 0.5;
+     }
+     }*/
     @Override
-    public void doOnBeingHit(String weaponType) {
-        switch (weaponType) {
-            case "rocket":
-                hitPoints = hitPoints - 20;
-                break;
-            case "minigun":
-                hitPoints = hitPoints - 1;
-                allExplosionsOnEnemy.add(new Explosion());
-                break;
-            default:
-                hitPoints--;
-        }
-        if (hitPoints < damagedStateTreshold) {
-            movementSpeed = 0.5;
-        }
-    }*/
-
-    @Override
-    public void paintEnemy(double playerPossitionX, double playerPossitionY, Point playerScreenPosstion) {
+    public void paintEnemy(Point playerRobotWorldPossition, Point playerScreenPosstion) {
+        double playerPossitionX = playerRobotWorldPossition.getCoordX();
+        double playerPossitionY = playerRobotWorldPossition.getCoordY();
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
-        
+
         blinkCounter++;
         if (hitPoints >= damagedStateTreshold) {
             if (blinkCounter <= 15) {
@@ -90,7 +91,7 @@ public class EvilDroneMarkOne extends Enemy {
         System.out.println("----------------------------");
         System.out.println((playerPossitionX - worldPossition.getCoordX()) + " " + (playerPossitionY - worldPossition.getCoordY()));
         System.out.println((playerPossitionX) + " " + (playerPossitionY));
-        graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX() + playerScreenPosstion.getCoordX(), playerPossitionY - worldPossition.getCoordY() + playerScreenPosstion.getCoordY());
+        graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX() + playerScreenPosstion.getCoordX() - 32, playerPossitionY - worldPossition.getCoordY() + playerScreenPosstion.getCoordY() - 32);
     }
 
     public void paintDetectionParagraph() {
@@ -113,8 +114,6 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
-        playerPossitionX = playerPossitionX + 32;
-        playerPossitionY = playerPossitionY + 32;
         double deltaX = playerPossitionX - worldPossition.getCoordX();
         double deltaY = playerPossitionY - worldPossition.getCoordY();
         angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
@@ -136,35 +135,34 @@ public class EvilDroneMarkOne extends Enemy {
         return angle;
     }
 
- /*   @Override
-    public boolean detectCollision(Shape shape) {
-        if (alive) {
-            //   Circle meteorPolygon = new Circle(possitionOnCanvasX + enemyImage.getWidth() / 2, possitionOnCanvasY + enemyImage.getHeight() / 2, (enemyImage.getHeight() / 2));
-            Rectangle r = new Rectangle();
-            r.setX(possitionX);
-            r.setY(possitionY);
-            r.setWidth(64);
-            r.setHeight(64);
-            Shape intersect = Shape.intersect(shape, r);
-            if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-                return false;
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }*/
-
+    /*   @Override
+     public boolean detectCollision(Shape shape) {
+     if (alive) {
+     //   Circle meteorPolygon = new Circle(possitionOnCanvasX + enemyImage.getWidth() / 2, possitionOnCanvasY + enemyImage.getHeight() / 2, (enemyImage.getHeight() / 2));
+     Rectangle r = new Rectangle();
+     r.setX(possitionX);
+     r.setY(possitionY);
+     r.setWidth(64);
+     r.setHeight(64);
+     Shape intersect = Shape.intersect(shape, r);
+     if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+     return false;
+     }
+     } else {
+     return false;
+     }
+     return true;
+     }*/
     @Override
     public void paintAllExplosionsEnemy(GraphicsContext enemyGraphicsContext) {
-     /*   Iterator<Explosion> iterator = allExplosionsOnEnemy.iterator();
-        while (iterator.hasNext()) {
-            Explosion explosion = iterator.next();
-            explosion.paint(possitionX, possitionY, enemyGraphicsContext);
-            if (explosion.getNumberOfFramesBeingDisplayed() < 1) {
-                iterator.remove();
-            }
-        }*/
+        /*   Iterator<Explosion> iterator = allExplosionsOnEnemy.iterator();
+         while (iterator.hasNext()) {
+         Explosion explosion = iterator.next();
+         explosion.paint(possitionX, possitionY, enemyGraphicsContext);
+         if (explosion.getNumberOfFramesBeingDisplayed() < 1) {
+         iterator.remove();
+         }
+         }*/
     }
 
     @Override

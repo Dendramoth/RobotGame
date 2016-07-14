@@ -34,7 +34,7 @@ public abstract class Enemy extends GameObject{
 
     public abstract void moveEnemy(double playerPossitionX, double playerPossitionY);
 
-    public abstract void paintEnemy(double playerPossitionX, double playerPossitionY, Point playerScreenPosstion);
+    public abstract void paintEnemy(Point playerRobotWorldPossition, Point playerScreenPosstion);
 
     public abstract void paintAllExplosionsEnemy(GraphicsContext enemyGraphicsContext);
 

@@ -73,7 +73,7 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(robotCanvas);
 
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(2048, 8216), new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
-        evilDroneMarkOne = new EvilDroneMarkOne(new Point(2048, 8216), 64, 64, 1, 20, 30, enemyGraphicsContext);
+        evilDroneMarkOne = new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext);
         
         gridTable = new GridTable(enviromentGraphicsContext);
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
@@ -207,7 +207,7 @@ public class GameMainInfrastructure {
                 gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
                 
                 evilDroneMarkOne.moveEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
-                evilDroneMarkOne.paintEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY(), playerRobot.getScreenPossition());
+                evilDroneMarkOne.paintEnemy(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());
                 playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
             }
 
