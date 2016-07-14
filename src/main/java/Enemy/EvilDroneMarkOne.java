@@ -60,7 +60,7 @@ public class EvilDroneMarkOne extends Enemy {
     }*/
 
     @Override
-    public void paintEnemy(double playerPossitionX, double playerPossitionY) {
+    public void paintEnemy(double playerPossitionX, double playerPossitionY, Point playerScreenPosstion) {
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         
         blinkCounter++;
@@ -90,7 +90,7 @@ public class EvilDroneMarkOne extends Enemy {
         System.out.println("----------------------------");
         System.out.println((playerPossitionX - worldPossition.getCoordX()) + " " + (playerPossitionY - worldPossition.getCoordY()));
         System.out.println((playerPossitionX) + " " + (playerPossitionY));
-        graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX(), playerPossitionY - worldPossition.getCoordY());
+        graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX() + playerScreenPosstion.getCoordX(), playerPossitionY - worldPossition.getCoordY() + playerScreenPosstion.getCoordY());
     }
 
     public void paintDetectionParagraph() {
@@ -113,8 +113,8 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
-        playerPossitionX = playerPossitionX + 64;
-        playerPossitionY = playerPossitionY + 96;
+        playerPossitionX = playerPossitionX + 32;
+        playerPossitionY = playerPossitionY + 32;
         double deltaX = playerPossitionX - worldPossition.getCoordX();
         double deltaY = playerPossitionY - worldPossition.getCoordY();
         angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);

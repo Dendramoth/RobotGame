@@ -23,7 +23,6 @@ public class PlayerRobotTurret {
     private final Image turretIdleImage;
     private final Image turretShootingImage;
     private final GraphicsContext robotGraphicsContext;
-    private final GameObject.Point screenPosition = new GameObject.Point(0, 0);
     private final AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
     
     private Image turretCurrentImage;

@@ -161,6 +161,7 @@ public class PlayerRobot extends GameObject {
         playerRobotTurret.paintTurret(screenPossition);
     }
 
+
     private void paintShield() {
         shieldImageRotationCounter++;
 
@@ -230,5 +231,11 @@ public class PlayerRobot extends GameObject {
     public PlayerRobotShield getPlayerRobotShield() {
         return playerRobotShield;
     }
+
+    public Point getScreenPossition() {
+        return screenPossition;
+    }
+    
+    
 
 }

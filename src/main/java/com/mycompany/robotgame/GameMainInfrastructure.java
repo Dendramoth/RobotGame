@@ -206,8 +206,8 @@ public class GameMainInfrastructure {
                 playerRobot.shootFromRobotTurret(mousePressed);
                 gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
                 
-                evilDroneMarkOne.moveEnemy(playerRobot.getWorldPossition().getCoordX() - WINDOW_WIDTH / 2, playerRobot.getWorldPossition().getCoordY() - WINDOW_HEIGH / 2);
-                evilDroneMarkOne.paintEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
+                evilDroneMarkOne.moveEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
+                evilDroneMarkOne.paintEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY(), playerRobot.getScreenPossition());
                 playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
             }
 
