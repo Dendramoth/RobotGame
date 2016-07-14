@@ -33,7 +33,7 @@ public class PlayerRobot extends GameObject {
     private Image robotImage;
     private Image robotImageMoving;
     private Image shieldImage = LoadAllResources.getMapOfAllImages().get("energyShield1");
-     private int hitPoints = 100;
+    private int hitPoints = 100;
     private double facingAngle = 0.0;
     private int moveTracks = 0;
     private int shieldImageRotationCounter = 0;
@@ -154,13 +154,13 @@ public class PlayerRobot extends GameObject {
         robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
+        robotGraphicsContext.drawImage(robotImage, screenPossition.getCoordX(), screenPossition.getCoordY());
         if (playerRobotShield.isActive()) {
             paintShield();
         }
         robotGraphicsContext.restore();
         playerRobotTurret.paintTurret(screenPossition);
     }
-
 
     private void paintShield() {
         shieldImageRotationCounter++;
@@ -215,7 +215,6 @@ public class PlayerRobot extends GameObject {
      removeHitPoints(1);
      }
      }*/
-    
     public void setShieldActive(boolean shieldActive) {
         if (playerRobotShield.getShieldHitPoints() > 20) {
             playerRobotShield.setActive(shieldActive);
@@ -232,10 +231,13 @@ public class PlayerRobot extends GameObject {
         return playerRobotShield;
     }
 
+    /**
+     * We need to return possition coordinates -32,
+     * because when we are drawing robot it is shifted by -32 for rotation around its center.
+     * @return 
+     */
     public Point getScreenPossition() {
-        return screenPossition;
+        return (new Point(screenPossition.getCoordX() - 32, screenPossition.getCoordY() - 32)); // 
     }
-    
-    
 
 }

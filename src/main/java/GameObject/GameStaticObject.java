@@ -19,12 +19,12 @@ import javafx.scene.shape.Shape;
  */
 public abstract class GameStaticObject extends GameObject{
 
-    private GraphicsContext graphicsContext;
-    private Polygon gameObjectPolygon = new Polygon();
-    private Color color;
-    private double[] xPoints;
-    private double[] yPoints;
-    private int numberOfPoints;
+    protected final GraphicsContext graphicsContext;
+    private final Polygon gameObjectPolygon = new Polygon();
+    private final Color color;
+    private final double[] xPoints;
+    private final double[] yPoints;
+    private final int numberOfPoints;
 
     private double objectForComparisonPosX;
     private double objectForComparisonPosY;
@@ -71,6 +71,7 @@ public abstract class GameStaticObject extends GameObject{
         }
     }
 
+    @Override
     public void paintGameObject() {
     }
 
@@ -129,6 +130,6 @@ public abstract class GameStaticObject extends GameObject{
         this.objectForComparisonPosY = objectForComparisonPosY;
     }
 
-    public abstract void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY);
+    public abstract void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition);
     
 }

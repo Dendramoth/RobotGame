@@ -9,6 +9,7 @@ import GameObject.BackgroundObject;
 import GameObject.CornerPointsOfObject;
 import GameObject.GameObject;
 import GameObject.GameStaticObject;
+import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import java.util.HashSet;
 import javafx.scene.canvas.GraphicsContext;
@@ -41,7 +42,7 @@ public class GridTable {
         createGrid();
     }
 
-    public void paintAllObjectsVisibleFromCoord(double playerWorldCoordX, double playerWorldCoordY) {
+    public void paintAllObjectsVisibleFromCoord(double playerWorldCoordX, double playerWorldCoordY, Point playerScreenPossition) {
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
 
         int x = indexInGrid(playerWorldCoordX);
@@ -55,7 +56,7 @@ public class GridTable {
 
             HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
             for (GameStaticObject gameObject : visibleObjects) {
-                gameObject.paintStaticGameObject(playerWorldCoordX, playerWorldCoordY);
+                gameObject.paintStaticGameObject(playerWorldCoordX, playerWorldCoordY, playerScreenPossition);
             }
         }
     }
