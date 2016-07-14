@@ -21,39 +21,34 @@ import javafx.scene.shape.Polygon;
  */
 public class PlayerRobot extends GameObject {
 
+    private final Point screenPossition;
+    private final AudioClip idleRobotSound = LoadAllResources.getMapOfAllSounds().get("idleRobotSound");
+    private final AudioClip movingRobotSound = LoadAllResources.getMapOfAllSounds().get("movingRobotSound");
+    private final GraphicsContext robotGraphicsContext;
+    private final PlayerRobotTurret playerRobotTurret;
+    private final PlayerRobotShield playerRobotShield;
+
     private double robotPositionChangeX = 0;
     private double robotPositionChangeY = 0;
-    private Point screenPossition;
-
-    private int hitPoints = 100;
-    private double facingAngle = 0.0;
-    private GraphicsContext robotGraphicsContext;
     private Image robotImage;
     private Image robotImageMoving;
     private Image shieldImage = LoadAllResources.getMapOfAllImages().get("energyShield1");
-    private PlayerRobotTurret playerRobotTurret;
+     private int hitPoints = 100;
+    private double facingAngle = 0.0;
     private int moveTracks = 0;
     private int shieldImageRotationCounter = 0;
     private int previousShieldImage = 2;
     private int currentShieldImage = 1;
-    private PlayerRobotShield playerRobotShield;
-
-    private AudioClip idleRobotSound = LoadAllResources.getMapOfAllSounds().get("idleRobotSound");
-    private AudioClip movingRobotSound = LoadAllResources.getMapOfAllSounds().get("movingRobotSound");
 
     public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition) {
         super(worldPossition, 64, 64);
         this.screenPossition = screenPossition;
-        System.out.println(worldPossition.getCoordX());
-       // worldPossitionX = possition.getCoordX() + 2048;
-       // worldpossitionY = possition.getCoordY() + 8216;
-
         this.robotGraphicsContext = robotGraphicsContext;
 
         robotImage = LoadAllResources.getMapOfAllImages().get("basePassive");
         robotImageMoving = LoadAllResources.getMapOfAllImages().get("baseMoving");
         playerRobotTurret = new PlayerRobotTurret(robotGraphicsContext);
-        playerRobotShield = new PlayerRobotShield(100, this);
+        playerRobotShield = new PlayerRobotShield(100);
     }
 
     public void playRobotIdleSound() {
@@ -76,7 +71,6 @@ public class PlayerRobot extends GameObject {
     }
 
     public void moveRobotForward() {
-
         robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 2.5;
         robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 2.5;
 
@@ -152,22 +146,6 @@ public class PlayerRobot extends GameObject {
         return playerRobotTurret.getAllShotsFromMinigun();
     }
 
-    public double getRobotPositionChangeX() {
-        return robotPositionChangeX;
-    }
-
-    public double getRobotPositionChangeY() {
-        return robotPositionChangeY;
-    }
-
-    public void setRobotPositionChangeX(double robotPositionChangeX) {
-        this.robotPositionChangeX = robotPositionChangeX;
-    }
-
-    public void setRobotPositionChangeY(double robotPositionChangeY) {
-        this.robotPositionChangeY = robotPositionChangeY;
-    }
-
     @Override
     public void paintGameObject() {
         robotGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
@@ -176,22 +154,11 @@ public class PlayerRobot extends GameObject {
         robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
-        robotGraphicsContext.restore();
-
-        paintRobotTurret();
-
         if (playerRobotShield.isActive()) {
             paintShield();
         }
-    }
-
-    private void paintRobotTurret() {
-        robotGraphicsContext.save();
-        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
-        robotGraphicsContext.rotate(playerRobotTurret.getTurretAngle());
-        playerRobotTurret.paintTurret(screenPossition.getCoordX(), screenPossition.getCoordY());
-        playerRobotTurret.moveToMouseCursor(screenPossition);
         robotGraphicsContext.restore();
+        playerRobotTurret.paintTurret(screenPossition);
     }
 
     private void paintShield() {
@@ -216,41 +183,38 @@ public class PlayerRobot extends GameObject {
             }
         }
 
-        robotGraphicsContext.save();
-        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
-        robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(shieldImage, -shieldImage.getWidth() / 2, -shieldImage.getHeight() / 2);
-        robotGraphicsContext.restore();
     }
 
     /*    @Override
-    public boolean detectCollision(Shape shape) {
-        Polygon meteorPolygon = createPolygonForColisionDetection();
-        Shape intersect = Shape.intersect(shape, meteorPolygon);
-        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return false;
-        }
-        return true;
-    }
+     public boolean detectCollision(Shape shape) {
+     Polygon meteorPolygon = createPolygonForColisionDetection();
+     Shape intersect = Shape.intersect(shape, meteorPolygon);
+     if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+     return false;
+     }
+     return true;
+     }
 
-    @Override
-    public boolean doOnCollision(GraphicsContext enemyGraphicsContext) {
-        return true;
-    }
+     @Override
+     public boolean doOnCollision(GraphicsContext enemyGraphicsContext) {
+     return true;
+     }
 
-    @Override
-    public void doOnBeingHit(String weaponType) {
-        switch (weaponType) {
-            case "rocket":
-                removeHitPoints(20);
-                break;
-            case "minigun":
-                removeHitPoints(1);
-                break;
-            default:
-                removeHitPoints(1);
-        }
-    }*/
+     @Override
+     public void doOnBeingHit(String weaponType) {
+     switch (weaponType) {
+     case "rocket":
+     removeHitPoints(20);
+     break;
+     case "minigun":
+     removeHitPoints(1);
+     break;
+     default:
+     removeHitPoints(1);
+     }
+     }*/
+    
     public void setShieldActive(boolean shieldActive) {
         if (playerRobotShield.getShieldHitPoints() > 20) {
             playerRobotShield.setActive(shieldActive);
@@ -265,6 +229,6 @@ public class PlayerRobot extends GameObject {
 
     public PlayerRobotShield getPlayerRobotShield() {
         return playerRobotShield;
-    } 
-    
+    }
+
 }

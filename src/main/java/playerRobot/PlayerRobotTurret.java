@@ -20,19 +20,19 @@ import javafx.scene.media.AudioClip;
 
 public class PlayerRobotTurret {
 
-    private Image turretIdleImage;
-    private Image turretShootingImage;
+    private final Image turretIdleImage;
+    private final Image turretShootingImage;
+    private final GraphicsContext robotGraphicsContext;
+    private final GameObject.Point screenPosition = new GameObject.Point(0, 0);
+    private final AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
+    
     private Image turretCurrentImage;
     private double turretAngle = 0;
-    private GraphicsContext robotGraphicsContext;
     private int shootingCounter = 0;
     private Image shootingMinigunFireImage;
-    private ArrayList<ShotsFromMinigun> allShotsFromMinigun = new ArrayList<ShotsFromMinigun>();
+    private ArrayList<ShotsFromMinigun> allShotsFromMinigun = new ArrayList<>();
     private int minigunImageCounter = 0;
     private boolean turretIsShooting = false;
-    private GameObject.Point screenPosition = new GameObject.Point(0, 0);
-    
-    private AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
 
     public PlayerRobotTurret(GraphicsContext robotGraphicsContext) {
         this.robotGraphicsContext = robotGraphicsContext;
@@ -40,18 +40,22 @@ public class PlayerRobotTurret {
         turretShootingImage = LoadAllResources.getMapOfAllImages().get("towerShooting");
         turretCurrentImage = turretIdleImage;
     }
-
-    public void paintTurret(double possitionX, double possitionY) {
-        this.screenPosition.setCoordX(possitionX);
-        this.screenPosition.setCoordY(possitionY);
-
+    
+    public void paintTurret(GameObject.Point screenPossition){
+        robotGraphicsContext.save();
+        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
+        moveToMouseCursor(screenPossition);
+        robotGraphicsContext.rotate(turretAngle);
         robotGraphicsContext.drawImage(turretCurrentImage, -turretCurrentImage.getWidth() / 2, -turretCurrentImage.getHeight() / 2);
-        
+        paintMinigunFireOnTurret();
+        robotGraphicsContext.restore();
+    }
+
+    private void paintMinigunFireOnTurret() {
         if (turretIsShooting) {
             if (!minigunSound.isPlaying()){
                 minigunSound.play();
             }
-            
             minigunImageCounter ++;
             if (minigunImageCounter <= 4) {
                 shootingMinigunFireImage = LoadAllResources.getMapOfAllImages().get("minigunFire1");

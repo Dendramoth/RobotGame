@@ -10,14 +10,12 @@ package playerRobot;
  * @author Dendra
  */
 public class PlayerRobotShield {
-
+    
     private double shieldHitPoints = 0;
-    private PlayerRobot playerRobot;
     private boolean active = false;
 
-    public PlayerRobotShield(int shieldHitPoints, PlayerRobot playerRobot) {
+    public PlayerRobotShield(int shieldHitPoints) {
         this.shieldHitPoints = shieldHitPoints;
-        this.playerRobot = playerRobot;
     }
 
     public void removeHitPointsFromShield(double removeValue) {

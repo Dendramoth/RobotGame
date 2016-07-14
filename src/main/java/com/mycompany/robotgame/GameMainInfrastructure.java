@@ -215,8 +215,6 @@ public class GameMainInfrastructure {
     }
 
     private void movePlayerRobot() {
-        playerRobot.setRobotPositionChangeX(0);
-        playerRobot.setRobotPositionChangeY(0);
         if (keyAPressed == true || keySPressed == true || keyWPressed == true || keyDPressed == true) {
             playerRobot.playRobotMovingSound();
             playerRobot.moveTracks();
