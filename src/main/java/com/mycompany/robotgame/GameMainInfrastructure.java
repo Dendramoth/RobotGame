@@ -5,6 +5,7 @@
  */
 package com.mycompany.robotgame;
 
+import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkOne;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -55,7 +56,7 @@ public class GameMainInfrastructure {
     
     private PlayerRobot playerRobot;
     private GridTable gridTable;
-    private EvilDroneMarkOne evilDroneMarkOne;
+    private EnemyContainer enemyContainer = new EnemyContainer();
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -73,7 +74,7 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(robotCanvas);
 
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(2048, 8216), new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
-        evilDroneMarkOne = new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext);
+        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext));
         
         gridTable = new GridTable(enviromentGraphicsContext);
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
@@ -206,8 +207,8 @@ public class GameMainInfrastructure {
                 playerRobot.shootFromRobotTurret(mousePressed);
                 gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY(), playerRobot.getScreenPossition());
                 
-                evilDroneMarkOne.moveEnemy(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY());
-                evilDroneMarkOne.paintEnemy(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());
+                enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
+                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());
                 playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
             }
 
