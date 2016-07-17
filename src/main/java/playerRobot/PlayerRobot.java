@@ -173,7 +173,6 @@ public class PlayerRobot extends GameObject {
         createPolygonForColisionDetection();
         robotGraphicsContext.setFill(Color.GREEN);
         for (int i = 0; i < pointsForDetection.size(); i++) {
-            System.out.println((pointsForDetection.get(i).getCoordX() - 10) + " " + (pointsForDetection.get(i).getCoordY() - 10));
             robotGraphicsContext.fillOval(pointsForDetection.get(i).getCoordX() - 5, pointsForDetection.get(i).getCoordY() - 5, 10, 10);
         }
     }
