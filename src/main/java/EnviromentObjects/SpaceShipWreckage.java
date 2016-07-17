@@ -20,15 +20,16 @@ import javafx.scene.paint.Color;
  */
 public class SpaceShipWreckage extends GameStaticObject {
 
-    GraphicsContext graphicsContext;
-    Image spaceShipWreckageImage = LoadAllResources.getMapOfAllImages().get("spaceShipWreckage");
+    private GraphicsContext graphicsContext;
+    private Image spaceShipWreckageImage = LoadAllResources.getMapOfAllImages().get("spaceShipWreckage");
+    private List<Point> pointsForDetection = new ArrayList<Point>();
 
     public SpaceShipWreckage(Point possition, double width, double heigh, GraphicsContext graphicsContext) {
-        super(getPoints(possition),possition, width, heigh,graphicsContext,Color.BLACK);
+        super(getPoints(possition), possition, width, heigh, graphicsContext, Color.BLACK);
         this.graphicsContext = graphicsContext;
     }
-    
-    private static List<Point> getPoints(Point possition){
+
+    private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<Point>();
         pointList.add(new Point(600 + possition.getCoordX(), 100 + possition.getCoordY()));
         pointList.add(new Point(800 + possition.getCoordX(), 100 + possition.getCoordY()));
@@ -40,12 +41,28 @@ public class SpaceShipWreckage extends GameStaticObject {
     @Override
     public void paintGameObject() {
         graphicsContext.drawImage(spaceShipWreckageImage, worldPossition.getCoordX(), worldPossition.getCoordY());
+
+    }
+
+    private void createPolygonForDetection(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition) {
+        pointsForDetection.clear();
+        pointsForDetection.add(new Point(worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
+        pointsForDetection.add(new Point(512 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
+        pointsForDetection.add(new Point(512 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 512 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
+        pointsForDetection.add(new Point(worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 512 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
     }
 
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition) {
-    //    graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
+        //    graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
         graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY());
+        
+        createPolygonForDetection(worldPossitionOfPlayerX, worldPossitionOfPlayerY, playerScreenPossition);
+        graphicsContext.setFill(Color.RED);
+        for (int i = 0; i < pointsForDetection.size(); i++) {
+            System.out.println((pointsForDetection.get(i).getCoordX() - 10) + " " + (pointsForDetection.get(i).getCoordY() - 10));
+            graphicsContext.fillOval(pointsForDetection.get(i).getCoordX() - 5, pointsForDetection.get(i).getCoordY() - 5, 10, 10);
+        }
     }
 
 }
