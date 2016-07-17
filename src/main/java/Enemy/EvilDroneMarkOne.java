@@ -88,9 +88,6 @@ public class EvilDroneMarkOne extends Enemy {
             }
         }
 
-        System.out.println("----------------------------");
-        System.out.println((playerPossitionX - worldPossition.getCoordX()) + " " + (playerPossitionY - worldPossition.getCoordY()));
-        System.out.println((playerPossitionX) + " " + (playerPossitionY));
         graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX() + playerScreenPosstion.getCoordX(), playerPossitionY - worldPossition.getCoordY() + playerScreenPosstion.getCoordY());
     }
 

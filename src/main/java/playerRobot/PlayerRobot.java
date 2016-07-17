@@ -10,9 +10,11 @@ import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -39,6 +41,7 @@ public class PlayerRobot extends GameObject {
     private int shieldImageRotationCounter = 0;
     private int previousShieldImage = 2;
     private int currentShieldImage = 1;
+    private List<Point> pointsForDetection = new ArrayList<Point>();
 
     public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition) {
         super(worldPossition, 64, 64);
@@ -122,6 +125,12 @@ public class PlayerRobot extends GameObject {
             64.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32,
             0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32});
 
+        pointsForDetection.clear();
+        pointsForDetection.add(new Point(0.0 + screenPossition.getCoordX() - 32, 0.0 + screenPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(0.0 + screenPossition.getCoordX() - 32, 64.0 + screenPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(64.0 + screenPossition.getCoordX() - 32, 64.0 + screenPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(64.0 + screenPossition.getCoordX() - 32, 0.0 + screenPossition.getCoordY() - 32));
+
         polygon.setRotate(facingAngle);
         return polygon;
     }
@@ -160,6 +169,13 @@ public class PlayerRobot extends GameObject {
         }
         robotGraphicsContext.restore();
         playerRobotTurret.paintTurret(screenPossition);
+
+        createPolygonForColisionDetection();
+        robotGraphicsContext.setFill(Color.GREEN);
+        for (int i = 0; i < pointsForDetection.size(); i++) {
+            System.out.println((pointsForDetection.get(i).getCoordX() - 10) + " " + (pointsForDetection.get(i).getCoordY() - 10));
+            robotGraphicsContext.fillOval(pointsForDetection.get(i).getCoordX() - 5, pointsForDetection.get(i).getCoordY() - 5, 10, 10);
+        }
     }
 
     private void paintShield() {
@@ -232,9 +248,10 @@ public class PlayerRobot extends GameObject {
     }
 
     /**
-     * We need to return possition coordinates -32,
-     * because when we are drawing robot it is shifted by -32 for rotation around its center.
-     * @return 
+     * We need to return possition coordinates -32, because when we are drawing
+     * robot it is shifted by -32 for rotation around its center.
+     *
+     * @return
      */
     public Point getScreenPossition() {
         return (new Point(screenPossition.getCoordX() - 32, screenPossition.getCoordY() - 32)); // 
