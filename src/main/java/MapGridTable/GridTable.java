@@ -7,7 +7,6 @@ package MapGridTable;
 
 import GameObject.BackgroundObject;
 import GameObject.CornerPointsOfObject;
-import GameObject.GameObject;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
@@ -38,8 +37,14 @@ public class GridTable {
         cellCountX = Math.round(mapWidth / cellSize);
         cellCountY = Math.round(mapHeigh / cellSize);
         gridCellField = new GridCell[cellCountX][cellCountY];
-
         createGrid();
+    }
+
+    public HashSet<GameStaticObject> getAllVisibleObjects(double playerWorldCoordX, double playerWorldCoordY, Point playerScreenPossition) {
+        int x = indexInGrid(playerWorldCoordX);
+        int y = indexInGrid(playerWorldCoordY);
+        HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
+        return visibleObjects;
     }
 
     public void paintAllObjectsVisibleFromCoord(double playerWorldCoordX, double playerWorldCoordY, Point playerScreenPossition) {
@@ -151,7 +156,7 @@ public class GridTable {
 
         int y2 = cellY2 + cellVisibility;
         if (y2 > cellCountY - 1) {
-            y2 = cellCountY- 1;
+            y2 = cellCountY - 1;
         }
 
         for (int indexX = x1; indexX <= x2; indexX++) {

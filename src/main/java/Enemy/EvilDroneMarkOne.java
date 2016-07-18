@@ -116,7 +116,7 @@ public class EvilDroneMarkOne extends Enemy {
     }
 
     @Override
-    public boolean detectCollision(Shape shape) {
+    public boolean detectCollision(Shape shape, Point playerWorldPosition) {
         return false;
     }
     

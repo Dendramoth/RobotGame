@@ -73,10 +73,10 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(enemiesCanvas);
         gameCanvasPanel.getChildren().add(robotCanvas);
 
-        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(2048, 8216), new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32));
+        gridTable = new GridTable(enviromentGraphicsContext);
+        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(2300, 8216), new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32), gridTable);
         enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext));
         
-        gridTable = new GridTable(enviromentGraphicsContext);
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
         createMap1.generatedObjectForGame(gridTable);
         createMap1.generateBackground(gridTable);

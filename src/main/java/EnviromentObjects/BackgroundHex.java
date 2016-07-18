@@ -31,7 +31,7 @@ public class BackgroundHex extends BackgroundObject{
     }
 
     @Override
-    public boolean detectCollision(Shape shape) {
+    public boolean detectCollision(Shape shape, Point playerWorldPosition) {
         // do nothing, cannot colide with background
         return false;
     }

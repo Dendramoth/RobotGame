@@ -28,7 +28,7 @@ public abstract class GameObject implements Comparable<GameObject>{
     }
     
     public abstract void paintGameObject();
-    public abstract boolean detectCollision(Shape shape);
+    public abstract boolean detectCollision(Shape shape, Point playerWorldPosition);
     
     private void prepareObjectCorners(){
         Point topRight = new Point(worldPossition.getCoordX() + width, worldPossition.getCoordY());

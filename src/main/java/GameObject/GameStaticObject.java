@@ -8,7 +8,6 @@ package GameObject;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -44,18 +43,16 @@ public abstract class GameStaticObject extends GameObject{
         createLinesFromPolygonPoints(pointsList);
     }
 
-    private void createPolygon(List<Point> pointsList) {
-        int i = 0;
+    protected void createPolygon(List<Point> pointsList) {
+        gameObjectPolygon.getPoints().clear();
         for (Point point : pointsList) {
             gameObjectPolygon.getPoints().add(point.getCoordX());
             gameObjectPolygon.getPoints().add(point.getCoordY());
-
-            xPoints[i] = point.getCoordX();
-            yPoints[i] = point.getCoordY();
-            i++;
         }
     }
 
+    public abstract void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition);
+    
     private void createLinesFromPolygonPoints(List<Point> pointsList) {
         Line line;
         for (int i = 0; i < pointsList.size(); i++) {
@@ -127,6 +124,6 @@ public abstract class GameStaticObject extends GameObject{
         this.objectForComparisonPosY = objectForComparisonPosY;
     }
 
-    public abstract void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition);
+    
     
 }

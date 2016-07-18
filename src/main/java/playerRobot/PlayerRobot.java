@@ -8,6 +8,7 @@ package playerRobot;
 import GameObject.GameObject;
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import MapGridTable.GridTable;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import java.util.ArrayList;
@@ -45,11 +46,13 @@ public class PlayerRobot extends GameObject {
     private int previousShieldImage = 2;
     private int currentShieldImage = 1;
     private List<Point> pointsForDetection = new ArrayList<Point>();
+    private GridTable gridTable;
 
-    public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition) {
+    public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition, GridTable gridTable) {
         super(worldPossition, 64, 64);
         this.screenPossition = screenPossition;
         this.robotGraphicsContext = robotGraphicsContext;
+        this.gridTable = gridTable;
 
         robotImage = LoadAllResources.getMapOfAllImages().get("basePassive");
         robotImageMoving = LoadAllResources.getMapOfAllImages().get("baseMoving");
@@ -82,6 +85,11 @@ public class PlayerRobot extends GameObject {
 
         worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
         worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
+
+        if (detectCollisionWithStaticGameObjects()) {
+            worldPossition.setCoordX(worldPossition.getCoordX() - robotPositionChangeX);
+            worldPossition.setCoordY(worldPossition.getCoordY() - robotPositionChangeY);
+        }
     }
 
     public void moveRobotBackward() {
@@ -90,6 +98,11 @@ public class PlayerRobot extends GameObject {
 
         worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
         worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
+        
+        if (detectCollisionWithStaticGameObjects()) {
+            worldPossition.setCoordX(worldPossition.getCoordX() - robotPositionChangeX);
+            worldPossition.setCoordY(worldPossition.getCoordY() - robotPositionChangeY);
+        }
     }
 
     public void moveRobotLeft() {
@@ -122,20 +135,24 @@ public class PlayerRobot extends GameObject {
     private Polygon createPolygonForColisionDetection() {
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
-            0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32,
-            0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 64.0 + worldPossition.getCoordY() - 32,
-            64.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 64.0 + worldPossition.getCoordY() - 32,
-            64.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32,
-            0.0 + worldPossition.getCoordX() - robotImage.getWidth() / 2, 0.0 + worldPossition.getCoordY() - 32});
-
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(0.0 + screenPossition.getCoordX() - 32, 0.0 + screenPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(0.0 + screenPossition.getCoordX() - 32, 64.0 + screenPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(64.0 + screenPossition.getCoordX() - 32, 64.0 + screenPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(64.0 + screenPossition.getCoordX() - 32, 0.0 + screenPossition.getCoordY() - 32));
-
+            0.0, 0.0,
+            0.0, 64.0,
+            64.0, 64.0,
+            64.0, 0.0,
+            0.0, 0.0});
         polygon.setRotate(facingAngle);
         return polygon;
+    }
+
+    private boolean detectCollisionWithStaticGameObjects() {
+        Polygon playerRobotPolygon = createPolygonForColisionDetection();
+        HashSet<GameStaticObject> visibleStaticObjects = gridTable.getAllVisibleObjects(worldPossition.getCoordX(), worldPossition.getCoordY(), screenPossition);
+        for (GameStaticObject gameStaticObject : visibleStaticObjects) {
+            if (gameStaticObject.detectCollision(playerRobotPolygon, worldPossition)) {  //v testu mam pouze jeden static object a ten je tridy SpaceShipWreckage
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getHitPoints() {
@@ -172,7 +189,6 @@ public class PlayerRobot extends GameObject {
         robotGraphicsContext.restore();
         playerRobotTurret.paintTurret(screenPossition);
 
-        createPolygonForColisionDetection();
         robotGraphicsContext.setFill(Color.GREEN);
         for (int i = 0; i < pointsForDetection.size(); i++) {
             robotGraphicsContext.fillOval(pointsForDetection.get(i).getCoordX() - 5, pointsForDetection.get(i).getCoordY() - 5, 10, 10);
@@ -205,54 +221,10 @@ public class PlayerRobot extends GameObject {
     }
 
     @Override
-    public boolean detectCollision(Shape shape) {
+    public boolean detectCollision(Shape shape, Point playerWorldPosition) {
         return false;
     }
 
-    /**
-     * Method specific for playerRobot.
-     * Detects collisions with static objects to avoid player move into them.
-     * @param gameStaticObjects
-     * @return 
-     */
-    private boolean detectCollisionWithStaticObjects(HashSet<GameStaticObject> gameStaticObjects) {
-        Polygon polygon = createPolygonForColisionDetection();
-        for (GameStaticObject gameStaticObject : gameStaticObjects) {
-            if (gameStaticObject.detectCollision(polygon)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /*    @Override
-     public boolean detectCollision(Shape shape) {
-     Polygon meteorPolygon = createPolygonForColisionDetection();
-     Shape intersect = Shape.intersect(shape, meteorPolygon);
-     if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-     return false;
-     }
-     return true;
-     }
-
-     @Override
-     public boolean doOnCollision(GraphicsContext enemyGraphicsContext) {
-     return true;
-     }
-
-     @Override
-     public void doOnBeingHit(String weaponType) {
-     switch (weaponType) {
-     case "rocket":
-     removeHitPoints(20);
-     break;
-     case "minigun":
-     removeHitPoints(1);
-     break;
-     default:
-     removeHitPoints(1);
-     }
-     }*/
     public void setShieldActive(boolean shieldActive) {
         if (playerRobotShield.getShieldHitPoints() > 20) {
             playerRobotShield.setActive(shieldActive);

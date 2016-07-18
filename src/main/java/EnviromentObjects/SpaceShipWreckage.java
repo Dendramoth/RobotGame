@@ -41,11 +41,11 @@ public class SpaceShipWreckage extends GameStaticObject {
 
     @Override
     public void paintGameObject() {
-        graphicsContext.drawImage(spaceShipWreckageImage, worldPossition.getCoordX(), worldPossition.getCoordY());
     }
 
     @Override
-    public boolean detectCollision(Shape shape) {
+    public boolean detectCollision(Shape shape, Point playerWorldPosition) {
+        createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
@@ -53,27 +53,27 @@ public class SpaceShipWreckage extends GameStaticObject {
         return true;
     }
 
-    private void createPolygonForDetection(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition) {
+    private void createPolygonForDetection(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(77 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 275 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(77 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 346 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(163 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 433 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(285 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 404 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(400 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 210 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(380 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 188 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(292 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 274 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(236 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 218 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(320 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 128 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(300 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 105 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
-        pointsForDetection.add(new Point(112 + worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), 220 + worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY()));
+        pointsForDetection.add(new Point(77 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 275 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(77 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 346 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(163 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 433 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(285 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 404 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(400 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 210 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(380 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 188 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(292 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 274 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(236 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 218 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(320 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 128 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(300 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 105 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(112 + worldPossitionOfPlayerX - worldPossition.getCoordX(), 220 + worldPossitionOfPlayerY - worldPossition.getCoordY()));
+        createPolygon(pointsForDetection);
     }
 
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition) {
-        //    graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
         graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY());
 
-        createPolygonForDetection(worldPossitionOfPlayerX, worldPossitionOfPlayerY, playerScreenPossition);
+        createPolygonForDetection(worldPossitionOfPlayerX, worldPossitionOfPlayerY);
         graphicsContext.setFill(Color.RED);
         for (int i = 0; i < pointsForDetection.size(); i++) {
             graphicsContext.fillOval(pointsForDetection.get(i).getCoordX() - 5, pointsForDetection.get(i).getCoordY() - 5, 10, 10);
