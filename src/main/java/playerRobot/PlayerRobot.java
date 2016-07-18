@@ -6,16 +6,19 @@
 package playerRobot;
 
 import GameObject.GameObject;
+import GameObject.GameStaticObject;
 import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -163,7 +166,6 @@ public class PlayerRobot extends GameObject {
         robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
-        robotGraphicsContext.drawImage(robotImage, screenPossition.getCoordX(), screenPossition.getCoordY());
         if (playerRobotShield.isActive()) {
             paintShield();
         }
@@ -200,6 +202,27 @@ public class PlayerRobot extends GameObject {
         }
 
         robotGraphicsContext.drawImage(shieldImage, -shieldImage.getWidth() / 2, -shieldImage.getHeight() / 2);
+    }
+
+    @Override
+    public boolean detectCollision(Shape shape) {
+        return false;
+    }
+
+    /**
+     * Method specific for playerRobot.
+     * Detects collisions with static objects to avoid player move into them.
+     * @param gameStaticObjects
+     * @return 
+     */
+    private boolean detectCollisionWithStaticObjects(HashSet<GameStaticObject> gameStaticObjects) {
+        Polygon polygon = createPolygonForColisionDetection();
+        for (GameStaticObject gameStaticObject : gameStaticObjects) {
+            if (gameStaticObject.detectCollision(polygon)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /*    @Override

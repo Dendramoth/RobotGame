@@ -9,6 +9,7 @@ import GameObject.BackgroundObject;
 import GameObject.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -27,6 +28,12 @@ public class BackgroundHex extends BackgroundObject{
     @Override
     public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
         graphicsContext.drawImage(hexImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
+    }
+
+    @Override
+    public boolean detectCollision(Shape shape) {
+        // do nothing, cannot colide with background
+        return false;
     }
     
 }

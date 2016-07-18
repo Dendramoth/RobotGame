@@ -13,6 +13,7 @@ import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -25,7 +26,7 @@ public class SpaceShipWreckage extends GameStaticObject {
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public SpaceShipWreckage(Point possition, double width, double heigh, GraphicsContext graphicsContext) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, Color.BLACK);
+        super(getPoints(possition), possition, width, heigh, graphicsContext);
         this.graphicsContext = graphicsContext;
     }
 
@@ -41,7 +42,15 @@ public class SpaceShipWreckage extends GameStaticObject {
     @Override
     public void paintGameObject() {
         graphicsContext.drawImage(spaceShipWreckageImage, worldPossition.getCoordX(), worldPossition.getCoordY());
+    }
 
+    @Override
+    public boolean detectCollision(Shape shape) {
+        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
+        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            return false;
+        }
+        return true;
     }
 
     private void createPolygonForDetection(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition) {

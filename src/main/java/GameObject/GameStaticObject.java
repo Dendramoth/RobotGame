@@ -20,8 +20,7 @@ import javafx.scene.shape.Shape;
 public abstract class GameStaticObject extends GameObject{
 
     protected final GraphicsContext graphicsContext;
-    private final Polygon gameObjectPolygon = new Polygon();
-    private final Color color;
+    protected final Polygon gameObjectPolygon = new Polygon();
     private final double[] xPoints;
     private final double[] yPoints;
     private final int numberOfPoints;
@@ -30,14 +29,12 @@ public abstract class GameStaticObject extends GameObject{
     private double objectForComparisonPosY;
     
     private List<Point> listOfPathPoints = new ArrayList<Point>();
-    private Point pointToReach;
     private List<Line> polygonLineList = new ArrayList<Line>();
 
-    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext, Color color) {
+    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext) {
         super(possition, width, heigh);
         
         this.graphicsContext = graphicsContext;
-        this.color = color;
         this.numberOfPoints = pointsList.size();
 
         xPoints = new double[numberOfPoints];

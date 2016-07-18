@@ -10,6 +10,7 @@ import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -91,24 +92,6 @@ public class EvilDroneMarkOne extends Enemy {
         graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX() + playerScreenPosstion.getCoordX(), playerPossitionY - worldPossition.getCoordY() + playerScreenPosstion.getCoordY());
     }
 
-    public void paintDetectionParagraph() {
-        graphicsContext.setStroke(Color.BLUE);
-        graphicsContext.strokeLine(x1, y1, x2, y2);
-        graphicsContext.setStroke(Color.BLUE);
-        graphicsContext.strokeLine(x1 + 64, y1 + 64, x2 + 64, y2 + 64);
-        graphicsContext.setStroke(Color.BLUE);
-        graphicsContext.strokeLine(x1 + 64, y1, x2 + 64, y2);
-        graphicsContext.setStroke(Color.BLUE);
-        graphicsContext.strokeLine(x1, y1 + 64, x2, y2 + 64);
-    }
-
-    public void setUpXYForDetectionParagraph(double x, double y, double x2, double y2) {
-        this.x1 = x;
-        this.x2 = x2;
-        this.y1 = y;
-        this.y2 = y2;
-    }
-
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
         double deltaX = playerPossitionX - worldPossition.getCoordX();
@@ -131,6 +114,13 @@ public class EvilDroneMarkOne extends Enemy {
         angle = (angle + 360) % 360;
         return angle;
     }
+
+    @Override
+    public boolean detectCollision(Shape shape) {
+        return false;
+    }
+    
+    
 
     /*   @Override
      public boolean detectCollision(Shape shape) {

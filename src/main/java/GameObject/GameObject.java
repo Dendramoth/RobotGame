@@ -5,6 +5,8 @@
  */
 package GameObject;
 
+import javafx.scene.shape.Shape;
+
 /**
  *
  * @author Dendra
@@ -26,6 +28,7 @@ public abstract class GameObject implements Comparable<GameObject>{
     }
     
     public abstract void paintGameObject();
+    public abstract boolean detectCollision(Shape shape);
     
     private void prepareObjectCorners(){
         Point topRight = new Point(worldPossition.getCoordX() + width, worldPossition.getCoordY());

@@ -19,8 +19,8 @@ import javafx.scene.shape.Shape;
 public class DetectCollisions {
 
  //   private AllProjectilesContainer allProjectilesContainer;
- /*   private PlayerRobot playerRobot;
-    private GameEnviroment gameEnviroment;
+    private PlayerRobot playerRobot;
+ /*   private GameEnviroment gameEnviroment;
 
     private ArrayList<GameObjectPathfinding> allGameObjectsWithColisions = new ArrayList<GameObjectPathfinding>();
     private ArrayList<Enemy> allLivingEnemiesList = new ArrayList<Enemy>();
@@ -31,6 +31,16 @@ public class DetectCollisions {
     
     private ArrayList<Rock> allRocks = new ArrayList<Rock>();
 
+ */
+    public DetectCollisions(PlayerRobot playerRobot){
+        this.playerRobot = playerRobot;
+    }
+    
+    public boolean detectCollisionOfPlayerRobotWithStaticObjects(){
+        return false;
+    }
+    /*
+    
     public void detectCollisionsOfAllEnemiesWithPlayerRobot() {
         Iterator<Enemy> iterator = allLivingEnemiesList.iterator();
         while (iterator.hasNext()) {
