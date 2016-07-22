@@ -9,19 +9,13 @@ import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkOne;
 import GameObject.Point;
 import MapGridTable.GridTable;
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TimelineBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.event.Event;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -205,7 +199,7 @@ public class GameMainInfrastructure {
                 movePlayerRobot();
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
-                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY(), playerRobot.getScreenPossition());
+                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());
                 
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());

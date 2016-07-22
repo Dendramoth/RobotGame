@@ -88,8 +88,7 @@ public class Pathfinding {
 
     private void sortStaticObjectsBasedOnDistanceFromPlayer(GameStaticObject startGameObject) {
         for (int i = 0; i < gameStaticObjectsList.size(); i++) {
-            gameStaticObjectsList.get(i).setObjectForComparisonPosX(startGameObject.getWorldPossition().getCoordX());
-            gameStaticObjectsList.get(i).setObjectForComparisonPosY(startGameObject.getWorldPossition().getCoordY());
+            gameStaticObjectsList.get(i).setObjectForComparison(new GameObject.Point(startGameObject.getWorldPossition().getCoordX(),startGameObject.getWorldPossition().getCoordY()));
         }
         Collections.sort(gameStaticObjectsList);
     }

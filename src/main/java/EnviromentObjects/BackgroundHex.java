@@ -5,7 +5,7 @@
  */
 package EnviromentObjects;
 
-import GameObject.BackgroundObject;
+import GameObject.GamePrimitiveObject;
 import GameObject.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -15,25 +15,24 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class BackgroundHex extends BackgroundObject{
+public class BackgroundHex extends GamePrimitiveObject{
     private Image hexImage;
     private GraphicsContext graphicsContext;
 
     public BackgroundHex(Point possition, double width, double heigh, Image image, GraphicsContext graphicsContext) {
-        super(possition, width, heigh);
+        super(possition, width, heigh, graphicsContext);
         this.hexImage = image;
         this.graphicsContext = graphicsContext;
     }
 
     @Override
-    public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY) {
-        graphicsContext.drawImage(hexImage, worldPossitionOfPlayerX - worldPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY());
+    public void paintStaticGameObject(Point playerWorldPosition, Point playerScreenPosition) {
+        graphicsContext.drawImage(hexImage, playerWorldPosition.getCoordX() - worldPossition.getCoordX(), playerWorldPosition.getCoordY() - worldPossition.getCoordY());
     }
 
     @Override
-    public boolean detectCollision(Shape shape, Point playerWorldPosition) {
-        // do nothing, cannot colide with background
-        return false;
+    public void paintGameObject() {
+        // not supported
     }
-    
+   
 }

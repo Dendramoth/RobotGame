@@ -5,7 +5,7 @@
  */
 package playerRobot;
 
-import GameObject.GameObject;
+import GameObject.GameObjectWithDistanceDetection;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -25,7 +25,7 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class PlayerRobot extends GameObject {
+public class PlayerRobot extends GameObjectWithDistanceDetection {
 
     private final Point screenPossition;
     private final AudioClip idleRobotSound = LoadAllResources.getMapOfAllSounds().get("idleRobotSound");
@@ -49,7 +49,7 @@ public class PlayerRobot extends GameObject {
     private GridTable gridTable;
 
     public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition, GridTable gridTable) {
-        super(worldPossition, 64, 64);
+        super(worldPossition, 64, 64, robotGraphicsContext);
         this.screenPossition = screenPossition;
         this.robotGraphicsContext = robotGraphicsContext;
         this.gridTable = gridTable;
@@ -241,8 +241,15 @@ public class PlayerRobot extends GameObject {
         return playerRobotShield;
     }
 
+    @Override
+    public void paintStaticGameObject(Point playerWorldPossition, Point playerScreenPosition) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
     /**
-     * We need to return possition coordinates -32, because when we are drawing
+     * We need to return position coordinates -32, because when we are drawing
      * robot it is shifted by -32 for rotation around its center.
      *
      * @return

@@ -16,29 +16,13 @@ import javafx.scene.shape.Shape;
  *
  * @author styma01
  */
-public abstract class GameStaticObject extends GameObject{
-
-    protected final GraphicsContext graphicsContext;
+public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
     protected final Polygon gameObjectPolygon = new Polygon();
-    private final double[] xPoints;
-    private final double[] yPoints;
-    private final int numberOfPoints;
-
-    private double objectForComparisonPosX;
-    private double objectForComparisonPosY;
-    
     private List<Point> listOfPathPoints = new ArrayList<Point>();
     private List<Line> polygonLineList = new ArrayList<Line>();
 
     public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext) {
-        super(possition, width, heigh);
-        
-        this.graphicsContext = graphicsContext;
-        this.numberOfPoints = pointsList.size();
-
-        xPoints = new double[numberOfPoints];
-        yPoints = new double[numberOfPoints];
-
+        super(possition, width, heigh, graphicsContext);
         createPolygon(pointsList);
         createLinesFromPolygonPoints(pointsList);
     }
@@ -51,7 +35,8 @@ public abstract class GameStaticObject extends GameObject{
         }
     }
 
-    public abstract void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition);
+    @Override
+    public void paintGameObject() {};
     
     private void createLinesFromPolygonPoints(List<Point> pointsList) {
         Line line;
@@ -65,10 +50,6 @@ public abstract class GameStaticObject extends GameObject{
         }
     }
 
-    @Override
-    public void paintGameObject() {
-    }
-
     public void moveGameObject(Point moveToPoint) {
         double deltaX = moveToPoint.getCoordX() - getWorldPossition().getCoordX();
         double deltaY = moveToPoint.getCoordY() - getWorldPossition().getCoordY();
@@ -76,11 +57,6 @@ public abstract class GameStaticObject extends GameObject{
 
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angle + 90)) * 1);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angle + 90)) * 1);
-
-        for (int i = 0; i < numberOfPoints; i++) {
-            xPoints[i] = xPoints[i] - Math.cos(Math.toRadians(angle + 90)) * 1;
-            yPoints[i] = yPoints[i] - Math.sin(Math.toRadians(angle + 90)) * 1;
-        }
     }
 
     private double calculateAngleBetweenPoints(double x, double y) {
@@ -107,23 +83,4 @@ public abstract class GameStaticObject extends GameObject{
     public List<Line> getPolygonLineList() {
         return polygonLineList;
     }
-
-    public double getObjectForComparisonPosX() {
-        return objectForComparisonPosX;
-    }
-
-    public void setObjectForComparisonPosX(double objectForComparisonPosX) {
-        this.objectForComparisonPosX = objectForComparisonPosX;
-    }
-
-    public double getObjectForComparisonPosY() {
-        return objectForComparisonPosY;
-    }
-
-    public void setObjectForComparisonPosY(double objectForComparisonPosY) {
-        this.objectForComparisonPosY = objectForComparisonPosY;
-    }
-
-    
-    
 }

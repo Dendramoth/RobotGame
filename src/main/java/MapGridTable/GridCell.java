@@ -5,7 +5,7 @@
  */
 package MapGridTable;
 
-import GameObject.BackgroundObject;
+import GameObject.GamePrimitiveObject;
 import GameObject.GameStaticObject;
 import java.util.HashSet;
 
@@ -17,8 +17,8 @@ public class GridCell {
     private final HashSet<GameStaticObject> objectInCell = new HashSet<GameStaticObject>();
     private final HashSet<GameStaticObject> objectsVisibleFromCell = new HashSet<GameStaticObject>();
     
-    private final HashSet<BackgroundObject> backgroundInCell = new HashSet<BackgroundObject>();
-    private final HashSet<BackgroundObject> backgroundVisibleFromCell = new HashSet<BackgroundObject>();
+    private final HashSet<GamePrimitiveObject> backgroundInCell = new HashSet<GamePrimitiveObject>();
+    private final HashSet<GamePrimitiveObject> backgroundVisibleFromCell = new HashSet<GamePrimitiveObject>();
 
     public GridCell() {
     }
@@ -31,11 +31,11 @@ public class GridCell {
         objectsVisibleFromCell.add(gameObject);
     }
     
-    public void addGameBackgroundHex(BackgroundObject gameObject){
+    public void addGameBackgroundHex(GamePrimitiveObject gameObject){
         backgroundInCell.add(gameObject);
     }
     
-    public void addBackgroundHexVisibleFromCell(BackgroundObject gameObject){
+    public void addBackgroundHexVisibleFromCell(GamePrimitiveObject gameObject){
         backgroundVisibleFromCell.add(gameObject);
     }
     
@@ -48,11 +48,11 @@ public class GridCell {
         return objectsVisibleFromCell;
     }
 
-    public HashSet<BackgroundObject> getBackgroundInCell() {
+    public HashSet<GamePrimitiveObject> getBackgroundInCell() {
         return backgroundInCell;
     }
 
-    public HashSet<BackgroundObject> getBackgroundVisibleFromCell() {
+    public HashSet<GamePrimitiveObject> getBackgroundVisibleFromCell() {
         return backgroundVisibleFromCell;
     }
 

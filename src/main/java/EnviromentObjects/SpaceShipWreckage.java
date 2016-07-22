@@ -70,14 +70,15 @@ public class SpaceShipWreckage extends GameStaticObject {
     }
 
     @Override
-    public void paintStaticGameObject(double worldPossitionOfPlayerX, double worldPossitionOfPlayerY, Point playerScreenPossition) {
-        graphicsContext.drawImage(spaceShipWreckageImage, worldPossitionOfPlayerX - worldPossition.getCoordX() + playerScreenPossition.getCoordX(), worldPossitionOfPlayerY - worldPossition.getCoordY() + playerScreenPossition.getCoordY());
+    public void paintStaticGameObject(Point playerWorldPossition, Point playerScreenPosition) {
+        graphicsContext.drawImage(spaceShipWreckageImage, playerWorldPossition.getCoordX() - worldPossition.getCoordX() + playerScreenPosition.getCoordX(), playerWorldPossition.getCoordY() - worldPossition.getCoordY() + playerScreenPosition.getCoordY());
 
-        createPolygonForDetection(worldPossitionOfPlayerX, worldPossitionOfPlayerY);
+        createPolygonForDetection(playerWorldPossition.getCoordX(), playerWorldPossition.getCoordY());
         graphicsContext.setFill(Color.RED);
         for (int i = 0; i < pointsForDetection.size(); i++) {
             graphicsContext.fillOval(pointsForDetection.get(i).getCoordX() - 5, pointsForDetection.get(i).getCoordY() - 5, 10, 10);
         }
     }
-
+    
+    
 }

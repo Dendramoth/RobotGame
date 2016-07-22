@@ -5,7 +5,7 @@
  */
 package Enemy;
 
-import GameObject.GameObject;
+import GameObject.GameObjectWithDistanceDetection;
 import GameObject.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
  *
  * @author Dendra
  */
-public abstract class Enemy extends GameObject{
+public abstract class Enemy extends GameObjectWithDistanceDetection{
 
     protected double movementSpeed;
     protected double damagedStateTreshold;
@@ -25,7 +25,7 @@ public abstract class Enemy extends GameObject{
     protected GraphicsContext graphicsContext;
 
     public Enemy(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext) {
-        super(possitionInWorld, width, heigh);
+        super(possitionInWorld, width, heigh, graphicsContext);
         this.movementSpeed = movementSpeed;
         this.damagedStateTreshold = damagedStateTreshold;
         this.hitPoints = hitPoints;
@@ -33,13 +33,8 @@ public abstract class Enemy extends GameObject{
     }
 
     public abstract void moveEnemy(double playerPossitionX, double playerPossitionY);
-
-    public abstract void paintEnemy(Point playerRobotWorldPossition, Point playerScreenPosstion);
-
     public abstract void paintAllExplosionsEnemy(GraphicsContext enemyGraphicsContext);
-
     protected abstract boolean paintDyingEnemyAnimation(GraphicsContext enemyGraphicsContext);
-
     public abstract void paintDeadEnemy(GraphicsContext enemyGraphicsContext);
 
     public boolean isAlive() {
@@ -53,13 +48,4 @@ public abstract class Enemy extends GameObject{
     public int getHitPoints() {
         return hitPoints;
     }
-
-  /*  public ArrayList<Explosion> getAllExplosionsOnEnemy() {
-        return allExplosionsOnEnemy;
-    }
-
-    public void setAllExplosionsOnEnemy(ArrayList<Explosion> allExplosionsOnEnemy) {
-        this.allExplosionsOnEnemy = allExplosionsOnEnemy;
-    }*/
-
 }

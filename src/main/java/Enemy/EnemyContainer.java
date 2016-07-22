@@ -35,7 +35,7 @@ public class EnemyContainer {
     
     public void paintEnemies(Point playerRobotWorldPossition, Point playerScreenPosstion){
         for (Enemy enemy : enemyList){
-            enemy.paintEnemy(playerRobotWorldPossition, playerScreenPosstion);
+            enemy.paintStaticGameObject(playerRobotWorldPossition, playerScreenPosstion);
         }
     }
 }

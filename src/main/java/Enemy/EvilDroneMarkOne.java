@@ -37,30 +37,8 @@ public class EvilDroneMarkOne extends Enemy {
         damagedStateTreshold = 25;
     }
 
-    /*   @Override
-     public boolean doOnCollision(GraphicsContext enemyGraphicsContext) {
-     return paintDyingEnemyAnimation(enemyGraphicsContext);
-     }
-
-     @Override
-     public void doOnBeingHit(String weaponType) {
-     switch (weaponType) {
-     case "rocket":
-     hitPoints = hitPoints - 20;
-     break;
-     case "minigun":
-     hitPoints = hitPoints - 1;
-     allExplosionsOnEnemy.add(new Explosion());
-     break;
-     default:
-     hitPoints--;
-     }
-     if (hitPoints < damagedStateTreshold) {
-     movementSpeed = 0.5;
-     }
-     }*/
     @Override
-    public void paintEnemy(Point playerRobotWorldPossition, Point playerScreenPosstion) {
+    public void paintStaticGameObject(Point playerRobotWorldPossition, Point playerScreenPosstion) {
         double playerPossitionX = playerRobotWorldPossition.getCoordX();
         double playerPossitionY = playerRobotWorldPossition.getCoordY();
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
@@ -205,5 +183,8 @@ public class EvilDroneMarkOne extends Enemy {
     @Override
     public void paintGameObject() {
     }
+
+    
+    
 
 }
