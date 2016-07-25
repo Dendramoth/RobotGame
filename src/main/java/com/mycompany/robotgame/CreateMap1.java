@@ -6,7 +6,9 @@
 package com.mycompany.robotgame;
 
 import EnviromentObjects.BackgroundHex;
+import EnviromentObjects.CliffBottomLeft;
 import EnviromentObjects.CliffHorizontal;
+import EnviromentObjects.CliffVertical;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -19,26 +21,35 @@ import javafx.scene.image.Image;
  * @author Dendra
  */
 public class CreateMap1 {
+
     private GraphicsContext graphicsContext;
     private MonitorWindow monitorWindow;
-    
+
     public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.graphicsContext = graphicsContext;
         this.monitorWindow = monitorWindow;
     }
-    
-    public void generatedObjectForGame(GridTable gridTable){
+
+    public void generatedObjectForGame(GridTable gridTable) {
         SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
     }
-    
-    public void generateGameMapBorders(GridTable gridTable){
-        for (int i = 0; i < 4; i++){
-            CliffHorizontal cliffHorizontal = new CliffHorizontal(new Point(i*1024, 9000), 1024, 512, graphicsContext, monitorWindow);
+
+    public void generateGameMapBorders(GridTable gridTable) {
+        CliffBottomLeft cliffBottomLeft = new CliffBottomLeft(new Point(0, 9000), 512, 512, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(cliffBottomLeft);
+
+        for (int i = 0; i < 4; i++) {
+            CliffHorizontal cliffHorizontal = new CliffHorizontal(new Point(i * 1024 + 512, 9000), 1024, 512, graphicsContext, monitorWindow);
             gridTable.insertGameObjectIntoGridCell(cliffHorizontal);
         }
+
+        for (int i = 1; i < 5; i++) {
+            CliffVertical cliffVertical = new CliffVertical(new Point(0, 9000 - i * 1024), 512, 1024, graphicsContext, monitorWindow);
+            gridTable.insertGameObjectIntoGridCell(cliffVertical);
+        }
     }
-    
+
     public void generateBackground(GridTable gridTable) {
         Image image;
         Random random = new Random();
@@ -99,5 +110,5 @@ public class CreateMap1 {
             }
         }
     }
-    
+
 }

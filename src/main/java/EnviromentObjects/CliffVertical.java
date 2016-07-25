@@ -19,27 +19,27 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class CliffHorizontal extends GameStaticObject{
-    private final Image cliffHorizontalImage = LoadAllResources.getMapOfAllImages().get("cliffHorizontal");
+public class CliffVertical extends GameStaticObject{
+    private final Image cliffVerticalImage = LoadAllResources.getMapOfAllImages().get("cliffVertical");
     private final List<Point> pointsForDetection = new ArrayList<>();
 
-    public CliffHorizontal(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+    public CliffVertical(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow);
     }
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(0 + possition.getCoordX(), 150 + possition.getCoordY()));
-        pointList.add(new Point(1024 + possition.getCoordX(), 150 + possition.getCoordY()));
-        pointList.add(new Point(0 + possition.getCoordX(), 322 + possition.getCoordY()));
-        pointList.add(new Point(1024 + possition.getCoordX(), 322 + possition.getCoordY()));
+        pointList.add(new Point(150 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(150 + possition.getCoordX(), 1024 + possition.getCoordY()));
+        pointList.add(new Point(322 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(322 + possition.getCoordX(), 1024 + possition.getCoordY()));
         return pointList;
     }
 
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(cliffHorizontalImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.drawImage(cliffVerticalImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     //    createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 
@@ -55,10 +55,10 @@ public class CliffHorizontal extends GameStaticObject{
 
     private void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 322 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 322 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(322 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(322 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
 }
