@@ -6,6 +6,7 @@
 package com.mycompany.robotgame;
 
 import EnviromentObjects.BackgroundHex;
+import EnviromentObjects.CliffHorizontal;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -19,14 +20,23 @@ import javafx.scene.image.Image;
  */
 public class CreateMap1 {
     private GraphicsContext graphicsContext;
+    private MonitorWindow monitorWindow;
     
-    public CreateMap1(GraphicsContext graphicsContext) {
+    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.graphicsContext = graphicsContext;
+        this.monitorWindow = monitorWindow;
     }
     
     public void generatedObjectForGame(GridTable gridTable){
-        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext);
+        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
+    }
+    
+    public void generateGameMapBorders(GridTable gridTable){
+        for (int i = 0; i < 4; i++){
+            CliffHorizontal cliffHorizontal = new CliffHorizontal(new Point(i*1024, 9000), 1024, 512, graphicsContext, monitorWindow);
+            gridTable.insertGameObjectIntoGridCell(cliffHorizontal);
+        }
     }
     
     public void generateBackground(GridTable gridTable) {
@@ -84,7 +94,7 @@ public class CreateMap1 {
                         image = LoadAllResources.getMapOfAllImages().get("terrain10");
                         break;
                 }
-                BackgroundHex backgroundHex = new BackgroundHex(new Point(i * 256, j * 256), 256, 256, image, graphicsContext);
+                BackgroundHex backgroundHex = new BackgroundHex(new Point(i * 256, j * 256), 256, 256, image, graphicsContext, monitorWindow);
                 gridTable.insertBackgroundIntoGridCell(backgroundHex);
             }
         }

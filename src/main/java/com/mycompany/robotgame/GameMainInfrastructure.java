@@ -47,7 +47,7 @@ public class GameMainInfrastructure {
     private Label shieldHpValueLabel;
     private Label playerWorldPossitionValueLabel;
     private Label gameOverLabel = new Label("");
-    
+
     private PlayerRobot playerRobot;
     private GridTable gridTable;
     private EnemyContainer enemyContainer = new EnemyContainer();
@@ -67,12 +67,15 @@ public class GameMainInfrastructure {
         gameCanvasPanel.getChildren().add(enemiesCanvas);
         gameCanvasPanel.getChildren().add(robotCanvas);
 
-        gridTable = new GridTable(enviromentGraphicsContext);
-        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(2300, 8216), new Point(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGH / 2 - 32), gridTable);
-        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext));
-        
-        CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext);
+        Point startMonitorWindowPos = new Point(2000, 8000);
+        MonitorWindow monitorWindow = new MonitorWindow(startMonitorWindowPos);
+        gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
+        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
+        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext, monitorWindow));
+
+        CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow);
         createMap1.generatedObjectForGame(gridTable);
+        createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
 
         HBox userProfilePanel = new HBox();
@@ -87,10 +90,10 @@ public class GameMainInfrastructure {
         shieldHpValueLabel = new Label(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
         playerShiedInformation.getChildren().add(shieldHpLabel);
         playerShiedInformation.getChildren().add(shieldHpValueLabel);
-        
+
         HBox playerWorldPossition = new HBox();
         Label playerWorldPossitionLabel = new Label("World Possition:");
-        playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossition().getCoordX()+ " " + playerRobot.getWorldPossition().getCoordY()));
+        playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
         playerWorldPossition.getChildren().add(playerWorldPossitionLabel);
         playerWorldPossition.getChildren().add(playerWorldPossitionValueLabel);
 
@@ -108,7 +111,7 @@ public class GameMainInfrastructure {
 
         buildAndSetGameLoop(stage);
     }
-    
+
     private void changeCanvasWidthAndHeighToFullSize() {
         WINDOW_WIDTH = Screen.getPrimary().getVisualBounds().getMaxX();
         WINDOW_HEIGH = Screen.getPrimary().getVisualBounds().getMaxY() - 100;
@@ -186,7 +189,7 @@ public class GameMainInfrastructure {
     }
 
     private void buildAndSetGameLoop(final Stage stage) {
-        setGameLoop(new AnimationTimer(){
+        setGameLoop(new AnimationTimer() {
             /**
              * Everything inside this handle is what will be repeated in every
              * game loop. Move objects here, detect collisions etc.
@@ -195,14 +198,14 @@ public class GameMainInfrastructure {
             public void handle(long now) {
                 windowPositionX = stage.getX();
                 windowPositionY = stage.getY();
-                
+
                 movePlayerRobot();
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
-                gridTable.paintAllObjectsVisibleFromCoord(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());
-                
+                gridTable.paintAllObjectsInMonitorWindow();
+
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
-                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), playerRobot.getScreenPossition());
+                enemyContainer.paintEnemies(playerRobot.getWorldPossition());
                 playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
             }
 
@@ -229,7 +232,7 @@ public class GameMainInfrastructure {
         if (keyDPressed == true) {
             playerRobot.moveRobotRight();
         }
-        
+
         playerRobot.setShieldActive(keySpacePressed);
     }
 

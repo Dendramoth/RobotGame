@@ -5,6 +5,7 @@
  */
 package GameObject;
 
+import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,22 +22,19 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
     private List<Point> listOfPathPoints = new ArrayList<Point>();
     private List<Line> polygonLineList = new ArrayList<Line>();
 
-    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext) {
-        super(possition, width, heigh, graphicsContext);
+    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(possition, width, heigh, graphicsContext, monitorWindow);
         createPolygon(pointsList);
         createLinesFromPolygonPoints(pointsList);
     }
 
-    protected void createPolygon(List<Point> pointsList) {
+    protected final void createPolygon(List<Point> pointsList) {
         gameObjectPolygon.getPoints().clear();
         for (Point point : pointsList) {
             gameObjectPolygon.getPoints().add(point.getCoordX());
             gameObjectPolygon.getPoints().add(point.getCoordY());
         }
     }
-
-    @Override
-    public void paintGameObject() {};
     
     private void createLinesFromPolygonPoints(List<Point> pointsList) {
         Line line;

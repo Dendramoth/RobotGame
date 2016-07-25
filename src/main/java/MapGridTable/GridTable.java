@@ -10,6 +10,7 @@ import GameObject.GamePrimitiveObject;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
+import com.mycompany.robotgame.MonitorWindow;
 import java.util.HashSet;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -23,46 +24,48 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class GridTable {
 
-    private final int cellSize = 512;
-    private final int cellVisibility = 1;
+    private final int cellSize = 256;
+    private final int cellVerticalVisibility = 2;
+    private final int cellHorizontalVisibility = 4;
     private final int mapWidth = 5120;
     private final int mapHeigh = 10240;
     private final int cellCountX;
     private final int cellCountY;
     private final GridCell gridCellField[][];
     private final GraphicsContext graphicsContext;
+    private MonitorWindow monitorWindow;
 
-    public GridTable(GraphicsContext graphicsContext) {
+    public GridTable(GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.graphicsContext = graphicsContext;
+        this.monitorWindow = monitorWindow;
         cellCountX = Math.round(mapWidth / cellSize);
         cellCountY = Math.round(mapHeigh / cellSize);
         gridCellField = new GridCell[cellCountX][cellCountY];
         createGrid();
     }
 
-    public HashSet<GameStaticObject> getAllVisibleObjects(double playerWorldCoordX, double playerWorldCoordY, Point playerScreenPossition) {
-        int x = indexInGrid(playerWorldCoordX);
-        int y = indexInGrid(playerWorldCoordY);
+    public HashSet<GameStaticObject> getAllVisibleObjects() {
+        int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
+        int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);
         HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
         return visibleObjects;
     }
 
-    public void paintAllObjectsVisibleFromCoord(Point playerWorldPosition, Point playerScreenPossition) {
+    public void paintAllObjectsInMonitorWindow() {
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
-
-        int x = indexInGrid(playerWorldPosition.getCoordX());
-        int y = indexInGrid(playerWorldPosition.getCoordY());
+        
+        int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
+        int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);
 
         if (x < cellCountX - 1 && x >= 0 && y < cellCountY - 1 && y >= 0) {
-            System.out.println("X: " + x + " Y: " + y);
             HashSet<GamePrimitiveObject> visibleBackground = gridCellField[x][y].getBackgroundVisibleFromCell();
             for (GamePrimitiveObject gameObject : visibleBackground) {
-                gameObject.paintStaticGameObject(playerWorldPosition, playerScreenPossition);
+                gameObject.paintGameObject();
             }
 
             HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
             for (GameStaticObject gameObject : visibleObjects) {
-                gameObject.paintStaticGameObject(playerWorldPosition, playerScreenPossition);
+                gameObject.paintGameObject();
             }
         }
     }
@@ -79,16 +82,16 @@ public class GridTable {
         int switchValue = 0;
         CornerPointsOfObject cornerPointsOfObject = gameObject.getCornerPointsOfObject();
 
-        int x1 = indexInGrid(cornerPointsOfObject.getTopLeft().getCoordX());
-        int x2 = indexInGrid(cornerPointsOfObject.getTopRight().getCoordX());
+        int x1 = bottomIndexInGrid(cornerPointsOfObject.getTopLeft().getCoordX());
+        int x2 = bottomIndexInGrid(cornerPointsOfObject.getTopRight().getCoordX());
         if (x1 > x2) {
             switchValue = x2;
             x2 = x1;
             x1 = switchValue;
         }
 
-        int y1 = indexInGrid(cornerPointsOfObject.getTopLeft().getCoordY());
-        int y2 = indexInGrid(cornerPointsOfObject.getBottomLeft().getCoordY());
+        int y1 = bottomIndexInGrid(cornerPointsOfObject.getTopLeft().getCoordY());
+        int y2 = bottomIndexInGrid(cornerPointsOfObject.getBottomLeft().getCoordY());
         if (y1 > y2) {
             switchValue = y2;
             y2 = y1;
@@ -103,23 +106,22 @@ public class GridTable {
         int switchValue = 0;
         CornerPointsOfObject cornerPointsOfObject = gameObject.getCornerPointsOfObject();
 
-        int x1 = indexInGrid(cornerPointsOfObject.getTopLeft().getCoordX());
-        int x2 = indexInGrid(cornerPointsOfObject.getTopRight().getCoordX());
+        int x1 = bottomIndexInGrid(cornerPointsOfObject.getTopLeft().getCoordX());
+        int x2 = topIndexInGrid(cornerPointsOfObject.getTopRight().getCoordX());
         if (x1 > x2) {
             switchValue = x2;
             x2 = x1;
             x1 = switchValue;
         }
 
-        int y1 = indexInGrid(cornerPointsOfObject.getTopLeft().getCoordY());
-        int y2 = indexInGrid(cornerPointsOfObject.getBottomLeft().getCoordY());
+        int y1 = bottomIndexInGrid(cornerPointsOfObject.getTopLeft().getCoordY());
+        int y2 = topIndexInGrid(cornerPointsOfObject.getBottomLeft().getCoordY());
         if (y1 > y2) {
             switchValue = y2;
             y2 = y1;
             y1 = switchValue;
         }
 
-        addBackgroundToCell(gameObject, x1, x2, y1, y2);
         addVisibleBackgroundToCell(gameObject, x1, x2, y1, y2);
     }
 
@@ -140,22 +142,22 @@ public class GridTable {
     }
 
     private void addVisibleObjectToCell(GameStaticObject gameObject, int cellX1, int cellX2, int cellY1, int cellY2) {
-        int x1 = cellX1 - cellVisibility;
+        int x1 = cellX1 - cellHorizontalVisibility;
         if (x1 < 0) {
             x1 = 0;
         }
 
-        int x2 = cellX2 + cellVisibility + 1;
+        int x2 = cellX2 + cellHorizontalVisibility + 1;
         if (x2 > cellCountX - 1) {
             x2 = cellCountX - 1;
         }
 
-        int y1 = cellY1 - cellVisibility;
+        int y1 = cellY1 - cellVerticalVisibility;
         if (y1 < 0) {
             y1 = 0;
         }
 
-        int y2 = cellY2 + cellVisibility;
+        int y2 = cellY2 + cellVerticalVisibility;
         if (y2 > cellCountY - 1) {
             y2 = cellCountY - 1;
         }
@@ -168,22 +170,22 @@ public class GridTable {
     }
 
     private void addVisibleBackgroundToCell(GamePrimitiveObject gameObject, int cellX1, int cellX2, int cellY1, int cellY2) {
-        int x1 = cellX1 - cellVisibility;
+        int x1 = cellX1 - cellHorizontalVisibility;
         if (x1 < 0) {
             x1 = 0;
         }
 
-        int x2 = cellX2 + cellVisibility + 2;
+        int x2 = cellX2 + cellHorizontalVisibility;
         if (x2 > cellCountX - 1) {
             x2 = cellCountX - 1;
         }
 
-        int y1 = cellY1 - cellVisibility;
+        int y1 = cellY1 - cellVerticalVisibility;
         if (y1 < 0) {
             y1 = 0;
         }
 
-        int y2 = cellY2 + cellVisibility;
+        int y2 = cellY2 + cellVerticalVisibility;
         if (y2 > cellCountY - 1) {
             y2 = cellCountY - 1;
         }
@@ -195,8 +197,12 @@ public class GridTable {
         }
     }
 
-    private int indexInGrid(double coordination) {
+    private int bottomIndexInGrid(double coordination) {
         return (int) Math.floor(coordination / cellSize);
+    }
+
+    private int topIndexInGrid(double coordination) {
+        return (int) Math.floor((coordination - 1) / cellSize);
     }
 
 }

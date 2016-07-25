@@ -5,6 +5,7 @@
  */
 package GameObject;
 
+import com.mycompany.robotgame.MonitorWindow;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -15,8 +16,8 @@ public abstract class GameObjectWithDistanceDetection extends GamePrimitiveObjec
 
     private Point objectForComparison;
 
-    public GameObjectWithDistanceDetection(Point possition, double width, double heigh, GraphicsContext graphicsContext) {
-        super(possition, width, heigh, graphicsContext);
+    public GameObjectWithDistanceDetection(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(possition, width, heigh, graphicsContext, monitorWindow);
     }
     
     public Point getObjectForComparison() {

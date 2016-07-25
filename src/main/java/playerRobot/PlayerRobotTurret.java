@@ -89,12 +89,12 @@ public class PlayerRobotTurret {
         return turretAngle;
     }
 
-    public void shootTurret(boolean shoot, GameObject.Point screenPosition) {
+    public void shootTurret(boolean shoot, GameObject.Point startPositionOfShooting) {
         turretIsShooting = shoot;
         if (shoot) {
             shootingCounter++;
             if (shootingCounter == 6) {
-                shootMinigunProjectile(screenPosition);
+                shootMinigunProjectile(startPositionOfShooting);
             }
             if (shootingCounter > 8) {
                 if (turretCurrentImage == turretIdleImage) {

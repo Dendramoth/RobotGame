@@ -8,6 +8,7 @@ package Enemy;
 import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
+import com.mycompany.robotgame.MonitorWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -29,45 +30,12 @@ public class EvilDroneMarkOne extends Enemy {
     private double y1 = 0;
     private double y2 = 0;
 
-    public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext) {
-        super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext);
+    public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, monitorWindow);
 
         enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
         hitPoints = 30;
         damagedStateTreshold = 25;
-    }
-
-    @Override
-    public void paintStaticGameObject(Point playerRobotWorldPossition, Point playerScreenPosstion) {
-        double playerPossitionX = playerRobotWorldPossition.getCoordX();
-        double playerPossitionY = playerRobotWorldPossition.getCoordY();
-        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
-
-        blinkCounter++;
-        if (hitPoints >= damagedStateTreshold) {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        }
-        if (hitPoints < damagedStateTreshold) {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1Damaged");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2Damaged");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        }
-
-        graphicsContext.drawImage(enemyImage, playerPossitionX - worldPossition.getCoordX() + playerScreenPosstion.getCoordX(), playerPossitionY - worldPossition.getCoordY() + playerScreenPosstion.getCoordY());
     }
 
     @Override
@@ -182,6 +150,34 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void paintGameObject() {
+        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+
+        blinkCounter++;
+        if (hitPoints >= damagedStateTreshold) {
+            if (blinkCounter <= 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
+            }
+            if (blinkCounter > 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2");
+            }
+            if (blinkCounter == 30) {
+                blinkCounter = 0;
+            }
+        }
+        if (hitPoints < damagedStateTreshold) {
+            if (blinkCounter <= 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1Damaged");
+            }
+            if (blinkCounter > 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2Damaged");
+            }
+            if (blinkCounter == 30) {
+                blinkCounter = 0;
+            }
+        }
+        
+        Point monitorPossition = monitorWindow.getPositionInWorld();
+        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     }
 
     

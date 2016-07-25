@@ -66,9 +66,15 @@ import javafx.scene.media.AudioClip;
         loadRocketImage();
         loadMinigunMissImages();
         loadPlayerRobotImages();
+        loadCliffs();
         
         loadAllSounds();
         
+    }
+    
+    private void loadCliffs(){
+        Image image = new Image("/cliffs/cliffHorizontal.png", 1024, 512, false, false);
+        mapOfAllImages.put("cliffHorizontal", image);
     }
     
     private void loadMinigunMissImages(){

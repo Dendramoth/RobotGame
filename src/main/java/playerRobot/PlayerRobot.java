@@ -11,6 +11,7 @@ import GameObject.Point;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
+import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +28,6 @@ import javafx.scene.shape.Shape;
  */
 public class PlayerRobot extends GameObjectWithDistanceDetection {
 
-    private final Point screenPossition;
     private final AudioClip idleRobotSound = LoadAllResources.getMapOfAllSounds().get("idleRobotSound");
     private final AudioClip movingRobotSound = LoadAllResources.getMapOfAllSounds().get("movingRobotSound");
     private final GraphicsContext robotGraphicsContext;
@@ -48,9 +48,8 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     private List<Point> pointsForDetection = new ArrayList<Point>();
     private GridTable gridTable;
 
-    public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, Point screenPossition, GridTable gridTable) {
-        super(worldPossition, 64, 64, robotGraphicsContext);
-        this.screenPossition = screenPossition;
+    public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, GridTable gridTable, MonitorWindow monitorWindow) {
+        super(worldPossition, 64, 64, robotGraphicsContext, monitorWindow);
         this.robotGraphicsContext = robotGraphicsContext;
         this.gridTable = gridTable;
 
@@ -89,6 +88,8 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
         if (detectCollisionWithStaticGameObjects()) {
             worldPossition.setCoordX(worldPossition.getCoordX() - robotPositionChangeX);
             worldPossition.setCoordY(worldPossition.getCoordY() - robotPositionChangeY);
+        } else {
+            monitorWindow.moveMonitorWindow(robotPositionChangeX, robotPositionChangeY);
         }
     }
 
@@ -98,10 +99,12 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
 
         worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
         worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
-        
+
         if (detectCollisionWithStaticGameObjects()) {
             worldPossition.setCoordX(worldPossition.getCoordX() - robotPositionChangeX);
             worldPossition.setCoordY(worldPossition.getCoordY() - robotPositionChangeY);
+        } else {
+            monitorWindow.moveMonitorWindow(robotPositionChangeX, robotPositionChangeY);
         }
     }
 
@@ -114,7 +117,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     public void shootFromRobotTurret(boolean shoot) {
-        playerRobotTurret.shootTurret(shoot, screenPossition);
+        playerRobotTurret.shootTurret(shoot, worldPossition);
     }
 
     public void moveTracks() {
@@ -135,18 +138,17 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     private Polygon createPolygonForColisionDetection() {
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
-            0.0, 0.0,
-            0.0, 64.0,
-            64.0, 64.0,
-            64.0, 0.0,
-            0.0, 0.0});
+            worldPossition.getCoordX() + 0.0 - robotImage.getWidth() / 2, worldPossition.getCoordY() + 0.0 - robotImage.getHeight() / 2,
+            worldPossition.getCoordX() + 0.0 - robotImage.getWidth() / 2, worldPossition.getCoordY() + 64.0 - robotImage.getHeight() / 2,
+            worldPossition.getCoordX() + 64.0 - robotImage.getWidth() / 2, worldPossition.getCoordY() + 64.0 - robotImage.getHeight() / 2,
+            worldPossition.getCoordX() + 64.0 - robotImage.getWidth() / 2, worldPossition.getCoordY() + 0.0 - robotImage.getHeight() / 2});
         polygon.setRotate(facingAngle);
         return polygon;
     }
 
     private boolean detectCollisionWithStaticGameObjects() {
         Polygon playerRobotPolygon = createPolygonForColisionDetection();
-        HashSet<GameStaticObject> visibleStaticObjects = gridTable.getAllVisibleObjects(worldPossition.getCoordX(), worldPossition.getCoordY(), screenPossition);
+        HashSet<GameStaticObject> visibleStaticObjects = gridTable.getAllVisibleObjects();
         for (GameStaticObject gameStaticObject : visibleStaticObjects) {
             if (gameStaticObject.detectCollision(playerRobotPolygon, worldPossition)) {  //v testu mam pouze jeden static object a ten je tridy SpaceShipWreckage
                 return true;
@@ -178,16 +180,17 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     @Override
     public void paintGameObject() {
         robotGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+        Point monitorPosition = new Point(worldPossition.getCoordX() - monitorWindow.getPositionInWorld().getCoordX(), worldPossition.getCoordY() - monitorWindow.getPositionInWorld().getCoordY());
 
         robotGraphicsContext.save();
-        robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
+        robotGraphicsContext.translate(monitorPosition.getCoordX(), monitorPosition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
         if (playerRobotShield.isActive()) {
             paintShield();
         }
         robotGraphicsContext.restore();
-        playerRobotTurret.paintTurret(screenPossition);
+        playerRobotTurret.paintTurret(monitorPosition);
 
         robotGraphicsContext.setFill(Color.GREEN);
         for (int i = 0; i < pointsForDetection.size(); i++) {
@@ -242,20 +245,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     @Override
-    public void paintStaticGameObject(Point playerWorldPossition, Point playerScreenPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Point getWorldPossition() {
+        return super.getWorldPossition(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-
-    /**
-     * We need to return position coordinates -32, because when we are drawing
-     * robot it is shifted by -32 for rotation around its center.
-     *
-     * @return
-     */
-    public Point getScreenPossition() {
-        return (new Point(screenPossition.getCoordX() - 32, screenPossition.getCoordY() - 32)); // 
-    }
-
 }

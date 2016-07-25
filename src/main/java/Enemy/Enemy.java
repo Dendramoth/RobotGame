@@ -7,6 +7,7 @@ package Enemy;
 
 import GameObject.GameObjectWithDistanceDetection;
 import GameObject.Point;
+import com.mycompany.robotgame.MonitorWindow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -24,8 +25,8 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
  //   protected ArrayList<Explosion> allExplosionsOnEnemy = new ArrayList<Explosion>();
     protected GraphicsContext graphicsContext;
 
-    public Enemy(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext) {
-        super(possitionInWorld, width, heigh, graphicsContext);
+    public Enemy(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(possitionInWorld, width, heigh, graphicsContext, monitorWindow);
         this.movementSpeed = movementSpeed;
         this.damagedStateTreshold = damagedStateTreshold;
         this.hitPoints = hitPoints;
