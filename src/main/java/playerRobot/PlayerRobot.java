@@ -79,8 +79,8 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     public void moveRobotForward() {
-        robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 2.5;
-        robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 2.5;
+        robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 15;
+        robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 15;
 
         worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
         worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);

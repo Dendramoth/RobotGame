@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EnviromentObjects;
+package EnviromentObjects.Cliffs;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;

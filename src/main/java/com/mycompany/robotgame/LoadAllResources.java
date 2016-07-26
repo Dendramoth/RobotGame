@@ -76,14 +76,26 @@ import javafx.scene.media.AudioClip;
         Image image = new Image("/cliffs/cliffHorizontal.png", 1024, 512, false, false);
         mapOfAllImages.put("cliffHorizontal", image);
         
+        image = new Image("/cliffs/cliffHorizontalReversed.png", 1024, 512, false, false);
+        mapOfAllImages.put("cliffHorizontalReversed", image);
+        
         image = new Image("/cliffs/cliffVertical.png", 512, 1024, false, false);
         mapOfAllImages.put("cliffVertical", image);
+        
+        image = new Image("/cliffs/cliffVerticalReversed.png", 512, 1024, false, false);
+        mapOfAllImages.put("cliffVerticalReversed", image);
         
         image = new Image("/cliffs/cliff_corner_BottomLeft.png", 512, 512, false, false);
         mapOfAllImages.put("cliffBottomLeftCorner", image);
         
         image = new Image("/cliffs/cliff_corner_BottomRight.png", 512, 512, false, false);
-        mapOfAllImages.put("cliffBottomRIghtCorner", image);
+        mapOfAllImages.put("cliffBottomRightCorner", image);
+        
+        image = new Image("/cliffs/cliff_corner_TopLeft.png", 512, 512, false, false);
+        mapOfAllImages.put("cliffTopLeftCorner", image);
+        
+        image = new Image("/cliffs/cliff_corner_TopRight.png", 512, 512, false, false);
+        mapOfAllImages.put("cliffTopRightCorner", image);
     }
     
     private void loadMinigunMissImages(){

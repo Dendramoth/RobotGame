@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EnviromentObjects;
+package EnviromentObjects.Cliffs;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
@@ -19,11 +19,11 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class CliffHorizontal extends GameStaticObject{
-    private final Image cliffHorizontalImage = LoadAllResources.getMapOfAllImages().get("cliffHorizontal");
+public class CliffHorizontalReversed extends GameStaticObject{
+    private final Image cliffHorizontalReversedImage = LoadAllResources.getMapOfAllImages().get("cliffHorizontalReversed");
     private final List<Point> pointsForDetection = new ArrayList<>();
 
-    public CliffHorizontal(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+    public CliffHorizontalReversed(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow);
     }
 
@@ -39,7 +39,7 @@ public class CliffHorizontal extends GameStaticObject{
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(cliffHorizontalImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.drawImage(cliffHorizontalReversedImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     //    createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 

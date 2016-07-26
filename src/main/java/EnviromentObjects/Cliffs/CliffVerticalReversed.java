@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EnviromentObjects;
+package EnviromentObjects.Cliffs;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
@@ -19,11 +19,11 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class CliffVertical extends GameStaticObject{
-    private final Image cliffVerticalImage = LoadAllResources.getMapOfAllImages().get("cliffVertical");
+public class CliffVerticalReversed extends GameStaticObject{
+    private final Image cliffVerticalImage = LoadAllResources.getMapOfAllImages().get("cliffVerticalReversed");
     private final List<Point> pointsForDetection = new ArrayList<>();
 
-    public CliffVertical(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+    public CliffVerticalReversed(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow);
     }
 
@@ -40,7 +40,6 @@ public class CliffVertical extends GameStaticObject{
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(cliffVerticalImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
-    //    createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 
     @Override
