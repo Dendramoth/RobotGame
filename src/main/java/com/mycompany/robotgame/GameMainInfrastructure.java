@@ -71,7 +71,7 @@ public class GameMainInfrastructure {
         MonitorWindow monitorWindow = new MonitorWindow(startMonitorWindowPos);
         gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
-        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext, monitorWindow));
+        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
 
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow);
         createMap1.generatedObjectForGame(gridTable);

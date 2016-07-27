@@ -5,12 +5,19 @@
  */
 package Enemy;
 
+import GameObject.GameStaticObject;
 import GameObject.Point;
+import Pathfinding.PathfindingPoint;
+import MapGridTable.GridTable;
+import Pathfinding.Pathfinding;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 /**
@@ -30,8 +37,10 @@ public class EvilDroneMarkOne extends Enemy {
     private double y1 = 0;
     private double y2 = 0;
 
-    public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, monitorWindow);
+    private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
+
+    public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+        super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
 
         enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
         hitPoints = 30;
@@ -40,12 +49,29 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
-        double deltaX = playerPossitionX - worldPossition.getCoordX();
-        double deltaY = playerPossitionY - worldPossition.getCoordY();
+        if (pathPoints.size() < 1) {
+            findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
+        }
+
+        double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
+        double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
         angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
 
+        /*   double deltaX = playerPossitionX - worldPossition.getCoordX();
+        double deltaY = playerPossitionY - worldPossition.getCoordY();
+        angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);*/
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
+
+        removePointThatWasReached();
+    }
+
+    private void removePointThatWasReached() {
+        PathfindingPoint point = pathPoints.get(0);
+        if ((point.getCoordX() > worldPossition.getCoordX() - 1.5 && point.getCoordX() < worldPossition.getCoordX() + 1.5)
+                && (point.getCoordY() > worldPossition.getCoordY() - 1.5 && point.getCoordY() < worldPossition.getCoordY() + 1.5)) { //point was reached
+            pathPoints.remove(0);
+        }
     }
 
     private double calculateAngleBetweenPlayerAndDrone(double x, double y) {
@@ -65,8 +91,6 @@ public class EvilDroneMarkOne extends Enemy {
     public boolean detectCollision(Shape shape, Point playerWorldPosition) {
         return false;
     }
-    
-    
 
     /*   @Override
      public boolean detectCollision(Shape shape) {
@@ -175,12 +199,19 @@ public class EvilDroneMarkOne extends Enemy {
                 blinkCounter = 0;
             }
         }
-        
+
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     }
 
-    
-    
+    private void findPathToPlayer(Point playerWorldPosition) {
+        List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
+        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext);
+        pathPoints = pathfinding.createPath(this, playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
+        /*    System.out.println("---------------------------------");
+        for (PathfindingPoint pathfindingPoint : pathPoints) {
+            System.out.println(pathfindingPoint.getCoordX() + " " + pathfindingPoint.getCoordY());
+        }*/
+    }
 
 }

@@ -9,13 +9,13 @@ package Pathfinding;
  *
  * @author Dendra
  */
-public class Point {
+public class PathfindingPoint {
     private double coordX;
     private double coordY;
     private boolean lastPointInObject = false;
     private boolean pointWasReached = false;
 
-    public Point(double coordX, double coordY) {
+    public PathfindingPoint(double coordX, double coordY) {
         this.coordX = coordX;
         this.coordY = coordY;
     }

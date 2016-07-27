@@ -33,10 +33,17 @@ public class SpaceShipWreckage extends GameStaticObject {
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(600 + possition.getCoordX(), 100 + possition.getCoordY()));
-        pointList.add(new Point(800 + possition.getCoordX(), 100 + possition.getCoordY()));
-        pointList.add(new Point(800 + possition.getCoordX(), 600 + possition.getCoordY()));
-        pointList.add(new Point(600 + possition.getCoordX(), 600 + possition.getCoordY()));
+        pointList.add(new Point(77 + possition.getCoordX(), 275 + possition.getCoordY()));
+        pointList.add(new Point(77 + possition.getCoordX(), 346 + possition.getCoordY()));
+        pointList.add(new Point(163 + possition.getCoordX(), 433 + possition.getCoordY()));
+        pointList.add(new Point(285 + possition.getCoordX(), 404 + possition.getCoordY()));
+        pointList.add(new Point(400 + possition.getCoordX(), 210 + possition.getCoordY()));
+        pointList.add(new Point(380 + possition.getCoordX(), 188 + possition.getCoordY()));
+        pointList.add(new Point(292 + possition.getCoordX(), 274 + possition.getCoordY()));
+        pointList.add(new Point(236 + possition.getCoordX(), 218 + possition.getCoordY()));
+        pointList.add(new Point(320 + possition.getCoordX(), 128 + possition.getCoordY()));
+        pointList.add(new Point(300 + possition.getCoordX(), 105 + possition.getCoordY()));
+        pointList.add(new Point(112 + possition.getCoordX(), 220 + possition.getCoordY()));
         return pointList;
     }
 
