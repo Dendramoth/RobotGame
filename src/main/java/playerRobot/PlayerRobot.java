@@ -79,8 +79,8 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     public void moveRobotForward() {
-        robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 4;
-        robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 4;
+        robotPositionChangeX = Math.cos(Math.toRadians(facingAngle - 90)) * 4;
+        robotPositionChangeY = Math.sin(Math.toRadians(facingAngle - 90)) * 4;
 
         worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
         worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
@@ -94,8 +94,8 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     public void moveRobotBackward() {
-        robotPositionChangeX = Math.cos(Math.toRadians(facingAngle - 90)) * 2.5;
-        robotPositionChangeY = Math.sin(Math.toRadians(facingAngle - 90)) * 2.5;
+        robotPositionChangeX = Math.cos(Math.toRadians(facingAngle + 90)) * 2.5;
+        robotPositionChangeY = Math.sin(Math.toRadians(facingAngle + 90)) * 2.5;
 
         worldPossition.setCoordX(worldPossition.getCoordX() + robotPositionChangeX);
         worldPossition.setCoordY(worldPossition.getCoordY() + robotPositionChangeY);
@@ -186,11 +186,16 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
         robotGraphicsContext.translate(monitorPosition.getCoordX(), monitorPosition.getCoordY());
         robotGraphicsContext.rotate(facingAngle);
         robotGraphicsContext.drawImage(robotImage, -robotImage.getWidth() / 2, -robotImage.getHeight() / 2);
-        if (playerRobotShield.isActive()) {
-            paintShield();
-        }
         robotGraphicsContext.restore();
         playerRobotTurret.paintTurret(monitorPosition);
+
+        if (playerRobotShield.isActive()) {
+            robotGraphicsContext.save();
+            robotGraphicsContext.translate(monitorPosition.getCoordX(), monitorPosition.getCoordY());
+            robotGraphicsContext.rotate(facingAngle);
+            paintShield();
+            robotGraphicsContext.restore();
+        }
 
         robotGraphicsContext.setFill(Color.GREEN);
         for (int i = 0; i < pointsForDetection.size(); i++) {

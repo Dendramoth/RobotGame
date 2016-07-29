@@ -31,7 +31,6 @@ public class Pathfinding {
     }
 
     public List<PathfindingPoint> createPath(GameObjectWithDistanceDetection startGameObject, double targetPointX, double targetPointY) {
-
         boolean point2IsVisibleFromPoint1 = true;
 
         sortStaticObjectsBasedOnDistanceFromPlayer(startGameObject);
