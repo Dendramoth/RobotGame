@@ -201,7 +201,7 @@ public class EvilDroneMarkOne extends Enemy {
         }
 
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
     }
 
     private void findPathToPlayer(Point playerWorldPosition) {

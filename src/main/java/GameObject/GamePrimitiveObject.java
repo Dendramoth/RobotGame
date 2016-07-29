@@ -45,4 +45,10 @@ public abstract class GamePrimitiveObject {
     public Point getWorldPossition() {
         return worldPossition;
     }
+
+    public void setWorldPossition(Point worldPossition) {
+        this.worldPossition = worldPossition;
+    }
+    
+    
 }
