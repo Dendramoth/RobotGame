@@ -5,8 +5,7 @@
  */
 package playerRobot;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import GameObject.Point;
 import javafx.scene.shape.Line;
 
 /**
@@ -15,43 +14,32 @@ import javafx.scene.shape.Line;
  */
 public class ShotsFromMinigun {
 
-    private double startPositionOfShotX = 0;
-    private double startPositionOfShotY = 0;
-    private double endPositionOfShotX = 0;
-    private double endPositionOfShotY = 0;
-    private double angleOfFiredShot = 0;
+    private final Point startPositionOfShot;
+    private final Point endPositionOfShot;
 
-    public ShotsFromMinigun(double startPositionOfShotX, double startPositionOfShotY, double angleOfFiredShot) {
-        this.startPositionOfShotX = startPositionOfShotX;
-        this.startPositionOfShotY = startPositionOfShotY;
-        this.endPositionOfShotX = startPositionOfShotX - Math.cos(Math.toRadians(angleOfFiredShot + 90)) * 450;
-        this.endPositionOfShotY = startPositionOfShotY - Math.sin(Math.toRadians(angleOfFiredShot + 90)) * 450;
-                
-        this.angleOfFiredShot = angleOfFiredShot;
-    }
-
-    public void paintShot() {
-
+    public ShotsFromMinigun(Point startPoint, double angleOfFiredShot) {
+        this.startPositionOfShot = startPoint;
+        double endPositionX = startPositionOfShot.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot + 90)) * 200;
+        double endPositionY = startPositionOfShot.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot + 90)) * 200;
+        this.endPositionOfShot = new Point(endPositionX, endPositionY);
     }
 
     public Line getLineForDetection() {
         Line line = new Line();
-        line.setStartX(startPositionOfShotX );
-        line.setStartY(startPositionOfShotY );
-        line.setEndX(endPositionOfShotX);
-        line.setEndY(endPositionOfShotY);
-
+        line.setStartX(startPositionOfShot.getCoordX() );
+        line.setStartY(startPositionOfShot.getCoordY() );
+        line.setEndX(endPositionOfShot.getCoordX());
+        line.setEndY(endPositionOfShot.getCoordY());
         return line;
     }
 
-    public double getEndPositionOfShotX() {
-        return endPositionOfShotX;
+    public Point getStartPositionOfShot() {
+        return startPositionOfShot;
     }
 
-    public double getEndPositionOfShotY() {
-        return endPositionOfShotY;
+    public Point getEndPositionOfShot() {
+        return endPositionOfShot;
     }
     
     
-
 }

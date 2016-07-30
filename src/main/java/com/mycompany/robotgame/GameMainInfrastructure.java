@@ -5,6 +5,7 @@
  */
 package com.mycompany.robotgame;
 
+import CollisionDetection.DetectCollisions;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkOne;
 import GameObject.Point;
@@ -51,6 +52,8 @@ public class GameMainInfrastructure {
     private PlayerRobot playerRobot;
     private GridTable gridTable;
     private EnemyContainer enemyContainer = new EnemyContainer();
+    private GameDynamicEnviroment gameDynamicEnviroment;
+    private DetectCollisions detectCollisions;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -72,6 +75,8 @@ public class GameMainInfrastructure {
         gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
         enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+        gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
+        detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment);
 
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow);
         createMap1.generatedObjectForGame(gridTable);
@@ -203,9 +208,13 @@ public class GameMainInfrastructure {
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
                 gridTable.paintAllObjectsInMonitorWindow();
+                gameDynamicEnviroment.paintAllMinigunsHitsOnGround();
 
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition());
+                
+                detectCollisions.detectCollisionsWithPlayerMinigunShots();
+                
                 playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
             }
 
