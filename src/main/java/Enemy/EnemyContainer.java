@@ -38,4 +38,10 @@ public class EnemyContainer {
             enemy.paintGameObject();
         }
     }
+
+    public List<Enemy> getEnemyList() {
+        return enemyList;
+    }
+    
+    
 }

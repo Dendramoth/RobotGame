@@ -14,8 +14,6 @@ import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Shape;
@@ -38,6 +36,7 @@ public class EvilDroneMarkOne extends Enemy {
     private double y2 = 0;
 
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
+    private final List<Point> pointsForDetection = new ArrayList<>();
 
     public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
@@ -89,7 +88,21 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public boolean detectCollision(Shape shape) {
-        return false;
+        createPolygonForDetection();
+        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
+        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            return false;
+        }
+        return true;
+    }
+    
+    private void createPolygonForDetection() {
+        pointsForDetection.clear();
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
+        createPolygon(pointsForDetection);
     }
 
     /*   @Override

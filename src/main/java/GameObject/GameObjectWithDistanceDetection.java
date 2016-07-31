@@ -6,7 +6,9 @@
 package GameObject;
 
 import com.mycompany.robotgame.MonitorWindow;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Polygon;
 
 /**
  *

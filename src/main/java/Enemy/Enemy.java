@@ -9,15 +9,18 @@ import GameObject.GameObjectWithDistanceDetection;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.MonitorWindow;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Polygon;
 
 /**
  *
  * @author Dendra
  */
 public abstract class Enemy extends GameObjectWithDistanceDetection{
-
+    
+    protected final Polygon gameObjectPolygon = new Polygon();
     protected double movementSpeed;
     protected double damagedStateTreshold;
     protected Image enemyImage;
@@ -51,6 +54,14 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
 
     public int getHitPoints() {
         return hitPoints;
+    }
+    
+    protected final void createPolygon(List<Point> pointsList) {
+        gameObjectPolygon.getPoints().clear();
+        for (Point point : pointsList) {
+            gameObjectPolygon.getPoints().add(point.getCoordX());
+            gameObjectPolygon.getPoints().add(point.getCoordY());
+        }
     }
     
 }

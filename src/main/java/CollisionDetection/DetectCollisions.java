@@ -5,6 +5,8 @@
  */
 package CollisionDetection;
 
+import Enemy.EnemyContainer;
+import GameObject.GameObjectWithDistanceDetection;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -27,12 +29,14 @@ public class DetectCollisions {
 
     private PlayerRobot playerRobot;
     private GameDynamicEnviroment gameDynamicEnviroment;
-    private GridTable gridTable;
+    private final GridTable gridTable;
+    private EnemyContainer enemyContainer;
 
-    public DetectCollisions(PlayerRobot playerRobot, GameDynamicEnviroment gameDynamicEnviroment, GridTable gridTable) {
+    public DetectCollisions(PlayerRobot playerRobot, GameDynamicEnviroment gameDynamicEnviroment, GridTable gridTable, EnemyContainer enemyContainer) {
         this.playerRobot = playerRobot;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
         this.gridTable = gridTable;
+        this.enemyContainer = enemyContainer;
     }
 
     public boolean detectCollisionOfPlayerRobotWithStaticObjects() {
@@ -41,22 +45,21 @@ public class DetectCollisions {
 
     public void detectCollisionsWithPlayerMinigunShots() {
         if (playerRobot.getAllShotsFromMinigun() != null && playerRobot.getAllShotsFromMinigun().size() > 0) {
-            System.out.println(playerRobot.getAllShotsFromMinigun().size());
-
             ShotsFromMinigun shotFromMinigun = playerRobot.getAllShotsFromMinigun().get(0);
 
-            List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
+            List<GameObjectWithDistanceDetection> visibleObjects = new ArrayList<GameObjectWithDistanceDetection>(gridTable.getAllVisibleObjects());
+            visibleObjects.addAll(enemyContainer.getEnemyList());
 
-            for (int i = 0; i < visibleStaticObjects.size(); i++) {
-                visibleStaticObjects.get(i).setObjectForComparison(shotFromMinigun.getStartPositionOfShot());
+            for (int i = 0; i < visibleObjects.size(); i++) {
+                visibleObjects.get(i).setObjectForComparison(shotFromMinigun.getStartPositionOfShot());
             }
 
-            Collections.sort(visibleStaticObjects);
+            Collections.sort(visibleObjects);
 
-            Iterator<GameStaticObject> iterator = visibleStaticObjects.iterator();
+            Iterator<GameObjectWithDistanceDetection> iterator = visibleObjects.iterator();
             while (iterator.hasNext()) {
-                GameStaticObject gameStaticObject = iterator.next();
-                if (gameStaticObject.detectCollision(shotFromMinigun.getLineForDetection())) {
+                GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
+                if (gameObjectWithDistanceDetection.detectCollision(shotFromMinigun.getLineForDetection())) {
                     playerRobot.getAllShotsFromMinigun().clear();
                     return;
                 }

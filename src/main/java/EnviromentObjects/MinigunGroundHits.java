@@ -22,7 +22,7 @@ public class MinigunGroundHits {
     private Image explosionImage;
     private GraphicsContext graphicsContext;
     private MonitorWindow monitorWindow;
-    private int numberOfFramesBeingDisplayed = 120;
+    private int numberOfFramesBeingDisplayed = 100;
 
     public MinigunGroundHits(Point worldPosition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.worldPosition = worldPosition;
