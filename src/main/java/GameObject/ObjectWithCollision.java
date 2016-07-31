@@ -12,5 +12,5 @@ import javafx.scene.shape.Shape;
  * @author styma01
  */
 public interface ObjectWithCollision{
-    public abstract boolean detectCollision(Shape shape, Point playerWorldPosition);
+    public abstract boolean detectCollision(Shape shape);
 }

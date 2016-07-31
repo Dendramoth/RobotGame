@@ -150,7 +150,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
         Polygon playerRobotPolygon = createPolygonForColisionDetection();
         HashSet<GameStaticObject> visibleStaticObjects = gridTable.getAllVisibleObjects();
         for (GameStaticObject gameStaticObject : visibleStaticObjects) {
-            if (gameStaticObject.detectCollision(playerRobotPolygon, worldPossition)) {  //v testu mam pouze jeden static object a ten je tridy SpaceShipWreckage
+            if (gameStaticObject.detectCollision(playerRobotPolygon)) {  //v testu mam pouze jeden static object a ten je tridy SpaceShipWreckage
                 return true;
             }
         }
@@ -229,7 +229,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     @Override
-    public boolean detectCollision(Shape shape, Point playerWorldPosition) {
+    public boolean detectCollision(Shape shape) {
         return false;
     }
 
