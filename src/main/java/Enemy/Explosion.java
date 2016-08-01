@@ -7,6 +7,7 @@ package Enemy;
 
 import GameObject.Point;
 import com.mycompany.robotgame.LoadAllResources;
+import com.mycompany.robotgame.MonitorWindow;
 import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -21,11 +22,13 @@ public class Explosion {
     private double possitionY = 0;
     private Image explosionImage;
     private int numberOfFramesBeingDisplayed = 10;
+    private MonitorWindow monitorWindow;
     
-    public Explosion() {
+    public Explosion(MonitorWindow monitorWindow) {
         Random random = new Random();
         this.possitionX = random.nextDouble() * 32;
         this.possitionY = random.nextDouble() * 32;
+        this.monitorWindow = monitorWindow;
 
         switch (random.nextInt(3)) {
             case 0:
@@ -43,7 +46,8 @@ public class Explosion {
     
     
     public void paint(Point worldPosition, GraphicsContext graphicsContext) {
-        graphicsContext.drawImage(explosionImage, worldPosition.getCoordX() + possitionX, worldPosition.getCoordY() + possitionY);
+        Point monitorPossition = monitorWindow.getPositionInWorld();
+        graphicsContext.drawImage(explosionImage, worldPosition.getCoordX() - possitionX - monitorPossition.getCoordX(), worldPosition.getCoordY() - possitionY - monitorPossition.getCoordY());
         numberOfFramesBeingDisplayed--;
     }
 

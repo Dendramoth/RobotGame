@@ -19,8 +19,8 @@ public class ShotsFromMinigun {
 
     public ShotsFromMinigun(Point startPoint, double angleOfFiredShot) {
         this.startPositionOfShot = startPoint;
-        double endPositionX = startPositionOfShot.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot + 90)) * 200;
-        double endPositionY = startPositionOfShot.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot + 90)) * 200;
+        double endPositionX = startPositionOfShot.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot + 90)) * 400;
+        double endPositionY = startPositionOfShot.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot + 90)) * 400;
         this.endPositionOfShot = new Point(endPositionX, endPositionY);
     }
 

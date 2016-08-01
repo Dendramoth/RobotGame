@@ -211,7 +211,7 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void doOnBeingHitByMinigun() {
-        allExplosionsOnEnemy.add(new Explosion());
+        allExplosionsOnEnemy.add(new Explosion(monitorWindow));
     }
 
 }
