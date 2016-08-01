@@ -24,7 +24,7 @@ public class PlayerRobotTurret {
     private final Image turretShootingImage;
     private final GraphicsContext robotGraphicsContext;
     private final AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
-    
+
     private Image turretCurrentImage;
     private double turretAngle = 0;
     private int shootingCounter = 0;
@@ -39,8 +39,8 @@ public class PlayerRobotTurret {
         turretShootingImage = LoadAllResources.getMapOfAllImages().get("towerShooting");
         turretCurrentImage = turretIdleImage;
     }
-    
-    public void paintTurret(GameObject.Point screenPossition){
+
+    public void paintTurret(GameObject.Point screenPossition) {
         robotGraphicsContext.save();
         robotGraphicsContext.translate(screenPossition.getCoordX(), screenPossition.getCoordY());
         moveToMouseCursor(screenPossition);
@@ -52,10 +52,10 @@ public class PlayerRobotTurret {
 
     private void paintMinigunFireOnTurret() {
         if (turretIsShooting) {
-            if (!minigunSound.isPlaying()){
+            if (!minigunSound.isPlaying()) {
                 minigunSound.play();
             }
-            minigunImageCounter ++;
+            minigunImageCounter++;
             if (minigunImageCounter <= 4) {
                 shootingMinigunFireImage = LoadAllResources.getMapOfAllImages().get("minigunFire1");
             } else if (minigunImageCounter > 4 && minigunImageCounter <= 8) {
@@ -64,13 +64,13 @@ public class PlayerRobotTurret {
                 shootingMinigunFireImage = LoadAllResources.getMapOfAllImages().get("minigunFire3");
             } else if (minigunImageCounter > 12 && minigunImageCounter <= 16) {
                 shootingMinigunFireImage = LoadAllResources.getMapOfAllImages().get("minigunFire4");
-            }else{
+            } else {
                 shootingMinigunFireImage = LoadAllResources.getMapOfAllImages().get("minigunFire1");
                 minigunImageCounter = 0;
             }
             robotGraphicsContext.drawImage(shootingMinigunFireImage, -shootingMinigunFireImage.getWidth() / 2, -shootingMinigunFireImage.getHeight() / 2);
-        }else{
-            if (minigunSound.isPlaying()){
+        } else {
+            if (minigunSound.isPlaying()) {
                 minigunSound.stop();
             }
             minigunImageCounter = 0;
@@ -111,7 +111,7 @@ public class PlayerRobotTurret {
     }
 
     private void shootMinigunProjectile(GameObject.Point worldPositionOfRobot) {
-        allShotsFromMinigun.add(new ShotsFromMinigun(worldPositionOfRobot, turretAngle));
+        allShotsFromMinigun.add(new ShotsFromMinigun(new GameObject.Point(worldPositionOfRobot.getCoordX() + 32, worldPositionOfRobot.getCoordY() + 32), turretAngle));
     }
 
     public void moveToMouseCursor(GameObject.Point screenPosition) {
