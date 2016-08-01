@@ -61,4 +61,12 @@ public class CliffHorizontal extends GameStaticObject{
         pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 322 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
+    
+    @Override
+    public void doOnCollision() {
+    }
+
+    @Override
+    public void doOnBeingHitByMinigun() {
+    }
 }

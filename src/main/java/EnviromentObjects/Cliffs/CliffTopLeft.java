@@ -66,4 +66,12 @@ public class CliffTopLeft extends GameStaticObject{
         pointsForDetection.add(new Point(239 + worldPossition.getCoordX(), 512 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
+    
+    @Override
+    public void doOnCollision() {
+    }
+
+    @Override
+    public void doOnBeingHitByMinigun() {
+    }
 }

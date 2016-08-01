@@ -14,6 +14,7 @@ import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Shape;
@@ -56,9 +57,6 @@ public class EvilDroneMarkOne extends Enemy {
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
         angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
 
-        /*   double deltaX = playerPossitionX - worldPossition.getCoordX();
-        double deltaY = playerPossitionY - worldPossition.getCoordY();
-        angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);*/
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
 
@@ -95,7 +93,7 @@ public class EvilDroneMarkOne extends Enemy {
         }
         return true;
     }
-    
+
     private void createPolygonForDetection() {
         pointsForDetection.clear();
         pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
@@ -105,34 +103,16 @@ public class EvilDroneMarkOne extends Enemy {
         createPolygon(pointsForDetection);
     }
 
-    /*   @Override
-     public boolean detectCollision(Shape shape) {
-     if (alive) {
-     //   Circle meteorPolygon = new Circle(possitionOnCanvasX + enemyImage.getWidth() / 2, possitionOnCanvasY + enemyImage.getHeight() / 2, (enemyImage.getHeight() / 2));
-     Rectangle r = new Rectangle();
-     r.setX(possitionX);
-     r.setY(possitionY);
-     r.setWidth(64);
-     r.setHeight(64);
-     Shape intersect = Shape.intersect(shape, r);
-     if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-     return false;
-     }
-     } else {
-     return false;
-     }
-     return true;
-     }*/
     @Override
-    public void paintAllExplosionsEnemy(GraphicsContext enemyGraphicsContext) {
-        /*   Iterator<Explosion> iterator = allExplosionsOnEnemy.iterator();
-         while (iterator.hasNext()) {
-         Explosion explosion = iterator.next();
-         explosion.paint(possitionX, possitionY, enemyGraphicsContext);
-         if (explosion.getNumberOfFramesBeingDisplayed() < 1) {
-         iterator.remove();
-         }
-         }*/
+    public void paintAllExplosionsEnemy() {
+        Iterator<Explosion> iterator = allExplosionsOnEnemy.iterator();
+        while (iterator.hasNext()) {
+            Explosion explosion = iterator.next();
+            explosion.paint(worldPossition, graphicsContext);
+            if (explosion.getNumberOfFramesBeingDisplayed() < 1) {
+                iterator.remove();
+            }
+        }
     }
 
     @Override
@@ -215,16 +195,23 @@ public class EvilDroneMarkOne extends Enemy {
 
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+
+        paintAllExplosionsEnemy();
     }
 
     private void findPathToPlayer(Point playerWorldPosition) {
         List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
         Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext);
         pathPoints = pathfinding.createPath(this, playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
-        /*    System.out.println("---------------------------------");
-        for (PathfindingPoint pathfindingPoint : pathPoints) {
-            System.out.println(pathfindingPoint.getCoordX() + " " + pathfindingPoint.getCoordY());
-        }*/
+    }
+
+    @Override
+    public void doOnCollision() {
+    }
+
+    @Override
+    public void doOnBeingHitByMinigun() {
+        allExplosionsOnEnemy.add(new Explosion());
     }
 
 }

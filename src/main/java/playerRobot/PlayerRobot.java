@@ -253,4 +253,14 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     public Point getWorldPossition() {
         return super.getWorldPossition(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void doOnCollision() {
+    }
+
+    @Override
+    public void doOnBeingHitByMinigun() {
+    }
+    
+    
 }

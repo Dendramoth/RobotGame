@@ -79,4 +79,12 @@ public class SpaceShipWreckage extends GameStaticObject {
         pointsForDetection.add(new Point(112 + worldPossition.getCoordX(), 220 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
+    
+    @Override
+    public void doOnCollision() {
+    }
+
+    @Override
+    public void doOnBeingHitByMinigun() {
+    }
 }

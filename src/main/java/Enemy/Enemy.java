@@ -9,6 +9,7 @@ import GameObject.GameObjectWithDistanceDetection;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.MonitorWindow;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,8 +27,7 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
     protected Image enemyImage;
     protected boolean alive = true;
     protected int hitPoints;
- //   protected ArrayList<Explosion> allExplosionsOnEnemy = new ArrayList<Explosion>();
-    protected GraphicsContext graphicsContext;
+    protected ArrayList<Explosion> allExplosionsOnEnemy = new ArrayList<>();
     protected GridTable gridTable;
 
     public Enemy(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
@@ -35,12 +35,11 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
         this.movementSpeed = movementSpeed;
         this.damagedStateTreshold = damagedStateTreshold;
         this.hitPoints = hitPoints;
-        this.graphicsContext = graphicsContext;
         this.gridTable = gridTable;
     }
 
     public abstract void moveEnemy(double playerPossitionX, double playerPossitionY);
-    public abstract void paintAllExplosionsEnemy(GraphicsContext enemyGraphicsContext);
+    public abstract void paintAllExplosionsEnemy();
     protected abstract boolean paintDyingEnemyAnimation(GraphicsContext enemyGraphicsContext);
     public abstract void paintDeadEnemy(GraphicsContext enemyGraphicsContext);
 
