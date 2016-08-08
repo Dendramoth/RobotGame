@@ -67,9 +67,21 @@ import javafx.scene.media.AudioClip;
         loadMinigunMissImages();
         loadPlayerRobotImages();
         loadCliffs();
+        loadMinigunHits();
         
         loadAllSounds();
         
+    }
+    
+    private void loadMinigunHits(){
+        Image image = new Image("/MinigunsHits/blocked_hits1.png", 32, 32, false, false);
+        mapOfAllImages.put("blockedMinigunShot1", image);
+        
+        image = new Image("/MinigunsHits/blocked_hits2.png", 32, 32, false, false);
+        mapOfAllImages.put("blockedMinigunShot2", image);
+        
+        image = new Image("/MinigunsHits/blocked_hits3.png", 32, 32, false, false);
+        mapOfAllImages.put("blockedMinigunShot3", image);
     }
     
     private void loadCliffs(){

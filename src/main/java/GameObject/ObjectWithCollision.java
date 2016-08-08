@@ -12,7 +12,7 @@ import javafx.scene.shape.Shape;
  * @author styma01
  */
 public interface ObjectWithCollision{
-    public abstract boolean detectCollision(Shape shape);
+    public abstract boolean detectCollision(Shape shape, Point positionOfObject);
     public abstract void doOnCollision();
     public abstract void doOnBeingHitByMinigun();
 }

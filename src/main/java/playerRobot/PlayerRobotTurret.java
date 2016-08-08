@@ -111,7 +111,7 @@ public class PlayerRobotTurret {
     }
 
     private void shootMinigunProjectile(GameObject.Point worldPositionOfRobot) {
-        allShotsFromMinigun.add(new ShotsFromMinigun(new GameObject.Point(worldPositionOfRobot.getCoordX() + 32, worldPositionOfRobot.getCoordY() + 32), turretAngle));
+        allShotsFromMinigun.add(new ShotsFromMinigun(new GameObject.Point(worldPositionOfRobot.getCoordX(), worldPositionOfRobot.getCoordY()), turretAngle));
     }
 
     public void moveToMouseCursor(GameObject.Point screenPosition) {

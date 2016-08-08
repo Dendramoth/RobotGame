@@ -50,7 +50,7 @@ public class DetectCollisions {
             Iterator<GameObjectWithDistanceDetection> iterator = visibleObjects.iterator();
             while (iterator.hasNext()) {
                 GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
-                if (gameObjectWithDistanceDetection.detectCollision(shotFromMinigun.getLineForDetection())) {
+                if (gameObjectWithDistanceDetection.detectCollision(shotFromMinigun.getLineForDetection(), shotFromMinigun.getStartPositionOfShot())) {
                     gameObjectWithDistanceDetection.doOnBeingHitByMinigun();
                     playerRobot.getAllShotsFromMinigun().clear();
                     return;
