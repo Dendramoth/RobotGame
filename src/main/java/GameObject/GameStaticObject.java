@@ -5,10 +5,12 @@
  */
 package GameObject;
 
+import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -18,12 +20,14 @@ import javafx.scene.shape.Shape;
  * @author styma01
  */
 public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
+    protected Image staticObjectImage;
     protected final Polygon gameObjectPolygon = new Polygon();
     private List<Point> listOfPathPoints = new ArrayList<Point>();
     private List<Line> polygonLineList = new ArrayList<Line>();
 
-    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
         super(possition, width, heigh, graphicsContext, monitorWindow);
+        this.staticObjectImage = staticObjectImage;
         createPolygon(pointsList);
         createLinesFromPolygonPoints(pointsList);
     }

@@ -20,11 +20,10 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class CliffTopRight extends GameStaticObject{
-    private final Image cliffTopRightImage = LoadAllResources.getMapOfAllImages().get("cliffTopRightCorner");
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffTopRight(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow);
+        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffTopRightCorner"));
     }
 
     private static List<Point> getPoints(Point possition) {
@@ -41,17 +40,22 @@ public class CliffTopRight extends GameStaticObject{
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(cliffTopRightImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     }
 
     @Override
-    public boolean detectCollision(Shape shape, Point point) {
+    public boolean detectCollision(Shape shape) {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        return false;
     }
 
     private void createPolygonForDetection() {

@@ -20,11 +20,10 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class CliffHorizontal extends GameStaticObject{
-    private final Image cliffHorizontalImage = LoadAllResources.getMapOfAllImages().get("cliffHorizontal");
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffHorizontal(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow);
+        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffHorizontal"));
     }
 
     private static List<Point> getPoints(Point possition) {
@@ -39,18 +38,23 @@ public class CliffHorizontal extends GameStaticObject{
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(cliffHorizontalImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     //    createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 
     @Override
-    public boolean detectCollision(Shape shape, Point point) {
+    public boolean detectCollision(Shape shape) {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        return false;
     }
 
     private void createPolygonForDetection() {

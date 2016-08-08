@@ -23,6 +23,7 @@ public class MinigunHitIntoStaticObject {
     private GraphicsContext graphicsContext;
     private MonitorWindow monitorWindow;
     private int numberOfFramesBeingDisplayed = 20;
+    public static int explosionImageSize = 32;
 
     public MinigunHitIntoStaticObject(Point worldPosition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.worldPosition = worldPosition;

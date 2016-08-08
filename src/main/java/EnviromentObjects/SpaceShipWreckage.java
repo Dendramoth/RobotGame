@@ -24,12 +24,12 @@ import javafx.scene.shape.Shape;
 public class SpaceShipWreckage extends GameStaticObject {
 
     private final GraphicsContext graphicsContext;
-    private final Image spaceShipWreckageImage = LoadAllResources.getMapOfAllImages().get("spaceShipWreckage");
+
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
 
     public SpaceShipWreckage(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow);
+        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("spaceShipWreckage"));
         this.graphicsContext = graphicsContext;
     }
 
@@ -52,7 +52,7 @@ public class SpaceShipWreckage extends GameStaticObject {
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(spaceShipWreckageImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
         paintAllMinigunHitsIntoSpaceShip();
     }
 
@@ -68,7 +68,17 @@ public class SpaceShipWreckage extends GameStaticObject {
     }
 
     @Override
-    public boolean detectCollision(Shape shape, Point positionOfColidingObject) {
+    public boolean detectCollision(Shape shape) {
+        createPolygonForDetection();
+        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
+        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         Point intersectionPoint = new Point(0, 0);
 
         createPolygonForDetection();
@@ -76,22 +86,24 @@ public class SpaceShipWreckage extends GameStaticObject {
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
-        if (positionOfColidingObject.getCoordX() + 32 < worldPossition.getCoordX() + 256) {
-            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMinX() - 16);
+        if (positionOfColidingObject.getCoordX() + 32 < worldPossition.getCoordX() + staticObjectImage.getWidth() / 2) {
+            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMinX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         } else {
-            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMaxX() - 16);
+            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMaxX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         }
 
-        if (positionOfColidingObject.getCoordY() + 32 < worldPossition.getCoordY() + 256) {
-            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMinY() - 16);
+        if (positionOfColidingObject.getCoordY() + 32 < worldPossition.getCoordY() + staticObjectImage.getHeight() / 2) {
+            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMinY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         } else {
-            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMaxY() - 16);
+            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMaxY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         }
 
         allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
 
         return true;
     }
+    
+    
 
     private void createPolygonForDetection() {
         pointsForDetection.clear();

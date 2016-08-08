@@ -85,7 +85,17 @@ public class EvilDroneMarkOne extends Enemy {
     }
 
     @Override
-    public boolean detectCollision(Shape shape, Point point) {
+    public boolean detectCollision(Shape shape) {
+        createPolygonForDetection();
+        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
+        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
