@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
  * @author Dendra
  */
 public class MinigunHitIntoStaticObject {
-    
+
     private Point worldPosition;
     private Image explosionImage;
     private GraphicsContext graphicsContext;
@@ -29,9 +29,9 @@ public class MinigunHitIntoStaticObject {
         this.worldPosition = worldPosition;
         this.graphicsContext = graphicsContext;
         this.monitorWindow = monitorWindow;
-        
+
         Random random = new Random();
-        switch (random.nextInt(3)) {
+        switch (random.nextInt(5)) {
             case 0:
                 this.explosionImage = LoadAllResources.getMapOfAllImages().get("blockedMinigunShot1");
                 break;
@@ -41,9 +41,15 @@ public class MinigunHitIntoStaticObject {
             case 2:
                 this.explosionImage = LoadAllResources.getMapOfAllImages().get("blockedMinigunShot3");
                 break;
+            case 3:
+                this.explosionImage = LoadAllResources.getMapOfAllImages().get("blockedMinigunShot4");
+                break;
+            case 4:
+                this.explosionImage = LoadAllResources.getMapOfAllImages().get("blockedMinigunShot5");
+                break;
         }
     }
-    
+
     public void paint() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(explosionImage, worldPosition.getCoordX() - monitorPossition.getCoordX(), worldPosition.getCoordY() - monitorPossition.getCoordY());

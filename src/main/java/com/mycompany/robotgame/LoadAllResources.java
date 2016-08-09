@@ -74,14 +74,20 @@ import javafx.scene.media.AudioClip;
     }
     
     private void loadMinigunHits(){
-        Image image = new Image("/MinigunsHits/blocked_hits1.png", 32, 32, false, false);
+        Image image = new Image("/MinigunsHits/blocked_hits_1.png", 32, 32, false, false);
         mapOfAllImages.put("blockedMinigunShot1", image);
         
-        image = new Image("/MinigunsHits/blocked_hits2.png", 32, 32, false, false);
+        image = new Image("/MinigunsHits/blocked_hits_2.png", 32, 32, false, false);
         mapOfAllImages.put("blockedMinigunShot2", image);
         
-        image = new Image("/MinigunsHits/blocked_hits3.png", 32, 32, false, false);
+        image = new Image("/MinigunsHits/blocked_hits_3.png", 32, 32, false, false);
         mapOfAllImages.put("blockedMinigunShot3", image);
+        
+        image = new Image("/MinigunsHits/blocked_hits_4.png", 32, 32, false, false);
+        mapOfAllImages.put("blockedMinigunShot4", image);
+        
+        image = new Image("/MinigunsHits/blocked_hits_5.png", 32, 32, false, false);
+        mapOfAllImages.put("blockedMinigunShot5", image);
     }
     
     private void loadCliffs(){

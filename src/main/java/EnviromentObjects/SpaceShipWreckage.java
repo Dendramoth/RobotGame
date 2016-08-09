@@ -75,37 +75,10 @@ public class SpaceShipWreckage extends GameStaticObject {
             return false;
         }
         return true;
-    }
+    }  
 
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        Point intersectionPoint = new Point(0, 0);
-
-        createPolygonForDetection();
-        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
-        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return false;
-        }
-        if (positionOfColidingObject.getCoordX() + 32 < worldPossition.getCoordX() + staticObjectImage.getWidth() / 2) {
-            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMinX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        } else {
-            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMaxX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        }
-
-        if (positionOfColidingObject.getCoordY() + 32 < worldPossition.getCoordY() + staticObjectImage.getHeight() / 2) {
-            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMinY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        } else {
-            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMaxY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        }
-
-        allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
-
-        return true;
-    }
-    
-    
-
-    private void createPolygonForDetection() {
+    public void createPolygonForDetection() {
         pointsForDetection.clear();
         pointsForDetection.add(new Point(77 + worldPossition.getCoordX(), 275 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(77 + worldPossition.getCoordX(), 346 + worldPossition.getCoordY()));
@@ -126,6 +99,7 @@ public class SpaceShipWreckage extends GameStaticObject {
     }
 
     @Override
-    public void doOnBeingHitByMinigun() {
+    public void doOnBeingHitByMinigun(Point intersectionPoint) {
+        allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
 }

@@ -57,7 +57,7 @@ public class MinigunGroundHits {
     
     public void paint() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(explosionImage, worldPosition.getCoordX() - monitorPossition.getCoordX() - 64, worldPosition.getCoordY() - monitorPossition.getCoordY() - 64);
+        graphicsContext.drawImage(explosionImage, worldPosition.getCoordX() - monitorPossition.getCoordX() - 32, worldPosition.getCoordY() - monitorPossition.getCoordY() - 32);
         numberOfFramesBeingDisplayed--;
     }
 

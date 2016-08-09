@@ -60,8 +60,8 @@ public class CliffBottomLeft extends GameStaticObject{
     }
     
     
-
-    private void createPolygonForDetection() {
+    @Override
+    public void createPolygonForDetection() {
         pointsForDetection.clear();
         pointsForDetection.add(new Point(235 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(258 + worldPossition.getCoordX(), 181 + worldPossition.getCoordY()));
@@ -78,7 +78,7 @@ public class CliffBottomLeft extends GameStaticObject{
     }
 
     @Override
-    public void doOnBeingHitByMinigun() {
+    public void doOnBeingHitByMinigun(Point intersectionPoint) {
     }
     
     

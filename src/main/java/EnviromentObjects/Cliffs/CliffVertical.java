@@ -57,7 +57,8 @@ public class CliffVertical extends GameStaticObject{
         return false;
     }
 
-    private void createPolygonForDetection() {
+    @Override
+    public void createPolygonForDetection() {
         pointsForDetection.clear();
         pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
@@ -71,6 +72,6 @@ public class CliffVertical extends GameStaticObject{
     }
 
     @Override
-    public void doOnBeingHitByMinigun() {
+    public void doOnBeingHitByMinigun(Point intersectionPoint) {
     }
 }

@@ -5,6 +5,7 @@
  */
 package GameObject;
 
+import EnviromentObjects.MinigunHitIntoStaticObject;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angle + 90)) * 1);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angle + 90)) * 1);
     }
-
+    
     private double calculateAngleBetweenPoints(double x, double y) {
         double angle;
         if (y == 0 && x == 0) {
@@ -72,6 +73,33 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
         }
         angle = (angle + 360) % 360;
         return angle;
+    }
+    
+    public abstract void createPolygonForDetection();
+    
+    @Override
+    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        Point intersectionPoint = new Point(0, 0);
+
+        createPolygonForDetection();
+        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
+        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            return false;
+        }
+        if (positionOfColidingObject.getCoordX() + 32 < worldPossition.getCoordX() + staticObjectImage.getWidth() / 2) {
+            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMinX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
+        } else {
+            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMaxX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
+        }
+
+        if (positionOfColidingObject.getCoordY() + 32 < worldPossition.getCoordY() + staticObjectImage.getHeight() / 2) {
+            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMinY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
+        } else {
+            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMaxY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
+        }
+        
+        doOnBeingHitByMinigun(intersectionPoint);
+        return true;
     }
 
     public Shape detectIntersection(Shape lineDetection) {

@@ -264,7 +264,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
 
     @Override
-    public void doOnBeingHitByMinigun() {
+    public void doOnBeingHitByMinigun(Point intersectionPoint) {
     }
     
     

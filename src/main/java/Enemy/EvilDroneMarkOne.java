@@ -57,8 +57,8 @@ public class EvilDroneMarkOne extends Enemy {
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
         angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
 
-   //     worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
-   //     worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
+        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
+        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
 
         removePointThatWasReached();
     }
@@ -101,6 +101,7 @@ public class EvilDroneMarkOne extends Enemy {
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
+        doOnBeingHitByMinigun(new Point(0,0)); //we dont need possition of shot
         return true;
     }
 
@@ -220,7 +221,7 @@ public class EvilDroneMarkOne extends Enemy {
     }
 
     @Override
-    public void doOnBeingHitByMinigun() {
+    public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allExplosionsOnEnemy.add(new Explosion(monitorWindow));
     }
 
