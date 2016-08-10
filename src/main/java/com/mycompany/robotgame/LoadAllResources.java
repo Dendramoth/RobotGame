@@ -60,6 +60,9 @@ import javafx.scene.media.AudioClip;
         image = new Image("/wreckage/wreckage_export.png", 512, 512, false, false);
         mapOfAllImages.put("spaceShipWreckage", image);
         
+        image = new Image("/walls/outerWallFortress.png", 1500, 1299, false, false);
+        mapOfAllImages.put("outerWallFortress", image);
+        
         loadShieldImages();
         loadTerrainImages();
         loadStaticTurretPictures();

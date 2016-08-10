@@ -13,36 +13,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
 /**
  *
  * @author Dendra
  */
-public class SpaceShipWreckage extends GameStaticObject {
-
+public class OuterFortressWallsWest extends GameStaticObject {
+    
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
 
-    public SpaceShipWreckage(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("spaceShipWreckage"));
+    public OuterFortressWallsWest(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("outerWallFortress"));
     }
-
+    
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(77 + possition.getCoordX(), 275 + possition.getCoordY()));
-        pointList.add(new Point(77 + possition.getCoordX(), 346 + possition.getCoordY()));
-        pointList.add(new Point(163 + possition.getCoordX(), 433 + possition.getCoordY()));
-        pointList.add(new Point(285 + possition.getCoordX(), 404 + possition.getCoordY()));
-        pointList.add(new Point(400 + possition.getCoordX(), 210 + possition.getCoordY()));
-        pointList.add(new Point(380 + possition.getCoordX(), 188 + possition.getCoordY()));
+        pointList.add(new Point(0 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(10 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(10 + possition.getCoordX(), 10 + possition.getCoordY()));
+        pointList.add(new Point(0 + possition.getCoordX(), 10 + possition.getCoordY()));
+      /*  pointList.add(new Point(380 + possition.getCoordX(), 188 + possition.getCoordY()));
         pointList.add(new Point(292 + possition.getCoordX(), 274 + possition.getCoordY()));
         pointList.add(new Point(236 + possition.getCoordX(), 218 + possition.getCoordY()));
         pointList.add(new Point(320 + possition.getCoordX(), 128 + possition.getCoordY()));
         pointList.add(new Point(300 + possition.getCoordX(), 105 + possition.getCoordY()));
-        pointList.add(new Point(112 + possition.getCoordX(), 220 + possition.getCoordY()));
+        pointList.add(new Point(112 + possition.getCoordX(), 220 + possition.getCoordY()));*/
         return pointList;
     }
 
@@ -77,17 +74,17 @@ public class SpaceShipWreckage extends GameStaticObject {
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(77 + worldPossition.getCoordX(), 275 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(77 + worldPossition.getCoordX(), 346 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(163 + worldPossition.getCoordX(), 433 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(285 + worldPossition.getCoordX(), 404 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(400 + worldPossition.getCoordX(), 210 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
+    /*    pointsForDetection.add(new Point(400 + worldPossition.getCoordX(), 210 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(380 + worldPossition.getCoordX(), 188 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(292 + worldPossition.getCoordX(), 274 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(236 + worldPossition.getCoordX(), 218 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(320 + worldPossition.getCoordX(), 128 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(300 + worldPossition.getCoordX(), 105 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(112 + worldPossition.getCoordX(), 220 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(112 + worldPossition.getCoordX(), 220 + worldPossition.getCoordY()));*/
         createPolygon(pointsForDetection);
     }
 
@@ -99,4 +96,5 @@ public class SpaceShipWreckage extends GameStaticObject {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
+    
 }
