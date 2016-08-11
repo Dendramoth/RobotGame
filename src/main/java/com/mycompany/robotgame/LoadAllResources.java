@@ -60,9 +60,6 @@ import javafx.scene.media.AudioClip;
         image = new Image("/wreckage/wreckage_export.png", 512, 512, false, false);
         mapOfAllImages.put("spaceShipWreckage", image);
         
-        image = new Image("/walls/outerWallFortress.png", 1500, 1299, false, false);
-        mapOfAllImages.put("outerWallFortress", image);
-        
         loadShieldImages();
         loadTerrainImages();
         loadStaticTurretPictures();
@@ -71,9 +68,18 @@ import javafx.scene.media.AudioClip;
         loadPlayerRobotImages();
         loadCliffs();
         loadMinigunHits();
+        loadFortressWalls();
         
         loadAllSounds();
         
+    }
+    
+    private void loadFortressWalls(){
+        Image image = new Image("/walls/outerWallEast.png", 1532, 1532, false, false);
+        mapOfAllImages.put("outerWallEast", image);
+        
+        image = new Image("/walls/outerWallWest.png", 1536, 1536, false, false);
+        mapOfAllImages.put("outerWallWest", image);
     }
     
     private void loadMinigunHits(){

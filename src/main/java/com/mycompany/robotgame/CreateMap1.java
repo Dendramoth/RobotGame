@@ -14,6 +14,7 @@ import EnviromentObjects.Cliffs.CliffTopLeft;
 import EnviromentObjects.Cliffs.CliffTopRight;
 import EnviromentObjects.Cliffs.CliffVertical;
 import EnviromentObjects.Cliffs.CliffVerticalReversed;
+import EnviromentObjects.OuterFortressWallsEast;
 import EnviromentObjects.OuterFortressWallsWest;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
@@ -40,8 +41,10 @@ public class CreateMap1 {
         SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
         
-        OuterFortressWallsWest outerFortressWalls = new OuterFortressWallsWest(new Point(1800,6000), 1500, 1299, graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(outerFortressWalls);
+        OuterFortressWallsWest outerFortressWallsWest = new OuterFortressWallsWest(new Point(2000,6000), 1536, 1536, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(outerFortressWallsWest);
+        OuterFortressWallsEast outerFortressWallsEast = new OuterFortressWallsEast(new Point(2000,6000), 1536, 1536, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(outerFortressWallsEast);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
