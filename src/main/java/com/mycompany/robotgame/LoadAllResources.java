@@ -75,16 +75,16 @@ import javafx.scene.media.AudioClip;
     }
     
     private void loadFortressWalls(){
-        Image image = new Image("/walls/outerWallEast.png", 1532, 1532, false, false);
+        Image image = new Image("/walls/outerWallEast.png", 640, 1530, false, false);
         mapOfAllImages.put("outerWallEast", image);
         
-        image = new Image("/walls/outerWallWest.png", 1536, 1536, false, false);
+        image = new Image("/walls/outerWallWest.png", 642, 1532, false, false);
         mapOfAllImages.put("outerWallWest", image);
         
-        image = new Image("/walls/southWall.png", 1536, 1536, false, false);
+        image = new Image("/walls/southWall.png", 489, 108, false, false);
         mapOfAllImages.put("southWall", image);
         
-        image = new Image("/walls/NortWall.png", 1536, 1536, false, false);
+        image = new Image("/walls/NortWall.png", 493, 111, false, false);
         mapOfAllImages.put("northWall", image);
     }
     

@@ -45,11 +45,11 @@ public class CreateMap1 {
         
         OuterFortressWallsWest outerFortressWallsWest = new OuterFortressWallsWest(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(outerFortressWallsWest);
-        OuterFortressWallsEast outerFortressWallsEast = new OuterFortressWallsEast(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
+        OuterFortressWallsEast outerFortressWallsEast = new OuterFortressWallsEast(new Point(2450,6000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(outerFortressWallsEast);
-        InnerFortressWallNorth innerFortressWallNorth = new InnerFortressWallNorth(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
+        InnerFortressWallNorth innerFortressWallNorth = new InnerFortressWallNorth(new Point(2100,6400), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallNorth);
-        InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
+        InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(2100,7000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth);
     }
 
