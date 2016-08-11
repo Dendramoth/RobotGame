@@ -80,6 +80,12 @@ import javafx.scene.media.AudioClip;
         
         image = new Image("/walls/outerWallWest.png", 1536, 1536, false, false);
         mapOfAllImages.put("outerWallWest", image);
+        
+        image = new Image("/walls/southWall.png", 1536, 1536, false, false);
+        mapOfAllImages.put("southWall", image);
+        
+        image = new Image("/walls/NortWall.png", 1536, 1536, false, false);
+        mapOfAllImages.put("northWall", image);
     }
     
     private void loadMinigunHits(){

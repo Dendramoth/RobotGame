@@ -14,6 +14,8 @@ import EnviromentObjects.Cliffs.CliffTopLeft;
 import EnviromentObjects.Cliffs.CliffTopRight;
 import EnviromentObjects.Cliffs.CliffVertical;
 import EnviromentObjects.Cliffs.CliffVerticalReversed;
+import EnviromentObjects.InnerFortressWallNorth;
+import EnviromentObjects.InnerFortressWallSouth;
 import EnviromentObjects.OuterFortressWallsEast;
 import EnviromentObjects.OuterFortressWallsWest;
 import EnviromentObjects.SpaceShipWreckage;
@@ -29,8 +31,8 @@ import javafx.scene.image.Image;
  */
 public class CreateMap1 {
 
-    private GraphicsContext graphicsContext;
-    private MonitorWindow monitorWindow;
+    private final GraphicsContext graphicsContext;
+    private final MonitorWindow monitorWindow;
 
     public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.graphicsContext = graphicsContext;
@@ -41,10 +43,14 @@ public class CreateMap1 {
         SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
         
-        OuterFortressWallsWest outerFortressWallsWest = new OuterFortressWallsWest(new Point(2000,6000), 1536, 1536, graphicsContext, monitorWindow);
+        OuterFortressWallsWest outerFortressWallsWest = new OuterFortressWallsWest(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(outerFortressWallsWest);
-        OuterFortressWallsEast outerFortressWallsEast = new OuterFortressWallsEast(new Point(2000,6000), 1536, 1536, graphicsContext, monitorWindow);
+        OuterFortressWallsEast outerFortressWallsEast = new OuterFortressWallsEast(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(outerFortressWallsEast);
+        InnerFortressWallNorth innerFortressWallNorth = new InnerFortressWallNorth(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(innerFortressWallNorth);
+        InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(1600,6000), 1536, 1536, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
