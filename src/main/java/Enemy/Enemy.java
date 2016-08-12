@@ -40,7 +40,7 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
 
     public abstract void moveEnemy(double playerPossitionX, double playerPossitionY);
     public abstract void paintAllExplosionsEnemy();
-    protected abstract boolean paintDyingEnemyAnimation(GraphicsContext enemyGraphicsContext);
+    public abstract boolean paintDyingEnemyAnimation();
     public abstract void paintDeadEnemy(GraphicsContext enemyGraphicsContext);
 
     public boolean isAlive() {

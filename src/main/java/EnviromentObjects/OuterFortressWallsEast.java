@@ -30,16 +30,26 @@ public class OuterFortressWallsEast extends GameStaticObject {
     
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(0 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(10 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(10 + possition.getCoordX(), 10 + possition.getCoordY()));
-        pointList.add(new Point(0 + possition.getCoordX(), 10 + possition.getCoordY()));
-      /*  pointList.add(new Point(380 + possition.getCoordX(), 188 + possition.getCoordY()));
-        pointList.add(new Point(292 + possition.getCoordX(), 274 + possition.getCoordY()));
-        pointList.add(new Point(236 + possition.getCoordX(), 218 + possition.getCoordY()));
-        pointList.add(new Point(320 + possition.getCoordX(), 128 + possition.getCoordY()));
-        pointList.add(new Point(300 + possition.getCoordX(), 105 + possition.getCoordY()));
-        pointList.add(new Point(112 + possition.getCoordX(), 220 + possition.getCoordY()));*/
+        pointList.add(new Point(33 + possition.getCoordX(), 1498 + possition.getCoordY()));
+        pointList.add(new Point(608 + possition.getCoordX(), 1498 + possition.getCoordY()));
+        pointList.add(new Point(608 + possition.getCoordX(), 923 + possition.getCoordY()));
+        pointList.add(new Point(480 + possition.getCoordX(), 923 + possition.getCoordY()));
+        pointList.add(new Point(480 + possition.getCoordX(), 602 + possition.getCoordY()));
+        pointList.add(new Point(608 + possition.getCoordX(), 602 + possition.getCoordY()));
+        pointList.add(new Point(608 + possition.getCoordX(), 27 + possition.getCoordY()));
+        pointList.add(new Point(32 + possition.getCoordX(), 27 + possition.getCoordY()));
+        pointList.add(new Point(32 + possition.getCoordX(), 227 + possition.getCoordY()));
+        pointList.add(new Point(96 + possition.getCoordX(), 227 + possition.getCoordY()));
+        pointList.add(new Point(96 + possition.getCoordX(), 89 + possition.getCoordY()));
+        pointList.add(new Point(545 + possition.getCoordX(), 89 + possition.getCoordY()));
+        pointList.add(new Point(545 + possition.getCoordX(), 538 + possition.getCoordY()));
+        pointList.add(new Point(416 + possition.getCoordX(), 538 + possition.getCoordY()));
+        pointList.add(new Point(416 + possition.getCoordX(), 985 + possition.getCoordY()));
+        pointList.add(new Point(545 + possition.getCoordX(), 985 + possition.getCoordY()));
+        pointList.add(new Point(545 + possition.getCoordX(), 1435 + possition.getCoordY()));
+        pointList.add(new Point(95 + possition.getCoordX(), 1435 + possition.getCoordY()));
+        pointList.add(new Point(95 + possition.getCoordX(), 1300 + possition.getCoordY()));
+        pointList.add(new Point(33 + possition.getCoordX(), 1300 + possition.getCoordY()));
         return pointList;
     }
 
@@ -74,17 +84,26 @@ public class OuterFortressWallsEast extends GameStaticObject {
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
-    /*    pointsForDetection.add(new Point(400 + worldPossition.getCoordX(), 210 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(380 + worldPossition.getCoordX(), 188 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(292 + worldPossition.getCoordX(), 274 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(236 + worldPossition.getCoordX(), 218 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(320 + worldPossition.getCoordX(), 128 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(300 + worldPossition.getCoordX(), 105 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(112 + worldPossition.getCoordX(), 220 + worldPossition.getCoordY()));*/
+        pointsForDetection.add(new Point(33 + worldPossition.getCoordX(), 1498 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 1498 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 923 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(480 + worldPossition.getCoordX(), 923 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(480 + worldPossition.getCoordX(), 602 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 602 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(32 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(32 + worldPossition.getCoordX(), 227 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(96 + worldPossition.getCoordX(), 227 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(96 + worldPossition.getCoordX(), 89 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 89 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 538 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(416 + worldPossition.getCoordX(), 538 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(416 + worldPossition.getCoordX(), 985 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 985 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 1435 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(95 + worldPossition.getCoordX(), 1435 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(95 + worldPossition.getCoordX(), 1300 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(33 + worldPossition.getCoordX(), 1300 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
 

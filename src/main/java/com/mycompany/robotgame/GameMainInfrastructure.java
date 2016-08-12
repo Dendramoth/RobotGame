@@ -74,7 +74,7 @@ public class GameMainInfrastructure {
         MonitorWindow monitorWindow = new MonitorWindow(startMonitorWindowPos);
         gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
-        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 1, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
         gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
 
@@ -210,8 +210,10 @@ public class GameMainInfrastructure {
                 gridTable.paintAllObjectsInMonitorWindow();
                 gameDynamicEnviroment.paintAllMinigunsHitsOnGround();
 
+                enemyContainer.testEnemiesAlive();
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition());
+                enemyContainer.paintAllDiingEnemies();
                 
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 

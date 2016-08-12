@@ -41,10 +41,7 @@ public class EvilDroneMarkOne extends Enemy {
 
     public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
-
         enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
-        hitPoints = 30;
-        damagedStateTreshold = 25;
     }
 
     @Override
@@ -93,7 +90,7 @@ public class EvilDroneMarkOne extends Enemy {
         }
         return true;
     }
-    
+
     @Override
     public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         createPolygonForDetection();
@@ -101,7 +98,7 @@ public class EvilDroneMarkOne extends Enemy {
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
-        doOnBeingHitByMinigun(new Point(0,0)); //we dont need possition of shot
+        doOnBeingHitByMinigun(new Point(0, 0)); //we dont need possition of shot
         return true;
     }
 
@@ -112,6 +109,38 @@ public class EvilDroneMarkOne extends Enemy {
         pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
+    }
+
+    @Override
+    public void paintGameObject() {
+        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+        blinkCounter++;
+
+        if (hitPoints >= damagedStateTreshold) {
+            if (blinkCounter <= 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
+            }
+            if (blinkCounter > 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2");
+            }
+            if (blinkCounter == 30) {
+                blinkCounter = 0;
+            }
+        } else {
+            if (blinkCounter <= 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1Damaged");
+            }
+            if (blinkCounter > 15) {
+                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2Damaged");
+            }
+            if (blinkCounter == 30) {
+                blinkCounter = 0;
+            }
+        }
+
+        Point monitorPossition = monitorWindow.getPositionInWorld();
+        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        paintAllExplosionsEnemy();
     }
 
     @Override
@@ -127,7 +156,7 @@ public class EvilDroneMarkOne extends Enemy {
     }
 
     @Override
-    protected boolean paintDyingEnemyAnimation(GraphicsContext enemyGraphicsContext) {
+    public boolean paintDyingEnemyAnimation() {
         if (explodingTimer < 4) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death1");
         } else if (explodingTimer <= 5) {
@@ -141,8 +170,10 @@ public class EvilDroneMarkOne extends Enemy {
         } else {
             return false;
         }
-
-        enemyGraphicsContext.drawImage(enemyImage, worldPossition.getCoordX(), worldPossition.getCoordY());
+        
+        Point monitorPossition = monitorWindow.getPositionInWorld();
+        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        
         explodingTimer++;
         return true;
     }
@@ -176,40 +207,6 @@ public class EvilDroneMarkOne extends Enemy {
         this.collisionDetectedInLastTest = collisionDetectedInLastTest;
     }
 
-    @Override
-    public void paintGameObject() {
-        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
-
-        blinkCounter++;
-        if (hitPoints >= damagedStateTreshold) {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        }
-        if (hitPoints < damagedStateTreshold) {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1Damaged");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2Damaged");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        }
-
-        Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
-
-        paintAllExplosionsEnemy();
-    }
-
     private void findPathToPlayer(Point playerWorldPosition) {
         List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
         Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext);
@@ -223,6 +220,13 @@ public class EvilDroneMarkOne extends Enemy {
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allExplosionsOnEnemy.add(new Explosion(monitorWindow));
+        hitPoints--;
+        if (hitPoints < damagedStateTreshold) {
+            movementSpeed = 1;
+        }
+        if (hitPoints < 1){
+            alive = false;
+        }
     }
 
 }
