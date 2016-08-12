@@ -6,9 +6,11 @@
 package Enemy;
 
 import GameObject.Point;
+import com.mycompany.robotgame.GameMainInfrastructure;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
@@ -16,10 +18,12 @@ import java.util.List;
  */
 public class EnemyContainer {
 
-    List<Enemy> enemyList = new ArrayList<>();
-    List<Enemy> dyingEnemyList = new ArrayList<Enemy>();
+    private List<Enemy> enemyList = new ArrayList<>();
+    private List<Enemy> dyingEnemyList = new ArrayList<Enemy>();
+    private GraphicsContext graphicsContext;
 
-    public EnemyContainer() {
+    public EnemyContainer(GraphicsContext graphicsContext) {
+        this.graphicsContext = graphicsContext;
     }
 
     public void addEnemy(Enemy enemy) {
@@ -48,19 +52,18 @@ public class EnemyContainer {
     }
 
     public void paintEnemies(Point playerRobotWorldPossition) {
+        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         for (Enemy enemy : enemyList) {
             enemy.paintGameObject();
         }
     }
 
     public void paintAllDiingEnemies() {
-        Iterator<Enemy> iterator = enemyList.iterator();
+        Iterator<Enemy> iterator = dyingEnemyList.iterator();
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
-            if (!enemy.isAlive()) {
-                if (!enemy.paintDyingEnemyAnimation()) {
-                    iterator.remove();
-                }
+            if (!enemy.paintDyingEnemyAnimation()) {
+                iterator.remove();
             }
         }
     }

@@ -113,7 +113,6 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void paintGameObject() {
-        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         blinkCounter++;
 
         if (hitPoints >= damagedStateTreshold) {
@@ -157,15 +156,15 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public boolean paintDyingEnemyAnimation() {
-        if (explodingTimer < 4) {
+        if (explodingTimer < 5) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death1");
-        } else if (explodingTimer <= 5) {
+        } else if (explodingTimer >= 5 && explodingTimer < 10) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death2");
-        } else if (explodingTimer > 5 && explodingTimer <= 10) {
+        } else if (explodingTimer >= 10 && explodingTimer < 15) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death3");
-        } else if (explodingTimer > 10 && explodingTimer <= 15) {
+        } else if (explodingTimer >= 15 && explodingTimer < 20) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death4");
-        } else if (explodingTimer > 15 && explodingTimer <= 20) {
+        } else if (explodingTimer >= 20 && explodingTimer < 25) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death5");
         } else {
             return false;
