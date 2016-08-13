@@ -69,9 +69,18 @@ import javafx.scene.media.AudioClip;
         loadCliffs();
         loadMinigunHits();
         loadFortressWalls();
+        loadSatelite();
         
         loadAllSounds();
         
+    }
+    
+    private void loadSatelite(){
+        Image image = new Image("/Satelit/satelite_base.png", 256, 256, false, false);
+        mapOfAllImages.put("sateliteBase", image);
+        
+        image = new Image("/Satelit/satelite_tower.png", 384, 384, false, false);
+        mapOfAllImages.put("sateliteTower", image);
     }
     
     private void loadFortressWalls(){

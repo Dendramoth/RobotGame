@@ -56,7 +56,6 @@ public class EvilDroneMarkOne extends Enemy {
 
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
-
         removePointThatWasReached();
     }
 
@@ -86,8 +85,10 @@ public class EvilDroneMarkOne extends Enemy {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            System.out.println("false");
             return false;
         }
+        System.out.println("true");
         return true;
     }
 
@@ -104,10 +105,10 @@ public class EvilDroneMarkOne extends Enemy {
 
     private void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
         createPolygon(pointsForDetection);
     }
 
@@ -169,10 +170,10 @@ public class EvilDroneMarkOne extends Enemy {
         } else {
             return false;
         }
-        
+
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
-        
+
         explodingTimer++;
         return true;
     }
@@ -223,7 +224,7 @@ public class EvilDroneMarkOne extends Enemy {
         if (hitPoints < damagedStateTreshold) {
             movementSpeed = 1;
         }
-        if (hitPoints < 1){
+        if (hitPoints < 1) {
             alive = false;
         }
     }

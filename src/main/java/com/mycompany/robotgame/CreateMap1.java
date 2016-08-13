@@ -18,6 +18,7 @@ import EnviromentObjects.InnerFortressWallNorth;
 import EnviromentObjects.InnerFortressWallSouth;
 import EnviromentObjects.OuterFortressWallsEast;
 import EnviromentObjects.OuterFortressWallsWest;
+import EnviromentObjects.Satelite;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -51,6 +52,9 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(innerFortressWallNorth);
         InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(2100,7000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth);
+        
+        Satelite satelite = new Satelite(new Point(2228,6572), 1536, 1536, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(satelite);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
