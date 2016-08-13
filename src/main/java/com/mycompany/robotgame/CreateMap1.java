@@ -53,7 +53,7 @@ public class CreateMap1 {
         InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(2100,7000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth);
         
-        Satelite satelite = new Satelite(new Point(2228,6572), 1536, 1536, graphicsContext, monitorWindow);
+        Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
     }
 

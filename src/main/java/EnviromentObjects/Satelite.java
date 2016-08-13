@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 
 /**
@@ -23,6 +24,7 @@ public class Satelite extends GameStaticObject {
     
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
+    private int sateliteAngle = 0;
 
     public Satelite(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("sateliteBase"));
@@ -41,7 +43,18 @@ public class Satelite extends GameStaticObject {
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        paintRotatingSatelite(monitorPossition);
         paintAllMinigunHitsIntoSpaceShip();
+    }
+    
+    private void paintRotatingSatelite(Point monitorPossition) {
+        Image rotatingSateliteImage = LoadAllResources.getMapOfAllImages().get("sateliteTower");
+        sateliteAngle = (sateliteAngle + 1) % 360;
+        graphicsContext.save();
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX() + 128, worldPossition.getCoordY() - monitorPossition.getCoordY() + 128);
+        graphicsContext.rotate(sateliteAngle);
+        graphicsContext.drawImage(rotatingSateliteImage, -rotatingSateliteImage.getWidth() / 2, -rotatingSateliteImage.getHeight() / 2);
+        graphicsContext.restore();
     }
 
     private void paintAllMinigunHitsIntoSpaceShip() {
