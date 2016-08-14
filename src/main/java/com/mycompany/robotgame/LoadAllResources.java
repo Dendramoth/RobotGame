@@ -70,9 +70,29 @@ import javafx.scene.media.AudioClip;
         loadMinigunHits();
         loadFortressWalls();
         loadSatelite();
+        loadSpiderRobot();
         
         loadAllSounds();
+    }
+    
+    private void loadSpiderRobot(){
+        Image image = new Image("/SpiderRobot/walker_idle.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_idle", image);
         
+        image = new Image("/SpiderRobot/walker_moving_1.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_1", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_2.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_2", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_3.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_3", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_4.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_4", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_5.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_5", image);
     }
     
     private void loadSatelite(){

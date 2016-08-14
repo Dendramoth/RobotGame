@@ -22,9 +22,9 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class EvilDroneMarkOne extends Enemy {
-
-    private int blinkCounter = 0;
+public class SpiderRobot extends Enemy{
+    
+    private int movementAnimationFrame = 1;
     private int explodingTimer = 0;
     private double angleOfDrone = 0;
     private double lastAngleToAvoidCollision = 0;
@@ -33,17 +33,17 @@ public class EvilDroneMarkOne extends Enemy {
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
 
-    public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow){
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
-        enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
+        enemyImage = LoadAllResources.getMapOfAllImages().get("walker_idle");
     }
-
+   
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
         if (pathPoints.size() < 1) {
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
         }
-
+        
         double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
         angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
@@ -100,38 +100,27 @@ public class EvilDroneMarkOne extends Enemy {
     private void createPolygonForDetection() {
         pointsForDetection.clear();
         pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(256 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(256 + worldPossition.getCoordX() - 32, 256 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 256 + worldPossition.getCoordY() - 32));
         createPolygon(pointsForDetection);
     }
 
     @Override
     public void paintGameObject() {
-        blinkCounter++;
-
-        if (hitPoints >= damagedStateTreshold) {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        } else {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1Damaged");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2Damaged");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
+        if (movementAnimationFrame < 5){
+            enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_1");
+        }else if(movementAnimationFrame >= 5 && movementAnimationFrame < 10){
+            enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_2");
+        }else if(movementAnimationFrame >= 10 && movementAnimationFrame < 15){
+            enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_3");
+        }else if(movementAnimationFrame >=15 && movementAnimationFrame < 20){
+            enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_4");
+        }else{
+            movementAnimationFrame = 0;
         }
-
+        movementAnimationFrame++;
+        
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
         paintAllExplosionsEnemy();
@@ -221,6 +210,7 @@ public class EvilDroneMarkOne extends Enemy {
         if (hitPoints < 1) {
             alive = false;
         }
-    }
-
+    } 
+    
+    
 }

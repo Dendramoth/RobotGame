@@ -8,6 +8,7 @@ package com.mycompany.robotgame;
 import CollisionDetection.DetectCollisions;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkOne;
+import Enemy.SpiderRobot;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import javafx.animation.AnimationTimer;
@@ -75,7 +76,9 @@ public class GameMainInfrastructure {
         gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
         enemyContainer = new EnemyContainer(enemyGraphicsContext);
-        enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+    //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+        enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+        
         gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
 
