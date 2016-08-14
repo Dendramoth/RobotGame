@@ -93,9 +93,9 @@ public class CreateMap1 {
         Random random = new Random();
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 39; j++) {
-                switch (random.nextInt(15)) {
+                switch (random.nextInt(14)) {
                     case 0:
-                        image = LoadAllResources.getMapOfAllImages().get("terrainCrater");
+                        image = LoadAllResources.getMapOfAllImages().get("terrain1");
                         break;
                     case 1:
                         image = LoadAllResources.getMapOfAllImages().get("terrain2");
@@ -125,22 +125,19 @@ public class CreateMap1 {
                         image = LoadAllResources.getMapOfAllImages().get("terrain10");
                         break;
                     case 10:
-                        image = LoadAllResources.getMapOfAllImages().get("terrain6");
+                        image = LoadAllResources.getMapOfAllImages().get("terrain11");
                         break;
                     case 11:
-                        image = LoadAllResources.getMapOfAllImages().get("terrain7");
+                        image = LoadAllResources.getMapOfAllImages().get("terrain12");
                         break;
                     case 12:
-                        image = LoadAllResources.getMapOfAllImages().get("terrain8");
+                        image = LoadAllResources.getMapOfAllImages().get("terrain13");
                         break;
                     case 13:
-                        image = LoadAllResources.getMapOfAllImages().get("terrain9");
-                        break;
-                    case 14:
-                        image = LoadAllResources.getMapOfAllImages().get("terrain10");
+                        image = LoadAllResources.getMapOfAllImages().get("terrain14");
                         break;
                     default:
-                        image = LoadAllResources.getMapOfAllImages().get("terrain10");
+                        image = LoadAllResources.getMapOfAllImages().get("terrain1");
                         break;
                 }
                 BackgroundHex backgroundHex = new BackgroundHex(new Point(i * 256, j * 256), 256, 256, image, graphicsContext, monitorWindow);

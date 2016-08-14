@@ -40,7 +40,7 @@ public class OuterFortressWallsWest extends GameStaticObject {
         pointList.add(new Point(608 + possition.getCoordX(), 30 + possition.getCoordY()));
         pointList.add(new Point(608 + possition.getCoordX(), 223 + possition.getCoordY()));
         pointList.add(new Point(545 + possition.getCoordX(), 223 + possition.getCoordY()));
-        pointList.add(new Point(608 + possition.getCoordX(), 91 + possition.getCoordY()));
+        pointList.add(new Point(545 + possition.getCoordX(), 91 + possition.getCoordY()));
         pointList.add(new Point(97 + possition.getCoordX(), 91 + possition.getCoordY()));
         pointList.add(new Point(97 + possition.getCoordX(), 541 + possition.getCoordY()));
         pointList.add(new Point(224 + possition.getCoordX(), 541 + possition.getCoordY()));
@@ -96,7 +96,7 @@ public class OuterFortressWallsWest extends GameStaticObject {
         pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 30 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 223 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 223 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 91 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 91 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(97 + worldPossition.getCoordX(), 91 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(97 + worldPossition.getCoordX(), 541 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(224 + worldPossition.getCoordX(), 541 + worldPossition.getCoordY()));

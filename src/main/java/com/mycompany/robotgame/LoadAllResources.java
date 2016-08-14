@@ -207,35 +207,47 @@ import javafx.scene.media.AudioClip;
     }
     
     private void loadTerrainImages(){
-        Image image = new Image("/terrain/teren1.png", 256, 256, false, false);
-        mapOfAllImages.put("terrainCrater", image);
+        Image image = new Image("/terrain/pisek_1.png", 256, 256, false, false);
+        mapOfAllImages.put("terrain1", image);
         
-        image = new Image("/terrain/teren2.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_1m.png", 256, 256, false, false);
         mapOfAllImages.put("terrain2", image);
         
-        image = new Image("/terrain/teren3.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_2.png", 256, 256, false, false);
         mapOfAllImages.put("terrain3", image);
         
-        image = new Image("/terrain/teren4.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_2m.png", 256, 256, false, false);
         mapOfAllImages.put("terrain4", image);
         
-        image = new Image("/terrain/teren5.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_3.png", 256, 256, false, false);
         mapOfAllImages.put("terrain5", image);
         
-        image = new Image("/terrain/teren_pisek_1.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_3m.png", 256, 256, false, false);
         mapOfAllImages.put("terrain6", image);
         
-        image = new Image("/terrain/teren_pisek_2.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_4.png", 256, 256, false, false);
         mapOfAllImages.put("terrain7", image);
         
-        image = new Image("/terrain/teren_pisek_3.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_4m.png", 256, 256, false, false);
         mapOfAllImages.put("terrain8", image);
         
-        image = new Image("/terrain/teren_pisek_4.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_5.png", 256, 256, false, false);
         mapOfAllImages.put("terrain9", image);
         
-        image = new Image("/terrain/teren_pisek_5.png", 256, 256, false, false);
+        image = new Image("/terrain/pisek_5m.png", 256, 256, false, false);
         mapOfAllImages.put("terrain10", image);
+        
+        image = new Image("/terrain/pisek_6.png", 256, 256, false, false);
+        mapOfAllImages.put("terrain11", image);
+        
+        image = new Image("/terrain/pisek_6m.png", 256, 256, false, false);
+        mapOfAllImages.put("terrain12", image);
+        
+        image = new Image("/terrain/pisek_7.png", 256, 256, false, false);
+        mapOfAllImages.put("terrain13", image);
+        
+        image = new Image("/terrain/pisek_7m.png", 256, 256, false, false);
+        mapOfAllImages.put("terrain14", image);
     }
     
     private void loadRocketImage(){

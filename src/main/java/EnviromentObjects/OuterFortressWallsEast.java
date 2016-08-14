@@ -57,10 +57,10 @@ public class OuterFortressWallsEast extends GameStaticObject {
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
-        paintAllMinigunHitsIntoSpaceShip();
+        paintAllMinigunHitsIntoWall();
     }
 
-    private void paintAllMinigunHitsIntoSpaceShip() {
+    private void paintAllMinigunHitsIntoWall() {
         Iterator<MinigunHitIntoStaticObject> iterator = allHitsIntoSpaceShip.iterator();
         while (iterator.hasNext()) {
             MinigunHitIntoStaticObject minigunHitIntoStaticObject = iterator.next();

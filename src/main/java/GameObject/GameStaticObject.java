@@ -20,7 +20,8 @@ import javafx.scene.shape.Shape;
  *
  * @author styma01
  */
-public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
+public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
+
     protected Image staticObjectImage;
     protected final Polygon gameObjectPolygon = new Polygon();
     private List<Point> listOfPathPoints = new ArrayList<Point>();
@@ -40,7 +41,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
             gameObjectPolygon.getPoints().add(point.getCoordY());
         }
     }
-    
+
     private void createLinesFromPolygonPoints(List<Point> pointsList) {
         Line line;
         for (int i = 0; i < pointsList.size(); i++) {
@@ -61,7 +62,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angle + 90)) * 1);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angle + 90)) * 1);
     }
-    
+
     private double calculateAngleBetweenPoints(double x, double y) {
         double angle;
         if (y == 0 && x == 0) {
@@ -74,30 +75,41 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection{
         angle = (angle + 360) % 360;
         return angle;
     }
-    
+
     public abstract void createPolygonForDetection();
-    
+
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+    public boolean detectCollisionWithProjectile(Shape projectileTrajectoryLine, Point trajectoryStartPosition) {
         Point intersectionPoint = new Point(0, 0);
 
         createPolygonForDetection();
-        Shape intersect = Shape.intersect(shape, gameObjectPolygon);
+        Shape intersect = Shape.intersect(projectileTrajectoryLine, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
-        if (positionOfColidingObject.getCoordX() + 32 < worldPossition.getCoordX() + staticObjectImage.getWidth() / 2) {
-            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMinX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        } else {
-            intersectionPoint.setCoordX(intersect.getLayoutBounds().getMaxX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        }
 
-        if (positionOfColidingObject.getCoordY() + 32 < worldPossition.getCoordY() + staticObjectImage.getHeight() / 2) {
-            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMinY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        } else {
-            intersectionPoint.setCoordY(intersect.getLayoutBounds().getMaxY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
+        Point possibleIntersectionOne = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMaxY());
+        Point possibleIntersectionTwo = new Point(intersect.getLayoutBounds().getMinX(), intersect.getLayoutBounds().getMaxY());
+        Point possibleIntersectionThree = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMinY());
+        Point possibleIntersectionFour = new Point(intersect.getLayoutBounds().getMinX(), intersect.getLayoutBounds().getMinY());
+        
+        double distancePointOne = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionOne.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionOne.getCoordY());
+        double distancePointTwo = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionTwo.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionTwo.getCoordY());
+        double distancePointThree = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionThree.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionThree.getCoordY());
+        double distancePointFour = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionFour.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionFour.getCoordY());
+
+        if (distancePointOne <= distancePointTwo && distancePointOne <= distancePointThree && distancePointOne <= distancePointFour) {
+            intersectionPoint = possibleIntersectionOne;
+        } else if(distancePointTwo <= distancePointOne && distancePointTwo <= distancePointThree && distancePointTwo <= distancePointFour){
+            intersectionPoint = possibleIntersectionTwo;
+        } else if (distancePointThree <= distancePointOne && distancePointThree <= distancePointTwo && distancePointThree <= distancePointFour){
+            intersectionPoint = possibleIntersectionThree;
+        }else{
+            intersectionPoint = possibleIntersectionFour;
         }
         
+        intersectionPoint.setCoordX(intersectionPoint.getCoordX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
+        intersectionPoint.setCoordY(intersectionPoint.getCoordY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         doOnBeingHitByMinigun(intersectionPoint);
         return true;
     }
