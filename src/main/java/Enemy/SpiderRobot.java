@@ -22,34 +22,34 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class SpiderRobot extends Enemy{
-    
+public class SpiderRobot extends Enemy {
+
     private int movementAnimationFrame = 1;
     private int explodingTimer = 0;
-    private double angleOfDrone = 0;
+    private double angleOfSpider = 0;
     private double lastAngleToAvoidCollision = 0;
     private boolean collisionDetectedInLastTest = false;
 
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
 
-    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow){
+    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         enemyImage = LoadAllResources.getMapOfAllImages().get("walker_idle");
     }
-   
+
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
         if (pathPoints.size() < 1) {
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
         }
-        
+
         double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
-        angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
+        angleOfSpider = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY) + 90;
 
-        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
-        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
+        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfSpider)) * movementSpeed);
+        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfSpider)) * movementSpeed);
         removePointThatWasReached();
     }
 
@@ -108,22 +108,30 @@ public class SpiderRobot extends Enemy{
 
     @Override
     public void paintGameObject() {
-        if (movementAnimationFrame < 5){
+        if (movementAnimationFrame < 5) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_1");
-        }else if(movementAnimationFrame >= 5 && movementAnimationFrame < 10){
+        } else if (movementAnimationFrame >= 5 && movementAnimationFrame < 10) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_2");
-        }else if(movementAnimationFrame >= 10 && movementAnimationFrame < 15){
+        } else if (movementAnimationFrame >= 10 && movementAnimationFrame < 15) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_3");
-        }else if(movementAnimationFrame >=15 && movementAnimationFrame < 20){
+        } else if (movementAnimationFrame >= 15 && movementAnimationFrame < 20) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_4");
-        }else{
+        } else {
             movementAnimationFrame = 0;
         }
         movementAnimationFrame++;
-        
+
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+
+        graphicsContext.save();
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.rotate(angleOfSpider + 180);
+        graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
+        graphicsContext.restore();
+
         paintAllExplosionsEnemy();
+        //    graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+
     }
 
     @Override
@@ -167,11 +175,11 @@ public class SpiderRobot extends Enemy{
     }
 
     public double getAngleOfDrone() {
-        return angleOfDrone;
+        return angleOfSpider;
     }
 
     public void setAngleOfDrone(double angleOfDrone) {
-        this.angleOfDrone = angleOfDrone;
+        this.angleOfSpider = angleOfDrone;
     }
 
     public double getLastAngleToAvoidCollision() {
@@ -210,7 +218,6 @@ public class SpiderRobot extends Enemy{
         if (hitPoints < 1) {
             alive = false;
         }
-    } 
-    
-    
+    }
+
 }
