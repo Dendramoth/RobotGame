@@ -44,7 +44,6 @@ public class DetectCollisions {
             for (int i = 0; i < visibleObjects.size(); i++) {
                 visibleObjects.get(i).setObjectForComparison(shotFromMinigun.getStartPositionOfShot());
             }
-
             Collections.sort(visibleObjects);
 
             Iterator<GameObjectWithDistanceDetection> iterator = visibleObjects.iterator();
