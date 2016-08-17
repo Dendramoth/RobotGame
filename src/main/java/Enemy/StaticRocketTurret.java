@@ -7,71 +7,69 @@ package Enemy;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
-import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
+import Pathfinding.PathfindingPoint;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
+import playerRobot.PlayerRobot;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
 /**
  *
- * @author Dendra
+ * @author styma01
  */
-public class EvilDroneMarkOne extends Enemy {
+public class StaticRocketTurret extends Enemy{
+    
+    private boolean active = false;
+    private boolean playInitialIntro = false;
+    private int initialIntroFrame = 0;
+    private double turretAngle = 0;
+    private double playerPossX = 0;
+    private double playerPossY = 0;
+    private double turretAngleSpeed = 1;
 
-    private int blinkCounter = 0;
+    private int rocketCounter = 0;
     private int explodingTimer = 0;
-    private double angleOfDrone = 0;
-    private double lastAngleToAvoidCollision = 0;
-    private boolean collisionDetectedInLastTest = false;
-
-    private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
+    
     private final List<Point> pointsForDetection = new ArrayList<>();
+  //  private AllProjectilesContainer allProjectilesContainer;
 
-    public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+    public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
-    //    enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
     }
-
+    
+    
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
-        if (pathPoints.size() < 1) {
-            findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
+        double deltaX = playerPossitionX - worldPossition.getCoordX();
+        double deltaY = playerPossitionY - worldPossition.getCoordY();
+        /**
+         * rotate Turret to player by turretAngleSpeed
+         */
+        if (active && !playInitialIntro) {
+            double angleToPlayer = (Math.toDegrees(Math.atan2(deltaX, deltaY)) + 360) % 360;
+            turretAngle = (turretAngle + 360) % 360;
+            if (((turretAngle - angleToPlayer > 0) && (turretAngle - angleToPlayer < 180)) || (turretAngle - angleToPlayer < -180)) {
+                turretAngle = turretAngle + turretAngleSpeed;
+            } else {
+                turretAngle = turretAngle - turretAngleSpeed;
+            }
         }
 
-        double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
-        double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
-        angleOfDrone = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY);
-
-        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
-        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfDrone + 90)) * movementSpeed);
-        removePointThatWasReached();
-    }
-
-    private void removePointThatWasReached() {
-        PathfindingPoint point = pathPoints.get(0);
-        if ((point.getCoordX() > worldPossition.getCoordX() - 1.5 && point.getCoordX() < worldPossition.getCoordX() + 1.5)
-                && (point.getCoordY() > worldPossition.getCoordY() - 1.5 && point.getCoordY() < worldPossition.getCoordY() + 1.5)) { //point was reached
-            pathPoints.remove(0);
+        if (!active) {
+            double distanceFromPlayer = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+            if (distanceFromPlayer < 500 && active == false) {
+                active = true;
+                playInitialIntro = true;
+            }
         }
-    }
-
-    private double calculateAngleBetweenPlayerAndDrone(double x, double y) {
-        double angle;
-        if (y == 0 && x == 0) {
-            angle = 0;
-        } else if (y > 0) {
-            angle = Math.toDegrees(Math.acos(x / (Math.sqrt(y * y + x * x)))) + 90;
-        } else {
-            angle = -Math.toDegrees(Math.acos(x / (Math.sqrt(y * y + x * x)))) + 90;
-        }
-        angle = (angle + 360) % 360;
-        return angle;
     }
 
     @Override
@@ -108,33 +106,56 @@ public class EvilDroneMarkOne extends Enemy {
 
     @Override
     public void paintGameObject() {
-        blinkCounter++;
-
-        if (hitPoints >= damagedStateTreshold) {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        } else {
-            if (blinkCounter <= 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1Damaged");
-            }
-            if (blinkCounter > 15) {
-                enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle2Damaged");
-            }
-            if (blinkCounter == 30) {
-                blinkCounter = 0;
-            }
-        }
-
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        
+        if (playInitialIntro) {
+            paintInitialIntro();
+            graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        } else if (active) {
+       /*     rocketCounter++;
+            if (rocketCounter > 100) {
+                rocketCounter = 0;
+                fireRocket(graphicsContext);
+            }*/
+
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretBase");
+            graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+            paintRotatedGunOnTurret(monitorPossition);
+        } else {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("idleTurret");
+            graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        }
         paintAllExplosionsEnemy();
+    }
+    
+    private void paintRotatedGunOnTurret(Point monitorPossition) {
+        if (hitPoints > damagedStateTreshold) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretTower");
+        } else {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretDamaged");
+        }
+        graphicsContext.save();
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX() + enemyImage.getWidth() / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() + enemyImage.getHeight() / 2);
+        graphicsContext.rotate(turretAngle);
+        graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
+        graphicsContext.restore();
+    }
+    
+    private void paintInitialIntro() {
+        initialIntroFrame++;
+        if (initialIntroFrame <= 8) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretIntro1");
+        } else if (initialIntroFrame > 13 && initialIntroFrame <= 24) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretIntro2");
+        } else if (initialIntroFrame > 24 && initialIntroFrame <= 32) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretIntro3");
+        } else if (initialIntroFrame > 32 && initialIntroFrame <= 40) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretIntro4");
+        } else if (initialIntroFrame > 40 && initialIntroFrame <= 48) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretIntro5");
+        } else if (initialIntroFrame > 48) {
+            playInitialIntro = false;
+        }
     }
 
     @Override
@@ -177,36 +198,6 @@ public class EvilDroneMarkOne extends Enemy {
 
     }
 
-    public double getAngleOfDrone() {
-        return angleOfDrone;
-    }
-
-    public void setAngleOfDrone(double angleOfDrone) {
-        this.angleOfDrone = angleOfDrone;
-    }
-
-    public double getLastAngleToAvoidCollision() {
-        return lastAngleToAvoidCollision;
-    }
-
-    public void setLastAngleToAvoidCollision(double lastAngleToAvoidCollision) {
-        this.lastAngleToAvoidCollision = lastAngleToAvoidCollision;
-    }
-
-    public boolean isCollisionDetectedInLastTest() {
-        return collisionDetectedInLastTest;
-    }
-
-    public void setCollisionDetectedInLastTest(boolean collisionDetectedInLastTest) {
-        this.collisionDetectedInLastTest = collisionDetectedInLastTest;
-    }
-
-    private void findPathToPlayer(Point playerWorldPosition) {
-        List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
-        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext);
-        pathPoints = pathfinding.createPath(this, playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
-    }
-
     @Override
     public void doOnCollision() {
     }
@@ -222,5 +213,5 @@ public class EvilDroneMarkOne extends Enemy {
             alive = false;
         }
     }
-
+    
 }
