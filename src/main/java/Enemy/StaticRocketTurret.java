@@ -5,28 +5,22 @@
  */
 package Enemy;
 
-import GameObject.GameStaticObject;
 import GameObject.Point;
 import MapGridTable.GridTable;
-import Pathfinding.Pathfinding;
-import Pathfinding.PathfindingPoint;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
-import playerRobot.PlayerRobot;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
 /**
  *
  * @author styma01
  */
-public class StaticRocketTurret extends Enemy{
-    
+public class StaticRocketTurret extends Enemy {
+
     private boolean active = false;
     private boolean playInitialIntro = false;
     private int initialIntroFrame = 0;
@@ -37,15 +31,14 @@ public class StaticRocketTurret extends Enemy{
 
     private int rocketCounter = 0;
     private int explodingTimer = 0;
-    
+
     private final List<Point> pointsForDetection = new ArrayList<>();
-  //  private AllProjectilesContainer allProjectilesContainer;
+    //  private AllProjectilesContainer allProjectilesContainer;
 
     public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
     }
-    
-    
+
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
         double deltaX = playerPossitionX - worldPossition.getCoordX();
@@ -54,7 +47,7 @@ public class StaticRocketTurret extends Enemy{
          * rotate Turret to player by turretAngleSpeed
          */
         if (active && !playInitialIntro) {
-            double angleToPlayer = (Math.toDegrees(Math.atan2(deltaX, deltaY)) + 360) % 360;
+            double angleToPlayer = (Math.toDegrees(Math.atan2(deltaX, -deltaY)) + 360) % 360;
             turretAngle = (turretAngle + 360) % 360;
             if (((turretAngle - angleToPlayer > 0) && (turretAngle - angleToPlayer < 180)) || (turretAngle - angleToPlayer < -180)) {
                 turretAngle = turretAngle + turretAngleSpeed;
@@ -107,12 +100,12 @@ public class StaticRocketTurret extends Enemy{
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        
+
         if (playInitialIntro) {
             paintInitialIntro();
             graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
         } else if (active) {
-       /*     rocketCounter++;
+            /*     rocketCounter++;
             if (rocketCounter > 100) {
                 rocketCounter = 0;
                 fireRocket(graphicsContext);
@@ -127,7 +120,7 @@ public class StaticRocketTurret extends Enemy{
         }
         paintAllExplosionsEnemy();
     }
-    
+
     private void paintRotatedGunOnTurret(Point monitorPossition) {
         if (hitPoints > damagedStateTreshold) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("turretTower");
@@ -135,12 +128,12 @@ public class StaticRocketTurret extends Enemy{
             enemyImage = LoadAllResources.getMapOfAllImages().get("turretDamaged");
         }
         graphicsContext.save();
-        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX() + enemyImage.getWidth() / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() + enemyImage.getHeight() / 2);
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
         graphicsContext.rotate(turretAngle);
         graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
         graphicsContext.restore();
     }
-    
+
     private void paintInitialIntro() {
         initialIntroFrame++;
         if (initialIntroFrame <= 8) {
@@ -213,5 +206,5 @@ public class StaticRocketTurret extends Enemy{
             alive = false;
         }
     }
-    
+
 }
