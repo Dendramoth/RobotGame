@@ -35,7 +35,7 @@ public class EvilDroneMarkOne extends Enemy {
 
     public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
-    //    enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
+        enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
     }
 
     @Override

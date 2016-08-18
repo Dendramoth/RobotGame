@@ -23,13 +23,14 @@ public class Rocket extends Projectile{
     private boolean switchImage = true;
     
      public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow) {
-        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, monitorWindow);
+        super(graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, monitorWindow);
         projectileImage = LoadAllResources.getMapOfAllImages().get("rocket1");
     }
 
     @Override
     public void moveProjectile() {
-        worldPossition = new Point(worldPossition.getCoordX() + 1, worldPossition.getCoordY());
+        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot - 90)) * 1);
+        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot - 90)) * 1);
     }
      
      
