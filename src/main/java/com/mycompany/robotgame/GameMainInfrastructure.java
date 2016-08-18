@@ -12,6 +12,7 @@ import Enemy.SpiderRobot;
 import Enemy.StaticRocketTurret;
 import GameObject.Point;
 import MapGridTable.GridTable;
+import Projectiles.ProjectileContainer;
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,6 +57,7 @@ public class GameMainInfrastructure {
     private EnemyContainer enemyContainer;
     private GameDynamicEnviroment gameDynamicEnviroment;
     private DetectCollisions detectCollisions;
+    private ProjectileContainer projectileContainer;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -77,9 +79,10 @@ public class GameMainInfrastructure {
         gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
         enemyContainer = new EnemyContainer(enemyGraphicsContext);
+        projectileContainer = new ProjectileContainer();
     //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
         enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(2000, 8300), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(2000, 8300), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         
         gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
@@ -220,6 +223,9 @@ public class GameMainInfrastructure {
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition());
                 enemyContainer.paintAllDiingEnemies();
+                
+                projectileContainer.moveAllProjectiles();
+                projectileContainer.paintAllProjectiles();
                 
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 

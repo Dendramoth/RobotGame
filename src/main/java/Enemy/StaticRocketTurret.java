@@ -7,6 +7,8 @@ package Enemy;
 
 import GameObject.Point;
 import MapGridTable.GridTable;
+import Projectiles.ProjectileContainer;
+import Projectiles.Rocket;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -33,10 +35,12 @@ public class StaticRocketTurret extends Enemy {
     private int explodingTimer = 0;
 
     private final List<Point> pointsForDetection = new ArrayList<>();
-    //  private AllProjectilesContainer allProjectilesContainer;
+    private ProjectileContainer projectileContainer;
+    
 
-    public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+    public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+        this.projectileContainer = projectileContainer;
     }
 
     @Override
@@ -105,11 +109,11 @@ public class StaticRocketTurret extends Enemy {
             paintInitialIntro();
             graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
         } else if (active) {
-            /*     rocketCounter++;
+            rocketCounter++;
             if (rocketCounter > 100) {
                 rocketCounter = 0;
-                fireRocket(graphicsContext);
-            }*/
+                projectileContainer.addProjectileToContainer(new Rocket(graphicsContext, turretAngle, worldPossition, this, 64, 64, monitorWindow));
+            }
 
             enemyImage = LoadAllResources.getMapOfAllImages().get("turretBase");
             graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
