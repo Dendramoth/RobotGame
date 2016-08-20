@@ -31,7 +31,7 @@ public class StaticRocketTurret extends Enemy {
     private double playerPossY = 0;
     private double turretAngleSpeed = 1;
 
-    private int rocketCounter = 0;
+    private int rocketCounter = 125;
     private int explodingTimer = 0;
 
     private final List<Point> pointsForDetection = new ArrayList<>();
