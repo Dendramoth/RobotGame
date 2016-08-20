@@ -110,7 +110,7 @@ public class StaticRocketTurret extends Enemy {
             graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
         } else if (active) {
             rocketCounter++;
-            if (rocketCounter > 100) {
+            if (rocketCounter > 150) {
                 rocketCounter = 0;
                 projectileContainer.addProjectileToContainer(new Rocket(graphicsContext, turretAngle, worldPossition, this, 64, 64, monitorWindow));
             }

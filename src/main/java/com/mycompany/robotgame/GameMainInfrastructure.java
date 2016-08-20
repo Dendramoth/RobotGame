@@ -226,6 +226,8 @@ public class GameMainInfrastructure {
                 
                 projectileContainer.moveAllProjectiles();
                 projectileContainer.paintAllProjectiles();
+                projectileContainer.testAllProjectilesForReachingMaximumRange();
+                projectileContainer.paintAllProjectilesExplosions();
                 
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 

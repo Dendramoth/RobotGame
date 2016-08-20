@@ -32,5 +32,7 @@ public abstract class Projectile extends GameObjectWithDistanceDetection{
     }
     
     public abstract void moveProjectile();
+    public abstract boolean hasProjectileReachedDestination();
+    public abstract boolean projectileExplosion();
 
 }

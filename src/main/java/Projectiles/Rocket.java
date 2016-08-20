@@ -21,6 +21,8 @@ import javafx.scene.shape.Shape;
 public class Rocket extends Projectile{
     private int switchingRocketImageCounter = 0;
     private boolean switchImage = true;
+    private int rocketTimout = 120;
+    private int rocketExplosionCounter = 0;
     
      public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow) {
         super(graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, monitorWindow);
@@ -29,11 +31,18 @@ public class Rocket extends Projectile{
 
     @Override
     public void moveProjectile() {
-        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot - 90)) * 1);
-        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot - 90)) * 1);
+        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot - 90)) * 5);
+        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot - 90)) * 5);
     }
      
-     
+    @Override
+    public boolean hasProjectileReachedDestination() {
+        rocketTimout--;
+        if (rocketTimout < 1) {
+            return true;
+        }
+        return false;
+    } 
 
     @Override
     public void paintGameObject() {
@@ -67,19 +76,33 @@ public class Rocket extends Projectile{
         return true;
     }
     
+    @Override
+    public boolean projectileExplosion() {
+        rocketExplosionCounter++;
+        if (rocketExplosionCounter <= 5) {
+            projectileImage = LoadAllResources.getMapOfAllImages().get("rocketExplosion1");
+        } else if (rocketExplosionCounter > 5 && rocketExplosionCounter <= 10) {
+            projectileImage = LoadAllResources.getMapOfAllImages().get("rocketExplosion2");
+        } else if (rocketExplosionCounter > 15 && rocketExplosionCounter <= 20) {
+            projectileImage = LoadAllResources.getMapOfAllImages().get("rocketExplosion3");
+        } else if (rocketExplosionCounter > 25 && rocketExplosionCounter <= 30) {
+            projectileImage = LoadAllResources.getMapOfAllImages().get("rocketExplosion4");
+        } else if (rocketExplosionCounter > 35 && rocketExplosionCounter <= 40) {
+            projectileImage = LoadAllResources.getMapOfAllImages().get("rocketExplosion5");
+        } else if (rocketExplosionCounter > 40) {
+            return false;
+        }
+        Point monitorPossition = monitorWindow.getPositionInWorld();
+        graphicsContext.drawImage(projectileImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        return true;
+    }
+    
     public void createPolygonForDetection() {
         List<Point> pointsForDetection = new ArrayList<Point>();
-        pointsForDetection.add(new Point(77 + worldPossition.getCoordX(), 275 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(77 + worldPossition.getCoordX(), 346 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(163 + worldPossition.getCoordX(), 433 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(285 + worldPossition.getCoordX(), 404 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(400 + worldPossition.getCoordX(), 210 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(380 + worldPossition.getCoordX(), 188 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(292 + worldPossition.getCoordX(), 274 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(236 + worldPossition.getCoordX(), 218 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(320 + worldPossition.getCoordX(), 128 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(300 + worldPossition.getCoordX(), 105 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(112 + worldPossition.getCoordX(), 220 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
     

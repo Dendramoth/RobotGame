@@ -15,10 +15,11 @@ import java.util.List;
  */
 public class ProjectileContainer {
     
-    private List<Projectile> allFiredRockets = new ArrayList<>();
+    private List<Projectile> allFiredProjectiles = new ArrayList<>();
+    private List<Projectile> allExplodingProjectiles = new ArrayList<>();
     
     public void moveAllProjectiles(){
-        Iterator<Projectile> iterator = allFiredRockets.iterator();
+        Iterator<Projectile> iterator = allFiredProjectiles.iterator();
         while (iterator.hasNext()) {
             Projectile projectile = iterator.next();
             projectile.moveProjectile();
@@ -26,15 +27,36 @@ public class ProjectileContainer {
     }
     
     public void paintAllProjectiles(){
-        Iterator<Projectile> iterator = allFiredRockets.iterator();
+        Iterator<Projectile> iterator = allFiredProjectiles.iterator();
         while (iterator.hasNext()) {
             Projectile projectile = iterator.next();
             projectile.paintGameObject();
         }
     }
     
+    public void testAllProjectilesForReachingMaximumRange(){
+        Iterator<Projectile> iterator = allFiredProjectiles.iterator();
+        while (iterator.hasNext()) {
+            Projectile projectile = iterator.next();
+            if (projectile.hasProjectileReachedDestination()){
+                allExplodingProjectiles.add(projectile);
+                iterator.remove();
+            }
+        }
+    }
+    
+    public void paintAllProjectilesExplosions(){
+        Iterator<Projectile> iterator = allExplodingProjectiles.iterator();
+        while (iterator.hasNext()) {
+            Projectile projectile = iterator.next();
+            if (!projectile.projectileExplosion()){
+                iterator.remove();
+            }
+        }
+    }
+    
     public void addProjectileToContainer(Projectile projectile) {
-        allFiredRockets.add(projectile);
+        allFiredProjectiles.add(projectile);
     }
     
 }
