@@ -118,11 +118,11 @@ public class SpiderRobot extends Enemy {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_4");
         } else if (movementAnimationFrame >= 16 && movementAnimationFrame < 20) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_5");
-        } else if (movementAnimationFrame >= 24 && movementAnimationFrame < 28) {
+        } else if (movementAnimationFrame >= 20 && movementAnimationFrame < 24) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_6");
-        } else if (movementAnimationFrame >= 28 && movementAnimationFrame < 32) {
+        } else if (movementAnimationFrame >= 24 && movementAnimationFrame < 28) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_7");
-        } else if (movementAnimationFrame >= 32 && movementAnimationFrame < 36) {
+        } else if (movementAnimationFrame >= 28 && movementAnimationFrame < 32) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_8");
         } else {
             movementAnimationFrame = 0;
