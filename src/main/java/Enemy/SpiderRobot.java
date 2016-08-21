@@ -55,8 +55,8 @@ public class SpiderRobot extends Enemy {
 
     private void removePointThatWasReached() {
         PathfindingPoint point = pathPoints.get(0);
-        if ((point.getCoordX() > worldPossition.getCoordX() - 1.5 && point.getCoordX() < worldPossition.getCoordX() + 1.5)
-                && (point.getCoordY() > worldPossition.getCoordY() - 1.5 && point.getCoordY() < worldPossition.getCoordY() + 1.5)) { //point was reached
+        if ((point.getCoordX() > worldPossition.getCoordX() - 3 && point.getCoordX() < worldPossition.getCoordX() + 3)
+                && (point.getCoordY() > worldPossition.getCoordY() - 3 && point.getCoordY() < worldPossition.getCoordY() + 3)) { //point was reached
             pathPoints.remove(0);
         }
     }
@@ -108,13 +108,13 @@ public class SpiderRobot extends Enemy {
 
     @Override
     public void paintGameObject() {
-        if (movementAnimationFrame < 5) {
+        if (movementAnimationFrame < 4) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_1");
-        } else if (movementAnimationFrame >= 5 && movementAnimationFrame < 10) {
+        } else if (movementAnimationFrame >= 4 && movementAnimationFrame < 8) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_2");
-        } else if (movementAnimationFrame >= 10 && movementAnimationFrame < 15) {
+        } else if (movementAnimationFrame >= 8 && movementAnimationFrame < 12) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_3");
-        } else if (movementAnimationFrame >= 15 && movementAnimationFrame < 20) {
+        } else if (movementAnimationFrame >= 12 && movementAnimationFrame < 16) {
             enemyImage = LoadAllResources.getMapOfAllImages().get("walker_moving_4");
         } else {
             movementAnimationFrame = 0;

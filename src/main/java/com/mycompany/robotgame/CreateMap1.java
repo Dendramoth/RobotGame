@@ -14,6 +14,7 @@ import EnviromentObjects.Cliffs.CliffTopLeft;
 import EnviromentObjects.Cliffs.CliffTopRight;
 import EnviromentObjects.Cliffs.CliffVertical;
 import EnviromentObjects.Cliffs.CliffVerticalReversed;
+import EnviromentObjects.CraterBig;
 import EnviromentObjects.InnerFortressWallNorth;
 import EnviromentObjects.InnerFortressWallSouth;
 import EnviromentObjects.OuterFortressWallsEast;
@@ -41,6 +42,8 @@ public class CreateMap1 {
     }
 
     public void generatedObjectForGame(GridTable gridTable) {
+        generatedObjectsForGameWithoutCollision(gridTable);
+        
         SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(2048, 8216), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
         
@@ -55,6 +58,11 @@ public class CreateMap1 {
         
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
+    }
+    
+    private void generatedObjectsForGameWithoutCollision(GridTable gridTable){
+        CraterBig craterBig = new CraterBig(new Point(3000,8500), 256, 256, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {

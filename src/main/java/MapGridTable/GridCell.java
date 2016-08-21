@@ -17,6 +17,9 @@ public class GridCell {
     private final HashSet<GameStaticObject> objectInCell = new HashSet<GameStaticObject>();
     private final HashSet<GameStaticObject> objectsVisibleFromCell = new HashSet<GameStaticObject>();
     
+    private final HashSet<GamePrimitiveObject> objectInCellWithoutColision = new HashSet<GamePrimitiveObject>();
+    private final HashSet<GamePrimitiveObject> objectVisibleFromCellWithoutColision = new HashSet<GamePrimitiveObject>();
+    
     private final HashSet<GamePrimitiveObject> backgroundInCell = new HashSet<GamePrimitiveObject>();
     private final HashSet<GamePrimitiveObject> backgroundVisibleFromCell = new HashSet<GamePrimitiveObject>();
 
@@ -29,6 +32,14 @@ public class GridCell {
     
     public void addObjectVisibleFromCell(GameStaticObject gameObject){
         objectsVisibleFromCell.add(gameObject);
+    }
+    
+    public void addGameObjectWithoutColision(GamePrimitiveObject gameObject){
+        objectInCellWithoutColision.add(gameObject);
+    }
+    
+    public void addGameObjectWithoutColisionVisibleFromCell(GamePrimitiveObject gameObject){
+        objectVisibleFromCellWithoutColision.add(gameObject);
     }
     
     public void addGameBackgroundHex(GamePrimitiveObject gameObject){
@@ -56,11 +67,11 @@ public class GridCell {
         return backgroundVisibleFromCell;
     }
 
-    
-    
- 
-    
-    
-    
-    
+    public HashSet<GamePrimitiveObject> getObjectInCellWithoutColision() {
+        return objectInCellWithoutColision;
+    }
+
+    public HashSet<GamePrimitiveObject> getObjectVisibleFromCellWithoutColision() {
+        return objectVisibleFromCellWithoutColision;
+    }
 }

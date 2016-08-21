@@ -57,7 +57,7 @@ import javafx.scene.media.AudioClip;
         image = new Image("/Cursor/cursor_target.png", 32, 32, false, false);
         mapOfAllImages.put("cursorTarget", image);
         
-        image = new Image("/wreckage/wreckage_export.png", 512, 512, false, false);
+        image = new Image("/wreckage/wreckage.png", 512, 512, false, false);
         mapOfAllImages.put("spaceShipWreckage", image);
         
         loadShieldImages();
@@ -71,8 +71,26 @@ import javafx.scene.media.AudioClip;
         loadFortressWalls();
         loadSatelite();
         loadSpiderRobot();
+        loadCraters();
         
         loadAllSounds();
+    }
+    
+    private void loadCraters(){
+        Image image = new Image("/Craters/krater_128_2.png", 128, 128, false, false);
+        mapOfAllImages.put("crater128", image);
+        
+        image = new Image("/Craters/krater_256.png", 256, 256, false, false);
+        mapOfAllImages.put("crater256", image);
+        
+        image = new Image("/Craters/krater_64_1.png", 64, 64, false, false);
+        mapOfAllImages.put("crater64_1", image);
+        
+        image = new Image("/Craters/krater_64_2.png", 64, 64, false, false);
+        mapOfAllImages.put("crater64_2", image);
+        
+        image = new Image("/Craters/krater_64_3.png", 64, 64, false, false);
+        mapOfAllImages.put("crater64_3", image);
     }
     
     private void loadSpiderRobot(){

@@ -50,10 +50,17 @@ public class GridTable {
         HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
         return visibleObjects;
     }
+    
+    public HashSet<GamePrimitiveObject> getAllVisibleObjectsWithoutColision() {
+        int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
+        int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);
+        HashSet<GamePrimitiveObject> visibleObjects = gridCellField[x][y].getObjectVisibleFromCellWithoutColision();
+        return visibleObjects;
+    }
 
     public void paintAllObjectsInMonitorWindow() {
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
-        
+
         int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
         int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);
 
@@ -62,9 +69,14 @@ public class GridTable {
             for (GamePrimitiveObject gameObject : visibleBackground) {
                 gameObject.paintGameObject();
             }
-
+            
             HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
             for (GameStaticObject gameObject : visibleObjects) {
+                gameObject.paintGameObject();
+            }
+            
+            HashSet<GamePrimitiveObject> visibleObjectsWithoutColision = gridCellField[x][y].getObjectVisibleFromCellWithoutColision();
+            for (GamePrimitiveObject gameObject : visibleObjectsWithoutColision) {
                 gameObject.paintGameObject();
             }
         }
@@ -78,7 +90,7 @@ public class GridTable {
         }
     }
 
-    public void insertGameObjectIntoGridCell(GameStaticObject gameObject) {
+    public void insertGameObjectIntoGridCell(GamePrimitiveObject gameObject) {
         int switchValue = 0;
         CornerPointsOfObject cornerPointsOfObject = gameObject.getCornerPointsOfObject();
 
@@ -98,8 +110,14 @@ public class GridTable {
             y1 = switchValue;
         }
 
-        addObjectToCell(gameObject, x1, x2, y1, y2);
-        addVisibleObjectToCell(gameObject, x1, x2, y1, y2);
+        if (gameObject instanceof GameStaticObject) {
+            GameStaticObject gameStaticObject = (GameStaticObject) gameObject;
+            addObjectToCell(gameStaticObject, x1, x2, y1, y2);
+            addVisibleObjectToCell(gameStaticObject, x1, x2, y1, y2);
+        }else{
+            addPrimitiveObjectToCell(gameObject, x1, x2, y1, y2);
+            addVisiblePrimitiveObjectToCell(gameObject, x1, x2, y1, y2);
+        }
     }
 
     public void insertBackgroundIntoGridCell(GamePrimitiveObject gameObject) {
@@ -129,6 +147,14 @@ public class GridTable {
         for (int indexX = x1; indexX <= x2; indexX++) {
             for (int indexY = y1; indexY <= y2; indexY++) {
                 gridCellField[indexX][indexY].addGameObject(gameObject);
+            }
+        }
+    }
+
+    private void addPrimitiveObjectToCell(GamePrimitiveObject gameObject, int x1, int x2, int y1, int y2) {
+        for (int indexX = x1; indexX <= x2; indexX++) {
+            for (int indexY = y1; indexY <= y2; indexY++) {
+                gridCellField[indexX][indexY].addGameObjectWithoutColision(gameObject);
             }
         }
     }
@@ -165,6 +191,34 @@ public class GridTable {
         for (int indexX = x1; indexX <= x2; indexX++) {
             for (int indexY = y1; indexY <= y2; indexY++) {
                 gridCellField[indexX][indexY].addObjectVisibleFromCell(gameObject);
+            }
+        }
+    }
+
+    private void addVisiblePrimitiveObjectToCell(GamePrimitiveObject gameObject, int cellX1, int cellX2, int cellY1, int cellY2) {
+        int x1 = cellX1 - cellHorizontalVisibility;
+        if (x1 < 0) {
+            x1 = 0;
+        }
+
+        int x2 = cellX2 + cellHorizontalVisibility + 1;
+        if (x2 > cellCountX - 1) {
+            x2 = cellCountX - 1;
+        }
+
+        int y1 = cellY1 - cellVerticalVisibility;
+        if (y1 < 0) {
+            y1 = 0;
+        }
+
+        int y2 = cellY2 + cellVerticalVisibility;
+        if (y2 > cellCountY - 1) {
+            y2 = cellCountY - 1;
+        }
+
+        for (int indexX = x1; indexX <= x2; indexX++) {
+            for (int indexY = y1; indexY <= y2; indexY++) {
+                gridCellField[indexX][indexY].addGameObjectWithoutColisionVisibleFromCell(gameObject);
             }
         }
     }
