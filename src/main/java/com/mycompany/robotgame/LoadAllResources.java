@@ -101,16 +101,28 @@ import javafx.scene.media.AudioClip;
         mapOfAllImages.put("walker_moving_1", image);
         
         image = new Image("/SpiderRobot/walker_moving_2.png", 256, 256, false, false);
-        mapOfAllImages.put("walker_moving_2", image);
-        
-        image = new Image("/SpiderRobot/walker_moving_3.png", 256, 256, false, false);
         mapOfAllImages.put("walker_moving_3", image);
         
+        image = new Image("/SpiderRobot/walker_moving_3.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_5", image);
+        
         image = new Image("/SpiderRobot/walker_moving_4.png", 256, 256, false, false);
-        mapOfAllImages.put("walker_moving_4", image);
+        mapOfAllImages.put("walker_moving_7", image);
         
         image = new Image("/SpiderRobot/walker_moving_5.png", 256, 256, false, false);
-        mapOfAllImages.put("walker_moving_5", image);
+        mapOfAllImages.put("walker_moving_10", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_1,5.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_2", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_2,5.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_4", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_3,5.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_6", image);
+        
+        image = new Image("/SpiderRobot/walker_moving_4,5.png", 256, 256, false, false);
+        mapOfAllImages.put("walker_moving_8", image);
     }
     
     private void loadSatelite(){
