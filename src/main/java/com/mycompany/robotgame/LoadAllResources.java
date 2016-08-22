@@ -72,8 +72,29 @@ import javafx.scene.media.AudioClip;
         loadSatelite();
         loadSpiderRobot();
         loadCraters();
+        loadEvilDroneMarkTwo();
         
         loadAllSounds();
+    }
+    
+    private void loadEvilDroneMarkTwo(){
+        Image image = new Image("/EvilDroneMarkTwo/drone_1.png", 64, 64, false, false);
+        mapOfAllImages.put("evilDroneMarkTwo1", image);
+        
+        image = new Image("/EvilDroneMarkTwo/drone_2.png", 64, 64, false, false);
+        mapOfAllImages.put("evilDroneMarkTwo2", image);
+        
+        image = new Image("/EvilDroneMarkTwo/drone_3.png", 64, 64, false, false);
+        mapOfAllImages.put("evilDroneMarkTwo3", image);
+        
+        image = new Image("/EvilDroneMarkTwo/drone_4.png", 64, 64, false, false);
+        mapOfAllImages.put("evilDroneMarkTwo4", image);
+        
+        image = new Image("/EvilDroneMarkTwo/drone_damaged_1.png", 64, 64, false, false);
+        mapOfAllImages.put("evilDroneMarkTwoDamaged1", image);
+        
+        image = new Image("/EvilDroneMarkTwo/drone_damaged_2.png", 64, 64, false, false);
+        mapOfAllImages.put("evilDroneMarkTwoDamaged2", image);
     }
     
     private void loadCraters(){
