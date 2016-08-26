@@ -5,8 +5,12 @@
  */
 package Enemy;
 
+import EnviromentObjects.CraterBig;
+import EnviromentObjects.DeadStaticRocketTurretBase;
 import GameObject.Point;
+import MapGridTable.GridTable;
 import com.mycompany.robotgame.GameMainInfrastructure;
+import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,9 +25,15 @@ public class EnemyContainer {
     private List<Enemy> enemyList = new ArrayList<>();
     private List<Enemy> dyingEnemyList = new ArrayList<Enemy>();
     private GraphicsContext graphicsContext;
+    private GridTable gridTable;
+    private GraphicsContext enviromentGraphicsContext;
+    private MonitorWindow monitorWindow;
 
-    public EnemyContainer(GraphicsContext graphicsContext) {
+    public EnemyContainer(GraphicsContext graphicsContext, GridTable gridTable, GraphicsContext enviromentGraphicsContext, MonitorWindow monitorWindow) {
         this.graphicsContext = graphicsContext;
+        this.gridTable = gridTable;
+        this.enviromentGraphicsContext = enviromentGraphicsContext;
+        this.monitorWindow = monitorWindow;
     }
 
     public void addEnemy(Enemy enemy) {
@@ -39,6 +49,9 @@ public class EnemyContainer {
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
             if (!enemy.isAlive()) {
+                if (enemy instanceof StaticRocketTurret){
+                    gridTable.insertGameObjectIntoGridCell(new DeadStaticRocketTurretBase(new Point(enemy.getWorldPossition().getCoordX() - 32, enemy.getWorldPossition().getCoordY() - 32), 64, 64, enviromentGraphicsContext, monitorWindow));
+                }
                 dyingEnemyList.add(enemy);
                 iterator.remove();
             }
@@ -55,6 +68,7 @@ public class EnemyContainer {
         graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         for (Enemy enemy : enemyList) {
             enemy.paintGameObject();
+            
         }
     }
 
