@@ -10,6 +10,8 @@ import GameObject.Point;
 import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
+import Projectiles.ProjectileContainer;
+import Projectiles.SpiderEnergyShock;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -37,10 +39,13 @@ public class SpiderRobot extends Enemy {
 
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
+    private ProjectileContainer projectileContainer;
+    private int shockCounter = 0;
 
-    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         enemyImage = LoadAllResources.getMapOfAllImages().get("walker_idle");
+        this.projectileContainer = projectileContainer;
     }
 
     @Override
@@ -154,6 +159,12 @@ public class SpiderRobot extends Enemy {
 
         paintSpiderTurret(monitorPossition);
         paintAllExplosionsEnemy();
+        
+        shockCounter++;
+        if (shockCounter > 60) {
+                shockCounter = 0;
+                projectileContainer.addProjectileToContainer(new SpiderEnergyShock(graphicsContext, angleOfSpiderTower, worldPossition, this, 256, 256, monitorWindow));
+            }
     }
 
     private void paintSpiderTurret(Point monitorPossition) {

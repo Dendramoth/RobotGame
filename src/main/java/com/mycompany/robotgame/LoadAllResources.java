@@ -71,10 +71,34 @@ import javafx.scene.media.AudioClip;
         loadFortressWalls();
         loadSatelite();
         loadSpiderRobot();
+        loadSpiderEnergyShock();
         loadCraters();
         loadEvilDroneMarkTwo();
         
         loadAllSounds();
+    }
+    
+    private void loadSpiderEnergyShock(){
+        Image image = new Image("/SpiderRobot/EnergyShock/spider_lightning_1b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning1B", image);
+        
+        image = new Image("/SpiderRobot/EnergyShock/spider_lightning_2b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning2B", image);
+        
+        image = new Image("/SpiderRobot/EnergyShock/spider_lightning_3b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning3B", image);
+        
+        image = new Image("/SpiderRobot/EnergyShock/spider_lightning_4b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning4B", image);
+        
+        image = new Image("/SpiderRobot/EnergyShock/spider_lightning_5b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning5B", image);
+        
+        image = new Image("/SpiderRobot/EnergyShock/spider_lightning_6b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning6B", image);
+        
+        image = new Image("/SpiderRobot/EnergyShock/spider_lightning_7b.png", 256, 256, false, false);
+        mapOfAllImages.put("spiderLightning7B", image);
     }
     
     private void loadEvilDroneMarkTwo(){
