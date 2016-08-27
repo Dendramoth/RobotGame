@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 
 /**
@@ -27,8 +28,12 @@ public class SpiderRobot extends Enemy {
     private int movementAnimationFrame = 1;
     private int explodingTimer = 0;
     private double angleOfSpider = 0;
+    private double angleOfSpiderTower = 0;
     private double lastAngleToAvoidCollision = 0;
     private boolean collisionDetectedInLastTest = false;
+    private Image enemyTurretImage;
+    private double turretAngleSpeed = 0.5;
+    private int spiderTurretImgCounter = 0;
 
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
@@ -40,13 +45,23 @@ public class SpiderRobot extends Enemy {
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
+        double deltaXToPlayer = playerPossitionX - worldPossition.getCoordX();
+        double deltaYToPlayer = playerPossitionY - worldPossition.getCoordY();
+        angleOfSpiderTower = (angleOfSpiderTower + 360) % 360;
+        double angleToPlayer = (Math.toDegrees(Math.atan2(deltaXToPlayer, -deltaYToPlayer)) + 360) % 360;
+        if (((angleOfSpiderTower - angleToPlayer > 0) && (angleOfSpiderTower - angleToPlayer < 180)) || (angleOfSpiderTower - angleToPlayer < -180)) {
+            angleOfSpiderTower = angleOfSpiderTower + turretAngleSpeed;
+        } else {
+            angleOfSpiderTower = angleOfSpiderTower - turretAngleSpeed;
+        }
+        
         if (pathPoints.size() < 1) {
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
         }
-
         double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
-        angleOfSpider = calculateAngleBetweenPlayerAndDrone(deltaX, deltaY) + 90;
+        angleOfSpider = calculateAngleBetweenDroneAndNextPointInPathfinding(deltaX, deltaY) + 90;
+        
 
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfSpider)) * movementSpeed);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfSpider)) * movementSpeed);
@@ -61,7 +76,7 @@ public class SpiderRobot extends Enemy {
         }
     }
 
-    private double calculateAngleBetweenPlayerAndDrone(double x, double y) {
+    private double calculateAngleBetweenDroneAndNextPointInPathfinding(double x, double y) {
         double angle;
         if (y == 0 && x == 0) {
             angle = 0;
@@ -137,9 +152,28 @@ public class SpiderRobot extends Enemy {
         graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
         graphicsContext.restore();
 
+        paintSpiderTurret(monitorPossition);
         paintAllExplosionsEnemy();
-        //    graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+    }
 
+    private void paintSpiderTurret(Point monitorPossition) {
+        spiderTurretImgCounter++;
+        if (spiderTurretImgCounter < 12) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower1");
+        } else if (spiderTurretImgCounter >= 12 && spiderTurretImgCounter < 24) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower2");
+        } else if (spiderTurretImgCounter >= 24 && spiderTurretImgCounter < 36) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower3");
+        } else if (spiderTurretImgCounter >= 36 && spiderTurretImgCounter < 48) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower4");
+        }  else {
+            spiderTurretImgCounter = 0;
+        }
+        graphicsContext.save();
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.rotate(angleOfSpiderTower);
+        graphicsContext.drawImage(enemyTurretImage, -enemyTurretImage.getWidth() / 2, -enemyTurretImage.getHeight() / 2);
+        graphicsContext.restore();
     }
 
     @Override
@@ -220,9 +254,6 @@ public class SpiderRobot extends Enemy {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allExplosionsOnEnemy.add(new Explosion(monitorWindow));
         hitPoints--;
-        if (hitPoints < damagedStateTreshold) {
-            movementSpeed = 1;
-        }
         if (hitPoints < 1) {
             alive = false;
         }

@@ -144,6 +144,18 @@ import javafx.scene.media.AudioClip;
         
         image = new Image("/SpiderRobot/walker_moving_5.png", 256, 256, false, false);
         mapOfAllImages.put("walker_moving_10", image);
+        
+        image = new Image("/SpiderRobot/spider_tower_1.png", 128, 128, false, false);
+        mapOfAllImages.put("spiderTower1", image);
+        
+        image = new Image("/SpiderRobot/spider_tower_2.png", 128, 128, false, false);
+        mapOfAllImages.put("spiderTower2", image);
+        
+        image = new Image("/SpiderRobot/spider_tower_3.png", 128, 128, false, false);
+        mapOfAllImages.put("spiderTower3", image);
+        
+        image = new Image("/SpiderRobot/spider_tower_4.png", 128, 128, false, false);
+        mapOfAllImages.put("spiderTower4", image);
     }
     
     private void loadSatelite(){
