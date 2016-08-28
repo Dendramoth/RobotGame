@@ -161,7 +161,7 @@ public class SpiderRobot extends Enemy {
         paintAllExplosionsEnemy();
         
         shockCounter++;
-        if (shockCounter > 60) {
+        if (shockCounter > 48) {
                 shockCounter = 0;
                 projectileContainer.addProjectileToContainer(new SpiderEnergyShock(graphicsContext, angleOfSpiderTower, worldPossition, this, 256, 256, monitorWindow));
             }
