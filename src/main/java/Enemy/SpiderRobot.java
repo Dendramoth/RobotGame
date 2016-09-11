@@ -41,6 +41,7 @@ public class SpiderRobot extends Enemy {
     private final List<Point> pointsForDetection = new ArrayList<>();
     private ProjectileContainer projectileContainer;
     private int shockCounter = 0;
+    private boolean damaged = false;
 
     public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
@@ -59,14 +60,13 @@ public class SpiderRobot extends Enemy {
         } else {
             angleOfSpiderTower = angleOfSpiderTower - turretAngleSpeed;
         }
-        
+
         if (pathPoints.size() < 1) {
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
         }
         double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
         angleOfSpider = calculateAngleBetweenDroneAndNextPointInPathfinding(deltaX, deltaY) + 90;
-        
 
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfSpider)) * movementSpeed);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfSpider)) * movementSpeed);
@@ -159,26 +159,40 @@ public class SpiderRobot extends Enemy {
 
         paintSpiderTurret(monitorPossition);
         paintAllExplosionsEnemy();
-        
+
         shockCounter++;
         if (shockCounter > 48) {
-                shockCounter = 0;
-                projectileContainer.addProjectileToContainer(new SpiderEnergyShock(graphicsContext, angleOfSpiderTower, worldPossition, this, 256, 256, monitorWindow));
-            }
+            shockCounter = 0;
+            projectileContainer.addProjectileToContainer(new SpiderEnergyShock(graphicsContext, angleOfSpiderTower, worldPossition, this, 256, 256, monitorWindow));
+        }
     }
 
     private void paintSpiderTurret(Point monitorPossition) {
         spiderTurretImgCounter++;
-        if (spiderTurretImgCounter < 12) {
-            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower1");
-        } else if (spiderTurretImgCounter >= 12 && spiderTurretImgCounter < 24) {
-            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower2");
-        } else if (spiderTurretImgCounter >= 24 && spiderTurretImgCounter < 36) {
-            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower3");
-        } else if (spiderTurretImgCounter >= 36 && spiderTurretImgCounter < 48) {
-            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower4");
-        }  else {
-            spiderTurretImgCounter = 0;
+        if (damaged == false) {
+            if (spiderTurretImgCounter < 12) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower1");
+            } else if (spiderTurretImgCounter >= 12 && spiderTurretImgCounter < 24) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower2");
+            } else if (spiderTurretImgCounter >= 24 && spiderTurretImgCounter < 36) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower3");
+            } else if (spiderTurretImgCounter >= 36 && spiderTurretImgCounter < 48) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTower4");
+            } else {
+                spiderTurretImgCounter = 0;
+            }
+        }else{
+            if (spiderTurretImgCounter < 12) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged1");
+            } else if (spiderTurretImgCounter >= 12 && spiderTurretImgCounter < 24) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged2");
+            } else if (spiderTurretImgCounter >= 24 && spiderTurretImgCounter < 36) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged3");
+            } else if (spiderTurretImgCounter >= 36 && spiderTurretImgCounter < 48) {
+                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged4");
+            } else {
+                spiderTurretImgCounter = 0;
+            }
         }
         graphicsContext.save();
         graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
@@ -267,6 +281,8 @@ public class SpiderRobot extends Enemy {
         hitPoints--;
         if (hitPoints < 1) {
             alive = false;
+        }else if (hitPoints < damagedStateTreshold){
+            damaged = true;
         }
     }
 
