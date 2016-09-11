@@ -6,6 +6,7 @@
 package Enemy;
 
 import EnviromentObjects.CraterBig;
+import EnviromentObjects.DeadSpiderRobot;
 import EnviromentObjects.DeadStaticRocketTurretBase;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -51,7 +52,10 @@ public class EnemyContainer {
             if (!enemy.isAlive()) {
                 if (enemy instanceof StaticRocketTurret){
                     gridTable.insertGameObjectIntoGridCell(new DeadStaticRocketTurretBase(new Point(enemy.getWorldPossition().getCoordX() - 32, enemy.getWorldPossition().getCoordY() - 32), 64, 64, enviromentGraphicsContext, monitorWindow));
+                }else if (enemy instanceof SpiderRobot){
+                    gridTable.insertGameObjectIntoGridCell(new DeadSpiderRobot(new Point(enemy.getWorldPossition().getCoordX() - 64, enemy.getWorldPossition().getCoordY() - 64), 128, 128, enviromentGraphicsContext, monitorWindow));
                 }
+                
                 dyingEnemyList.add(enemy);
                 iterator.remove();
             }
