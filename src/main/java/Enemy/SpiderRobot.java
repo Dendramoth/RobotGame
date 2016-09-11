@@ -215,23 +215,27 @@ public class SpiderRobot extends Enemy {
 
     @Override
     public boolean paintDyingEnemyAnimation() {
-        if (explodingTimer < 5) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death1");
-        } else if (explodingTimer >= 5 && explodingTimer < 10) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death2");
-        } else if (explodingTimer >= 10 && explodingTimer < 15) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death3");
-        } else if (explodingTimer >= 15 && explodingTimer < 20) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death4");
-        } else if (explodingTimer >= 20 && explodingTimer < 25) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death5");
+        if (explodingTimer < 8) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("spiderExplosion1");
+        } else if (explodingTimer >= 8 && explodingTimer < 16) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("spiderExplosion2");
+        } else if (explodingTimer >= 16 && explodingTimer < 24) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("spiderExplosion3");
+        } else if (explodingTimer >= 24 && explodingTimer < 32) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("spiderExplosion4");
+        } else if (explodingTimer >= 32 && explodingTimer < 40) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("spiderExplosion5");
         } else {
             return false;
         }
 
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
-
+        graphicsContext.save();
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.rotate(angleOfSpiderTower);
+        graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
+        graphicsContext.restore();
+        
         explodingTimer++;
         return true;
     }
