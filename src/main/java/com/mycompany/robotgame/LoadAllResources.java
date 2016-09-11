@@ -72,10 +72,34 @@ import javafx.scene.media.AudioClip;
         loadSatelite();
         loadSpiderRobot();
         loadSpiderEnergyShock();
+        loadSpiderLaser();
         loadCraters();
         loadEvilDroneMarkTwo();
+        loadLaserBurnedGround();
         
         loadAllSounds();
+    }
+    
+    private void loadLaserBurnedGround(){
+        Image image = new Image("/LaserBurnedGround/laser_burns_1.png", 32, 32, false, false);
+        mapOfAllImages.put("laserBurnedGround1", image);
+        
+        image = new Image("/LaserBurnedGround/laser_burns_2.png", 32, 32, false, false);
+        mapOfAllImages.put("laserBurnedGround2", image);
+        
+        image = new Image("/LaserBurnedGround/laser_burns_3.png", 32, 32, false, false);
+        mapOfAllImages.put("laserBurnedGround3", image);
+        
+        image = new Image("/LaserBurnedGround/laser_burns_4.png", 32, 32, false, false);
+        mapOfAllImages.put("laserBurnedGround4", image);
+    }
+    
+    private void loadSpiderLaser(){
+        Image image = new Image("/SpiderRobot/Laser/walker_tower_laser_1.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser1", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_2.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser2", image);
     }
     
     private void loadSpiderEnergyShock(){

@@ -81,16 +81,22 @@ public class GameMainInfrastructure {
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
         enemyContainer = new EnemyContainer(enemyGraphicsContext, gridTable, enviromentGraphicsContext, monitorWindow);
         projectileContainer = new ProjectileContainer();
+        
+        gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
+        detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
+        
+        
+        
+        
     //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer)); //2.3
+        enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
     //    enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2175, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         
     //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         
-        gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
-        detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
+        
 
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow);
         createMap1.generatedObjectForGame(gridTable);
@@ -223,6 +229,7 @@ public class GameMainInfrastructure {
                 playerRobot.shootFromRobotTurret(mousePressed);
                 gridTable.paintAllObjectsInMonitorWindow();
                 gameDynamicEnviroment.paintAllMinigunsHitsOnGround();
+                gameDynamicEnviroment.paintAllLaserHitsOnGround();
 
                 enemyContainer.testEnemiesAlive();
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));

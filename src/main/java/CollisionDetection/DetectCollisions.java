@@ -60,4 +60,5 @@ public class DetectCollisions {
             playerRobot.getAllShotsFromMinigun().clear();
         }
     }
+
 }

@@ -12,6 +12,8 @@ import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
 import Projectiles.ProjectileContainer;
 import Projectiles.SpiderEnergyShock;
+import Projectiles.SpiderLaser;
+import com.mycompany.robotgame.GameDynamicEnviroment;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -42,11 +44,13 @@ public class SpiderRobot extends Enemy {
     private ProjectileContainer projectileContainer;
     private int shockCounter = 0;
     private boolean damaged = false;
+    private GameDynamicEnviroment gameDynamicEnviroment;
 
-    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
+    public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer, GameDynamicEnviroment gameDynamicEnviroment) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         enemyImage = LoadAllResources.getMapOfAllImages().get("walker_idle");
         this.projectileContainer = projectileContainer;
+        this.gameDynamicEnviroment = gameDynamicEnviroment;
     }
 
     @Override
@@ -161,9 +165,9 @@ public class SpiderRobot extends Enemy {
         paintAllExplosionsEnemy();
 
         shockCounter++;
-        if (shockCounter > 48) {
+        if (shockCounter > 320) {
             shockCounter = 0;
-            projectileContainer.addProjectileToContainer(new SpiderEnergyShock(graphicsContext, angleOfSpiderTower, worldPossition, this, 256, 256, monitorWindow));
+            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, 512, 512, monitorWindow, this, gameDynamicEnviroment));
         }
     }
 
@@ -245,8 +249,8 @@ public class SpiderRobot extends Enemy {
 
     }
 
-    public double getAngleOfDrone() {
-        return angleOfSpider;
+    public double getAngleOfSpiderTower() {
+        return angleOfSpiderTower;
     }
 
     public void setAngleOfDrone(double angleOfDrone) {

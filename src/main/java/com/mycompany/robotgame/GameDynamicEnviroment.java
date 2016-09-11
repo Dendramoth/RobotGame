@@ -5,6 +5,7 @@
  */
 package com.mycompany.robotgame;
 
+import EnviromentObjects.LaserGroundHits;
 import java.util.Iterator;
 import EnviromentObjects.MinigunGroundHits;
 import GameObject.Point;
@@ -18,6 +19,7 @@ import playerRobot.PlayerRobot;
  */
 public class GameDynamicEnviroment {
     private List<MinigunGroundHits> allMinigunGroundHits = new ArrayList<>();
+    private List<LaserGroundHits> allLaserGroundHits = new ArrayList<>();
     private GraphicsContext graphicsContext;
     private MonitorWindow monitorWindow;
 
@@ -37,7 +39,23 @@ public class GameDynamicEnviroment {
         }
     }
     
+    public void paintAllLaserHitsOnGround() {
+        Iterator<LaserGroundHits> iterator = allLaserGroundHits.iterator();
+        while (iterator.hasNext()) {
+            LaserGroundHits laserGroundHits = iterator.next();
+            laserGroundHits.paint();
+            if (laserGroundHits.getNumberOfFramesBeingDisplayed() < 1) {
+                iterator.remove();
+            }
+        }
+    }
+    
+    
     public void generateNewMinigunHitOnGround(Point position){
         allMinigunGroundHits.add(new MinigunGroundHits(position, graphicsContext, monitorWindow));
+    }
+    
+    public void generateNewLaserHitOnGround(Point position){
+        allLaserGroundHits.add(new LaserGroundHits(position, graphicsContext, monitorWindow));
     }
 }
