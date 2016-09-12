@@ -5,7 +5,9 @@
  */
 package CollisionDetection;
 
+import Enemy.Enemy;
 import Enemy.EnemyContainer;
+import Enemy.EvilDroneMarkTwo;
 import GameObject.GameObjectWithDistanceDetection;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.GameDynamicEnviroment;
@@ -58,6 +60,19 @@ public class DetectCollisions {
 
             gameDynamicEnviroment.generateNewMinigunHitOnGround(shotFromMinigun.getEndPositionOfShot());
             playerRobot.getAllShotsFromMinigun().clear();
+        }
+    }
+    
+    public void detectCollisionOfAllDronesWithPlayerRobot() {
+        for (Enemy enemy : enemyContainer.getEnemyList()){
+            if (enemy instanceof EvilDroneMarkTwo){
+                EvilDroneMarkTwo evilDroneMarkTwo = (EvilDroneMarkTwo) enemy;
+                double distance = Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordX() - playerRobot.getWorldPossition().getCoordX()) + Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordY() - playerRobot.getWorldPossition().getCoordY());
+                if (distance < 52){
+                    evilDroneMarkTwo.doOnCollision();
+                    playerRobot.removeHitPoints(50);
+                }
+            }
         }
     }
 

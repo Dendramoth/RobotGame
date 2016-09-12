@@ -225,6 +225,8 @@ public class EvilDroneMarkTwo extends Enemy{
 
     @Override
     public void doOnCollision() {
+        hitPoints = 0; //die!
+        alive = false;
     }
 
     @Override
