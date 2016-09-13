@@ -9,6 +9,6 @@ package playerInterface;
  *
  * @author styma01
  */
-public class ShieldBar {
+public class ShieldBar extends interfaceBar{
     
 }

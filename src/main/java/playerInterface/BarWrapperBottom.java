@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
 public class BarWrapperBottom {
 
     private static double CLOSED_OFFSET = -80;
-    private Image bottomBarWrapperImage = LoadAllResources.getMapOfAllImages().get("barWrapperBottom");
+    private final Image bottomBarWrapperImage = LoadAllResources.getMapOfAllImages().get("barWrapperBottom");
     private GraphicsContext graphicsContext;
 
     public BarWrapperBottom(GraphicsContext graphicsContext) {

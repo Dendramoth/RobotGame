@@ -17,8 +17,9 @@ import javafx.scene.image.Image;
 public class BarWrapperTop {
 
     private static double CLOSED_OFFSET = -102;
-    private Image topBarWrapperImage = LoadAllResources.getMapOfAllImages().get("barWrapperTop");
+    private final Image topBarWrapperImage = LoadAllResources.getMapOfAllImages().get("barWrapperTop");
     private GraphicsContext graphicsContext;
+    private double currentOffset = 0; 
 
     public BarWrapperTop(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -28,4 +29,13 @@ public class BarWrapperTop {
         graphicsContext.drawImage(topBarWrapperImage, 20, GameMainInfrastructure.WINDOW_HEIGH + CLOSED_OFFSET);
     }
 
+    public double getCurrentOffset() {
+        return currentOffset;
+    }
+
+    public void setCurrentOffset(double currentOffset) {
+        this.currentOffset = currentOffset;
+    }
+    
+    
 }

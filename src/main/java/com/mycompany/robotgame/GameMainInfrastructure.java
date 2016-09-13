@@ -47,6 +47,7 @@ public class GameMainInfrastructure {
     private boolean keySPressed = false;
     private boolean keyWPressed = false;
     private boolean keyDPressed = false;
+    private boolean keyXPressed = false;
     private boolean keySpacePressed = false;
 
  //   private Label robotHpValueLabel;
@@ -212,6 +213,9 @@ public class GameMainInfrastructure {
             case "D":
                 keyDPressed = pressed;
                 break;
+            case "X":
+                keyXPressed = pressed;
+                break;    
             case "SPACE":
                 keySpacePressed = pressed;
 
@@ -230,6 +234,7 @@ public class GameMainInfrastructure {
                 windowPositionY = stage.getY();
 
                 movePlayerRobot();
+                showHideInterface();
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
                 gridTable.paintAllObjectsInMonitorWindow();
@@ -280,6 +285,13 @@ public class GameMainInfrastructure {
         }
 
         playerRobot.setShieldActive(keySpacePressed);
+    }
+    
+    private void showHideInterface() {
+        if (keyXPressed == true) {
+            keyXPressed = false;
+            barInterfaceHandler.addBar();
+        }
     }
 
     protected static void setGameLoop(AnimationTimer gameLoop) {

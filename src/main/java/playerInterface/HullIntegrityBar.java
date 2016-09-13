@@ -9,6 +9,6 @@ package playerInterface;
  *
  * @author styma01
  */
-public class HullIntegrityBar {
+public class HullIntegrityBar extends interfaceBar{
     
 }
