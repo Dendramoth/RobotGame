@@ -76,8 +76,47 @@ import javafx.scene.media.AudioClip;
         loadCraters();
         loadEvilDroneMarkTwo();
         loadLaserBurnedGround();
+        loadInterfaceBar();
         
         loadAllSounds();
+    }
+    
+    private void loadInterfaceBar(){
+        Image image = new Image("/InterfaceBar/bar_intro_1.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro1", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_2.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro2", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_3.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro3", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_4.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro4", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_5.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro5", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_6.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro6", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_7.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro7", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_8.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro8", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_9.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro9", image);
+        
+        image = new Image("/InterfaceBar/bar_intro_10.png", 308, 41, false, false);
+        mapOfAllImages.put("barIntro10", image);
+        
+        image = new Image("/InterfaceBar/bar_bottom.png", 308, 36, false, false);
+        mapOfAllImages.put("barWrapperBottom", image);
+        
+        image = new Image("/InterfaceBar/bar_top.png", 308, 37, false, false);
+        mapOfAllImages.put("barWrapperTop", image);
     }
     
     private void loadLaserBurnedGround(){
