@@ -28,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
+import playerInterface.BarInterfaceHandler;
 import playerRobot.PlayerRobot;
 
 public class GameMainInfrastructure {
@@ -48,10 +49,10 @@ public class GameMainInfrastructure {
     private boolean keyDPressed = false;
     private boolean keySpacePressed = false;
 
-    private Label robotHpValueLabel;
-    private Label shieldHpValueLabel;
-    private Label playerWorldPossitionValueLabel;
-    private Label gameOverLabel = new Label("");
+ //   private Label robotHpValueLabel;
+ //   private Label shieldHpValueLabel;
+ //   private Label playerWorldPossitionValueLabel;
+ //   private Label gameOverLabel = new Label("");
 
     private PlayerRobot playerRobot;
     private GridTable gridTable;
@@ -59,7 +60,8 @@ public class GameMainInfrastructure {
     private GameDynamicEnviroment gameDynamicEnviroment;
     private DetectCollisions detectCollisions;
     private ProjectileContainer projectileContainer;
-
+    private BarInterfaceHandler barInterfaceHandler;
+    
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
         changeCanvasWidthAndHeighToFullSize();
@@ -70,10 +72,13 @@ public class GameMainInfrastructure {
         GraphicsContext enemyGraphicsContext = enemiesCanvas.getGraphicsContext2D();
         final Canvas robotCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
         GraphicsContext robotGraphicsContext = robotCanvas.getGraphicsContext2D();
+        final Canvas interfaceCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
+        GraphicsContext interfaceGraphicsContext = interfaceCanvas.getGraphicsContext2D();
 
         gameCanvasPanel.getChildren().add(baseCanvas);
         gameCanvasPanel.getChildren().add(enemiesCanvas);
         gameCanvasPanel.getChildren().add(robotCanvas);
+        gameCanvasPanel.getChildren().add(interfaceCanvas);
 
         Point startMonitorWindowPos = new Point(2000, 8000);
         MonitorWindow monitorWindow = new MonitorWindow(startMonitorWindowPos);
@@ -85,8 +90,8 @@ public class GameMainInfrastructure {
         gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
         
-        
-        
+        barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext);
+        barInterfaceHandler.paintInterface();
         
     //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
     //    enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
@@ -103,7 +108,7 @@ public class GameMainInfrastructure {
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
 
-        HBox userProfilePanel = new HBox();
+    /*    HBox userProfilePanel = new HBox();
         Label robotHpLabel = new Label("Robot HP:");
         robotHpValueLabel = new Label(String.valueOf(playerRobot.getHitPoints()));
         userProfilePanel.getChildren().add(robotHpLabel);
@@ -121,12 +126,12 @@ public class GameMainInfrastructure {
         playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
         playerWorldPossition.getChildren().add(playerWorldPossitionLabel);
         playerWorldPossition.getChildren().add(playerWorldPossitionValueLabel);
-
+*/
         VBox gameVerticalPanel = new VBox();
         gameVerticalPanel.getChildren().add(gameCanvasPanel);
-        gameVerticalPanel.getChildren().add(playerShiedInformation);
-        gameVerticalPanel.getChildren().add(userProfilePanel);
-        gameVerticalPanel.getChildren().add(playerWorldPossition);
+    //    gameVerticalPanel.getChildren().add(playerShiedInformation);
+     //   gameVerticalPanel.getChildren().add(userProfilePanel);
+    //    gameVerticalPanel.getChildren().add(playerWorldPossition);
 
         gamePanel.getChildren().add(gameVerticalPanel);
 
@@ -139,7 +144,7 @@ public class GameMainInfrastructure {
 
     private void changeCanvasWidthAndHeighToFullSize() {
         WINDOW_WIDTH = Screen.getPrimary().getVisualBounds().getMaxX();
-        WINDOW_HEIGH = Screen.getPrimary().getVisualBounds().getMaxY() - 100;
+        WINDOW_HEIGH = Screen.getPrimary().getVisualBounds().getMaxY();
     }
 
     private void setUpMouseListeners(Stage stage) {
@@ -244,10 +249,10 @@ public class GameMainInfrastructure {
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 detectCollisions.detectCollisionOfAllDronesWithPlayerRobot();
                 
-                playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
+             //   playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
                 
-                robotHpValueLabel.setText(String.valueOf(playerRobot.getHitPoints()));
-                shieldHpValueLabel.setText(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
+            //    robotHpValueLabel.setText(String.valueOf(playerRobot.getHitPoints()));
+            //    shieldHpValueLabel.setText(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
             }
 
         });
