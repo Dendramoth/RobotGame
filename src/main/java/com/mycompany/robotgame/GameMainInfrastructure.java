@@ -33,8 +33,8 @@ import playerRobot.PlayerRobot;
 
 public class GameMainInfrastructure {
 
-    public static double WINDOW_WIDTH = 1024;
-    public static double WINDOW_HEIGH = 720;
+    public static double WINDOW_WIDTH;
+    public static double WINDOW_HEIGH;
     //public static int FRAMERATE = 60;
     public static double windowPositionX = 0.0;
     public static double windowPositionY = 0.0;
@@ -62,6 +62,7 @@ public class GameMainInfrastructure {
     private DetectCollisions detectCollisions;
     private ProjectileContainer projectileContainer;
     private BarInterfaceHandler barInterfaceHandler;
+    private boolean openInterfaceBar = true;
     
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -92,7 +93,7 @@ public class GameMainInfrastructure {
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
         
         barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext);
-        barInterfaceHandler.paintInterface();
+        
         
     //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
     //    enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
@@ -141,6 +142,7 @@ public class GameMainInfrastructure {
         setUpResizeListeners(stage, baseCanvas, robotCanvas, enemiesCanvas);
 
         buildAndSetGameLoop(stage);
+        
     }
 
     private void changeCanvasWidthAndHeighToFullSize() {
@@ -254,6 +256,8 @@ public class GameMainInfrastructure {
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 detectCollisions.detectCollisionOfAllDronesWithPlayerRobot();
                 
+                
+                
              //   playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
                 
             //    robotHpValueLabel.setText(String.valueOf(playerRobot.getHitPoints()));
@@ -290,7 +294,13 @@ public class GameMainInfrastructure {
     private void showHideInterface() {
         if (keyXPressed == true) {
             keyXPressed = false;
-            barInterfaceHandler.addBar();
+            if (openInterfaceBar){
+                openInterfaceBar = false;
+                barInterfaceHandler.addBar();
+            }else{
+                openInterfaceBar = true;
+                barInterfaceHandler.removeBar();
+            }
         }
     }
 
@@ -304,6 +314,10 @@ public class GameMainInfrastructure {
 
     public void stopGameLoop() {
         gameLoop.stop();
+    }
+    
+    public void paintInterface() {
+        barInterfaceHandler.paintInterface();
     }
 
 }

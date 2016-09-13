@@ -75,5 +75,9 @@ public class DetectCollisions {
             }
         }
     }
+    
+    public void detectCollisionOfRocketWithStaticObjectsAndOtherEnemies() {
+        
+    }
 
 }

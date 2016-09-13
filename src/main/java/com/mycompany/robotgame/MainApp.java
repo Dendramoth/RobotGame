@@ -29,6 +29,8 @@ public class MainApp extends Application {
         stage.setTitle("Robot Awesome Game");
         stage.setScene(scene);
         stage.show();
+        
+        gameMainInfrastructure.paintInterface(); //show player interface
     }
 
     /**

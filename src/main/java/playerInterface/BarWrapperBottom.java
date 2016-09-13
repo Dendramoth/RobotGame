@@ -16,15 +16,22 @@ import javafx.scene.image.Image;
  */
 public class BarWrapperBottom {
 
-    private static double CLOSED_OFFSET = -80;
+    private static double CLOSED_OFFSET = -130;
     private final Image bottomBarWrapperImage = LoadAllResources.getMapOfAllImages().get("barWrapperBottom");
     private GraphicsContext graphicsContext;
+    private double barYCoord = 0;
 
     public BarWrapperBottom(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }
 
     public void paintBottomWrapper() {
-        graphicsContext.drawImage(bottomBarWrapperImage, 20, GameMainInfrastructure.WINDOW_HEIGH + CLOSED_OFFSET);
+        barYCoord = GameMainInfrastructure.WINDOW_HEIGH + CLOSED_OFFSET;
+        graphicsContext.drawImage(bottomBarWrapperImage, 20, barYCoord);
     }
+
+    public double getBarYCoord() {
+        return barYCoord;
+    }
+    
 }
