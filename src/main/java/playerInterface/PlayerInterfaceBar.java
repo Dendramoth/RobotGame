@@ -99,4 +99,10 @@ public class PlayerInterfaceBar {
     public boolean isBarIscompletelyHidden() {
         return barIscompletelyHidden;
     }
+
+    public int getDisplayedStage() {
+        return displayedStage;
+    }
+    
+    
 }

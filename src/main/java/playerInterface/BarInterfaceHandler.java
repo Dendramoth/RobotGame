@@ -34,8 +34,8 @@ public class BarInterfaceHandler {
         barWrapperTop = new BarWrapperTop(graphicsContext);
         hullIntegrityBar = new HullIntegrityBar(graphicsContext, true);
         shieldBar = new ShieldBar(graphicsContext, true);
-        allBars.add(shieldBar);
         allBars.add(hullIntegrityBar);
+        allBars.add(shieldBar);
     }
 
     public void paintInterface() {
@@ -45,11 +45,15 @@ public class BarInterfaceHandler {
         int barPosition = 1;
         if (hullIntegrityBar.shouldBeDisplayed) {
             hullIntegrityBar.paintBar(barWrapperBottom.getBarYCoord() - STANDARD_BAR_HEIGHT * barPosition);
-            barPosition++;
+            if (hullIntegrityBar.displayedStage > 0) {
+                barPosition++;
+            }
         }
         if (shieldBar.shouldBeDisplayed) {
             shieldBar.paintBar(barWrapperBottom.getBarYCoord() - STANDARD_BAR_HEIGHT * barPosition);
-            barPosition++;
+            if (hullIntegrityBar.displayedStage > 0) {
+                barPosition++;
+            }
         }
     }
 
