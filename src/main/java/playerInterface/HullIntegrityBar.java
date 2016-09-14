@@ -14,10 +14,10 @@ import javafx.scene.image.Image;
  *
  * @author styma01
  */
-public class HullIntegrityBar extends interfaceBar{
+public class HullIntegrityBar extends InterfaceBar{
 
-    public HullIntegrityBar(GraphicsContext graphicsContext) {
-        super(graphicsContext);
+    public HullIntegrityBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
+        super(graphicsContext, shouldBeDisplayed);
     }
     
 }

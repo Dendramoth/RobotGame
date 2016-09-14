@@ -11,10 +11,10 @@ import javafx.scene.canvas.GraphicsContext;
  *
  * @author styma01
  */
-public class ShieldBar extends interfaceBar{
+public class ShieldBar extends InterfaceBar{
 
-    public ShieldBar(GraphicsContext graphicsContext) {
-        super(graphicsContext);
+    public ShieldBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
+        super(graphicsContext, shouldBeDisplayed);
     }
     
 }
