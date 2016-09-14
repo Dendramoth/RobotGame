@@ -5,13 +5,96 @@
  */
 package playerInterface;
 
+import com.mycompany.robotgame.LoadAllResources;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 /**
  *
  * @author styma01
  */
 public class interfaceBar {
     
-    public void playInitialIntro(){
+    protected boolean barIscompletelyVisible = false;
+    protected boolean barIscompletelyHidden = true;
+    protected int displayedStage = 0;
+    protected GraphicsContext graphicsContext;
+    protected Image barImage; 
+
+    public interfaceBar(GraphicsContext graphicsContext) {
+        this.graphicsContext = graphicsContext;
+    }
         
+    public void paintBar(double coordY){
+        if (displayedStage > 0){
+            graphicsContext.drawImage(barImage, 20, coordY);
+        }
+    }
+    
+    public void showBiggerPartOfBar(GraphicsContext graphicsContext){
+        this.graphicsContext = graphicsContext;
+        displayedStage++;
+        chooseCorrectBarFrameForOpeningClosingAnimation();
+        
+        if (displayedStage >= 10){
+            barIscompletelyVisible = true;
+            barIscompletelyHidden = false;
+        }
+    }
+    
+    public void showSmallerPartOfBar(GraphicsContext graphicsContext){
+        this.graphicsContext = graphicsContext;
+        displayedStage--;
+        chooseCorrectBarFrameForOpeningClosingAnimation();
+        
+        if (displayedStage <= 0){
+            barIscompletelyVisible = false;
+            barIscompletelyHidden = true;
+        }
+    }
+    
+    public void chooseCorrectBarFrameForOpeningClosingAnimation(){
+        switch (displayedStage){
+            case 1:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro1");
+                break;
+            case 2:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro2");
+                break;
+            case 3:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro3");
+                break;
+            case 4:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro4");
+                break;
+            case 5:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro5");
+                break;
+            case 6:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro6");
+                break;
+            case 7:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro7");
+                break;
+            case 8:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro8");
+                break;
+            case 9:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro9");
+                break;
+            case 10:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro10");
+                break;
+            default:
+                barImage = LoadAllResources.getMapOfAllImages().get("barIntro10");
+        }
+    }
+
+    public boolean isBarIscompletelyVisible() {
+        return barIscompletelyVisible;
+    }
+
+    public boolean isBarIscompletelyHidden() {
+        return barIscompletelyHidden;
     }
 }

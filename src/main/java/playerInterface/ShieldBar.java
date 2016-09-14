@@ -5,10 +5,16 @@
  */
 package playerInterface;
 
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  *
  * @author styma01
  */
 public class ShieldBar extends interfaceBar{
+
+    public ShieldBar(GraphicsContext graphicsContext) {
+        super(graphicsContext);
+    }
     
 }

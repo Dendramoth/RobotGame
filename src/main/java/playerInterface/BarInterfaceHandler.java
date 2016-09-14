@@ -27,7 +27,7 @@ public class BarInterfaceHandler {
         this.graphicsContext = graphicsContext;
         barWrapperBottom = new BarWrapperBottom(graphicsContext);
         barWrapperTop = new BarWrapperTop(graphicsContext);
-        hullIntegrityBar = new HullIntegrityBar();
+        hullIntegrityBar = new HullIntegrityBar(graphicsContext);
     }
 
     public void paintInterface() {
