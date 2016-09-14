@@ -11,7 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
  *
  * @author styma01
  */
-public class ShieldBar extends InterfaceBar{
+public class ShieldBar extends PlayerInterfaceBar{
 
     public ShieldBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
         super(graphicsContext, shouldBeDisplayed);

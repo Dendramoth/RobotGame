@@ -13,16 +13,18 @@ import javafx.scene.image.Image;
  *
  * @author styma01
  */
-public class interfaceBar {
+public class PlayerInterfaceBar {
     
     protected boolean barIscompletelyVisible = false;
     protected boolean barIscompletelyHidden = true;
     protected int displayedStage = 0;
     protected GraphicsContext graphicsContext;
     protected Image barImage; 
+    protected boolean shouldBeDisplayed;
 
-    public interfaceBar(GraphicsContext graphicsContext) {
+    public PlayerInterfaceBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
         this.graphicsContext = graphicsContext;
+        this.shouldBeDisplayed = shouldBeDisplayed;
     }
         
     public void paintBar(double coordY){

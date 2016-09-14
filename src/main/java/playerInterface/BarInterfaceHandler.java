@@ -26,7 +26,7 @@ public class BarInterfaceHandler {
     private HullIntegrityBar hullIntegrityBar;
     private ShieldBar shieldBar;
     private static double STANDARD_BAR_HEIGHT = 36;
-    private HashSet<InterfaceBar> allBars = new HashSet<>();
+    private HashSet<PlayerInterfaceBar> allBars = new HashSet<>();
 
     public BarInterfaceHandler(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -90,7 +90,7 @@ public class BarInterfaceHandler {
         });
     }
 
-    private void addBarAnimation(final InterfaceBar interfaceBar) {
+    private void addBarAnimation(final PlayerInterfaceBar interfaceBar) {
         setGameLoop(new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -155,8 +155,8 @@ public class BarInterfaceHandler {
      * ************************************************************************
      * Other Methods
      */
-    private InterfaceBar findCurrentPanelToDisplay() {
-        for (InterfaceBar interfaceBar : allBars) {
+    private PlayerInterfaceBar findCurrentPanelToDisplay() {
+        for (PlayerInterfaceBar interfaceBar : allBars) {
             if (!interfaceBar.barIscompletelyVisible && interfaceBar.shouldBeDisplayed) {
                 return interfaceBar;
             }

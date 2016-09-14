@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
  *
  * @author styma01
  */
-public class HullIntegrityBar extends InterfaceBar{
+public class HullIntegrityBar extends PlayerInterfaceBar{
 
     public HullIntegrityBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
         super(graphicsContext, shouldBeDisplayed);
