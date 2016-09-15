@@ -43,16 +43,13 @@ public class BarInterfaceHandler {
         barWrapperBottom.paintBottomWrapper();
         barWrapperTop.paintTopWrapper();
         int barPosition = 1;
-        if (hullIntegrityBar.shouldBeDisplayed) {
-            hullIntegrityBar.paintBar(barWrapperBottom.getBarYCoord() - STANDARD_BAR_HEIGHT * barPosition);
-            if (hullIntegrityBar.displayedStage > 0) {
-                barPosition++;
-            }
-        }
-        if (shieldBar.shouldBeDisplayed) {
-            shieldBar.paintBar(barWrapperBottom.getBarYCoord() - STANDARD_BAR_HEIGHT * barPosition);
-            if (hullIntegrityBar.displayedStage > 0) {
-                barPosition++;
+
+        for (PlayerInterfaceBar playerInterfaceBar : allBars) {
+            if (playerInterfaceBar.shouldBeDisplayed) {
+                playerInterfaceBar.paintBar(barWrapperBottom.getBarYCoord() - STANDARD_BAR_HEIGHT * barPosition);
+                if (playerInterfaceBar.displayedStage > 0) {
+                    barPosition++;
+                }
             }
         }
     }
@@ -86,7 +83,6 @@ public class BarInterfaceHandler {
                 if (animationCounter == 40) {
                     animationCounter = 0;
                     gameLoop.stop();
-                    System.out.println(findCurrentPanelToDisplay().getClass());
                     addBarAnimation(findCurrentPanelToDisplay());
                     gameLoop.start();
                 }
@@ -126,11 +122,12 @@ public class BarInterfaceHandler {
             @Override
             public void handle(long now) {
                 animationCounter++;
+                PlayerInterfaceBar barToBeRemoved = findCurrentPanelToRemove();
                 if (animationCounter % 5 == 0) {
-                    hullIntegrityBar.showSmallerPartOfBar(graphicsContext);
+                    barToBeRemoved.showSmallerPartOfBar(graphicsContext);
                     paintInterface();
                 }
-                if (hullIntegrityBar.isBarIscompletelyHidden()) {
+                if (barToBeRemoved.isBarIscompletelyHidden()) {
                     animationCounter = 0;
                     gameLoop.stop();
                     moveTopWrapperDown();
@@ -150,6 +147,10 @@ public class BarInterfaceHandler {
                 if (animationCounter == 40) {
                     animationCounter = 0;
                     gameLoop.stop();
+                    if (findCurrentPanelToRemove() != null){
+                        removeBarAndCloseGapAnimation();
+                        gameLoop.start();
+                    }
                 }
             }
         });
@@ -166,6 +167,16 @@ public class BarInterfaceHandler {
             }
         }
         return null; // all bars are already displayed
+    }
+    
+    private PlayerInterfaceBar findCurrentPanelToRemove() {
+        PlayerInterfaceBar barToBeRemoved = null;
+        for (PlayerInterfaceBar interfaceBar : allBars) {
+            if (interfaceBar.barIscompletelyVisible) {
+                barToBeRemoved = interfaceBar;
+            }
+        }
+        return barToBeRemoved; // all bars are already displayed
     }
 
     protected static void setGameLoop(AnimationTimer gameLoop) {
