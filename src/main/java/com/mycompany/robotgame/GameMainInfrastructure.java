@@ -7,9 +7,7 @@ package com.mycompany.robotgame;
 
 import CollisionDetection.DetectCollisions;
 import Enemy.EnemyContainer;
-import Enemy.EvilDroneMarkOne;
 import Enemy.EvilDroneMarkTwo;
-import Enemy.SpiderRobot;
 import Enemy.StaticRocketTurret;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -21,10 +19,8 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -50,11 +46,10 @@ public class GameMainInfrastructure {
     private boolean keyXPressed = false;
     private boolean keySpacePressed = false;
 
- //   private Label robotHpValueLabel;
- //   private Label shieldHpValueLabel;
- //   private Label playerWorldPossitionValueLabel;
- //   private Label gameOverLabel = new Label("");
-
+    //   private Label robotHpValueLabel;
+    //   private Label shieldHpValueLabel;
+    //   private Label playerWorldPossitionValueLabel;
+    //   private Label gameOverLabel = new Label("");
     private PlayerRobot playerRobot;
     private GridTable gridTable;
     private EnemyContainer enemyContainer;
@@ -63,7 +58,7 @@ public class GameMainInfrastructure {
     private ProjectileContainer projectileContainer;
     private BarInterfaceHandler barInterfaceHandler;
     private boolean openInterfaceBar = true;
-    
+
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
         changeCanvasWidthAndHeighToFullSize();
@@ -88,29 +83,25 @@ public class GameMainInfrastructure {
         playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
         enemyContainer = new EnemyContainer(enemyGraphicsContext, gridTable, enviromentGraphicsContext, monitorWindow);
         projectileContainer = new ProjectileContainer();
-        
+
         gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
-        
+
         barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext);
-        
-        
-    //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
-    //    enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
+
+        //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
+        //    enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
         enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2175, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        
-    //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        
-        
 
+        //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow);
         createMap1.generatedObjectForGame(gridTable);
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
 
-    /*    HBox userProfilePanel = new HBox();
+        /*    HBox userProfilePanel = new HBox();
         Label robotHpLabel = new Label("Robot HP:");
         robotHpValueLabel = new Label(String.valueOf(playerRobot.getHitPoints()));
         userProfilePanel.getChildren().add(robotHpLabel);
@@ -128,12 +119,12 @@ public class GameMainInfrastructure {
         playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
         playerWorldPossition.getChildren().add(playerWorldPossitionLabel);
         playerWorldPossition.getChildren().add(playerWorldPossitionValueLabel);
-*/
+         */
         VBox gameVerticalPanel = new VBox();
         gameVerticalPanel.getChildren().add(gameCanvasPanel);
-    //    gameVerticalPanel.getChildren().add(playerShiedInformation);
-     //   gameVerticalPanel.getChildren().add(userProfilePanel);
-    //    gameVerticalPanel.getChildren().add(playerWorldPossition);
+        //    gameVerticalPanel.getChildren().add(playerShiedInformation);
+        //   gameVerticalPanel.getChildren().add(userProfilePanel);
+        //    gameVerticalPanel.getChildren().add(playerWorldPossition);
 
         gamePanel.getChildren().add(gameVerticalPanel);
 
@@ -142,7 +133,7 @@ public class GameMainInfrastructure {
         setUpResizeListeners(stage, baseCanvas, robotCanvas, enemiesCanvas);
 
         buildAndSetGameLoop(stage);
-        
+
     }
 
     private void changeCanvasWidthAndHeighToFullSize() {
@@ -217,7 +208,7 @@ public class GameMainInfrastructure {
                 break;
             case "X":
                 keyXPressed = pressed;
-                break;    
+                break;
             case "SPACE":
                 keySpacePressed = pressed;
 
@@ -247,21 +238,18 @@ public class GameMainInfrastructure {
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition());
                 enemyContainer.paintAllDiingEnemies();
-                
+
                 projectileContainer.moveAllProjectiles();
                 projectileContainer.paintAllProjectiles();
                 projectileContainer.testAllProjectilesForReachingMaximumRange();
                 projectileContainer.paintAllProjectilesExplosions();
-                
+
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 detectCollisions.detectCollisionOfAllDronesWithPlayerRobot();
-                
-                
-                
-             //   playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
-                
-            //    robotHpValueLabel.setText(String.valueOf(playerRobot.getHitPoints()));
-            //    shieldHpValueLabel.setText(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
+
+                //   playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
+                //    robotHpValueLabel.setText(String.valueOf(playerRobot.getHitPoints()));
+                //    shieldHpValueLabel.setText(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
             }
 
         });
@@ -290,16 +278,19 @@ public class GameMainInfrastructure {
 
         playerRobot.setShieldActive(keySpacePressed);
     }
-    
+
     private void showHideInterface() {
         if (keyXPressed == true) {
             keyXPressed = false;
-            if (openInterfaceBar){
-                openInterfaceBar = false;
-                barInterfaceHandler.addBar();
-            }else{
-                openInterfaceBar = true;
-                barInterfaceHandler.removeBar();
+            if (!barInterfaceHandler.isAnimationInProgress()) {
+                barInterfaceHandler.setAnimationInProgress(true);
+                if (openInterfaceBar) {
+                    openInterfaceBar = false;
+                    barInterfaceHandler.addBar();
+                } else {
+                    openInterfaceBar = true;
+                    barInterfaceHandler.removeBar();
+                }
             }
         }
     }
@@ -315,7 +306,7 @@ public class GameMainInfrastructure {
     public void stopGameLoop() {
         gameLoop.stop();
     }
-    
+
     public void paintInterface() {
         barInterfaceHandler.paintInterface();
     }

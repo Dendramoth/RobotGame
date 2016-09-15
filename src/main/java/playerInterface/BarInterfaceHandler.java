@@ -27,6 +27,7 @@ public class BarInterfaceHandler {
     private ShieldBar shieldBar;
     private static double STANDARD_BAR_HEIGHT = 36;
     private HashSet<PlayerInterfaceBar> allBars = new HashSet<>();
+    private boolean animationInProgress = false;
 
     public BarInterfaceHandler(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -70,6 +71,8 @@ public class BarInterfaceHandler {
         if (findCurrentPanelToDisplay() != null) {
             moveTopWrapperUpAndAddNewBar();
             gameLoop.start();
+        } else {
+            animationInProgress = false;
         }
     }
 
@@ -150,6 +153,8 @@ public class BarInterfaceHandler {
                     if (findCurrentPanelToRemove() != null){
                         removeBarAndCloseGapAnimation();
                         gameLoop.start();
+                    }else{
+                        animationInProgress = false;
                     }
                 }
             }
@@ -191,4 +196,12 @@ public class BarInterfaceHandler {
         gameLoop.stop();
     }
 
+    public boolean isAnimationInProgress() {
+        return animationInProgress;
+    }
+
+    public void setAnimationInProgress(boolean animationInProgress) {
+        this.animationInProgress = animationInProgress;
+    }
+    
 }
