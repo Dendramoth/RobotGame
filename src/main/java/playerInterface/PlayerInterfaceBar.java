@@ -40,8 +40,11 @@ public class PlayerInterfaceBar {
         
         if (displayedStage >= 10){
             barIscompletelyVisible = true;
+        }
+        if (displayedStage > 0){
             barIscompletelyHidden = false;
         }
+        
     }
     
     public void showSmallerPartOfBar(GraphicsContext graphicsContext){
@@ -50,8 +53,10 @@ public class PlayerInterfaceBar {
         chooseCorrectBarFrameForOpeningClosingAnimation();
         
         if (displayedStage <= 0){
-            barIscompletelyVisible = false;
             barIscompletelyHidden = true;
+        }
+        if (displayedStage < 10){
+            barIscompletelyVisible = false;
         }
     }
     
@@ -85,7 +90,7 @@ public class PlayerInterfaceBar {
                 barImage = LoadAllResources.getMapOfAllImages().get("barIntro9");
                 break;
             case 10:
-                barImage = LoadAllResources.getMapOfAllImages().get("barIntro10");
+                barImage = LoadAllResources.getMapOfAllImages().get("displayTen");
                 break;
             default:
                 barImage = LoadAllResources.getMapOfAllImages().get("barIntro10");

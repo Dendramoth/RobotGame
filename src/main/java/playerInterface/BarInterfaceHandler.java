@@ -116,16 +116,19 @@ public class BarInterfaceHandler {
      * REMOVE BAR FROM INTERFACE
      */
     public void removeBar() {
-        removeBarAndCloseGapAnimation();
-        gameLoop.start();
+        if (findCurrentPanelToRemove() != null) {
+            removeBarAndCloseGapAnimation(findCurrentPanelToRemove());
+            gameLoop.start();
+        } else {
+            animationInProgress = false;
+        }
     }
 
-    private void removeBarAndCloseGapAnimation() {
+    private void removeBarAndCloseGapAnimation(final PlayerInterfaceBar barToBeRemoved) {
         setGameLoop(new AnimationTimer() {
             @Override
             public void handle(long now) {
                 animationCounter++;
-                PlayerInterfaceBar barToBeRemoved = findCurrentPanelToRemove();
                 if (animationCounter % 5 == 0) {
                     barToBeRemoved.showSmallerPartOfBar(graphicsContext);
                     paintInterface();
@@ -150,12 +153,7 @@ public class BarInterfaceHandler {
                 if (animationCounter == 40) {
                     animationCounter = 0;
                     gameLoop.stop();
-                    if (findCurrentPanelToRemove() != null){
-                        removeBarAndCloseGapAnimation();
-                        gameLoop.start();
-                    }else{
-                        animationInProgress = false;
-                    }
+                    removeBar();
                 }
             }
         });
@@ -173,7 +171,7 @@ public class BarInterfaceHandler {
         }
         return null; // all bars are already displayed
     }
-    
+
     private PlayerInterfaceBar findCurrentPanelToRemove() {
         PlayerInterfaceBar barToBeRemoved = null;
         for (PlayerInterfaceBar interfaceBar : allBars) {
@@ -203,5 +201,5 @@ public class BarInterfaceHandler {
     public void setAnimationInProgress(boolean animationInProgress) {
         this.animationInProgress = animationInProgress;
     }
-    
+
 }

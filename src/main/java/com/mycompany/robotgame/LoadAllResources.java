@@ -117,6 +117,50 @@ import javafx.scene.media.AudioClip;
         
         image = new Image("/InterfaceBar/bar_top.png", 308, 37, false, false);
         mapOfAllImages.put("barWrapperTop", image);
+        
+        image = new Image("/InterfaceBar/bar_hull_integrity.png", 308, 41, false, false);
+        mapOfAllImages.put("TextHullIntergrity", image);
+        
+        image = new Image("/InterfaceBar/bar_weapon_heat.png", 308, 41, false, false);
+        mapOfAllImages.put("TextWeaponHeat", image);
+        
+        image = new Image("/InterfaceBar/bar_shield_energy.png", 308, 41, false, false);
+        mapOfAllImages.put("TextShieldEnergy", image);
+        
+        
+        
+        image = new Image("/InterfaceBar/bar_0.png", 308, 41, false, false);
+        mapOfAllImages.put("displayZero", image);
+        
+        image = new Image("/InterfaceBar/bar_1.png", 308, 41, false, false);
+        mapOfAllImages.put("displayOne", image);
+        
+        image = new Image("/InterfaceBar/bar_1-2.png", 308, 41, false, false);
+        mapOfAllImages.put("displayTwo", image);
+        
+        image = new Image("/InterfaceBar/bar_1-3.png", 308, 41, false, false);
+        mapOfAllImages.put("displayThree", image);
+        
+        image = new Image("/InterfaceBar/bar_1-4.png", 308, 41, false, false);
+        mapOfAllImages.put("displayFour", image);
+        
+        image = new Image("/InterfaceBar/bar_1-5.png", 308, 41, false, false);
+        mapOfAllImages.put("displayFive", image);
+        
+        image = new Image("/InterfaceBar/bar_1-6.png", 308, 41, false, false);
+        mapOfAllImages.put("displaySix", image);
+        
+        image = new Image("/InterfaceBar/bar_1-7.png", 308, 41, false, false);
+        mapOfAllImages.put("displaySeven", image);
+        
+        image = new Image("/InterfaceBar/bar_1-8.png", 308, 41, false, false);
+        mapOfAllImages.put("displayEight", image);
+        
+        image = new Image("/InterfaceBar/bar_1-9.png", 308, 41, false, false);
+        mapOfAllImages.put("displayNine", image);
+        
+        image = new Image("/InterfaceBar/bar_1-10.png", 308, 41, false, false);
+        mapOfAllImages.put("displayTen", image);
     }
     
     private void loadLaserBurnedGround(){
