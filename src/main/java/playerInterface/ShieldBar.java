@@ -28,6 +28,7 @@ public class ShieldBar extends PlayerInterfaceBar {
 
     @Override
     public void paintBar(double coordY) {
+        System.out.println("painting");
         if (displayedStage > 0) {
             if (barIscompletelyVisible){
                 selectProperBarNumber();
@@ -41,24 +42,24 @@ public class ShieldBar extends PlayerInterfaceBar {
 
     @Override
     public boolean haveBarStatusChanged() {
-        if (currentlyDisplayedPercentage != shieldPercentageStatus()){
+        int actualStatusOfShield = shieldPercentageStatus();
+        if (currentlyDisplayedPercentage != actualStatusOfShield){
+            currentlyDisplayedPercentage = actualStatusOfShield;
+            System.out.println("change");
             return true;
         }
         return false;
     }
     
-    
-
     public int shieldPercentageStatus() {
         double percentage = 0;
         int newPercentageStatus = 0;
         if (playerRobot.getPlayerRobotShield().getShieldHitPoints() != 0) {
             percentage = (playerRobot.getPlayerRobotShield().getShieldHitPoints() / playerRobot.getPlayerRobotShield().getShieldMaximumHitPoints()) * 100;
         }
-        
-        if (percentage <= 0) {
+        if (percentage <= 3) {
             newPercentageStatus = 0;
-        } else if (percentage > 0 && percentage <= 10) {
+        } else if (percentage > 3 && percentage <= 10) {
             newPercentageStatus = 1;
         } else if (percentage > 10 && percentage <= 20) {
             newPercentageStatus = 2;

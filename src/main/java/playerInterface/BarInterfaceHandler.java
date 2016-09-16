@@ -6,6 +6,7 @@
 package playerInterface;
 
 import com.mycompany.robotgame.GameMainInfrastructure;
+import java.util.HashMap;
 import java.util.HashSet;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,10 +23,10 @@ public class BarInterfaceHandler {
     private GraphicsContext graphicsContext;
     private static AnimationTimer gameLoop;
     private int animationCounter = 0;
-    private HullIntegrityBar hullIntegrityBar;
-    private ShieldBar shieldBar;
-    private static double STANDARD_BAR_HEIGHT = 36;
-    private HashSet<PlayerInterfaceBar> allBars = new HashSet<>();
+    private final HullIntegrityBar hullIntegrityBar;
+    private final ShieldBar shieldBar;
+    private static final double STANDARD_BAR_HEIGHT = 36;
+    private HashMap<Integer, PlayerInterfaceBar> allBars = new HashMap <Integer, PlayerInterfaceBar>();
     private boolean animationInProgress = false;
     private PlayerRobot playerRobot;
 
@@ -37,8 +38,8 @@ public class BarInterfaceHandler {
         barWrapperTop = new BarWrapperTop(graphicsContext);
         hullIntegrityBar = new HullIntegrityBar(graphicsContext, true);
         shieldBar = new ShieldBar(graphicsContext, true, playerRobot);
-        allBars.add(hullIntegrityBar);
-        allBars.add(shieldBar);
+        allBars.put(0, hullIntegrityBar);
+        allBars.put(1, shieldBar);
     }
 
     public void paintInterface() {
@@ -47,7 +48,8 @@ public class BarInterfaceHandler {
         barWrapperTop.paintTopWrapper();
         int barPosition = 1;
 
-        for (PlayerInterfaceBar playerInterfaceBar : allBars) {
+        for (int i = 0; i < allBars.size(); i++) {
+            PlayerInterfaceBar playerInterfaceBar = allBars.get(i);
             if (playerInterfaceBar.shouldBeDisplayed) {
                 playerInterfaceBar.paintBar(barWrapperBottom.getBarYCoord() - STANDARD_BAR_HEIGHT * barPosition);
                 if (playerInterfaceBar.displayedStage > 0) {
@@ -160,8 +162,8 @@ public class BarInterfaceHandler {
     
     public void checkChangesInBarsAndPaintThemIfNecessary(){
         boolean repaintBars = false;
-        for (PlayerInterfaceBar playerInterfaceBar : allBars){
-            if (playerInterfaceBar.haveBarStatusChanged()){
+        for (int i = 0; i < allBars.size(); i++){
+            if (allBars.get(i).haveBarStatusChanged()){
                 repaintBars = true;
             }
         }
@@ -171,22 +173,21 @@ public class BarInterfaceHandler {
     }
     
     private PlayerInterfaceBar findCurrentPanelToDisplay() {
-        for (PlayerInterfaceBar interfaceBar : allBars) {
-            if (!interfaceBar.barIscompletelyVisible && interfaceBar.shouldBeDisplayed) {
-                return interfaceBar;
+        for (int i = 0; i < allBars.size(); i++){
+            if (!allBars.get(i).barIscompletelyVisible && allBars.get(i).shouldBeDisplayed) {
+                return allBars.get(i);
             }
         }
         return null; // all bars are already displayed
     }
 
     private PlayerInterfaceBar findCurrentPanelToRemove() {
-        PlayerInterfaceBar barToBeRemoved = null;
-        for (PlayerInterfaceBar interfaceBar : allBars) {
-            if (interfaceBar.barIscompletelyVisible) {
-                barToBeRemoved = interfaceBar;
+        for (int i = allBars.size() - 1; i >= 0; i--){
+            if (allBars.get(i).barIscompletelyVisible) {
+                return allBars.get(i);
             }
         }
-        return barToBeRemoved; // all bars are already displayed
+        return null; // all bars are already displayed
     }
 
     protected static void setGameLoop(AnimationTimer gameLoop) {
