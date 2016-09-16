@@ -30,5 +30,12 @@ public class HullIntegrityBar extends PlayerInterfaceBar{
             }
         }
     }
+
+    @Override
+    public boolean haveBarStatusChanged() {
+        return false;
+    }
+    
+    
     
 }

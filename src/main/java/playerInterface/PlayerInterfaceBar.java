@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
  *
  * @author styma01
  */
-public class PlayerInterfaceBar {
+public abstract class PlayerInterfaceBar {
     
     protected boolean barIscompletelyVisible = false;
     protected boolean barIscompletelyHidden = true;
@@ -21,6 +21,8 @@ public class PlayerInterfaceBar {
     protected GraphicsContext graphicsContext;
     protected Image barImage; 
     protected boolean shouldBeDisplayed;
+    
+    public abstract boolean haveBarStatusChanged();
 
     public PlayerInterfaceBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
         this.graphicsContext = graphicsContext;

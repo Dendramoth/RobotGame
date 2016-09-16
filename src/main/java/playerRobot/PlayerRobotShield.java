@@ -12,10 +12,12 @@ package playerRobot;
 public class PlayerRobotShield {
     
     private double shieldHitPoints = 0;
+    private double shieldMaximumHitPoints = 100;
     private boolean active = false;
 
     public PlayerRobotShield(int shieldHitPoints) {
         this.shieldHitPoints = shieldHitPoints;
+        this.shieldMaximumHitPoints = shieldHitPoints;
     }
 
     public void removeHitPointsFromShield(double removeValue) {
@@ -49,4 +51,13 @@ public class PlayerRobotShield {
         this.active = active;
     }
 
+    public double getShieldMaximumHitPoints() {
+        return shieldMaximumHitPoints;
+    }
+
+    public void setShieldMaximumHitPoints(double shieldMaximumHitPoints) {
+        this.shieldMaximumHitPoints = shieldMaximumHitPoints;
+    }
+
+    
 }

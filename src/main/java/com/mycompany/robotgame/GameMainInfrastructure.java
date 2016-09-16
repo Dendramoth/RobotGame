@@ -87,7 +87,7 @@ public class GameMainInfrastructure {
         gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer);
 
-        barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext);
+        barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext, playerRobot);
 
         //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
         //    enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
@@ -246,10 +246,8 @@ public class GameMainInfrastructure {
 
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 detectCollisions.detectCollisionOfAllDronesWithPlayerRobot();
-
-                //   playerWorldPossitionValueLabel.setText(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
-                //    robotHpValueLabel.setText(String.valueOf(playerRobot.getHitPoints()));
-                //    shieldHpValueLabel.setText(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
+                
+                barInterfaceHandler.checkChangesInBarsAndPaintThemIfNecessary();
             }
 
         });

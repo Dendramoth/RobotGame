@@ -6,11 +6,10 @@
 package playerInterface;
 
 import com.mycompany.robotgame.GameMainInfrastructure;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
+import playerRobot.PlayerRobot;
 
 /**
  *
@@ -28,13 +27,16 @@ public class BarInterfaceHandler {
     private static double STANDARD_BAR_HEIGHT = 36;
     private HashSet<PlayerInterfaceBar> allBars = new HashSet<>();
     private boolean animationInProgress = false;
+    private PlayerRobot playerRobot;
 
-    public BarInterfaceHandler(GraphicsContext graphicsContext) {
+    public BarInterfaceHandler(GraphicsContext graphicsContext, PlayerRobot playerRobot) {
         this.graphicsContext = graphicsContext;
+        this.playerRobot = playerRobot;
+        
         barWrapperBottom = new BarWrapperBottom(graphicsContext);
         barWrapperTop = new BarWrapperTop(graphicsContext);
         hullIntegrityBar = new HullIntegrityBar(graphicsContext, true);
-        shieldBar = new ShieldBar(graphicsContext, true);
+        shieldBar = new ShieldBar(graphicsContext, true, playerRobot);
         allBars.add(hullIntegrityBar);
         allBars.add(shieldBar);
     }
@@ -53,14 +55,6 @@ public class BarInterfaceHandler {
                 }
             }
         }
-    }
-
-    public void showInterface() {
-
-    }
-
-    public void hideInterface() {
-
     }
 
     /**
@@ -163,6 +157,19 @@ public class BarInterfaceHandler {
      * ************************************************************************
      * Other Methods
      */
+    
+    public void checkChangesInBarsAndPaintThemIfNecessary(){
+        boolean repaintBars = false;
+        for (PlayerInterfaceBar playerInterfaceBar : allBars){
+            if (playerInterfaceBar.haveBarStatusChanged()){
+                repaintBars = true;
+            }
+        }
+        if (repaintBars){
+            paintInterface();
+        }
+    }
+    
     private PlayerInterfaceBar findCurrentPanelToDisplay() {
         for (PlayerInterfaceBar interfaceBar : allBars) {
             if (!interfaceBar.barIscompletelyVisible && interfaceBar.shouldBeDisplayed) {
