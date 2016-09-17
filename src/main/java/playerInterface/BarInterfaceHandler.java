@@ -36,7 +36,7 @@ public class BarInterfaceHandler {
         
         barWrapperBottom = new BarWrapperBottom(graphicsContext);
         barWrapperTop = new BarWrapperTop(graphicsContext);
-        hullIntegrityBar = new HullIntegrityBar(graphicsContext, true);
+        hullIntegrityBar = new HullIntegrityBar(graphicsContext, true, playerRobot);
         shieldBar = new ShieldBar(graphicsContext, true, playerRobot);
         allBars.put(0, hullIntegrityBar);
         allBars.put(1, shieldBar);

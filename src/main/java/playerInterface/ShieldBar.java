@@ -16,42 +16,23 @@ import playerRobot.PlayerRobot;
  */
 public class ShieldBar extends PlayerInterfaceBar {
 
-    private PlayerRobot playerRobot;
-    private final Image shieldEnergyTextImage = LoadAllResources.getMapOfAllImages().get("TextShieldEnergy");
-    private int currentlyDisplayedPercentage = 10;
-
     public ShieldBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed, PlayerRobot playerRobot) {
-        super(graphicsContext, shouldBeDisplayed);
-        this.playerRobot = playerRobot;
-        currentlyDisplayedPercentage = shieldPercentageStatus();
-    }
-
-    @Override
-    public void paintBar(double coordY) {
-        System.out.println("painting");
-        if (displayedStage > 0) {
-            if (barIscompletelyVisible){
-                selectProperBarNumber();
-            }
-            graphicsContext.drawImage(barImage, 20, coordY);
-            if (barIscompletelyVisible) {
-                graphicsContext.drawImage(shieldEnergyTextImage, 20, coordY);
-            }
-        }
+        super(graphicsContext, shouldBeDisplayed, playerRobot, LoadAllResources.getMapOfAllImages().get("TextShieldEnergy"));
+        currentlyDisplayedPercentage = barPercentageStatus();
     }
 
     @Override
     public boolean haveBarStatusChanged() {
-        int actualStatusOfShield = shieldPercentageStatus();
+        int actualStatusOfShield = barPercentageStatus();
         if (currentlyDisplayedPercentage != actualStatusOfShield){
             currentlyDisplayedPercentage = actualStatusOfShield;
-            System.out.println("change");
             return true;
         }
         return false;
     }
     
-    public int shieldPercentageStatus() {
+    @Override
+    public int barPercentageStatus() {
         double percentage = 0;
         int newPercentageStatus = 0;
         if (playerRobot.getPlayerRobotShield().getShieldHitPoints() != 0) {
@@ -84,44 +65,7 @@ public class ShieldBar extends PlayerInterfaceBar {
         return newPercentageStatus;
     }
     
-    private void selectProperBarNumber(){
-        int percentage = shieldPercentageStatus();
-        switch (percentage){
-            case 0: 
-                barImage = LoadAllResources.getMapOfAllImages().get("displayZero");
-                break;
-            case 1:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayOne");
-                break;
-            case 2:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayTwo");
-                break;
-            case 3:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayThree");
-                break;
-            case 4:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayFour");
-                break;
-            case 5:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayFive");
-                break;
-            case 6:
-                barImage = LoadAllResources.getMapOfAllImages().get("displaySix");
-                break;
-            case 7:
-                barImage = LoadAllResources.getMapOfAllImages().get("displaySeven");
-                break;
-            case 8:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayEight");
-                break;
-            case 9:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayNine");
-                break;
-            case 10:
-                barImage = LoadAllResources.getMapOfAllImages().get("displayTen");
-                break;
-        }
-    }
+    
 
 }
 /*

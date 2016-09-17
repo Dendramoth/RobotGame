@@ -8,6 +8,7 @@ package playerInterface;
 import com.mycompany.robotgame.LoadAllResources;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import playerRobot.PlayerRobot;
 
 /**
  *
@@ -21,17 +22,29 @@ public abstract class PlayerInterfaceBar {
     protected GraphicsContext graphicsContext;
     protected Image barImage; 
     protected boolean shouldBeDisplayed;
+    protected int currentlyDisplayedPercentage = 10;
+    protected PlayerRobot playerRobot;
+    protected Image barTextImage;
     
     public abstract boolean haveBarStatusChanged();
-
-    public PlayerInterfaceBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed) {
+    public abstract int barPercentageStatus();
+    
+    public PlayerInterfaceBar(GraphicsContext graphicsContext, boolean shouldBeDisplayed, PlayerRobot playerRobot, Image barTextImage) {
         this.graphicsContext = graphicsContext;
         this.shouldBeDisplayed = shouldBeDisplayed;
+        this.playerRobot = playerRobot;
+        this.barTextImage = barTextImage;
     }
         
     public void paintBar(double coordY){
-        if (displayedStage > 0){
+        if (displayedStage > 0) {
+            if (barIscompletelyVisible){
+                selectProperBarNumberImage();
+            }
             graphicsContext.drawImage(barImage, 20, coordY);
+            if (barIscompletelyVisible) {
+                graphicsContext.drawImage(barTextImage, 20, coordY);
+            }
         }
     }
     
@@ -96,6 +109,45 @@ public abstract class PlayerInterfaceBar {
                 break;
             default:
                 barImage = LoadAllResources.getMapOfAllImages().get("barIntro10");
+        }
+    }
+    
+    protected void selectProperBarNumberImage(){
+        int percentage = barPercentageStatus();
+        switch (percentage){
+            case 0: 
+                barImage = LoadAllResources.getMapOfAllImages().get("displayZero");
+                break;
+            case 1:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayOne");
+                break;
+            case 2:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayTwo");
+                break;
+            case 3:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayThree");
+                break;
+            case 4:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayFour");
+                break;
+            case 5:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayFive");
+                break;
+            case 6:
+                barImage = LoadAllResources.getMapOfAllImages().get("displaySix");
+                break;
+            case 7:
+                barImage = LoadAllResources.getMapOfAllImages().get("displaySeven");
+                break;
+            case 8:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayEight");
+                break;
+            case 9:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayNine");
+                break;
+            case 10:
+                barImage = LoadAllResources.getMapOfAllImages().get("displayTen");
+                break;
         }
     }
 

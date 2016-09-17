@@ -40,6 +40,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     private Image robotImageMoving;
     private Image shieldImage = LoadAllResources.getMapOfAllImages().get("energyShield1");
     private int hitPoints = 100;
+    private int maxHitPoints = 100;
     private double facingAngle = 0.0;
     private int moveTracks = 0;
     private int shieldImageRotationCounter = 0;
@@ -266,6 +267,13 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
     }
-    
+
+    public int getMaxHitPoints() {
+        return maxHitPoints;
+    }
+
+    public void setMaxHitPoints(int maxHitPoints) {
+        this.maxHitPoints = maxHitPoints;
+    }
     
 }
