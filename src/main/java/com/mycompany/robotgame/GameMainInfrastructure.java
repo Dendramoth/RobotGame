@@ -96,7 +96,7 @@ public class GameMainInfrastructure {
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow);
+        CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow, playerRobot);
         createMap1.generatedObjectForGame(gridTable);
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);

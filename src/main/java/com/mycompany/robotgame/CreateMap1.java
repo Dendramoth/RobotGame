@@ -27,6 +27,7 @@ import MapGridTable.GridTable;
 import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import playerRobot.PlayerRobot;
 
 /**
  *
@@ -36,10 +37,12 @@ public class CreateMap1 {
 
     private final GraphicsContext graphicsContext;
     private final MonitorWindow monitorWindow;
+    private PlayerRobot playerRobot;
 
-    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot) {
         this.graphicsContext = graphicsContext;
         this.monitorWindow = monitorWindow;
+        this.playerRobot = playerRobot;
     }
 
     public void generatedObjectForGame(GridTable gridTable) {
@@ -60,7 +63,7 @@ public class CreateMap1 {
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
         
-        DroneBarracks droneBarracks = new DroneBarracks(new Point(1000, 7600), 256, 384, graphicsContext, monitorWindow);
+        DroneBarracks droneBarracks = new DroneBarracks(new Point(1000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot);
         gridTable.insertGameObjectIntoGridCell(droneBarracks);
     }
     
