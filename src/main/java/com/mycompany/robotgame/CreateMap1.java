@@ -5,6 +5,7 @@
  */
 package com.mycompany.robotgame;
 
+import Enemy.EnemyContainer;
 import EnviromentObjects.BackgroundHex;
 import EnviromentObjects.Cliffs.CliffBottomLeft;
 import EnviromentObjects.Cliffs.CliffBottomRight;
@@ -37,12 +38,18 @@ public class CreateMap1 {
 
     private final GraphicsContext graphicsContext;
     private final MonitorWindow monitorWindow;
-    private PlayerRobot playerRobot;
+    private final PlayerRobot playerRobot;
+    private final EnemyContainer enemyContainer;
+    private GraphicsContext enemyGraphicsContext;
+    private GridTable gridTable;
 
-    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot) {
+    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GraphicsContext enemyGraphicsContext, GridTable gridTable) {
         this.graphicsContext = graphicsContext;
         this.monitorWindow = monitorWindow;
         this.playerRobot = playerRobot;
+        this.enemyContainer = enemyContainer;
+        this.enemyGraphicsContext = enemyGraphicsContext;
+        this.gridTable = gridTable;
     }
 
     public void generatedObjectForGame(GridTable gridTable) {
@@ -63,7 +70,7 @@ public class CreateMap1 {
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
         
-        DroneBarracks droneBarracks = new DroneBarracks(new Point(1000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot);
+        DroneBarracks droneBarracks = new DroneBarracks(new Point(1000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, this.gridTable);
         gridTable.insertGameObjectIntoGridCell(droneBarracks);
     }
     

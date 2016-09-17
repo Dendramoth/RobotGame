@@ -5,8 +5,11 @@
  */
 package EnviromentObjects;
 
+import Enemy.EnemyContainer;
+import Enemy.EvilDroneMarkTwo;
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import MapGridTable.GridTable;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -29,10 +32,16 @@ public class DroneBarracks extends GameStaticObject {
     private boolean dispatchingDrones = false;
     private int dispatchingDronesCounter = 0;
     private PlayerRobot playerRobot;
+    private EnemyContainer enemyContainer;
+    private GraphicsContext enemyGraphicsContext;
+    private GridTable gridTable;
 
-    public DroneBarracks(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot) {
+    public DroneBarracks(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GraphicsContext enemyGraphicsContext, GridTable gridTable) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("droneBarracks1"));
         this.playerRobot = playerRobot;
+        this.enemyContainer = enemyContainer;
+        this.enemyGraphicsContext = enemyGraphicsContext;
+        this.gridTable = gridTable;
     }
 
     private static List<Point> getPoints(Point possition) {
@@ -82,13 +91,13 @@ public class DroneBarracks extends GameStaticObject {
 
         if (dispatchingDrones) {
             dispatchingDronesCounter++;
-            if (dispatchingDronesCounter == 1){
+            if (dispatchingDronesCounter == 1) {
                 dispatchTheDronesSound.play();
             }
-            if (dispatchingDronesCounter % 120 == 0){
-                System.out.println("dispatching drone");
+            if (dispatchingDronesCounter % 120 == 0) {
+                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 20), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
             }
-            if (dispatchingDronesCounter > 500){
+            if (dispatchingDronesCounter > 750) {
                 dispatchingDrones = false;
             }
         }
