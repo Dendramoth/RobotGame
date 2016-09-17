@@ -15,6 +15,7 @@ import EnviromentObjects.Cliffs.CliffTopRight;
 import EnviromentObjects.Cliffs.CliffVertical;
 import EnviromentObjects.Cliffs.CliffVerticalReversed;
 import EnviromentObjects.CraterBig;
+import EnviromentObjects.DroneBarracks;
 import EnviromentObjects.InnerFortressWallNorth;
 import EnviromentObjects.InnerFortressWallSouth;
 import EnviromentObjects.OuterFortressWallsEast;
@@ -58,6 +59,9 @@ public class CreateMap1 {
         
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
+        
+        DroneBarracks droneBarracks = new DroneBarracks(new Point(1000, 7600), 256, 384, graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(droneBarracks);
     }
     
     private void generatedObjectsForGameWithoutCollision(GridTable gridTable){

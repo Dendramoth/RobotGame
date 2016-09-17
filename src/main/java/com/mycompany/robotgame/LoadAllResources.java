@@ -77,8 +77,29 @@ import javafx.scene.media.AudioClip;
         loadEvilDroneMarkTwo();
         loadLaserBurnedGround();
         loadInterfaceBar();
+        loadDroneBarracks();
         
         loadAllSounds();
+    }
+    
+    private void loadDroneBarracks(){
+        Image image = new Image("/DroneBarracks/drone_barracks_1.png", 256, 384, false, false);
+        mapOfAllImages.put("droneBarracks1", image);
+        
+        image = new Image("/DroneBarracks/drone_barracks_2.png", 256, 384, false, false);
+        mapOfAllImages.put("droneBarracks2", image);
+        
+        image = new Image("/DroneBarracks/drone_barracks_3.png", 256, 384, false, false);
+        mapOfAllImages.put("droneBarracks3", image);
+        
+        image = new Image("/DroneBarracks/drone_barracks_4.png", 256, 384, false, false);
+        mapOfAllImages.put("droneBarracks4", image);
+        
+        image = new Image("/DroneBarracks/drone_barracks_5.png", 256, 384, false, false);
+        mapOfAllImages.put("droneBarracks5", image);
+        
+        image = new Image("/DroneBarracks/drone_barracks_6.png", 256, 384, false, false);
+        mapOfAllImages.put("droneBarracks6", image);
     }
     
     private void loadInterfaceBar(){

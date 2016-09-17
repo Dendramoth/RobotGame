@@ -35,8 +35,6 @@ public class HullIntegrityBar extends PlayerInterfaceBar{
         double percentage = 0;
         int newPercentageStatus = 0;
         if (playerRobot.getHitPoints() != 0) {
-            System.out.println("playerRobot.getHitPoints(): " + playerRobot.getHitPoints());
-            System.out.println("playerRobot.getMaxHitPoints(): " + playerRobot.getMaxHitPoints());
             percentage = ((double) playerRobot.getHitPoints() / (double) playerRobot.getMaxHitPoints()) * 100;
         }
         if (percentage <= 3) {
@@ -62,8 +60,6 @@ public class HullIntegrityBar extends PlayerInterfaceBar{
         } else if (percentage > 90 && percentage <= 100) {
             newPercentageStatus = 10;
         }
-        
-        System.out.println("newPercentageStatus" + newPercentageStatus);
         return newPercentageStatus;
     }
     
