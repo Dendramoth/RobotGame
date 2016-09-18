@@ -10,6 +10,8 @@ import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkTwo;
 import GameObject.GameObjectWithDistanceDetection;
 import MapGridTable.GridTable;
+import Projectiles.Projectile;
+import Projectiles.ProjectileContainer;
 import com.mycompany.robotgame.GameDynamicEnviroment;
 import playerRobot.PlayerRobot;
 import playerRobot.ShotsFromMinigun;
@@ -28,12 +30,14 @@ public class DetectCollisions {
     private final GameDynamicEnviroment gameDynamicEnviroment;
     private final GridTable gridTable;
     private final EnemyContainer enemyContainer;
+    private final ProjectileContainer projectileContainer;
 
-    public DetectCollisions(PlayerRobot playerRobot, GameDynamicEnviroment gameDynamicEnviroment, GridTable gridTable, EnemyContainer enemyContainer) {
+    public DetectCollisions(PlayerRobot playerRobot, GameDynamicEnviroment gameDynamicEnviroment, GridTable gridTable, EnemyContainer enemyContainer, ProjectileContainer projectileContainer) {
         this.playerRobot = playerRobot;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
         this.gridTable = gridTable;
         this.enemyContainer = enemyContainer;
+        this.projectileContainer = projectileContainer;
     }
 
     public void detectCollisionsWithPlayerMinigunShots() {
@@ -62,22 +66,39 @@ public class DetectCollisions {
             playerRobot.getAllShotsFromMinigun().clear();
         }
     }
-    
+
     public void detectCollisionOfAllDronesWithPlayerRobot() {
-        for (Enemy enemy : enemyContainer.getEnemyList()){
-            if (enemy instanceof EvilDroneMarkTwo){
+        for (Enemy enemy : enemyContainer.getEnemyList()) {
+            if (enemy instanceof EvilDroneMarkTwo) {
                 EvilDroneMarkTwo evilDroneMarkTwo = (EvilDroneMarkTwo) enemy;
                 double distance = Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordX() - playerRobot.getWorldPossition().getCoordX()) + Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordY() - playerRobot.getWorldPossition().getCoordY());
-                if (distance < 52){
+                if (distance < 52) {
                     evilDroneMarkTwo.doOnCollision();
                     playerRobot.removeHitPoints(50);
                 }
             }
         }
     }
-    
+
     public void detectCollisionOfRocketWithStaticObjectsAndOtherEnemies() {
-        
+        if (projectileContainer.getAllFiredProjectiles().size() > 0) {
+            for (Projectile projectile : projectileContainer.getAllFiredProjectiles()) {
+                List<GameObjectWithDistanceDetection> visibleObjects = new ArrayList<GameObjectWithDistanceDetection>(gridTable.getAllVisibleObjects());
+                visibleObjects.addAll(enemyContainer.getEnemyList());
+                for (int i = 0; i < visibleObjects.size(); i++) {
+                    visibleObjects.get(i).setObjectForComparison(projectile.getWorldPossition());
+                }
+                Collections.sort(visibleObjects);
+
+                Iterator<GameObjectWithDistanceDetection> iterator = visibleObjects.iterator();
+                while (iterator.hasNext()) {
+                    GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
+                    if (gameObjectWithDistanceDetection.detectCollisionWithProjectile(projectile.getProjectileShape(), projectile.getWorldPossition())) {
+                        projectile.doOnCollision();
+                    }
+                }
+            }
+        }
     }
 
 }

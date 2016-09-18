@@ -58,5 +58,11 @@ public class ProjectileContainer {
     public void addProjectileToContainer(Projectile projectile) {
         allFiredProjectiles.add(projectile);
     }
+
+    public List<Projectile> getAllFiredProjectiles() {
+        return allFiredProjectiles;
+    }
+    
+    
     
 }

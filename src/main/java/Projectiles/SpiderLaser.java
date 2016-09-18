@@ -132,5 +132,12 @@ public class SpiderLaser extends Projectile {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         // nothing
     }
+
+    @Override
+    public Shape getProjectileShape() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }

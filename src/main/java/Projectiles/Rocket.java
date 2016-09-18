@@ -12,6 +12,7 @@ import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 /**
@@ -121,13 +122,27 @@ public class Rocket extends Projectile{
 
     @Override
     public void doOnCollision() {
-        //explode
+        rocketExplosionCounter = 120;
     }
 
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         //nothing
     }
+
+    @Override
+    public Shape getProjectileShape() {
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(new Double[]{
+        worldPossition.getCoordX() + 0.0, worldPossition.getCoordY() + 0.0,
+        worldPossition.getCoordX() + 0.0, worldPossition.getCoordY() + 64.0,
+        worldPossition.getCoordX() + 64.0, worldPossition.getCoordY() + 64.0,
+        worldPossition.getCoordX() + 64.0, worldPossition.getCoordY() + 0.0});
+        polygon.setRotate(angleOfFiredShot);
+        return polygon;
+    }
+    
+    
 
    
     

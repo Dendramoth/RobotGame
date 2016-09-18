@@ -105,4 +105,11 @@ public class SpiderEnergyShock extends Projectile {
         //nothing
     }
 
+    @Override
+    public Shape getProjectileShape() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
 }
