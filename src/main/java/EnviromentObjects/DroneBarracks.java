@@ -71,13 +71,13 @@ public class DroneBarracks extends GameStaticObject {
             staticObjectImage = LoadAllResources.getMapOfAllImages().get("droneBarracks1");
         } else if (imageCounter > 10 && imageCounter <= 20) {
             staticObjectImage = LoadAllResources.getMapOfAllImages().get("droneBarracks2");
-        } else if (imageCounter > 10 && imageCounter <= 20) {
+        } else if (imageCounter > 20 && imageCounter <= 30) {
             staticObjectImage = LoadAllResources.getMapOfAllImages().get("droneBarracks3");
-        } else if (imageCounter > 10 && imageCounter <= 20) {
+        } else if (imageCounter > 30 && imageCounter <= 40) {
             staticObjectImage = LoadAllResources.getMapOfAllImages().get("droneBarracks4");
-        } else if (imageCounter > 10 && imageCounter <= 20) {
+        } else if (imageCounter > 40 && imageCounter <= 50) {
             staticObjectImage = LoadAllResources.getMapOfAllImages().get("droneBarracks5");
-        } else if (imageCounter > 10 && imageCounter <= 20) {
+        } else if (imageCounter > 50 && imageCounter <= 60) {
             staticObjectImage = LoadAllResources.getMapOfAllImages().get("droneBarracks6");
         } else {
             imageCounter = 0;
@@ -106,7 +106,6 @@ public class DroneBarracks extends GameStaticObject {
     private boolean checkIfDronesShouldBeDispatched() {
         double deltaX = Math.abs((playerRobot.getWorldPossition().getCoordX() - width / 2) - worldPossition.getCoordX());
         double deltaY = Math.abs((playerRobot.getWorldPossition().getCoordY() - heigh / 2) - worldPossition.getCoordY());
-        System.out.println(deltaX + deltaY);
         if (deltaX + deltaY < 1000) {
             return true;
         }
