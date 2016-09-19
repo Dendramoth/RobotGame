@@ -8,6 +8,7 @@ package Projectiles;
 import Enemy.Enemy;
 import GameObject.ObjectWithCollision;
 import GameObject.Point;
+import GameObject.ResultOfDetectColisionWithProjectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -20,13 +21,14 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class Rocket extends Projectile{
+public class Rocket extends Projectile {
+
     private int switchingRocketImageCounter = 0;
     private boolean switchImage = true;
     private int rocketTimout = 120;
     private int rocketExplosionCounter = 0;
-    
-     public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
+
+    public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
         super(graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, firedFromWall, monitorWindow);
         projectileImage = LoadAllResources.getMapOfAllImages().get("rocket1");
     }
@@ -36,7 +38,7 @@ public class Rocket extends Projectile{
         worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfFiredShot - 90)) * 5);
         worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfFiredShot - 90)) * 5);
     }
-     
+
     @Override
     public boolean hasProjectileReachedDestination() {
         rocketTimout--;
@@ -44,7 +46,7 @@ public class Rocket extends Projectile{
             return true;
         }
         return false;
-    } 
+    }
 
     @Override
     public void paintGameObject() {
@@ -77,7 +79,7 @@ public class Rocket extends Projectile{
         }
         return true;
     }
-    
+
     @Override
     public boolean projectileExplosion() {
         rocketExplosionCounter++;
@@ -98,27 +100,29 @@ public class Rocket extends Projectile{
         graphicsContext.drawImage(projectileImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
         return true;
     }
-    
+
     public void createPolygonForDetection() {
-        List<Point> pointsForDetection = new ArrayList<Point>();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        List<Point> pointsForDetection = new ArrayList<>();
+        pointsForDetection.add(new Point(30 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(34 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(34 + worldPossition.getCoordX() - 32, 50 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(30 + worldPossition.getCoordX() - 32, 50 + worldPossition.getCoordY() - 32));
         createPolygon(pointsForDetection);
     }
-    
+
     protected final void createPolygon(List<Point> pointsList) {
-        projectilePolygon.getPoints().clear();
+        projectilePolygon = new Polygon();
         for (Point point : pointsList) {
             projectilePolygon.getPoints().add(point.getCoordX());
             projectilePolygon.getPoints().add(point.getCoordY());
         }
+        projectilePolygon.setRotate(angleOfFiredShot);
+
     }
 
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return false;
+    public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
     }
 
     @Override
@@ -133,18 +137,12 @@ public class Rocket extends Projectile{
 
     @Override
     public Shape getProjectileShape() {
-        Polygon polygon = new Polygon();
-        polygon.getPoints().addAll(new Double[]{
-        worldPossition.getCoordX() + 0.0, worldPossition.getCoordY() + 0.0,
-        worldPossition.getCoordX() + 0.0, worldPossition.getCoordY() + 64.0,
-        worldPossition.getCoordX() + 64.0, worldPossition.getCoordY() + 64.0,
-        worldPossition.getCoordX() + 64.0, worldPossition.getCoordY() + 0.0});
-        polygon.setRotate(angleOfFiredShot);
-        return polygon;
+        createPolygonForDetection();
+        return projectilePolygon;
     }
 
     public boolean isFiredFromWall() {
         return firedFromWall;
     }
-    
+
 }

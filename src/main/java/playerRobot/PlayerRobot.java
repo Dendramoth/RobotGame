@@ -8,6 +8,7 @@ package playerRobot;
 import GameObject.GameObjectWithDistanceDetection;
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
@@ -235,8 +236,13 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     }
     
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return false;
+    public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        Polygon playerRobotPolygon = createPolygonForColisionDetection();
+        Shape intersect = Shape.intersect(shape, playerRobotPolygon);
+        if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+        }
+        return new ResultOfDetectColisionWithProjectile(true, new Point(0,0));
     }
 
     public void setShieldActive(boolean shieldActive) {

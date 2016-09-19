@@ -79,13 +79,13 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
     public abstract void createPolygonForDetection();
 
     @Override
-    public boolean detectCollisionWithProjectile(Shape projectileTrajectoryLine, Point trajectoryStartPosition) {
+    public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape projectileTrajectoryLine, Point trajectoryStartPosition) {
         Point intersectionPoint = new Point(0, 0);
 
         createPolygonForDetection();
         Shape intersect = Shape.intersect(projectileTrajectoryLine, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return false;
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
         }
 
         Point possibleIntersectionOne = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMaxY());
@@ -110,8 +110,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
         
         intersectionPoint.setCoordX(intersectionPoint.getCoordX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         intersectionPoint.setCoordY(intersectionPoint.getCoordY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
-        doOnBeingHitByMinigun(intersectionPoint);
-        return true;
+        return new ResultOfDetectColisionWithProjectile(true, intersectionPoint);
     }
 
     public Shape detectIntersection(Shape lineDetection) {

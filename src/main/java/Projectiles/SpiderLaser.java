@@ -9,6 +9,7 @@ import Enemy.Enemy;
 import Enemy.SpiderRobot;
 import GameObject.ObjectWithCollision;
 import GameObject.Point;
+import GameObject.ResultOfDetectColisionWithProjectile;
 import com.mycompany.robotgame.GameDynamicEnviroment;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
@@ -121,8 +122,8 @@ public class SpiderLaser extends Projectile {
     }
 
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return false;
+    public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
     }
 
     @Override

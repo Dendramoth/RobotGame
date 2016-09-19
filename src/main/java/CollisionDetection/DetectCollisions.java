@@ -9,6 +9,7 @@ import Enemy.Enemy;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkTwo;
 import GameObject.GameObjectWithDistanceDetection;
+import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
 import Projectiles.Projectile;
 import Projectiles.ProjectileContainer;
@@ -55,7 +56,9 @@ public class DetectCollisions {
             Iterator<GameObjectWithDistanceDetection> iterator = visibleObjects.iterator();
             while (iterator.hasNext()) {
                 GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
-                if (gameObjectWithDistanceDetection.detectCollisionWithProjectile(shotFromMinigun.getLineForDetection(), shotFromMinigun.getStartPositionOfShot())) {
+                ResultOfDetectColisionWithProjectile resultOfDetectColisionWithProjectile = gameObjectWithDistanceDetection.detectCollisionWithProjectile(shotFromMinigun.getLineForDetection(), shotFromMinigun.getStartPositionOfShot());
+                if (resultOfDetectColisionWithProjectile.isColiding()) {
+                    gameObjectWithDistanceDetection.doOnBeingHitByMinigun(resultOfDetectColisionWithProjectile.getIntersectionPoint());
                     //if collision is detected subrutine to handle the colision is called inside the detectCollisionWithProjectile method
                     playerRobot.getAllShotsFromMinigun().clear();
                     return;
@@ -99,8 +102,9 @@ public class DetectCollisions {
                 Iterator<GameObjectWithDistanceDetection> iterator = visibleObjects.iterator();
                 while (iterator.hasNext()) {
                     GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
-                    if (gameObjectWithDistanceDetection.detectCollisionWithProjectile(projectile.getProjectileShape(), projectile.getWorldPossition())) {
-                        if (projectile.isFiredFromWall() && projectile.getObjectToIgnore() != null) {
+                    ResultOfDetectColisionWithProjectile resultOfDetectColisionWithProjectile = gameObjectWithDistanceDetection.detectCollisionWithProjectile(projectile.getProjectileShape(), projectile.getWorldPossition());
+                    if (resultOfDetectColisionWithProjectile.isColiding()) {
+                        if (projectile.isFiredFromWall() && projectile.getObjectToIgnore() == null) {
                             projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
                         } else {
                             projectile.doOnCollision();

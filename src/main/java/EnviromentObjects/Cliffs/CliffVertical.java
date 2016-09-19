@@ -7,6 +7,7 @@ package EnviromentObjects.Cliffs;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import GameObject.ResultOfDetectColisionWithProjectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class CliffVertical extends GameStaticObject{
     }
     
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return false;
+    public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
     }
 
     @Override

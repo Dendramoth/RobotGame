@@ -7,6 +7,7 @@ package Enemy;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import GameObject.ResultOfDetectColisionWithProjectile;
 import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
@@ -87,14 +88,13 @@ public class EvilDroneMarkOne extends Enemy {
     }
 
     @Override
-    public boolean detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
+    public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return false;
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
         }
-        doOnBeingHitByMinigun(new Point(0, 0)); //we dont need possition of shot
-        return true;
+        return new ResultOfDetectColisionWithProjectile(true, new Point(0,0));
     }
 
     private void createPolygonForDetection() {
