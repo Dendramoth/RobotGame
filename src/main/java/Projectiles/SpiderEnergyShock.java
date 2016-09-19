@@ -10,6 +10,7 @@ package Projectiles;
  * @author Dendra
  */
 import Enemy.Enemy;
+import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
@@ -23,7 +24,7 @@ public class SpiderEnergyShock extends Projectile {
     private int energyShockCounter = 0;
 
     public SpiderEnergyShock(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow) {
-        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, monitorWindow);
+        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
     }
 
     @Override

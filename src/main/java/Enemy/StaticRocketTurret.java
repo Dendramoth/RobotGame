@@ -30,6 +30,7 @@ public class StaticRocketTurret extends Enemy {
     private double playerPossX = 0;
     private double playerPossY = 0;
     private double turretAngleSpeed = 1;
+    private boolean turretOnWall = false;
 
     private int rocketCounter = 125;
     private int explodingTimer = 0;
@@ -38,9 +39,10 @@ public class StaticRocketTurret extends Enemy {
     private ProjectileContainer projectileContainer;
     
 
-    public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
+    public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, boolean turretOnWall, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         this.projectileContainer = projectileContainer;
+        this.turretOnWall = turretOnWall;
     }
 
     @Override
@@ -112,7 +114,7 @@ public class StaticRocketTurret extends Enemy {
             rocketCounter++;
             if (rocketCounter > 150) {
                 rocketCounter = 0;
-                projectileContainer.addProjectileToContainer(new Rocket(graphicsContext, turretAngle, worldPossition, this, 64, 64, monitorWindow));
+                projectileContainer.addProjectileToContainer(new Rocket(graphicsContext, turretAngle, worldPossition, this, 64, 64, turretOnWall, monitorWindow));
             }
 
             enemyImage = LoadAllResources.getMapOfAllImages().get("turretBase");

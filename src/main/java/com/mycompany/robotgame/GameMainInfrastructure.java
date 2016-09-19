@@ -32,11 +32,9 @@ public class GameMainInfrastructure {
 
     public static double WINDOW_WIDTH;
     public static double WINDOW_HEIGH;
-    //public static int FRAMERATE = 60;
     public static double windowPositionX = 0.0;
     public static double windowPositionY = 0.0;
 
-    //private static Timeline gameLoop;
     private static AnimationTimer gameLoop;
 
     private boolean mousePressed = false;
@@ -47,10 +45,6 @@ public class GameMainInfrastructure {
     private boolean keyXPressed = false;
     private boolean keySpacePressed = false;
 
-    //   private Label robotHpValueLabel;
-    //   private Label shieldHpValueLabel;
-    //   private Label playerWorldPossitionValueLabel;
-    //   private Label gameOverLabel = new Label("");
     private PlayerRobot playerRobot;
     private GridTable gridTable;
     private EnemyContainer enemyContainer;
@@ -93,8 +87,8 @@ public class GameMainInfrastructure {
         //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
       //  enemyContainer.addEnemy(new SpiderRobot(new Point(2000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
         enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(2175, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7466), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(2175, 7466), 64, 64, 2, 20, 30, true, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7466), 64, 64, 2, 20, 30, true, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, gridTable);
@@ -102,31 +96,8 @@ public class GameMainInfrastructure {
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
 
-        /*    HBox userProfilePanel = new HBox();
-        Label robotHpLabel = new Label("Robot HP:");
-        robotHpValueLabel = new Label(String.valueOf(playerRobot.getHitPoints()));
-        userProfilePanel.getChildren().add(robotHpLabel);
-        userProfilePanel.getChildren().add(robotHpValueLabel);
-        userProfilePanel.getChildren().add(gameOverLabel);
-
-        HBox playerShiedInformation = new HBox();
-        Label shieldHpLabel = new Label("Shield Energy:");
-        shieldHpValueLabel = new Label(String.valueOf(playerRobot.getPlayerRobotShield().getShieldHitPoints()));
-        playerShiedInformation.getChildren().add(shieldHpLabel);
-        playerShiedInformation.getChildren().add(shieldHpValueLabel);
-
-        HBox playerWorldPossition = new HBox();
-        Label playerWorldPossitionLabel = new Label("World Possition:");
-        playerWorldPossitionValueLabel = new Label(String.valueOf(playerRobot.getWorldPossition().getCoordX() + " " + playerRobot.getWorldPossition().getCoordY()));
-        playerWorldPossition.getChildren().add(playerWorldPossitionLabel);
-        playerWorldPossition.getChildren().add(playerWorldPossitionValueLabel);
-         */
         VBox gameVerticalPanel = new VBox();
         gameVerticalPanel.getChildren().add(gameCanvasPanel);
-        //    gameVerticalPanel.getChildren().add(playerShiedInformation);
-        //   gameVerticalPanel.getChildren().add(userProfilePanel);
-        //    gameVerticalPanel.getChildren().add(playerWorldPossition);
-
         gamePanel.getChildren().add(gameVerticalPanel);
 
         setUpMouseListeners(stage);

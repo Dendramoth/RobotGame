@@ -6,6 +6,7 @@
 package Projectiles;
 
 import Enemy.Enemy;
+import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
@@ -25,8 +26,8 @@ public class Rocket extends Projectile{
     private int rocketTimout = 120;
     private int rocketExplosionCounter = 0;
     
-     public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow) {
-        super(graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, monitorWindow);
+     public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
+        super(graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, firedFromWall, monitorWindow);
         projectileImage = LoadAllResources.getMapOfAllImages().get("rocket1");
     }
 
@@ -122,7 +123,7 @@ public class Rocket extends Projectile{
 
     @Override
     public void doOnCollision() {
-        rocketExplosionCounter = 120;
+        rocketTimout = 0;
     }
 
     @Override
@@ -141,11 +142,9 @@ public class Rocket extends Projectile{
         polygon.setRotate(angleOfFiredShot);
         return polygon;
     }
-    
-    
 
-   
-    
-    
+    public boolean isFiredFromWall() {
+        return firedFromWall;
+    }
     
 }

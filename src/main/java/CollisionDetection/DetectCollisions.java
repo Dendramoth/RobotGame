@@ -85,6 +85,12 @@ public class DetectCollisions {
             for (Projectile projectile : projectileContainer.getAllFiredProjectiles()) {
                 List<GameObjectWithDistanceDetection> visibleObjects = new ArrayList<GameObjectWithDistanceDetection>(gridTable.getAllVisibleObjects());
                 visibleObjects.addAll(enemyContainer.getEnemyList());
+                visibleObjects.add(playerRobot);
+                visibleObjects.remove(projectile.getEnemyWhoShootedThisProjectile());
+                if (projectile.getObjectToIgnore() != null){
+                    visibleObjects.remove(projectile.getObjectToIgnore());
+                }
+
                 for (int i = 0; i < visibleObjects.size(); i++) {
                     visibleObjects.get(i).setObjectForComparison(projectile.getWorldPossition());
                 }
@@ -94,7 +100,11 @@ public class DetectCollisions {
                 while (iterator.hasNext()) {
                     GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
                     if (gameObjectWithDistanceDetection.detectCollisionWithProjectile(projectile.getProjectileShape(), projectile.getWorldPossition())) {
-                        projectile.doOnCollision();
+                        if (projectile.isFiredFromWall() && projectile.getObjectToIgnore() != null) {
+                            projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
+                        } else {
+                            projectile.doOnCollision();
+                        }
                     }
                 }
             }

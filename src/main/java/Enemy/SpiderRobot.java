@@ -6,6 +6,7 @@
 package Enemy;
 
 import GameObject.GameStaticObject;
+import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
@@ -167,7 +168,7 @@ public class SpiderRobot extends Enemy {
         shockCounter++;
         if (shockCounter > 320) {
             shockCounter = 0;
-            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, 512, 512, monitorWindow, this, gameDynamicEnviroment));
+            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, 512, 512, monitorWindow, gameDynamicEnviroment));
         }
     }
 

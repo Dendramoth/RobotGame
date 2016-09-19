@@ -7,10 +7,12 @@ package Projectiles;
 
 import Enemy.Enemy;
 import Enemy.SpiderRobot;
+import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import com.mycompany.robotgame.GameDynamicEnviroment;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Shape;
 
@@ -24,8 +26,8 @@ public class SpiderLaser extends Projectile {
     private SpiderRobot spiderRobot;
     private GameDynamicEnviroment gameDynamicEnviroment;
 
-    public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, SpiderRobot spiderRobot, GameDynamicEnviroment gameDynamicEnviroment) {
-        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, monitorWindow);
+    public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
+        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
         this.spiderRobot = spiderRobot;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
     }
