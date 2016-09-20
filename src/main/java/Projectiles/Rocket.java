@@ -103,10 +103,10 @@ public class Rocket extends Projectile {
 
     public void createPolygonForDetection() {
         List<Point> pointsForDetection = new ArrayList<>();
-        pointsForDetection.add(new Point(30 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(34 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(34 + worldPossition.getCoordX() - 32, 50 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(30 + worldPossition.getCoordX() - 32, 50 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(30 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 64));
+        pointsForDetection.add(new Point(34 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 64));
+        pointsForDetection.add(new Point(34 + worldPossition.getCoordX() - 32, 50 + worldPossition.getCoordY() - 64));
+        pointsForDetection.add(new Point(30 + worldPossition.getCoordX() - 32, 50 + worldPossition.getCoordY() - 64));
         createPolygon(pointsForDetection);
     }
 

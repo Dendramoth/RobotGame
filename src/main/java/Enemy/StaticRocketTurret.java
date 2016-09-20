@@ -38,7 +38,6 @@ public class StaticRocketTurret extends Enemy {
 
     private final List<Point> pointsForDetection = new ArrayList<>();
     private ProjectileContainer projectileContainer;
-    
 
     public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, boolean turretOnWall, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
@@ -89,9 +88,9 @@ public class StaticRocketTurret extends Enemy {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
-        return new ResultOfDetectColisionWithProjectile(true, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(true, new Point(0, 0));
     }
 
     private void createPolygonForDetection() {
@@ -116,7 +115,6 @@ public class StaticRocketTurret extends Enemy {
                 rocketCounter = 0;
                 projectileContainer.addProjectileToContainer(new Rocket(graphicsContext, turretAngle, worldPossition, this, 64, 64, turretOnWall, monitorWindow));
             }
-
             enemyImage = LoadAllResources.getMapOfAllImages().get("turretBase");
             graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
             paintRotatedGunOnTurret(monitorPossition);
@@ -172,21 +170,25 @@ public class StaticRocketTurret extends Enemy {
     @Override
     public boolean paintDyingEnemyAnimation() {
         if (explodingTimer < 5) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death1");
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretDeath1");
         } else if (explodingTimer >= 5 && explodingTimer < 10) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death2");
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretDeath2");
         } else if (explodingTimer >= 10 && explodingTimer < 15) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death3");
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretDeath3");
         } else if (explodingTimer >= 15 && explodingTimer < 20) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death4");
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretDeath4");
         } else if (explodingTimer >= 20 && explodingTimer < 25) {
-            enemyImage = LoadAllResources.getMapOfAllImages().get("drone_death5");
+            enemyImage = LoadAllResources.getMapOfAllImages().get("turretDeath5");
         } else {
             return false;
         }
 
         Point monitorPossition = monitorWindow.getPositionInWorld();
-        graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX() - width / 2, worldPossition.getCoordY() - monitorPossition.getCoordY() - heigh / 2);
+        graphicsContext.save();
+        graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        graphicsContext.rotate(turretAngle);
+        graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
+        graphicsContext.restore();
 
         explodingTimer++;
         return true;
