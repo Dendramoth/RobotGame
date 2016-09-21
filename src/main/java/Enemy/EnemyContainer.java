@@ -5,7 +5,7 @@
  */
 package Enemy;
 
-import EnviromentObjects.CraterBig;
+import EnviromentObjects.Craters.CraterBig;
 import EnviromentObjects.DeadSpiderRobot;
 import EnviromentObjects.DeadStaticRocketTurretBase;
 import GameObject.Point;

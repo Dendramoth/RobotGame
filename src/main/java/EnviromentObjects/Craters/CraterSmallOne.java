@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EnviromentObjects;
+package EnviromentObjects.Craters;
 
 import GameObject.GamePrimitiveObject;
 import GameObject.Point;
@@ -14,19 +14,18 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author Dendra
+ * @author styma01
  */
-public class CraterBig extends GamePrimitiveObject{
-    private Image craterImage = LoadAllResources.getMapOfAllImages().get("crater256");
+public class CraterSmallOne extends GamePrimitiveObject {
+    private final Image craterImage = LoadAllResources.getMapOfAllImages().get("crater64_1");
 
-    public CraterBig(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, width, heigh, graphicsContext, monitorWindow);
+    public CraterSmallOne(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(possition, 64, 64, graphicsContext, monitorWindow);
     }
-
+    
     @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(craterImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
     }
-    
 }

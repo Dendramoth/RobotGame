@@ -19,7 +19,11 @@ import EnviromentObjects.Containers.BoxTriangle;
 import EnviromentObjects.Containers.ContainerOpenHorizontal;
 import EnviromentObjects.Containers.ContainerOpenVertical;
 import EnviromentObjects.Containers.SimpleBox;
-import EnviromentObjects.CraterBig;
+import EnviromentObjects.Craters.CraterBig;
+import EnviromentObjects.Craters.CraterMedium;
+import EnviromentObjects.Craters.CraterSmallOne;
+import EnviromentObjects.Craters.CraterSmallThree;
+import EnviromentObjects.Craters.CraterSmallTwo;
 import EnviromentObjects.DroneBarracks;
 import EnviromentObjects.InnerFortressWallNorth;
 import EnviromentObjects.InnerFortressWallSouth;
@@ -88,8 +92,16 @@ public class CreateMap1 {
     }
     
     private void generatedObjectsForGameWithoutCollision(GridTable gridTable){
-        CraterBig craterBig = new CraterBig(new Point(3000,8500), 256, 256, graphicsContext, monitorWindow);
+        CraterBig craterBig = new CraterBig(new Point(3000,8500), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterBig);
+        CraterSmallOne craterSmallOne = new CraterSmallOne(new Point(3000,8250), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne);
+        CraterSmallTwo craterSmallTwo = new CraterSmallTwo(new Point(3100,8250), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallTwo);
+        CraterSmallThree craterSmallThree = new CraterSmallThree(new Point(3200,8250), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallThree);
+        CraterMedium craterMedium = new CraterMedium(new Point(3200,8350), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
