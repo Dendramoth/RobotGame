@@ -20,31 +20,31 @@ import javafx.scene.shape.Shape;
  *
  * @author styma01
  */
-public class ContainerOpenHorizontal extends GameStaticObject {
+public class ContainerOpenVertical extends GameStaticObject {
     
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoBox = new ArrayList<>();
 
-    public ContainerOpenHorizontal(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, 256, 128, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container2"));
+    public ContainerOpenVertical(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(getPoints(possition), possition, 128, 256, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container1"));
     }
     
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(10 + possition.getCoordX(), 118 + possition.getCoordY()));
-        pointList.add(new Point(245 + possition.getCoordX(), 118 + possition.getCoordY()));
-        pointList.add(new Point(245 + possition.getCoordX(), 13 + possition.getCoordY()));
-        pointList.add(new Point(10 + possition.getCoordX(), 13 + possition.getCoordY()));
+        pointList.add(new Point(15 + possition.getCoordX(), 248 + possition.getCoordY()));
+        pointList.add(new Point(115 + possition.getCoordX(), 248 + possition.getCoordY()));
+        pointList.add(new Point(115 + possition.getCoordX(), 15 + possition.getCoordY()));
+        pointList.add(new Point(15 + possition.getCoordX(), 15 + possition.getCoordY()));
         return pointList;
     }
 
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(245 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(245 + worldPossition.getCoordX(), 13 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 13 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(15 + worldPossition.getCoordX(), 248 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(115 + worldPossition.getCoordX(), 248 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(115 + worldPossition.getCoordX(), 15 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(15 + worldPossition.getCoordX(), 15 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
 
