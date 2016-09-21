@@ -78,8 +78,23 @@ import javafx.scene.media.AudioClip;
         loadLaserBurnedGround();
         loadInterfaceBar();
         loadDroneBarracks();
+        loadAllContainers();
         
         loadAllSounds();
+    }
+    
+    private void loadAllContainers(){
+        Image image = new Image("/Containers/box.png", 128, 128, false, false);
+        mapOfAllImages.put("box1", image);
+        
+        image = new Image("/Containers/container1.png", 128, 256, false, false);
+        mapOfAllImages.put("container1", image);
+        
+        image = new Image("/Containers/container2.png", 256, 128, false, false);
+        mapOfAllImages.put("container2", image);
+        
+        image = new Image("/Containers/box2.png", 258, 258, false, false);
+        mapOfAllImages.put("box2", image);
     }
     
     private void loadDroneBarracks(){

@@ -15,6 +15,7 @@ import EnviromentObjects.Cliffs.CliffTopLeft;
 import EnviromentObjects.Cliffs.CliffTopRight;
 import EnviromentObjects.Cliffs.CliffVertical;
 import EnviromentObjects.Cliffs.CliffVerticalReversed;
+import EnviromentObjects.Containers.SimpleBox;
 import EnviromentObjects.CraterBig;
 import EnviromentObjects.DroneBarracks;
 import EnviromentObjects.InnerFortressWallNorth;
@@ -66,6 +67,9 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(innerFortressWallNorth);
         InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(2100,7000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth);
+        
+        SimpleBox simpleBox = new SimpleBox(new Point(2000, 7600), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(simpleBox);
         
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
