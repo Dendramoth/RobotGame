@@ -15,6 +15,7 @@ import EnviromentObjects.Cliffs.CliffTopLeft;
 import EnviromentObjects.Cliffs.CliffTopRight;
 import EnviromentObjects.Cliffs.CliffVertical;
 import EnviromentObjects.Cliffs.CliffVerticalReversed;
+import EnviromentObjects.Containers.BoxTriangle;
 import EnviromentObjects.Containers.SimpleBox;
 import EnviromentObjects.CraterBig;
 import EnviromentObjects.DroneBarracks;
@@ -70,6 +71,8 @@ public class CreateMap1 {
         
         SimpleBox simpleBox = new SimpleBox(new Point(2000, 7600), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox);
+        BoxTriangle triangleBox = new BoxTriangle(new Point(2000, 7800), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(triangleBox);
         
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);

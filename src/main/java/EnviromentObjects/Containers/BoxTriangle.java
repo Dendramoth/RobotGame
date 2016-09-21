@@ -20,31 +20,31 @@ import javafx.scene.shape.Shape;
  *
  * @author styma01
  */
-public class SimpleBox extends GameStaticObject  {
+public class BoxTriangle extends GameStaticObject  {
     
     private final List<Point> pointsForDetection = new ArrayList<>();
-    private final List<MinigunHitIntoStaticObject> allHitsIntoSimpleBox = new ArrayList<>();
+    private final List<MinigunHitIntoStaticObject> allHitsIntoTriangleBox = new ArrayList<>();
 
-    public SimpleBox(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, 128, 128, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box1"));
+    public BoxTriangle(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(getPoints(possition), possition, 256, 256, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box2"));
     }
     
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(14 + possition.getCoordX(), 118 + possition.getCoordY()));
-        pointList.add(new Point(118 + possition.getCoordX(), 118 + possition.getCoordY()));
-        pointList.add(new Point(118 + possition.getCoordX(), 14 + possition.getCoordY()));
-        pointList.add(new Point(14 + possition.getCoordX(), 14 + possition.getCoordY()));
+        pointList.add(new Point(30 + possition.getCoordX(), 238 + possition.getCoordY()));
+        pointList.add(new Point(233 + possition.getCoordX(), 238 + possition.getCoordY()));
+        pointList.add(new Point(233 + possition.getCoordX(), 10 + possition.getCoordY()));
+        pointList.add(new Point(30 + possition.getCoordX(), 10 + possition.getCoordY()));
         return pointList;
     }
 
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(14 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(118 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(118 + worldPossition.getCoordX(), 14 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(14 + worldPossition.getCoordX(), 14 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(30 + worldPossition.getCoordX(), 238 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(233 + worldPossition.getCoordX(), 238 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(233 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(30 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
 
@@ -56,7 +56,7 @@ public class SimpleBox extends GameStaticObject  {
     }
     
     private void paintAllMinigunHitsIntoSimpleBox() {
-        Iterator<MinigunHitIntoStaticObject> iterator = allHitsIntoSimpleBox.iterator();
+        Iterator<MinigunHitIntoStaticObject> iterator = allHitsIntoTriangleBox.iterator();
         while (iterator.hasNext()) {
             MinigunHitIntoStaticObject minigunHitIntoStaticObject = iterator.next();
             minigunHitIntoStaticObject.paint();
@@ -83,7 +83,7 @@ public class SimpleBox extends GameStaticObject  {
 
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
-        allHitsIntoSimpleBox.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
+        allHitsIntoTriangleBox.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
     
 }
