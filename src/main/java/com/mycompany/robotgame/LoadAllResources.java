@@ -79,8 +79,26 @@ import javafx.scene.media.AudioClip;
         loadInterfaceBar();
         loadDroneBarracks();
         loadAllContainers();
+        loadAllRocks();
         
         loadAllSounds();
+    }
+    
+    private void loadAllRocks(){
+        Image image = new Image("/Rocks/rock_128_1.png", 128, 128, false, false);
+        mapOfAllImages.put("rockMediumOne", image);
+        
+        image = new Image("/Rocks/rock_128_2.png", 128, 128, false, false);
+        mapOfAllImages.put("rockMediumTwo", image);
+        
+        image = new Image("/Rocks/rock_128_3.png", 128, 128, false, false);
+        mapOfAllImages.put("rockMediumThree", image);
+        
+        image = new Image("/Rocks/rock_256_1.png", 256, 256, false, false);
+        mapOfAllImages.put("rockLargeOne", image);
+        
+        image = new Image("/Rocks/rock_256_2.png", 256, 256, false, false);
+        mapOfAllImages.put("rockLargeTwo", image);
     }
     
     private void loadAllContainers(){

@@ -29,6 +29,11 @@ import EnviromentObjects.InnerFortressWallNorth;
 import EnviromentObjects.InnerFortressWallSouth;
 import EnviromentObjects.OuterFortressWallsEast;
 import EnviromentObjects.OuterFortressWallsWest;
+import EnviromentObjects.Rocks.RockLargeOne;
+import EnviromentObjects.Rocks.RockLargeTwo;
+import EnviromentObjects.Rocks.RockMediumOne;
+import EnviromentObjects.Rocks.RockMediumThree;
+import EnviromentObjects.Rocks.RockMediumTwo;
 import EnviromentObjects.Satelite;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
@@ -83,6 +88,17 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(containerOpenHorizontal);
         ContainerOpenVertical containerOpenVertical = new ContainerOpenVertical(new Point(1300, 8300), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(containerOpenVertical);
+        
+        RockMediumOne rockMediumOne = new RockMediumOne(new Point(3000, 7900), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumOne);
+        RockMediumTwo rockMediumTwo = new RockMediumTwo(new Point(3200, 7900), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumTwo);
+        RockMediumThree rockMediumThree = new RockMediumThree(new Point(3400, 7900), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumThree);
+        RockLargeOne rockLargeOne = new RockLargeOne(new Point(3000, 7600), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeOne);
+        RockLargeTwo rockLargeTwo = new RockLargeTwo(new Point(3300, 7600), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeTwo);
         
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
