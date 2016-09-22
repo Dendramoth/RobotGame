@@ -276,7 +276,7 @@ public class SpiderRobot extends Enemy {
 
     private void findPathToPlayer(Point playerWorldPosition) {
         List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
-        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext);
+        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext, pathPoints);
         pathPoints = pathfinding.createPath(this, playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 

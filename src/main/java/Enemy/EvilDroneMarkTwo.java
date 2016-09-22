@@ -32,6 +32,7 @@ public class EvilDroneMarkTwo extends Enemy{
     private double lastAngleToAvoidCollision = 0;
     private boolean collisionDetectedInLastTest = false;
     private int valueToAddToBlinkCounter = 1;
+    private int timerForRecalculationOfPathfinding = 0;
 
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
@@ -42,7 +43,9 @@ public class EvilDroneMarkTwo extends Enemy{
     
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
-        if (pathPoints.size() < 1) {
+        timerForRecalculationOfPathfinding++;
+        if (pathPoints.size() < 1 || timerForRecalculationOfPathfinding >= 20) {
+            timerForRecalculationOfPathfinding = 0;
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
         }
 
@@ -219,7 +222,7 @@ public class EvilDroneMarkTwo extends Enemy{
 
     private void findPathToPlayer(Point playerWorldPosition) {
         List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
-        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext);
+        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext, pathPoints);
         pathPoints = pathfinding.createPath(this, playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 

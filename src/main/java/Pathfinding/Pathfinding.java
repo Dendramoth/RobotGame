@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
@@ -22,19 +21,18 @@ import javafx.scene.shape.Shape;
 public class Pathfinding {
 
     private List<GameStaticObject> gameStaticObjectsList = new ArrayList<GameStaticObject>();
-    private GraphicsContext graphicsContext;
     private List<PathfindingPoint> listOfPathPoints = new ArrayList<PathfindingPoint>();
+    private boolean pathWasGeneratedBefore = false;
+    private boolean finalPointIsDirectlyVisible = true;
 
-    public Pathfinding(List<GameStaticObject> gameStaticObjectsList, GraphicsContext graphicsContext) {
+    public Pathfinding(List<GameStaticObject> gameStaticObjectsList, GraphicsContext graphicsContext, List<PathfindingPoint> listOfPathPoints) {
         this.gameStaticObjectsList = gameStaticObjectsList;
-        this.graphicsContext = graphicsContext;
+        this.listOfPathPoints = listOfPathPoints;
+        pathWasGeneratedBefore = listOfPathPoints != null && !listOfPathPoints.isEmpty();
     }
 
     public List<PathfindingPoint> createPath(GameObjectWithDistanceDetection startGameObject, double targetPointX, double targetPointY) {
-        boolean point2IsVisibleFromPoint1 = true;
-
         sortStaticObjectsBasedOnDistanceFromPlayer(startGameObject);
-
         PathfindingPoint currentPoint = new PathfindingPoint(startGameObject.getWorldPossition().getCoordX(), startGameObject.getWorldPossition().getCoordY());
 
         for (GameStaticObject gameStaticObject : gameStaticObjectsList) {
@@ -42,28 +40,22 @@ public class Pathfinding {
 
             Shape intersection = gameStaticObject.detectIntersection(line);
             if (!(intersection.getLayoutBounds().getHeight() <= 0 || intersection.getLayoutBounds().getWidth() <= 0)) {
+                finalPointIsDirectlyVisible = false;
+                if (pathWasGeneratedBefore == true){
+                    return listOfPathPoints;
+                }
+                
                 PathfindingPoint intersectionPoint = getIntersectionPointCoordinates(intersection, startGameObject, targetPointX, targetPointY);
-                point2IsVisibleFromPoint1 = false;
-
-                graphicsContext.setStroke(Color.RED);
-                graphicsContext.strokeLine(currentPoint.getCoordX(), currentPoint.getCoordY(), intersectionPoint.getCoordX(), intersectionPoint.getCoordY());
-
-                graphicsContext.setFill(Color.BLACK);
-                graphicsContext.fillOval(intersectionPoint.getCoordX() - 5, intersectionPoint.getCoordY() - 5, 11, 11);
-                FindPathAroundObject findPathAroundObject = new FindPathAroundObject(targetPointX, targetPointY, gameStaticObject, graphicsContext, listOfPathPoints);
+                FindPathAroundObject findPathAroundObject = new FindPathAroundObject(targetPointX, targetPointY, gameStaticObject, listOfPathPoints);
                 currentPoint = findPathAroundObject.findPathAroundObject(intersectionPoint);
                 listOfPathPoints.add(currentPoint);
             }
         }
-
-        listOfPathPoints.add(new PathfindingPoint(targetPointX, targetPointY));
-        graphicsContext.setStroke(Color.RED);
-        graphicsContext.strokeLine(currentPoint.getCoordX(), currentPoint.getCoordY(), targetPointX, targetPointY);
-
-        if (point2IsVisibleFromPoint1) {
-            graphicsContext.setStroke(Color.RED);
-            graphicsContext.strokeLine(startGameObject.getWorldPossition().getCoordX(), startGameObject.getWorldPossition().getCoordY(), targetPointX, targetPointY);
+        
+        if (finalPointIsDirectlyVisible){
+            listOfPathPoints.clear();
         }
+        listOfPathPoints.add(new PathfindingPoint(targetPointX, targetPointY));
 
         return listOfPathPoints;
     }
@@ -93,12 +85,12 @@ public class Pathfinding {
         Collections.sort(gameStaticObjectsList);
     }
 
-    public void paintAllPathPoints() {
+ /*   public void paintAllPathPoints() {
         for (int i = 0; i < listOfPathPoints.size(); i++) {
             PathfindingPoint point = listOfPathPoints.get(i);
             graphicsContext.setFill(Color.AQUA);
             graphicsContext.fillOval(point.getCoordX() - 5, point.getCoordY() - 5, 10, 10);
         }
-    }
+    }*/
 
 }

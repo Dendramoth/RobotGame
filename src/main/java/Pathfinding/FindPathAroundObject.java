@@ -28,16 +28,14 @@ public class FindPathAroundObject {
     private boolean pathFoundToTheLeft;
 
     private GameStaticObject gameObject;
-    private GraphicsContext graphicsContext;
     private List<PathfindingPoint> leftListOfPathPointsAroundObject = new ArrayList<PathfindingPoint>();
     private List<PathfindingPoint> rightListOfPathPointsAroundObject = new ArrayList<PathfindingPoint>();
     private List<PathfindingPoint> listOfPathPoints = new ArrayList<PathfindingPoint>();
 
-    public FindPathAroundObject(double targetX, double targetY, GameStaticObject gameObject, GraphicsContext graphicsContext, List<PathfindingPoint> listOfPathPoints) {
+    public FindPathAroundObject(double targetX, double targetY, GameStaticObject gameObject, List<PathfindingPoint> listOfPathPoints) {
         this.targetX = targetX;
         this.targetY = targetY;
         this.gameObject = gameObject;
-        this.graphicsContext = graphicsContext;
         this.listOfPathPoints = listOfPathPoints;
     }
 
@@ -124,8 +122,6 @@ public class FindPathAroundObject {
             Line currentLine = gameObject.getPolygonLineList().get(i);
             Shape intersection = Shape.intersect(currentLine, shape);
             if (!(intersection.getLayoutBounds().getHeight() <= 0 || intersection.getLayoutBounds().getWidth() <= 0)) {
-                graphicsContext.fillOval(currentLine.getEndX() - 5, currentLine.getEndY() - 5, 10, 10);
-                graphicsContext.fillOval(currentLine.getStartX() - 5, currentLine.getStartY() - 5, 10, 10);
                 return i;
             }
         }
@@ -142,8 +138,6 @@ public class FindPathAroundObject {
             currentPoint.setCoordX(currentLine.getStartX());
             currentPoint.setCoordY(currentLine.getStartY());
         }
-
-        graphicsContext.fillOval(currentPoint.getCoordX() - 5, currentPoint.getCoordY() - 5, 10, 10);
 
         if (detectVisibilityOfFinalPointFromPoint(currentPoint)) {
             currentPoint.setLastPointInObject(true);
@@ -168,8 +162,6 @@ public class FindPathAroundObject {
         } else {
             coordYForLineTest = point.getCoordY() - 1;
         }
-
-        graphicsContext.fillOval(point.getCoordX() - 5, point.getCoordY() - 5, 10, 10);
 
         Line testLine = new Line(coordXForLineTest, coordYForLineTest, targetX, targetY);
         Shape intersection = Shape.intersect(testLine, gameObject.getGameObjectPolygon());
