@@ -35,6 +35,7 @@ import EnviromentObjects.Rocks.RockMediumOne;
 import EnviromentObjects.Rocks.RockMediumThree;
 import EnviromentObjects.Rocks.RockMediumTwo;
 import EnviromentObjects.Satelite;
+import EnviromentObjects.Skeletons.DinosaurusSkeleton;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -102,6 +103,9 @@ public class CreateMap1 {
         
         Satelite satelite = new Satelite(new Point(2228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
+        
+        DinosaurusSkeleton dinosaurusSkeleton = new DinosaurusSkeleton(new Point(600,8100), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(dinosaurusSkeleton);
         
         DroneBarracks droneBarracks = new DroneBarracks(new Point(1000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, this.gridTable);
         gridTable.insertGameObjectIntoGridCell(droneBarracks);

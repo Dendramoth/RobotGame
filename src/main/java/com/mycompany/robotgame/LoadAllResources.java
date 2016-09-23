@@ -80,8 +80,14 @@ import javafx.scene.media.AudioClip;
         loadDroneBarracks();
         loadAllContainers();
         loadAllRocks();
+        loadSkeletons();
         
         loadAllSounds();
+    }
+    
+    private void loadSkeletons(){
+        Image image = new Image("/Skeletons/skeletonDinosaurus.png", 512, 512, false, false);
+        mapOfAllImages.put("skeletonDinosaurus", image);
     }
     
     private void loadAllRocks(){
