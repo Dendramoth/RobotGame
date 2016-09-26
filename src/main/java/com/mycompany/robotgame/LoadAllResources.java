@@ -81,8 +81,38 @@ import javafx.scene.media.AudioClip;
         loadAllContainers();
         loadAllRocks();
         loadSkeletons();
+        loadBomberAirplane();
         
         loadAllSounds();
+    }
+    
+    private void loadBomberAirplane(){
+        Image image = new Image("/FlyingBomber/bomber_idle.png", 64, 64, false, false);
+        mapOfAllImages.put("bomberIdle", image);
+        
+        image = new Image("/FlyingBomber/bomber_moving_1.png", 64, 64, false, false);
+        mapOfAllImages.put("bomberMovingA", image);
+        
+        image = new Image("/FlyingBomber/bomber_moving_2.png", 64, 64, false, false);
+        mapOfAllImages.put("bomberMovingB", image);
+        
+        image = new Image("/FlyingBomber/bomber_death_1.png", 192, 192, false, false);
+        mapOfAllImages.put("bomberDeath1", image);
+        
+        image = new Image("/FlyingBomber/bomber_death_2.png", 192, 192, false, false);
+        mapOfAllImages.put("bomberDeath2", image);
+        
+        image = new Image("/FlyingBomber/bomber_death_3.png", 192, 192, false, false);
+        mapOfAllImages.put("bomberDeath3", image);
+        
+        image = new Image("/FlyingBomber/bomber_death_4.png", 192, 192, false, false);
+        mapOfAllImages.put("bomberDeath4", image);
+        
+        image = new Image("/FlyingBomber/bomber_death_5.png", 192, 192, false, false);
+        mapOfAllImages.put("bomberDeath5", image);
+        
+        image = new Image("/FlyingBomber/bomber_death_6.png", 192, 192, false, false);
+        mapOfAllImages.put("bomberDeath6", image);
     }
     
     private void loadSkeletons(){
