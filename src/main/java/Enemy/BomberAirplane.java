@@ -8,14 +8,9 @@ package Enemy;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
-import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
-import Pathfinding.Pathfinding;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Shape;
 
@@ -23,17 +18,19 @@ import javafx.scene.shape.Shape;
  *
  * @author styma01
  */
-public class BomberAirplane extends Enemy{
+public class BomberAirplane extends Enemy {
+
+    private int bomberImageCounter = 0;
 
     public BomberAirplane(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         super(possitionInWorld, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
-        enemyImage = LoadAllResources.getMapOfAllImages().get("evilDroneIdle1");
+        enemyImage = LoadAllResources.getMapOfAllImages().get("bomberIdle");
     }
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
-        worldPossition.setCoordX(worldPossition.getCoordX() - 5); // move just to left
-        if (Math.abs(playerPossitionX - worldPossition.getCoordX()) > 1800){ // if it is to far away from screen, just kill it! :-)
+        worldPossition.setCoordX(worldPossition.getCoordX() - movementSpeed); // move just to left
+        if (Math.abs(playerPossitionX - worldPossition.getCoordX()) > 1800) { // if it is to far away from screen, just kill it! :-)
             alive = false;
             hitPoints = 0;
         }
@@ -55,8 +52,17 @@ public class BomberAirplane extends Enemy{
 
     @Override
     public void paintGameObject() {
+        bomberImageCounter++;
+        if (bomberImageCounter < 6) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("bomberMovingA");
+        } else if (bomberImageCounter >= 6 && bomberImageCounter < 9) {
+            enemyImage = LoadAllResources.getMapOfAllImages().get("bomberMovingB");
+        } else {
+            bomberImageCounter = 0;
+        }
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(enemyImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
+        System.out.println("painting airplane");
     }
 
     @Override
@@ -66,7 +72,7 @@ public class BomberAirplane extends Enemy{
 
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -79,6 +85,5 @@ public class BomberAirplane extends Enemy{
         alive = false;
         hitPoints = 0;
     }
-    
-    
+
 }

@@ -6,6 +6,7 @@
 package com.mycompany.robotgame;
 
 import CollisionDetection.DetectCollisions;
+import Enemy.BomberAirplane;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkTwo;
 import Enemy.SpiderRobot;
@@ -89,6 +90,7 @@ public class GameMainInfrastructure {
         enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2175, 7466), 64, 64, 2, 20, 30, true, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7466), 64, 64, 2, 20, 30, true, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 1, 1, enemyGraphicsContext, gridTable, monitorWindow));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, gridTable);
