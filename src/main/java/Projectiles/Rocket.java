@@ -117,7 +117,6 @@ public class Rocket extends Projectile {
             projectilePolygon.getPoints().add(point.getCoordY());
         }
         projectilePolygon.setRotate(angleOfFiredShot);
-
     }
 
     @Override

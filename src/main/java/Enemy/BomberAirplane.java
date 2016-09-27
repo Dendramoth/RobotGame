@@ -9,6 +9,8 @@ import GameObject.GameStaticObject;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
+import Projectiles.Bomb;
+import Projectiles.ProjectileContainer;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,9 +23,12 @@ import javafx.scene.shape.Shape;
 public class BomberAirplane extends Enemy {
 
     private int bomberImageCounter = 0;
+    private int dropBombCounter = 0;
+    private ProjectileContainer projectileContainer;
 
-    public BomberAirplane(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+    public BomberAirplane(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+        this.projectileContainer = projectileContainer;
         enemyImage = LoadAllResources.getMapOfAllImages().get("bomberIdle");
     }
 
@@ -34,6 +39,16 @@ public class BomberAirplane extends Enemy {
             alive = false;
             hitPoints = 0;
         }
+        
+        dropBombCounter++;
+        if (dropBombCounter > 20){
+            dropBombCounter = 0;
+            dropBomb();
+        }
+    }
+    
+    private void dropBomb(){
+        projectileContainer.addProjectileToContainer(new Bomb(graphicsContext, 0, new Point(worldPossition.getCoordX() + 50, worldPossition.getCoordY() + 32), this, false, monitorWindow));
     }
 
     @Override
