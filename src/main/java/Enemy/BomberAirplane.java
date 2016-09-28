@@ -25,7 +25,7 @@ import javafx.scene.shape.Shape;
 public class BomberAirplane extends Enemy {
 
     private final ProjectileContainer projectileContainer;
-    private final double rotationSpeed = 0.3;
+    private final double rotationSpeed = 0.8;
     
     private int bomberImageCounter = 0;
     private int dropBombCounter = 0;
