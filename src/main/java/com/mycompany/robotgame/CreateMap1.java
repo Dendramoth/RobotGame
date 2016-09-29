@@ -125,22 +125,22 @@ public class CreateMap1 {
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
-        CliffBottomLeft cliffBottomLeft = new CliffBottomLeft(new Point(0, 9000), 256, 256, graphicsContext, monitorWindow);
+        CliffBottomLeft cliffBottomLeft = new CliffBottomLeft(new Point(15, 9000), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffBottomLeft);
-        CliffBottomRight cliffBottomRight = new CliffBottomRight(new Point(3584, 9000), 256, 256, graphicsContext, monitorWindow);
+        CliffBottomRight cliffBottomRight = new CliffBottomRight(new Point(3328, 9000), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffBottomRight);
-        CliffTopRight cliffTopRight = new CliffTopRight(new Point(3584, 4392), 256, 256, graphicsContext, monitorWindow);
+        CliffTopRight cliffTopRight = new CliffTopRight(new Point(3328, 4648), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffTopRight);
-        CliffTopLeft cliffTopLeft = new CliffTopLeft(new Point(0, 4392), 256, 256, graphicsContext, monitorWindow);
+        CliffTopLeft cliffTopLeft = new CliffTopLeft(new Point(15, 4648), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffTopLeft);
 
         for (int i = 0; i < 3; i++) {
-            CliffHorizontal cliffHorizontal = new CliffHorizontal(new Point(i * 1024 + 256, 9000), 1024, 256, graphicsContext, monitorWindow);
+            CliffHorizontal cliffHorizontal = new CliffHorizontal(new Point(i * 1024 + 256, 9015), 1024, 256, graphicsContext, monitorWindow);
             gridTable.insertGameObjectIntoGridCell(cliffHorizontal);
         }
         
         for (int i = 0; i < 3; i++) {
-            CliffHorizontalReversed cliffHorizontalReversed = new CliffHorizontalReversed(new Point(i * 1024 + 256, 4392), 1024, 256, graphicsContext, monitorWindow);
+            CliffHorizontalReversed cliffHorizontalReversed = new CliffHorizontalReversed(new Point(i * 1024 + 271, 4638), 1024, 256, graphicsContext, monitorWindow);
             gridTable.insertGameObjectIntoGridCell(cliffHorizontalReversed);
         }
 
@@ -150,7 +150,7 @@ public class CreateMap1 {
         }
         
         for (int i = 1; i < 5; i++) {
-            CliffVerticalReversed cliffVerticalReversed = new CliffVerticalReversed(new Point(3584, 9000 - i * 1024), 256, 1024, graphicsContext, monitorWindow);
+            CliffVerticalReversed cliffVerticalReversed = new CliffVerticalReversed(new Point(3343, 9000 - i * 1024), 256, 1024, graphicsContext, monitorWindow);
             gridTable.insertGameObjectIntoGridCell(cliffVerticalReversed);
         }
     }
