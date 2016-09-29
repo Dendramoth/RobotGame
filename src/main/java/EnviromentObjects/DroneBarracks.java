@@ -46,20 +46,28 @@ public class DroneBarracks extends GameStaticObject {
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(0 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(256 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(256 + possition.getCoordX(), 384 + possition.getCoordY()));
-        pointList.add(new Point(0 + possition.getCoordX(), 384 + possition.getCoordY()));
+        pointList.add(new Point(25 + possition.getCoordX(), 294 + possition.getCoordY()));
+        pointList.add(new Point(75 + possition.getCoordX(), 294 + possition.getCoordY()));
+        pointList.add(new Point(75 + possition.getCoordX(), 225 + possition.getCoordY()));
+        pointList.add(new Point(177 + possition.getCoordX(), 225 + possition.getCoordY()));
+        pointList.add(new Point(177 + possition.getCoordX(), 294 + possition.getCoordY()));
+        pointList.add(new Point(231 + possition.getCoordX(), 294 + possition.getCoordY()));
+        pointList.add(new Point(231 + possition.getCoordX(), 27 + possition.getCoordY()));
+        pointList.add(new Point(25 + possition.getCoordX(), 27 + possition.getCoordY()));
         return pointList;
     }
 
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(256 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(256 + worldPossition.getCoordX(), 384 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 384 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(25 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(75 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(75 + worldPossition.getCoordX(), 225 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(177 + worldPossition.getCoordX(), 225 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(177 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(231 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(231 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(25 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
 
@@ -95,7 +103,7 @@ public class DroneBarracks extends GameStaticObject {
                 dispatchTheDronesSound.play();
             }
             if (dispatchingDronesCounter % 120 == 0) {
-                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 20), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
+                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 115), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
             }
             if (dispatchingDronesCounter > 750) {
                 dispatchingDrones = false;
