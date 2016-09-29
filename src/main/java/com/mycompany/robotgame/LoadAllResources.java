@@ -470,28 +470,28 @@ import javafx.scene.media.AudioClip;
     }
     
     private void loadCliffs(){
-        Image image = new Image("/cliffs/cliffHorizontal.png", 1024, 512, false, false);
+        Image image = new Image("/cliffs/cliffHorizontal.png", 1024, 256, false, false);
         mapOfAllImages.put("cliffHorizontal", image);
         
-        image = new Image("/cliffs/cliffHorizontalReversed.png", 1024, 512, false, false);
+        image = new Image("/cliffs/cliffHorizontalReversed.png", 1024, 256, false, false);
         mapOfAllImages.put("cliffHorizontalReversed", image);
         
-        image = new Image("/cliffs/cliffVertical.png", 512, 1024, false, false);
+        image = new Image("/cliffs/cliffVertical.png", 256, 1024, false, false);
         mapOfAllImages.put("cliffVertical", image);
         
-        image = new Image("/cliffs/cliffVerticalReversed.png", 512, 1024, false, false);
+        image = new Image("/cliffs/cliffVerticalReversed.png", 256, 1024, false, false);
         mapOfAllImages.put("cliffVerticalReversed", image);
         
-        image = new Image("/cliffs/cliff_corner_BottomLeft.png", 512, 512, false, false);
+        image = new Image("/cliffs/cliff_corner_BottomLeft.png", 256, 256, false, false);
         mapOfAllImages.put("cliffBottomLeftCorner", image);
         
-        image = new Image("/cliffs/cliff_corner_BottomRight.png", 512, 512, false, false);
+        image = new Image("/cliffs/cliff_corner_BottomRight.png", 256, 256, false, false);
         mapOfAllImages.put("cliffBottomRightCorner", image);
         
-        image = new Image("/cliffs/cliff_corner_TopLeft.png", 512, 512, false, false);
+        image = new Image("/cliffs/cliff_corner_TopLeft.png", 256, 256, false, false);
         mapOfAllImages.put("cliffTopLeftCorner", image);
         
-        image = new Image("/cliffs/cliff_corner_TopRight.png", 512, 512, false, false);
+        image = new Image("/cliffs/cliff_corner_TopRight.png", 256, 256, false, false);
         mapOfAllImages.put("cliffTopRightCorner", image);
     }
     
