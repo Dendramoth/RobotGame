@@ -13,7 +13,6 @@ import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 
 /**
@@ -29,10 +28,10 @@ public class CliffHorizontalReversed extends GameStaticObject{
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(0 + possition.getCoordX(), 150 + possition.getCoordY()));
+        pointList.add(new Point(0 + possition.getCoordX(), 158 + possition.getCoordY()));
+        pointList.add(new Point(1024 + possition.getCoordX(), 158 + possition.getCoordY()));
         pointList.add(new Point(1024 + possition.getCoordX(), 150 + possition.getCoordY()));
-        pointList.add(new Point(0 + possition.getCoordX(), 322 + possition.getCoordY()));
-        pointList.add(new Point(1024 + possition.getCoordX(), 322 + possition.getCoordY()));
+        pointList.add(new Point(0 + possition.getCoordX(), 150 + possition.getCoordY()));
         return pointList;
     }
 
@@ -61,10 +60,10 @@ public class CliffHorizontalReversed extends GameStaticObject{
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 158 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 158 + worldPossition.getCoordY()));
         pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 322 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 322 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
     

@@ -13,7 +13,6 @@ import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 
 /**
@@ -29,13 +28,12 @@ public class CliffBottomRight extends GameStaticObject{
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(170 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(143 + possition.getCoordX(), 124 + possition.getCoordY()));
-        pointList.add(new Point(0 + possition.getCoordX(), 158 + possition.getCoordY()));
-        pointList.add(new Point(0 + possition.getCoordX(), 273 + possition.getCoordY()));
-        pointList.add(new Point(150 + possition.getCoordX(), 265 + possition.getCoordY()));
-        pointList.add(new Point(258 + possition.getCoordX(), 182 + possition.getCoordY()));
-        pointList.add(new Point(275 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(0 + possition.getCoordX(), 142 + possition.getCoordY()));
+        pointList.add(new Point(117 + possition.getCoordX(), 129 + possition.getCoordY()));
+        pointList.add(new Point(138 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(180 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(180 + possition.getCoordX(), 165 + possition.getCoordY()));
+        pointList.add(new Point(0 + possition.getCoordX(), 165 + possition.getCoordY()));
         return pointList;
     }
 
@@ -63,13 +61,12 @@ public class CliffBottomRight extends GameStaticObject{
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(170 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(143 + worldPossition.getCoordX(), 124 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 158 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 273 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 265 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(258 + worldPossition.getCoordX(), 182 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(275 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 142 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(117 + worldPossition.getCoordX(), 129 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(138 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(180 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(180 + worldPossition.getCoordX(), 165 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 165 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
     

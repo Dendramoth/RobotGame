@@ -29,10 +29,10 @@ public class CliffVertical extends GameStaticObject{
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(150 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(150 + possition.getCoordX(), 1024 + possition.getCoordY()));
-        pointList.add(new Point(322 + possition.getCoordX(), 0 + possition.getCoordY()));
-        pointList.add(new Point(322 + possition.getCoordX(), 1024 + possition.getCoordY()));
+        pointList.add(new Point(162 + possition.getCoordX(), 0 + possition.getCoordY()));
+        pointList.add(new Point(162 + possition.getCoordX(), 1024 + possition.getCoordY()));
+        pointList.add(new Point(165 + possition.getCoordX(), 1024 + possition.getCoordY()));
+        pointList.add(new Point(165 + possition.getCoordX(), 0 + possition.getCoordY()));
         return pointList;
     }
 
@@ -61,10 +61,10 @@ public class CliffVertical extends GameStaticObject{
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(150 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(322 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(322 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(162 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(162 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(165 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(165 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
     
