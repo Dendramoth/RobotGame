@@ -26,13 +26,14 @@ public class BomberAirplane extends Enemy {
 
     private final ProjectileContainer projectileContainer;
     private final double rotationSpeed = 0.8;
-    
+
     private int bomberImageCounter = 0;
     private int dropBombCounter = 0;
     private final List<Point> pointsForDetection = new ArrayList<>();
     private double bomberFlightAngle = 0;
     private int explosionTimer = 0;
-    
+    private int reloadingBombTimer = 0;
+    private boolean droppingBombs = false;
 
     public BomberAirplane(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
         super(possitionInWorld, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
@@ -59,17 +60,38 @@ public class BomberAirplane extends Enemy {
             alive = false;
             hitPoints = 0;
         }
-        
-        dropBomb();
+
+        bombManagement(playerPossitionX, playerPossitionY);
     }
     
+    private void bombManagement(double playerPositionX, double playerPositionY) {
+        //keep reloading bombs in time
+        if (reloadingBombTimer > 0){
+            reloadingBombTimer--;
+        }
+        
+        //check distance for dropping bombs
+        if (reloadingBombTimer <= 0 && ((Math.abs(worldPossition.getCoordX() - playerPositionX) + Math.abs(worldPossition.getCoordY() - playerPositionY)) < 180)){
+            droppingBombs = true;
+            reloadingBombTimer = 320;
+        }
+        
+        //drop bombs
+        if (droppingBombs) {
+            dropBomb();
+        }
+    }
+
     private void dropBomb() {
         dropBombCounter++;
-        if (dropBombCounter > 20) {
-            dropBombCounter = 0;
+        if (dropBombCounter % 8 == 0) {
             double bombPositionX = worldPossition.getCoordX() + Math.cos(Math.toRadians(bomberFlightAngle)) * 50;
             double bombPositionY = worldPossition.getCoordY() + Math.sin(Math.toRadians(bomberFlightAngle)) * 50;
             projectileContainer.addProjectileToContainer(new Bomb(graphicsContext, 0, new Point(bombPositionX, bombPositionY), this, false, monitorWindow));
+        }
+        if (dropBombCounter >= 80) {
+            droppingBombs = false;
+            dropBombCounter = 0;
         }
     }
 
@@ -122,10 +144,10 @@ public class BomberAirplane extends Enemy {
         graphicsContext.rotate(bomberFlightAngle);
         graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
         graphicsContext.restore();
-        
+
         paintAllExplosionsEnemy();
     }
-    
+
     @Override
     public void paintAllExplosionsEnemy() {
         Iterator<Explosion> iterator = allExplosionsOnEnemy.iterator();
