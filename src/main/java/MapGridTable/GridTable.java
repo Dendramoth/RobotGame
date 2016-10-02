@@ -27,7 +27,7 @@ public class GridTable {
     private final int cellSize = 256;
     private final int cellVerticalVisibility = 2;
     private final int cellHorizontalVisibility = 4;
-    private final int mapWidth = 5120;
+    private final int mapWidth = 10240;
     private final int mapHeigh = 10240;
     private final int cellCountX;
     private final int cellCountY;

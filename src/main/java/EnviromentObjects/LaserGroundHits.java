@@ -53,7 +53,7 @@ public class LaserGroundHits {
         
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(laserImage, worldPosition.getCoordX() - monitorPossition.getCoordX() - 16, worldPosition.getCoordY() - monitorPossition.getCoordY() - 16);
-        System.out.println("painting " + (worldPosition.getCoordX() - monitorPossition.getCoordX() - 16) + " " + (worldPosition.getCoordY() - monitorPossition.getCoordY() - 16));
+     //   System.out.println("painting " + (worldPosition.getCoordX() - monitorPossition.getCoordX() - 16) + " " + (worldPosition.getCoordY() - monitorPossition.getCoordY() - 16));
         numberOfFramesBeingDisplayed--;
     }
 

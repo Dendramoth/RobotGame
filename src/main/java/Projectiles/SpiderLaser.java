@@ -15,6 +15,8 @@ import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 /**
@@ -29,7 +31,7 @@ public class SpiderLaser extends Projectile {
 
     public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
         super(graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
-        this.spiderRobot = spiderRobot;
+        this.spiderRobot = (SpiderRobot) enemy;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
     }
 
@@ -138,7 +140,7 @@ public class SpiderLaser extends Projectile {
 
     @Override
     public Shape getProjectileShape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Line(worldPossition.getCoordX(), worldPossition.getCoordY(), worldPossition.getCoordX() + 1, worldPossition.getCoordY());
     }
     
     

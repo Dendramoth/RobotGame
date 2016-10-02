@@ -6,14 +6,12 @@
 package Enemy;
 
 import GameObject.GameStaticObject;
-import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
 import Projectiles.ProjectileContainer;
-import Projectiles.SpiderEnergyShock;
 import Projectiles.SpiderLaser;
 import com.mycompany.robotgame.GameDynamicEnviroment;
 import com.mycompany.robotgame.LoadAllResources;
@@ -38,15 +36,16 @@ public class SpiderRobot extends Enemy {
     private double lastAngleToAvoidCollision = 0;
     private boolean collisionDetectedInLastTest = false;
     private Image enemyTurretImage;
-    private double turretAngleSpeed = 0.5;
+    private final double turretAngleSpeed = 0.5;
     private int spiderTurretImgCounter = 0;
+    private int timerForRecalculationOfPathfinding = 0;
 
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
-    private ProjectileContainer projectileContainer;
+    private final ProjectileContainer projectileContainer;
     private int shockCounter = 0;
     private boolean damaged = false;
-    private GameDynamicEnviroment gameDynamicEnviroment;
+    private final GameDynamicEnviroment gameDynamicEnviroment;
 
     public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer, GameDynamicEnviroment gameDynamicEnviroment) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
@@ -57,6 +56,12 @@ public class SpiderRobot extends Enemy {
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
+        timerForRecalculationOfPathfinding++;
+        if (pathPoints.size() < 1 || timerForRecalculationOfPathfinding >= 20) {
+            timerForRecalculationOfPathfinding = 0;
+            findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
+        }
+        
         double deltaXToPlayer = playerPossitionX - worldPossition.getCoordX();
         double deltaYToPlayer = playerPossitionY - worldPossition.getCoordY();
         angleOfSpiderTower = (angleOfSpiderTower + 360) % 360;
@@ -67,9 +72,6 @@ public class SpiderRobot extends Enemy {
             angleOfSpiderTower = angleOfSpiderTower - turretAngleSpeed;
         }
 
-        if (pathPoints.size() < 1) {
-            findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
-        }
         double deltaX = pathPoints.get(0).getCoordX() - worldPossition.getCoordX();
         double deltaY = pathPoints.get(0).getCoordY() - worldPossition.getCoordY();
         angleOfSpider = calculateAngleBetweenDroneAndNextPointInPathfinding(deltaX, deltaY) + 90;
