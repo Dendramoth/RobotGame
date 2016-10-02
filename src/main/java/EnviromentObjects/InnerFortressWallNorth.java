@@ -7,6 +7,7 @@ package EnviromentObjects;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -20,14 +21,14 @@ import javafx.scene.shape.Shape;
  * @author styma01
  */
 public class InnerFortressWallNorth extends GameStaticObject {
-    
+
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoWall = new ArrayList<>();
 
     public InnerFortressWallNorth(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("northWall"));
     }
-    
+
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(16 + possition.getCoordX(), 29 + possition.getCoordY()));
@@ -63,7 +64,7 @@ public class InnerFortressWallNorth extends GameStaticObject {
             return false;
         }
         return true;
-    }  
+    }
 
     @Override
     public void createPolygonForDetection() {
@@ -83,7 +84,9 @@ public class InnerFortressWallNorth extends GameStaticObject {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoWall.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
-    
-    
-    
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
+
 }

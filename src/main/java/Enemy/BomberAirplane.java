@@ -9,6 +9,7 @@ import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
 import Projectiles.Bomb;
+import Projectiles.Projectile;
 import Projectiles.ProjectileContainer;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
@@ -198,4 +199,11 @@ public class BomberAirplane extends Enemy {
         }
     }
 
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+        hitPoints = hitPoints - projectile.getDamage();
+        if (hitPoints < 1) {
+            alive = false;
+        }
+    }
 }

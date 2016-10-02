@@ -24,13 +24,13 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class SpiderLaser extends Projectile {
-    
+
     private int laserCounter = 0;
     private SpiderRobot spiderRobot;
     private GameDynamicEnviroment gameDynamicEnviroment;
 
     public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
-        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
+        super(5, graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
         this.spiderRobot = (SpiderRobot) enemy;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
     }
@@ -100,11 +100,11 @@ public class SpiderLaser extends Projectile {
             projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
         } else if (laserCounter >= 110 && laserCounter < 115) {
             projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
-        }else {
+        } else {
             projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
         }
-        
-        if (laserCounter % 5 == 0){
+
+        if (laserCounter % 5 == 0) {
             double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
             double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
             gameDynamicEnviroment.generateNewLaserHitOnGround(new Point(endPositionX, endPositionY));
@@ -125,7 +125,7 @@ public class SpiderLaser extends Projectile {
 
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -142,7 +142,9 @@ public class SpiderLaser extends Projectile {
     public Shape getProjectileShape() {
         return new Line(worldPossition.getCoordX(), worldPossition.getCoordY(), worldPossition.getCoordX() + 1, worldPossition.getCoordY());
     }
-    
-    
-    
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
+
 }

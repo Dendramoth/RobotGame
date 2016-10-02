@@ -29,9 +29,11 @@ public abstract class Projectile extends GameObjectWithDistanceDetection {
     protected Polygon projectilePolygon;
     protected ObjectWithCollision objectToIgnore = null;
     protected boolean firedFromWall = false;
+    protected int damage;
 
-    public Projectile(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
+    public Projectile(int damage, GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
         super(position, width, height, graphicsContext, monitorWindow);
+        this.damage = damage;
         this.angleOfFiredShot = angleOfFiredShot;
         this.enemyWhoShootedThisProjectile = enemy;
         this.firedFromWall = firedFromWall;
@@ -61,5 +63,7 @@ public abstract class Projectile extends GameObjectWithDistanceDetection {
         return firedFromWall;
     }
 
-    
+    public int getDamage() {
+        return damage;
+    }
 }

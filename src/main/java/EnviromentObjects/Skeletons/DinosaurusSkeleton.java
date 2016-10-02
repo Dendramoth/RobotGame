@@ -8,6 +8,7 @@ package EnviromentObjects.Skeletons;
 import EnviromentObjects.MinigunHitIntoStaticObject;
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -89,5 +90,11 @@ public class DinosaurusSkeleton extends GameStaticObject {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoSkeleton.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
+    
+    
     
 }

@@ -10,6 +10,7 @@ import Enemy.EvilDroneMarkTwo;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import MapGridTable.GridTable;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -140,4 +141,7 @@ public class DroneBarracks extends GameStaticObject {
         //nothing
     }
 
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
 }

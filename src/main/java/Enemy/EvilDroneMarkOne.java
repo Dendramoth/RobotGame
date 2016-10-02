@@ -11,6 +11,7 @@ import GameObject.ResultOfDetectColisionWithProjectile;
 import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -218,6 +219,14 @@ public class EvilDroneMarkOne extends Enemy {
         if (hitPoints < damagedStateTreshold) {
             movementSpeed = 1;
         }
+        if (hitPoints < 1) {
+            alive = false;
+        }
+    }
+    
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+        hitPoints = hitPoints - projectile.getDamage();
         if (hitPoints < 1) {
             alive = false;
         }

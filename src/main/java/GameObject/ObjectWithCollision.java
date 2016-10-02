@@ -5,6 +5,7 @@
  */
 package GameObject;
 
+import Projectiles.Projectile;
 import javafx.scene.shape.Shape;
 
 /**
@@ -16,4 +17,5 @@ public interface ObjectWithCollision{
     public abstract ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject);
     public abstract void doOnCollision();
     public abstract void doOnBeingHitByMinigun(Point intersectionPoint);
+    public abstract void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile);
 }

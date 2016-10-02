@@ -8,6 +8,7 @@ package Enemy;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
+import Projectiles.Projectile;
 import Projectiles.ProjectileContainer;
 import Projectiles.Rocket;
 import com.mycompany.robotgame.LoadAllResources;
@@ -210,6 +211,14 @@ public class StaticRocketTurret extends Enemy {
         if (hitPoints < damagedStateTreshold) {
             movementSpeed = 1;
         }
+        if (hitPoints < 1) {
+            alive = false;
+        }
+    }
+    
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+        hitPoints = hitPoints - projectile.getDamage();
         if (hitPoints < 1) {
             alive = false;
         }

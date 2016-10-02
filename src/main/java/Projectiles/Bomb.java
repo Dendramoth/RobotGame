@@ -20,12 +20,12 @@ import javafx.scene.shape.Shape;
  *
  * @author styma01
  */
-public class Bomb extends Projectile{
-    
+public class Bomb extends Projectile {
+
     private int bombExplosionAnimationCounter = 0;
 
     public Bomb(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, boolean firedFromWall, MonitorWindow monitorWindow) {
-        super(graphicsContext, angleOfFiredShot, position, enemy, 64, 64, firedFromWall, monitorWindow);
+        super(25, graphicsContext, angleOfFiredShot, position, enemy, 64, 64, firedFromWall, monitorWindow);
     }
 
     @Override
@@ -79,16 +79,16 @@ public class Bomb extends Projectile{
         }
         return true;
     }
-    
+
     public void createPolygonForDetection() {
         List<Point> pointsForDetection = new ArrayList<>();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(64 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 64 + worldPossition.getCoordY()));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(64 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 64 + worldPossition.getCoordY() - 32));
         createPolygon(pointsForDetection);
     }
-    
+
     protected final void createPolygon(List<Point> pointsList) {
         projectilePolygon = new Polygon();
         for (Point point : pointsList) {
@@ -99,7 +99,7 @@ public class Bomb extends Projectile{
 
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -111,6 +111,9 @@ public class Bomb extends Projectile{
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         // do nothing
     }
-    
-    
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
+
 }

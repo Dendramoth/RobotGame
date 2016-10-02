@@ -7,6 +7,7 @@ package EnviromentObjects;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class SpaceShipWreckage extends GameStaticObject {
             return false;
         }
         return true;
-    }  
+    }
 
     @Override
     public void createPolygonForDetection() {
@@ -96,5 +97,9 @@ public class SpaceShipWreckage extends GameStaticObject {
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
+    }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 }

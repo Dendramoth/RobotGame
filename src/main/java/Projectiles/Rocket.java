@@ -29,7 +29,7 @@ public class Rocket extends Projectile {
     private int rocketExplosionCounter = 0;
 
     public Rocket(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
-        super(graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, firedFromWall, monitorWindow);
+        super(25, graphicsContext, angleOfFiredShot, new Point(position.getCoordX(), position.getCoordY()), enemy, width, height, firedFromWall, monitorWindow);
         projectileImage = LoadAllResources.getMapOfAllImages().get("rocket1");
     }
 
@@ -121,7 +121,7 @@ public class Rocket extends Projectile {
 
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -142,6 +142,10 @@ public class Rocket extends Projectile {
 
     public boolean isFiredFromWall() {
         return firedFromWall;
+    }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 
 }

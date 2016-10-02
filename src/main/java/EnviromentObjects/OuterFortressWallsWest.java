@@ -7,6 +7,7 @@ package EnviromentObjects;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -20,14 +21,14 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class OuterFortressWallsWest extends GameStaticObject {
-    
+
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
 
     public OuterFortressWallsWest(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("outerWallWest"));
     }
-    
+
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(606 + possition.getCoordX(), 1500 + possition.getCoordY()));
@@ -50,8 +51,7 @@ public class OuterFortressWallsWest extends GameStaticObject {
         pointList.add(new Point(545 + possition.getCoordX(), 1436 + possition.getCoordY()));
         pointList.add(new Point(545 + possition.getCoordX(), 1303 + possition.getCoordY()));
         pointList.add(new Point(606 + possition.getCoordX(), 1303 + possition.getCoordY()));
-        
-        
+
         return pointList;
     }
 
@@ -81,7 +81,7 @@ public class OuterFortressWallsWest extends GameStaticObject {
             return false;
         }
         return true;
-    }  
+    }
 
     @Override
     public void createPolygonForDetection() {
@@ -117,5 +117,9 @@ public class OuterFortressWallsWest extends GameStaticObject {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
-    
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
+
 }

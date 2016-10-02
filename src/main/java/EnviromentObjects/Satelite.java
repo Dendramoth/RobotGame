@@ -7,6 +7,7 @@ package EnviromentObjects;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class Satelite extends GameStaticObject {
-    
+
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
     private int sateliteAngle = 0;
@@ -29,7 +30,7 @@ public class Satelite extends GameStaticObject {
     public Satelite(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("sateliteBase"));
     }
-    
+
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(0 + possition.getCoordX(), 0 + possition.getCoordY()));
@@ -46,7 +47,7 @@ public class Satelite extends GameStaticObject {
         paintRotatingSatelite(monitorPossition);
         paintAllMinigunHitsIntoSpaceShip();
     }
-    
+
     private void paintRotatingSatelite(Point monitorPossition) {
         Image rotatingSateliteImage = LoadAllResources.getMapOfAllImages().get("sateliteTower");
         sateliteAngle = (sateliteAngle + 1) % 360;
@@ -76,7 +77,7 @@ public class Satelite extends GameStaticObject {
             return false;
         }
         return true;
-    }  
+    }
 
     @Override
     public void createPolygonForDetection() {
@@ -96,5 +97,9 @@ public class Satelite extends GameStaticObject {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoSpaceShip.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
     }
-    
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
+
 }

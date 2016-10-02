@@ -108,6 +108,7 @@ public class DetectCollisions {
                             projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
                         } else {
                             projectile.doOnCollision();
+                            gameObjectWithDistanceDetection.doOnBeingHitByProjectile(resultOfDetectColisionWithProjectile.getIntersectionPoint(), projectile);
                         }
                     }
                 }

@@ -11,6 +11,7 @@ import GameObject.ResultOfDetectColisionWithProjectile;
 import Pathfinding.PathfindingPoint;
 import MapGridTable.GridTable;
 import Pathfinding.Pathfinding;
+import Projectiles.Projectile;
 import Projectiles.ProjectileContainer;
 import Projectiles.SpiderLaser;
 import com.mycompany.robotgame.GameDynamicEnviroment;
@@ -294,6 +295,14 @@ public class SpiderRobot extends Enemy {
             alive = false;
         }else if (hitPoints < damagedStateTreshold){
             damaged = true;
+        }
+    }
+    
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+        hitPoints = hitPoints - projectile.getDamage();
+        if (hitPoints < 1) {
+            alive = false;
         }
     }
 

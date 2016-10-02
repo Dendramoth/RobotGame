@@ -8,6 +8,7 @@ package EnviromentObjects.Rocks;
 import EnviromentObjects.MinigunHitIntoStaticObject;
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -21,10 +22,10 @@ import javafx.scene.shape.Shape;
  * @author styma01
  */
 public class RockMediumOne extends GameStaticObject {
-    
+
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoRock = new ArrayList<>();
-    
+
     public RockMediumOne(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, 128, 128, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("rockMediumOne"));
     }
@@ -37,7 +38,7 @@ public class RockMediumOne extends GameStaticObject {
         pointList.add(new Point(18 + possition.getCoordX(), 14 + possition.getCoordY()));
         return pointList;
     }
-    
+
     @Override
     public void createPolygonForDetection() {
         pointsForDetection.clear();
@@ -54,7 +55,7 @@ public class RockMediumOne extends GameStaticObject {
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
         paintAllMinigunHitsIntoSimpleBox();
     }
-    
+
     private void paintAllMinigunHitsIntoSimpleBox() {
         Iterator<MinigunHitIntoStaticObject> iterator = allHitsIntoRock.iterator();
         while (iterator.hasNext()) {
@@ -84,5 +85,9 @@ public class RockMediumOne extends GameStaticObject {
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoRock.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
+    }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 }

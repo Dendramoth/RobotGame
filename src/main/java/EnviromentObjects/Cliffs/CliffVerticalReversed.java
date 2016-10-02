@@ -8,6 +8,7 @@ package EnviromentObjects.Cliffs;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class CliffVerticalReversed extends GameStaticObject{
+public class CliffVerticalReversed extends GameStaticObject {
+
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffVerticalReversed(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
@@ -50,10 +52,10 @@ public class CliffVerticalReversed extends GameStaticObject{
         }
         return true;
     }
-    
+
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -65,12 +67,16 @@ public class CliffVerticalReversed extends GameStaticObject{
         pointsForDetection.add(new Point(120 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
-    
+
     @Override
     public void doOnCollision() {
     }
 
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
+    }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 }

@@ -25,7 +25,7 @@ public class SpiderEnergyShock extends Projectile {
     private int energyShockCounter = 0;
 
     public SpiderEnergyShock(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow) {
-        super(graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
+        super(5, graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class SpiderEnergyShock extends Projectile {
 
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -111,7 +111,9 @@ public class SpiderEnergyShock extends Projectile {
     public Shape getProjectileShape() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+    }
 
 }

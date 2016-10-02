@@ -8,6 +8,7 @@ package EnviromentObjects.Containers;
 import EnviromentObjects.MinigunHitIntoStaticObject;
 import GameObject.GameStaticObject;
 import GameObject.Point;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -21,14 +22,14 @@ import javafx.scene.shape.Shape;
  * @author styma01
  */
 public class ContainerOpenVertical extends GameStaticObject {
-    
+
     private final List<Point> pointsForDetection = new ArrayList<>();
     private final List<MinigunHitIntoStaticObject> allHitsIntoBox = new ArrayList<>();
 
     public ContainerOpenVertical(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         super(getPoints(possition), possition, 128, 256, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container1"));
     }
-    
+
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(15 + possition.getCoordX(), 248 + possition.getCoordY()));
@@ -54,7 +55,7 @@ public class ContainerOpenVertical extends GameStaticObject {
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
         paintAllMinigunHitsIntoSimpleBox();
     }
-    
+
     private void paintAllMinigunHitsIntoSimpleBox() {
         Iterator<MinigunHitIntoStaticObject> iterator = allHitsIntoBox.iterator();
         while (iterator.hasNext()) {
@@ -84,5 +85,9 @@ public class ContainerOpenVertical extends GameStaticObject {
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
         allHitsIntoBox.add(new MinigunHitIntoStaticObject(intersectionPoint, graphicsContext, monitorWindow));
+    }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 }

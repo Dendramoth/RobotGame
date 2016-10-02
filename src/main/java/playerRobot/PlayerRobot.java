@@ -10,6 +10,7 @@ import GameObject.GameStaticObject;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
@@ -234,15 +235,15 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     public boolean detectCollision(Shape shape) {
         return false;
     }
-    
+
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         Polygon playerRobotPolygon = createPolygonForColisionDetection();
         Shape intersect = Shape.intersect(shape, playerRobotPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
-        return new ResultOfDetectColisionWithProjectile(true, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(true, new Point(0, 0));
     }
 
     public void setShieldActive(boolean shieldActive) {
@@ -274,6 +275,11 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
     }
 
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+        removeHitPoints(projectile.getDamage()); 
+    }
+
     public int getMaxHitPoints() {
         return maxHitPoints;
     }
@@ -281,5 +287,5 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     public void setMaxHitPoints(int maxHitPoints) {
         this.maxHitPoints = maxHitPoints;
     }
-    
+
 }

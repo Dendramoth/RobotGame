@@ -8,6 +8,7 @@ package EnviromentObjects.Cliffs;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ import javafx.scene.shape.Shape;
  *
  * @author Dendra
  */
-public class CliffHorizontalReversed extends GameStaticObject{
+public class CliffHorizontalReversed extends GameStaticObject {
+
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffHorizontalReversed(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
@@ -39,7 +41,7 @@ public class CliffHorizontalReversed extends GameStaticObject{
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
-    //    createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
+        //    createPolygonForDetection(playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 
     @Override
@@ -51,10 +53,10 @@ public class CliffHorizontalReversed extends GameStaticObject{
         }
         return true;
     }
-    
+
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
-        return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
     }
 
     @Override
@@ -66,12 +68,16 @@ public class CliffHorizontalReversed extends GameStaticObject{
         pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
         createPolygon(pointsForDetection);
     }
-    
+
     @Override
     public void doOnCollision() {
     }
 
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
+    }
+
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 }

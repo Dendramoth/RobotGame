@@ -8,6 +8,7 @@ package EnviromentObjects.Cliffs;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
+import Projectiles.Projectile;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -77,6 +78,10 @@ public class CliffBottomLeft extends GameStaticObject{
 
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
+    }
+    
+    @Override
+    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
     
     
