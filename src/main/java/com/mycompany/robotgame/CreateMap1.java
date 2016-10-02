@@ -127,7 +127,7 @@ public class CreateMap1 {
     public void generateGameMapBorders(GridTable gridTable) {
         CliffBottomLeft cliffBottomLeft = new CliffBottomLeft(new Point(2015, 9000), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffBottomLeft);
-        CliffBottomRight cliffBottomRight = new CliffBottomRight(new Point(6400, 9000), 256, 256, graphicsContext, monitorWindow);
+        CliffBottomRight cliffBottomRight = new CliffBottomRight(new Point(8400, 9000), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffBottomRight);
         CliffTopRight cliffTopRight = new CliffTopRight(new Point(8400, 4648), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffTopRight);
