@@ -7,16 +7,13 @@ package Projectiles;
 
 import Enemy.Enemy;
 import Enemy.SpiderRobot;
-import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import com.mycompany.robotgame.GameDynamicEnviroment;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
-import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 /**
@@ -30,7 +27,7 @@ public class SpiderLaser extends Projectile {
     private GameDynamicEnviroment gameDynamicEnviroment;
 
     public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
-        super(5, graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
+        super(1, graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
         this.spiderRobot = (SpiderRobot) enemy;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
     }
@@ -140,7 +137,9 @@ public class SpiderLaser extends Projectile {
 
     @Override
     public Shape getProjectileShape() {
-        return new Line(worldPossition.getCoordX(), worldPossition.getCoordY(), worldPossition.getCoordX() + 1, worldPossition.getCoordY());
+        double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
+        double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
+        return new Line(worldPossition.getCoordX(), worldPossition.getCoordY(), endPositionX, endPositionY);
     }
 
     @Override
