@@ -130,12 +130,31 @@ public class SpiderLaser extends Projectile {
 
     @Override
     public void doOnCollision(Point collisionPoint) {
-        // nothing
+        double distanceFromIntersection = Math.sqrt(Math.pow(worldPossition.getCoordX() - collisionPoint.getCoordX(), 2) + Math.pow(worldPossition.getCoordY() - collisionPoint.getCoordY(), 2));
+        System.out.println(distanceFromIntersection);
+        if (distanceFromIntersection < 96){
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser11");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser12");
+        } else if (distanceFromIntersection >= 96 && distanceFromIntersection < 128){
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser21");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser22");
+        } else if (distanceFromIntersection >= 128 && distanceFromIntersection < 160){
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser31");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser32");
+        } else if (distanceFromIntersection >= 160 && distanceFromIntersection < 192){
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser41");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser42");
+        } else if (distanceFromIntersection >= 192 && distanceFromIntersection < 224){
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser51");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser52");
+        } else {
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser61");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser62");
+        }
     }
 
     @Override
     public void doOnBeingHitByMinigun(Point intersectionPoint) {
-        // nothing
     }
 
     @Override

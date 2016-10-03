@@ -273,6 +273,42 @@ import javafx.scene.media.AudioClip;
         
         image = new Image("/SpiderRobot/Laser/walker_tower_laser_2.png", 512, 512, false, false);
         mapOfAllImages.put("spiderLaser2", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_11.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser11", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_12.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser12", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_21.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser21", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_22.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser22", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_31.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser31", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_32.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser32", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_41.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser41", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_42.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser42", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_51.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser51", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_52.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser52", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_61.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser61", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_62.png", 512, 512, false, false);
+        mapOfAllImages.put("spiderLaser62", image);
     }
     
     private void loadSpiderEnergyShock(){
