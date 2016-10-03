@@ -78,7 +78,7 @@ public class RockLargeTwo extends GameStaticObject {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
         // nothing
     }
 

@@ -125,7 +125,7 @@ public class Rocket extends Projectile {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
         rocketTimout = 0;
     }
 

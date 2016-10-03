@@ -108,7 +108,7 @@ public class Bomb extends Projectile {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
         // do nothing
     }
 

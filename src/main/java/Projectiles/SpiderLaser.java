@@ -13,6 +13,7 @@ import com.mycompany.robotgame.GameDynamicEnviroment;
 import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
@@ -25,6 +26,8 @@ public class SpiderLaser extends Projectile {
     private int laserCounter = 0;
     private SpiderRobot spiderRobot;
     private GameDynamicEnviroment gameDynamicEnviroment;
+    private Image projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+    private Image projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
 
     public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
         super(1, graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
@@ -54,51 +57,51 @@ public class SpiderLaser extends Projectile {
     @Override
     public void paintGameObject() {
         if (laserCounter < 5) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 5 && laserCounter < 10) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 10 && laserCounter < 15) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 15 && laserCounter < 20) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 20 && laserCounter < 25) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 25 && laserCounter < 30) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 30 && laserCounter < 35) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 35 && laserCounter < 40) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 40 && laserCounter < 45) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 45 && laserCounter < 50) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 50 && laserCounter < 55) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 55 && laserCounter < 60) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 60 && laserCounter < 65) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 65 && laserCounter < 70) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 70 && laserCounter < 75) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 75 && laserCounter < 80) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 80 && laserCounter < 85) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 85 && laserCounter < 90) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 95 && laserCounter < 100) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 100 && laserCounter < 105) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else if (laserCounter >= 105 && laserCounter < 110) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         } else if (laserCounter >= 110 && laserCounter < 115) {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+            projectileImage = projectileImageB;
         } else {
-            projectileImage = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
+            projectileImage = projectileImageA;
         }
 
         if (laserCounter % 5 == 0) {
@@ -126,7 +129,7 @@ public class SpiderLaser extends Projectile {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
         // nothing
     }
 

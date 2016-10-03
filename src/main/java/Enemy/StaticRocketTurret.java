@@ -201,7 +201,7 @@ public class StaticRocketTurret extends Enemy {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
     }
 
     @Override

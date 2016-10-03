@@ -70,7 +70,7 @@ public class CliffHorizontalReversed extends GameStaticObject {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
     }
 
     @Override

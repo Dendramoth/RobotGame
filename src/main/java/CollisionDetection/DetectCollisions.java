@@ -9,6 +9,7 @@ import Enemy.Enemy;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkTwo;
 import GameObject.GameObjectWithDistanceDetection;
+import GameObject.Point;
 import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
 import Projectiles.Projectile;
@@ -76,7 +77,7 @@ public class DetectCollisions {
                 EvilDroneMarkTwo evilDroneMarkTwo = (EvilDroneMarkTwo) enemy;
                 double distance = Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordX() - playerRobot.getWorldPossition().getCoordX()) + Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordY() - playerRobot.getWorldPossition().getCoordY());
                 if (distance < 52) {
-                    evilDroneMarkTwo.doOnCollision();
+                    evilDroneMarkTwo.doOnCollision(new Point(0,0));
                     playerRobot.removeHitPoints(50);
                 }
             }
@@ -107,7 +108,7 @@ public class DetectCollisions {
                         if (projectile.isFiredFromWall() && projectile.getObjectToIgnore() == null) {
                             projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
                         } else {
-                            projectile.doOnCollision();
+                            projectile.doOnCollision(resultOfDetectColisionWithProjectile.getIntersectionPoint());
                             gameObjectWithDistanceDetection.doOnBeingHitByProjectile(resultOfDetectColisionWithProjectile.getIntersectionPoint(), projectile);
                         }
                     }

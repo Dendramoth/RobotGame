@@ -98,7 +98,7 @@ public class SpiderEnergyShock extends Projectile {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
         //explode
     }
 

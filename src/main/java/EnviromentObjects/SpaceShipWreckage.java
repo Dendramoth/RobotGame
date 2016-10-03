@@ -91,7 +91,7 @@ public class SpaceShipWreckage extends GameStaticObject {
     }
 
     @Override
-    public void doOnCollision() {
+    public void doOnCollision(Point collisionPoint) {
     }
 
     @Override
