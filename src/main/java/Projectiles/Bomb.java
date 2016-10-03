@@ -23,6 +23,7 @@ import javafx.scene.shape.Shape;
 public class Bomb extends Projectile {
 
     private int bombExplosionAnimationCounter = 0;
+    private boolean explodeBomb = false;
 
     public Bomb(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, boolean firedFromWall, MonitorWindow monitorWindow) {
         super(25, graphicsContext, angleOfFiredShot, position, enemy, 64, 64, firedFromWall, monitorWindow);
@@ -35,7 +36,11 @@ public class Bomb extends Projectile {
 
     @Override
     public boolean hasProjectileReachedDestination() {
-        return true; //explode bomb imidiately
+        if (explodeBomb == false){
+            explodeBomb = true;
+            return false;
+        }
+        return true;
     }
 
     @Override
