@@ -29,6 +29,13 @@ import EnviromentObjects.InnerFortressWallNorth;
 import EnviromentObjects.InnerFortressWallSouth;
 import EnviromentObjects.OuterFortressWallsEast;
 import EnviromentObjects.OuterFortressWallsWest;
+import EnviromentObjects.Roads.RoadSmooth;
+import EnviromentObjects.Roads.RoadSouthBridge;
+import EnviromentObjects.Roads.RoadStraight;
+import EnviromentObjects.Roads.RoadStraightBreaks;
+import EnviromentObjects.Roads.RoadStraightBurns;
+import EnviromentObjects.Roads.RoadStraightCracks;
+import EnviromentObjects.Roads.RoadStraightCrater;
 import EnviromentObjects.Rocks.RockLargeOne;
 import EnviromentObjects.Rocks.RockLargeTwo;
 import EnviromentObjects.Rocks.RockMediumOne;
@@ -122,6 +129,21 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(craterSmallThree);
         CraterMedium craterMedium = new CraterMedium(new Point(5200,8350), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterMedium);
+        
+        RoadSouthBridge roadSouthBridge = new RoadSouthBridge(new Point(5200,11500), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadSouthBridge);
+        RoadSmooth roadSmooth = new RoadSmooth(new Point(5200,11076), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadSmooth);
+        RoadStraight roadStraight = new RoadStraight(new Point(5200,10652), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight);
+        RoadStraightBreaks roadStraightBreaks = new RoadStraightBreaks(new Point(5200,10228), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightBreaks);
+        RoadStraightBurns roadStraightBurns = new RoadStraightBurns(new Point(5200,9804), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightBurns);
+        RoadStraightCracks roadStraightCracks = new RoadStraightCracks(new Point(5200,9380), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightCracks);
+        RoadStraightCrater roadStraightCrater = new RoadStraightCrater(new Point(5200,8956), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightCrater);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
