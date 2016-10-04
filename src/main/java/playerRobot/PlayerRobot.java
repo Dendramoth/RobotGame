@@ -239,11 +239,33 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         Polygon playerRobotPolygon = createPolygonForColisionDetection();
+        Point intersectionPoint = new Point(0,0);
+        
         Shape intersect = Shape.intersect(shape, playerRobotPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
-        return new ResultOfDetectColisionWithProjectile(true, new Point(0, 0));
+        Point possibleIntersectionOne = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMaxY());
+        Point possibleIntersectionTwo = new Point(intersect.getLayoutBounds().getMinX(), intersect.getLayoutBounds().getMaxY());
+        Point possibleIntersectionThree = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMinY());
+        Point possibleIntersectionFour = new Point(intersect.getLayoutBounds().getMinX(), intersect.getLayoutBounds().getMinY());
+        
+        double distancePointOne = Math.abs(positionOfColidingObject.getCoordX() - possibleIntersectionOne.getCoordX()) + Math.abs(positionOfColidingObject.getCoordY() - possibleIntersectionOne.getCoordY());
+        double distancePointTwo = Math.abs(positionOfColidingObject.getCoordX() - possibleIntersectionTwo.getCoordX()) + Math.abs(positionOfColidingObject.getCoordY() - possibleIntersectionTwo.getCoordY());
+        double distancePointThree = Math.abs(positionOfColidingObject.getCoordX() - possibleIntersectionThree.getCoordX()) + Math.abs(positionOfColidingObject.getCoordY() - possibleIntersectionThree.getCoordY());
+        double distancePointFour = Math.abs(positionOfColidingObject.getCoordX() - possibleIntersectionFour.getCoordX()) + Math.abs(positionOfColidingObject.getCoordY() - possibleIntersectionFour.getCoordY());
+
+        if (distancePointOne <= distancePointTwo && distancePointOne <= distancePointThree && distancePointOne <= distancePointFour) {
+            intersectionPoint = possibleIntersectionOne;
+        } else if(distancePointTwo <= distancePointOne && distancePointTwo <= distancePointThree && distancePointTwo <= distancePointFour){
+            intersectionPoint = possibleIntersectionTwo;
+        } else if (distancePointThree <= distancePointOne && distancePointThree <= distancePointTwo && distancePointThree <= distancePointFour){
+            intersectionPoint = possibleIntersectionThree;
+        }else{
+            intersectionPoint = possibleIntersectionFour;
+        }
+        
+        return new ResultOfDetectColisionWithProjectile(true, intersectionPoint);
     }
 
     public void setShieldActive(boolean shieldActive) {
