@@ -8,7 +8,6 @@ package MapGridTable;
 import GameObject.CornerPointsOfObject;
 import GameObject.GamePrimitiveObject;
 import GameObject.GameStaticObject;
-import GameObject.Point;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.HashSet;
@@ -28,7 +27,7 @@ public class GridTable {
     private final int cellVerticalVisibility = 2;
     private final int cellHorizontalVisibility = 4;
     private final int mapWidth = 10240;
-    private final int mapHeigh = 10240;
+    private final int mapHeigh = 18000;
     private final int cellCountX;
     private final int cellCountY;
     private final GridCell gridCellField[][];
