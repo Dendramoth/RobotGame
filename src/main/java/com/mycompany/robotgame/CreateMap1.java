@@ -76,7 +76,7 @@ public class CreateMap1 {
     public void generatedObjectForGame(GridTable gridTable) {
         generatedObjectsForGameWithoutCollision(gridTable);
         
-        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(4048, 8216), 512, 512, graphicsContext, monitorWindow);
+        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(6431, 8040), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
         
         OuterFortressWallsWest outerFortressWallsWest = new OuterFortressWallsWest(new Point(3600,6000), 1536, 1536, graphicsContext, monitorWindow);
@@ -88,7 +88,7 @@ public class CreateMap1 {
         InnerFortressWallSouth innerFortressWallSouth = new InnerFortressWallSouth(new Point(4100,7000), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth);
         
-        SimpleBox simpleBox = new SimpleBox(new Point(4000, 7600), graphicsContext, monitorWindow);
+        SimpleBox simpleBox = new SimpleBox(new Point(5215, 4200), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox);
         BoxTriangle triangleBox = new BoxTriangle(new Point(4000, 7800), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(triangleBox);
@@ -97,21 +97,27 @@ public class CreateMap1 {
         ContainerOpenVertical containerOpenVertical = new ContainerOpenVertical(new Point(3300, 8300), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(containerOpenVertical);
         
-        RockMediumOne rockMediumOne = new RockMediumOne(new Point(5000, 7900), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(rockMediumOne);
-        RockMediumTwo rockMediumTwo = new RockMediumTwo(new Point(5200, 7900), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(rockMediumTwo);
-        RockMediumThree rockMediumThree = new RockMediumThree(new Point(5400, 7900), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(rockMediumThree);
-        RockLargeOne rockLargeOne = new RockLargeOne(new Point(5000, 7600), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(rockLargeOne);
-        RockLargeTwo rockLargeTwo = new RockLargeTwo(new Point(5300, 7600), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(rockLargeTwo);
+        RockMediumOne rockMediumOne1 = new RockMediumOne(new Point(2655,10856), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumOne1);
+        RockMediumOne rockMediumOne2 = new RockMediumOne(new Point(2847,10280), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumOne2);
+        RockMediumTwo rockMediumTwo1 = new RockMediumTwo(new Point(2463,10472), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumTwo1);
+        RockMediumTwo rockMediumTwo2 = new RockMediumTwo(new Point(3295,10472), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumTwo2);
+        RockMediumTwo rockMediumTwo3 = new RockMediumTwo(new Point(3999,11368), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumTwo3);
+        RockMediumThree rockMediumThree1 = new RockMediumThree(new Point(3295,10216), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumThree1);
+        RockLargeOne rockLargeOne1 = new RockLargeOne(new Point(2911,10664), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeOne1);
+        RockLargeTwo rockLargeTwo1 = new RockLargeTwo(new Point(4319,11496), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeTwo1);
         
         Satelite satelite = new Satelite(new Point(4228,6600), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
         
-        DinosaurusSkeleton dinosaurusSkeleton = new DinosaurusSkeleton(new Point(2600,8100), graphicsContext, monitorWindow);
+        DinosaurusSkeleton dinosaurusSkeleton = new DinosaurusSkeleton(new Point(3679,9640), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(dinosaurusSkeleton);
         
         DroneBarracks droneBarracks = new DroneBarracks(new Point(3000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, this.gridTable);
@@ -119,31 +125,57 @@ public class CreateMap1 {
     }
     
     private void generatedObjectsForGameWithoutCollision(GridTable gridTable){
-        CraterBig craterBig = new CraterBig(new Point(5000,8500), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(craterBig);
-        CraterSmallOne craterSmallOne = new CraterSmallOne(new Point(5000,8250), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(craterSmallOne);
-        CraterSmallTwo craterSmallTwo = new CraterSmallTwo(new Point(5100,8250), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(craterSmallTwo);
-        CraterSmallThree craterSmallThree = new CraterSmallThree(new Point(5200,8250), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(craterSmallThree);
+        CraterSmallOne craterSmallOne1 = new CraterSmallOne(new Point(2591,11304), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne1);
+        CraterSmallOne craterSmallOne2 = new CraterSmallOne(new Point(2463,10984), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne2);
+        CraterSmallTwo craterSmallTwo1 = new CraterSmallTwo(new Point(2719,11560), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallTwo1);
+        CraterSmallTwo craterSmallTwo2 = new CraterSmallTwo(new Point(3103,10472), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallTwo2);
+        CraterSmallThree craterSmallThree1 = new CraterSmallThree(new Point(2719,11816), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallThree1);
+        CraterSmallThree craterSmallThree2 = new CraterSmallThree(new Point(2847,10536), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallThree2);
+        CraterBig craterBig1 = new CraterBig(new Point(3615,10856), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig1);
         CraterMedium craterMedium = new CraterMedium(new Point(5200,8350), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterMedium);
         
-        RoadSouthBridge roadSouthBridge = new RoadSouthBridge(new Point(5200,11500), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(roadSouthBridge);
-        RoadSmooth roadSmooth = new RoadSmooth(new Point(5200,11076), graphicsContext, monitorWindow);
+        RoadSmooth roadSmooth = new RoadSmooth(new Point(4995,5182), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(roadSmooth);
-        RoadStraight roadStraight = new RoadStraight(new Point(5200,10652), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(roadStraight);
-        RoadStraightBreaks roadStraightBreaks = new RoadStraightBreaks(new Point(5200,10228), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(roadStraightBreaks);
-        RoadStraightBurns roadStraightBurns = new RoadStraightBurns(new Point(5200,9804), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(roadStraightBurns);
-        RoadStraightCracks roadStraightCracks = new RoadStraightCracks(new Point(5200,9380), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(roadStraightCracks);
-        RoadStraightCrater roadStraightCrater = new RoadStraightCrater(new Point(5200,8956), graphicsContext, monitorWindow);
+        RoadStraightCrater roadStraightCrater2 = new RoadStraightCrater(new Point(4995,5606), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightCrater2);
+        RoadStraight roadStraight7 = new RoadStraight(new Point(4995,6030), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight7);
+        RoadStraightBurns roadStraightBurns3 = new RoadStraightBurns(new Point(4995,6454), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightBurns3);
+        RoadStraightBreaks roadStraightBreaks2 = new RoadStraightBreaks(new Point(4995,6878), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightBreaks2);
+        RoadStraight roadStraight6 = new RoadStraight(new Point(4995,7302), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight6);
+        RoadStraightCracks roadStraightCracks2 = new RoadStraightCracks(new Point(4995,7726), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightCracks2);
+        RoadStraight roadStraight5 = new RoadStraight(new Point(4995,8150), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight5);
+        RoadStraightCrater roadStraightCrater = new RoadStraightCrater(new Point(4995,8574), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(roadStraightCrater);
+        RoadStraight roadStraight4 = new RoadStraight(new Point(4995,8998), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight4);
+        RoadStraight roadStraight3 = new RoadStraight(new Point(4995,9422), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight3);
+        RoadStraightCracks roadStraightCracks = new RoadStraightCracks(new Point(4995,9846), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightCracks);
+        RoadStraightBreaks roadStraightBreaks = new RoadStraightBreaks(new Point(4995,10270), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightBreaks);
+        RoadStraight roadStraight2 = new RoadStraight(new Point(4995,10694), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight2);
+        RoadStraight roadStraight = new RoadStraight(new Point(4995,11118), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraight);
+        RoadStraightBurns roadStraightBurns = new RoadStraightBurns(new Point(4995,11542), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadStraightBurns);
+        RoadSouthBridge roadSouthBridge = new RoadSouthBridge(new Point(4995,11966), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(roadSouthBridge);
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
