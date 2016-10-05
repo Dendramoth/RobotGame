@@ -401,6 +401,9 @@ public class LoadAllResources {
     private void loadCraters() {
         Image image = new Image("/Craters/krater_128_2.png", 128, 128, false, false);
         mapOfAllImages.put("crater128", image);
+        
+        image = new Image("/Craters/krater_128_1.png", 128, 128, false, false);
+        mapOfAllImages.put("crater128_2", image);
 
         image = new Image("/Craters/krater_256.png", 256, 256, false, false);
         mapOfAllImages.put("crater256", image);
