@@ -47,6 +47,7 @@ public class SpiderRobot extends Enemy {
     private int shockCounter = 0;
     private boolean damaged = false;
     private final GameDynamicEnviroment gameDynamicEnviroment;
+    private List<PathfindingPoint> reachedPoints = new ArrayList<PathfindingPoint>();
 
     public SpiderRobot(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer, GameDynamicEnviroment gameDynamicEnviroment) {
         super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
@@ -57,12 +58,46 @@ public class SpiderRobot extends Enemy {
 
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
+        if (distanceFromPlayer(playerPossitionX, playerPossitionY) > 400) {
+            moveSpiderToPlayer(playerPossitionX, playerPossitionY);
+        } else if (reachedPoints.size() > 0) {
+            moveSpiderFromPlayer(playerPossitionX, playerPossitionY);
+        }
+    }
+
+    private void moveSpiderFromPlayer(double playerPossitionX, double playerPossitionY) {
+        //rotate turret to player
+        double deltaXToPlayer = playerPossitionX - worldPossition.getCoordX();
+        double deltaYToPlayer = playerPossitionY - worldPossition.getCoordY();
+        angleOfSpiderTower = (angleOfSpiderTower + 360) % 360;
+        double angleToPlayer = (Math.toDegrees(Math.atan2(deltaXToPlayer, -deltaYToPlayer)) + 360) % 360;
+        if (((angleOfSpiderTower - angleToPlayer > 0) && (angleOfSpiderTower - angleToPlayer < 180)) || (angleOfSpiderTower - angleToPlayer < -180)) {
+            angleOfSpiderTower = angleOfSpiderTower + turretAngleSpeed;
+        } else {
+            angleOfSpiderTower = angleOfSpiderTower - turretAngleSpeed;
+        }
+
+        //move from player
+        double deltaX = reachedPoints.get(0).getCoordX() - worldPossition.getCoordX();
+        double deltaY = reachedPoints.get(0).getCoordY() - worldPossition.getCoordY();
+        angleOfSpider = calculateAngleBetweenDroneAndNextPointInPathfinding(deltaX, deltaY) + 90;
+
+        worldPossition.setCoordX(worldPossition.getCoordX() - Math.cos(Math.toRadians(angleOfSpider)) * movementSpeed);
+        worldPossition.setCoordY(worldPossition.getCoordY() - Math.sin(Math.toRadians(angleOfSpider)) * movementSpeed);
+        removePointThatWasReachedFromReachedPoints();
+    }
+
+    private void moveSpiderToPlayer(double playerPossitionX, double playerPossitionY) {
         timerForRecalculationOfPathfinding++;
         if (pathPoints.size() < 1 || timerForRecalculationOfPathfinding >= 20) {
             timerForRecalculationOfPathfinding = 0;
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
+            reachedPoints.add(0, new PathfindingPoint(worldPossition.getCoordX(), worldPossition.getCoordY()));
+            if (reachedPoints.size() >= 30){
+                reachedPoints.remove(30);
+            }
         }
-        
+
         double deltaXToPlayer = playerPossitionX - worldPossition.getCoordX();
         double deltaYToPlayer = playerPossitionY - worldPossition.getCoordY();
         angleOfSpiderTower = (angleOfSpiderTower + 360) % 360;
@@ -82,11 +117,28 @@ public class SpiderRobot extends Enemy {
         removePointThatWasReached();
     }
 
+    private double distanceFromPlayer(double playerPossitionX, double playerPossitionY) {
+        return Math.abs(worldPossition.getCoordX() - playerPossitionX) + Math.abs(worldPossition.getCoordY() - playerPossitionY);
+    }
+
     private void removePointThatWasReached() {
         PathfindingPoint point = pathPoints.get(0);
         if ((point.getCoordX() > worldPossition.getCoordX() - 3 && point.getCoordX() < worldPossition.getCoordX() + 3)
                 && (point.getCoordY() > worldPossition.getCoordY() - 3 && point.getCoordY() < worldPossition.getCoordY() + 3)) { //point was reached
+            reachedPoints.add(0, pathPoints.get(0));
+            if (reachedPoints.size() >= 30) {
+                reachedPoints.remove(30);
+            }
             pathPoints.remove(0);
+        }
+    }
+
+    private void removePointThatWasReachedFromReachedPoints() {
+        PathfindingPoint point = reachedPoints.get(0);
+        if ((point.getCoordX() > worldPossition.getCoordX() - 3 && point.getCoordX() < worldPossition.getCoordX() + 3)
+                && (point.getCoordY() > worldPossition.getCoordY() - 3 && point.getCoordY() < worldPossition.getCoordY() + 3)) { //point was reached
+            pathPoints.add(0, pathPoints.get(0));
+            reachedPoints.remove(0);
         }
     }
 
@@ -120,9 +172,9 @@ public class SpiderRobot extends Enemy {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
-        return new ResultOfDetectColisionWithProjectile(true, new Point(0,0));
+        return new ResultOfDetectColisionWithProjectile(true, new Point(0, 0));
     }
 
     private void createPolygonForDetection() {
@@ -189,18 +241,16 @@ public class SpiderRobot extends Enemy {
             } else {
                 spiderTurretImgCounter = 0;
             }
-        }else{
-            if (spiderTurretImgCounter < 12) {
-                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged1");
-            } else if (spiderTurretImgCounter >= 12 && spiderTurretImgCounter < 24) {
-                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged2");
-            } else if (spiderTurretImgCounter >= 24 && spiderTurretImgCounter < 36) {
-                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged3");
-            } else if (spiderTurretImgCounter >= 36 && spiderTurretImgCounter < 48) {
-                enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged4");
-            } else {
-                spiderTurretImgCounter = 0;
-            }
+        } else if (spiderTurretImgCounter < 12) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged1");
+        } else if (spiderTurretImgCounter >= 12 && spiderTurretImgCounter < 24) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged2");
+        } else if (spiderTurretImgCounter >= 24 && spiderTurretImgCounter < 36) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged3");
+        } else if (spiderTurretImgCounter >= 36 && spiderTurretImgCounter < 48) {
+            enemyTurretImage = LoadAllResources.getMapOfAllImages().get("spiderTowerDamaged4");
+        } else {
+            spiderTurretImgCounter = 0;
         }
         graphicsContext.save();
         graphicsContext.translate(worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());
@@ -243,7 +293,7 @@ public class SpiderRobot extends Enemy {
         graphicsContext.rotate(angleOfSpiderTower);
         graphicsContext.drawImage(enemyImage, -enemyImage.getWidth() / 2, -enemyImage.getHeight() / 2);
         graphicsContext.restore();
-        
+
         explodingTimer++;
         return true;
     }
@@ -293,11 +343,11 @@ public class SpiderRobot extends Enemy {
         hitPoints--;
         if (hitPoints < 1) {
             alive = false;
-        }else if (hitPoints < damagedStateTreshold){
+        } else if (hitPoints < damagedStateTreshold) {
             damaged = true;
         }
     }
-    
+
     @Override
     public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
         hitPoints = hitPoints - projectile.getDamage();
