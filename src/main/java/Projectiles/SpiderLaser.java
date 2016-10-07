@@ -131,7 +131,7 @@ public class SpiderLaser extends Projectile {
     @Override
     public void doOnCollision(Point collisionPoint) {
         double distanceFromIntersection = Math.sqrt(Math.pow(worldPossition.getCoordX() - collisionPoint.getCoordX(), 2) + Math.pow(worldPossition.getCoordY() - collisionPoint.getCoordY(), 2));
-        System.out.println(distanceFromIntersection);
+        //   System.out.println(distanceFromIntersection);
         if (distanceFromIntersection < 96){
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser11");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser12");

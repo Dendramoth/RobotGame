@@ -109,7 +109,7 @@ public class DetectCollisions {
                             projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
                         } else {
                             projectile.doOnCollision(resultOfDetectColisionWithProjectile.getIntersectionPoint());
-                            System.out.println(resultOfDetectColisionWithProjectile.getIntersectionPoint().getCoordX() + " " + resultOfDetectColisionWithProjectile.getIntersectionPoint().getCoordY());
+                            // System.out.println(resultOfDetectColisionWithProjectile.getIntersectionPoint().getCoordX() + " " + resultOfDetectColisionWithProjectile.getIntersectionPoint().getCoordY());
                             gameObjectWithDistanceDetection.doOnBeingHitByProjectile(resultOfDetectColisionWithProjectile.getIntersectionPoint(), projectile);
                         }
                     }
