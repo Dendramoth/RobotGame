@@ -14,7 +14,7 @@ import playerRobot.PlayerRobot;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public class BarInterfaceHandler {
 

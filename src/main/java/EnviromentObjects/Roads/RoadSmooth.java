@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public class RoadSmooth extends GamePrimitiveObject {
     private final Image roadImage = LoadAllResources.getMapOfAllImages().get("Road_end_north_smooth");

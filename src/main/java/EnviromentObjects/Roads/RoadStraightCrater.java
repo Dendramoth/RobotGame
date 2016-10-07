@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public class RoadStraightCrater extends GamePrimitiveObject {
     private final Image roadImage = LoadAllResources.getMapOfAllImages().get("Road_straight_north_south_crater");

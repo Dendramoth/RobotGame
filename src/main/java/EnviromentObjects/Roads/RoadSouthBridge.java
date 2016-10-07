@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public class RoadSouthBridge extends GamePrimitiveObject {
     private final Image roadImage = LoadAllResources.getMapOfAllImages().get("Road_end_south_bridge");

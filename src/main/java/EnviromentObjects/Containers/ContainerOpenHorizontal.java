@@ -19,7 +19,7 @@ import javafx.scene.shape.Shape;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public class ContainerOpenHorizontal extends GameStaticObject {
 

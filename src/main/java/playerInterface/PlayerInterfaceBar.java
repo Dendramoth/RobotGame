@@ -12,7 +12,7 @@ import playerRobot.PlayerRobot;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public abstract class PlayerInterfaceBar {
     

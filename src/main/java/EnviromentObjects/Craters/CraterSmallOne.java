@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public class CraterSmallOne extends GamePrimitiveObject {
     private final Image craterImage = LoadAllResources.getMapOfAllImages().get("crater64_1");

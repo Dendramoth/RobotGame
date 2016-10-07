@@ -18,7 +18,7 @@ import javafx.scene.shape.Shape;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
 

@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 
 /**
  *
- * @author styma01
+ * @author Dendra
  */
 public interface ObjectWithCollision{
     public abstract boolean detectCollision(Shape shape);
