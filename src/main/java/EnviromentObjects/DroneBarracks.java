@@ -34,14 +34,12 @@ public class DroneBarracks extends GameStaticObject {
     private int dispatchingDronesCounter = 0;
     private PlayerRobot playerRobot;
     private EnemyContainer enemyContainer;
-    private GraphicsContext enemyGraphicsContext;
     private GridTable gridTable;
 
-    public DroneBarracks(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GraphicsContext enemyGraphicsContext, GridTable gridTable) {
+    public DroneBarracks(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GridTable gridTable) {
         super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("droneBarracks1"));
         this.playerRobot = playerRobot;
         this.enemyContainer = enemyContainer;
-        this.enemyGraphicsContext = enemyGraphicsContext;
         this.gridTable = gridTable;
     }
 
@@ -104,7 +102,7 @@ public class DroneBarracks extends GameStaticObject {
                 dispatchTheDronesSound.play();
             }
             if (dispatchingDronesCounter % 120 == 0) {
-                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 115), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
+                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 115), 64, 64, 2, 15, 20, graphicsContext, gridTable, monitorWindow));
             }
             if (dispatchingDronesCounter > 750) {
                 dispatchingDrones = false;

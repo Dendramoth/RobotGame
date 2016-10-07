@@ -182,7 +182,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
 
     @Override
     public void paintGameObject() {
-        robotGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+    //    robotGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         Point monitorPosition = new Point(worldPossition.getCoordX() - monitorWindow.getPositionInWorld().getCoordX(), worldPossition.getCoordY() - monitorWindow.getPositionInWorld().getCoordY());
 
         robotGraphicsContext.save();

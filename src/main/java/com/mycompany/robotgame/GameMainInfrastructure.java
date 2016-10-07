@@ -54,46 +54,41 @@ public class GameMainInfrastructure {
     private ProjectileContainer projectileContainer;
     private BarInterfaceHandler barInterfaceHandler;
     private boolean openInterfaceBar = true;
+    private GraphicsContext gameGraphicsContext;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
         changeCanvasWidthAndHeighToFullSize();
 
-        final Canvas baseCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
-        GraphicsContext enviromentGraphicsContext = baseCanvas.getGraphicsContext2D();
-        final Canvas enemiesCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
-        GraphicsContext enemyGraphicsContext = enemiesCanvas.getGraphicsContext2D();
-        final Canvas robotCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
-        GraphicsContext robotGraphicsContext = robotCanvas.getGraphicsContext2D();
+        final Canvas gameCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
+        gameGraphicsContext = gameCanvas.getGraphicsContext2D();
         final Canvas interfaceCanvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGH);
         GraphicsContext interfaceGraphicsContext = interfaceCanvas.getGraphicsContext2D();
 
-        gameCanvasPanel.getChildren().add(baseCanvas);
-        gameCanvasPanel.getChildren().add(enemiesCanvas);
-        gameCanvasPanel.getChildren().add(robotCanvas);
+        gameCanvasPanel.getChildren().add(gameCanvas);
         gameCanvasPanel.getChildren().add(interfaceCanvas);
 
         Point startMonitorWindowPos = new Point(4000, 8000);
         MonitorWindow monitorWindow = new MonitorWindow(startMonitorWindowPos);
-        gridTable = new GridTable(enviromentGraphicsContext, monitorWindow);
-        playerRobot = new PlayerRobot(robotGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
-        enemyContainer = new EnemyContainer(enemyGraphicsContext, gridTable, enviromentGraphicsContext, monitorWindow);
+        gridTable = new GridTable(gameGraphicsContext, monitorWindow);
+        playerRobot = new PlayerRobot(gameGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
+        enemyContainer = new EnemyContainer(gameGraphicsContext, gridTable, monitorWindow);
         projectileContainer = new ProjectileContainer();
 
-        gameDynamicEnviroment = new GameDynamicEnviroment(enviromentGraphicsContext, monitorWindow);
+        gameDynamicEnviroment = new GameDynamicEnviroment(gameGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer, projectileContainer);
 
         barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext, playerRobot);
 
         //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 256, 256, 2.3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
+        enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 256, 256, 2.3, 20, 30, gameGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
     //    enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 64, 64, 2, 20, 30, true, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 64, 64, 2, 20, 30, true, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 64, 64, 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 64, 64, 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
    //     enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        CreateMap1 createMap1 = new CreateMap1(enviromentGraphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, gridTable);
+        CreateMap1 createMap1 = new CreateMap1(gameGraphicsContext, monitorWindow, playerRobot, enemyContainer, gridTable);
         createMap1.generatedObjectForGame(gridTable);
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
@@ -104,7 +99,7 @@ public class GameMainInfrastructure {
 
         setUpMouseListeners(stage);
         setUpKeyboardListeners(stage);
-        setUpResizeListeners(stage, baseCanvas, robotCanvas, enemiesCanvas);
+        setUpResizeListeners(stage);
 
         buildAndSetGameLoop(stage);
 
@@ -146,7 +141,7 @@ public class GameMainInfrastructure {
         });
     }
 
-    private void setUpResizeListeners(Stage stage, final Canvas baseCanvas, final Canvas robotCanvas, final Canvas enemyCanvas) {
+    private void setUpResizeListeners(Stage stage) {
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -199,11 +194,13 @@ public class GameMainInfrastructure {
             public void handle(long now) {
                 windowPositionX = stage.getX();
                 windowPositionY = stage.getY();
+                
+                // clear the screen
+                gameGraphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
 
                 movePlayerRobot();
                 showHideInterface();
-                playerRobot.paintGameObject();
-                playerRobot.shootFromRobotTurret(mousePressed);
+                
                 gridTable.paintAllObjectsInMonitorWindow();
                 gameDynamicEnviroment.paintAllMinigunsHitsOnGround();
                 gameDynamicEnviroment.paintAllLaserHitsOnGround();
@@ -212,6 +209,9 @@ public class GameMainInfrastructure {
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition());
                 enemyContainer.paintAllDiingEnemies();
+                                
+                playerRobot.paintGameObject();
+                playerRobot.shootFromRobotTurret(mousePressed);
 
                 projectileContainer.moveAllProjectiles();
                 projectileContainer.paintAllProjectiles();

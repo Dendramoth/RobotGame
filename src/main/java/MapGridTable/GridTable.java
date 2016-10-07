@@ -58,7 +58,7 @@ public class GridTable {
     }
 
     public void paintAllObjectsInMonitorWindow() {
-        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+    //    graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
 
         int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
         int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);

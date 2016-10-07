@@ -24,16 +24,14 @@ import javafx.scene.canvas.GraphicsContext;
 public class EnemyContainer {
 
     private List<Enemy> enemyList = new ArrayList<>();
-    private List<Enemy> dyingEnemyList = new ArrayList<Enemy>();
-    private GraphicsContext graphicsContext;
-    private GridTable gridTable;
-    private GraphicsContext enviromentGraphicsContext;
-    private MonitorWindow monitorWindow;
+    private final List<Enemy> dyingEnemyList = new ArrayList<>();
+    private final GraphicsContext graphicsContext;
+    private final GridTable gridTable;
+    private final MonitorWindow monitorWindow;
 
-    public EnemyContainer(GraphicsContext graphicsContext, GridTable gridTable, GraphicsContext enviromentGraphicsContext, MonitorWindow monitorWindow) {
+    public EnemyContainer(GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
         this.graphicsContext = graphicsContext;
         this.gridTable = gridTable;
-        this.enviromentGraphicsContext = enviromentGraphicsContext;
         this.monitorWindow = monitorWindow;
     }
 
@@ -51,9 +49,9 @@ public class EnemyContainer {
             Enemy enemy = iterator.next();
             if (!enemy.isAlive()) {
                 if (enemy instanceof StaticRocketTurret){
-                    gridTable.insertGameObjectIntoGridCell(new DeadStaticRocketTurretBase(new Point(enemy.getWorldPossition().getCoordX() - 32, enemy.getWorldPossition().getCoordY() - 32), 64, 64, enviromentGraphicsContext, monitorWindow));
+                    gridTable.insertGameObjectIntoGridCell(new DeadStaticRocketTurretBase(new Point(enemy.getWorldPossition().getCoordX() - 32, enemy.getWorldPossition().getCoordY() - 32), 64, 64, graphicsContext, monitorWindow));
                 }else if (enemy instanceof SpiderRobot){
-                    gridTable.insertGameObjectIntoGridCell(new DeadSpiderRobot(new Point(enemy.getWorldPossition().getCoordX() - 64, enemy.getWorldPossition().getCoordY() - 64), 128, 128, enviromentGraphicsContext, monitorWindow));
+                    gridTable.insertGameObjectIntoGridCell(new DeadSpiderRobot(new Point(enemy.getWorldPossition().getCoordX() - 64, enemy.getWorldPossition().getCoordY() - 64), 128, 128, graphicsContext, monitorWindow));
                 }
                 
                 dyingEnemyList.add(enemy);
@@ -69,7 +67,7 @@ public class EnemyContainer {
     }
 
     public void paintEnemies(Point playerRobotWorldPossition) {
-        graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+        // graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         for (Enemy enemy : enemyList) {
             enemy.paintGameObject();
             

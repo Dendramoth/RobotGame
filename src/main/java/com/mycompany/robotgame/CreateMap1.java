@@ -62,15 +62,13 @@ public class CreateMap1 {
     private final MonitorWindow monitorWindow;
     private final PlayerRobot playerRobot;
     private final EnemyContainer enemyContainer;
-    private GraphicsContext enemyGraphicsContext;
     private GridTable gridTable;
 
-    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GraphicsContext enemyGraphicsContext, GridTable gridTable) {
+    public CreateMap1(GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GridTable gridTable) {
         this.graphicsContext = graphicsContext;
         this.monitorWindow = monitorWindow;
         this.playerRobot = playerRobot;
         this.enemyContainer = enemyContainer;
-        this.enemyGraphicsContext = enemyGraphicsContext;
         this.gridTable = gridTable;
     }
 
@@ -134,7 +132,7 @@ public class CreateMap1 {
         DinosaurusSkeleton dinosaurusSkeleton = new DinosaurusSkeleton(new Point(4063,9768), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(dinosaurusSkeleton);
         
-        DroneBarracks droneBarracks = new DroneBarracks(new Point(3000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot, enemyContainer, enemyGraphicsContext, this.gridTable);
+        DroneBarracks droneBarracks = new DroneBarracks(new Point(3000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot, enemyContainer, this.gridTable);
         gridTable.insertGameObjectIntoGridCell(droneBarracks);
     }
     
