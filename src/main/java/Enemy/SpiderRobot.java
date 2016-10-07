@@ -69,9 +69,20 @@ public class SpiderRobot extends Enemy {
             // if you have way to go back retreat from player, otherwise just rotate turret on player
             if (reachedPoints.size() > 0) {
                 moveSpiderFromPlayer(playerPossitionX, playerPossitionY);
-            }else{
+            } else {
                 rotateSpiderRobotTurretToPlayer(playerPossitionX, playerPossitionY);
             }
+        }
+        laserControler(distanceFromPlayer);
+    }
+
+    private void laserControler(double distanceFromPlayer) {
+        if (shockCounter < 320) {
+            shockCounter++;
+        }
+        if (distanceFromPlayer < 350 && shockCounter >= 320) {
+            shockCounter = 0;
+            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, 512, 512, monitorWindow, gameDynamicEnviroment));
         }
     }
 
@@ -225,12 +236,6 @@ public class SpiderRobot extends Enemy {
 
         paintSpiderTurret(monitorPossition);
         paintAllExplosionsEnemy();
-
-        shockCounter++;
-        if (shockCounter > 320) {
-            shockCounter = 0;
-            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, 512, 512, monitorWindow, gameDynamicEnviroment));
-        }
     }
 
     private void paintSpiderTurret(Point monitorPossition) {
