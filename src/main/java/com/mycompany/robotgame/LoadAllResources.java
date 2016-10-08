@@ -84,8 +84,32 @@ public class LoadAllResources {
         loadSkeletons();
         loadBomberAirplane();
         loadRoads();
+        loadDryLand();
 
         loadAllSounds();
+    }
+    
+    private void loadDryLand() {
+        Image image = new Image("/DryLand/Dry_land_horizontal.png", 512, 256, false, false);
+        mapOfAllImages.put("Dry_land_horizontal", image);
+
+        image = new Image("/DryLand/Dry_land_large_one.png", 512, 512, false, false);
+        mapOfAllImages.put("Dry_land_large_one", image);
+        
+        image = new Image("/DryLand/Dry_land_large_two.png", 512, 512, false, false);
+        mapOfAllImages.put("Dry_land_large_two", image);
+        
+        image = new Image("/DryLand/Dry_land_small_one.png", 256, 256, false, false);
+        mapOfAllImages.put("Dry_land_small_one", image);
+        
+        image = new Image("/DryLand/Dry_land_small_two.png", 256, 256, false, false);
+        mapOfAllImages.put("Dry_land_small_two", image);
+        
+        image = new Image("/DryLand/Dry_land_small_three.png", 256, 256, false, false);
+        mapOfAllImages.put("Dry_land_small_three", image);
+        
+        image = new Image("/DryLand/Dry_land_vertical.png", 256, 512, false, false);
+        mapOfAllImages.put("Dry_land_vertical", image);
     }
 
     private void loadRoads() {
