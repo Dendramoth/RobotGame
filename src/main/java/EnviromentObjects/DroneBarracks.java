@@ -102,7 +102,7 @@ public class DroneBarracks extends GameStaticObject {
                 dispatchTheDronesSound.play();
             }
             if (dispatchingDronesCounter % 120 == 0) {
-                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 115), 64, 64, 2, 15, 20, graphicsContext, gridTable, monitorWindow));
+                enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(worldPossition.getCoordX() + width / 2, worldPossition.getCoordY() + heigh - 115), 2, 15, 20, graphicsContext, gridTable, monitorWindow));
             }
             if (dispatchingDronesCounter > 750) {
                 dispatchingDrones = false;

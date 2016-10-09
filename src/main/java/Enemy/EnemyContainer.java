@@ -48,12 +48,12 @@ public class EnemyContainer {
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
             if (!enemy.isAlive()) {
-                if (enemy instanceof StaticRocketTurret){
+                if (enemy instanceof StaticRocketTurret) {
                     gridTable.insertGameObjectIntoGridCell(new DeadStaticRocketTurretBase(new Point(enemy.getWorldPossition().getCoordX() - 32, enemy.getWorldPossition().getCoordY() - 32), 64, 64, graphicsContext, monitorWindow));
-                }else if (enemy instanceof SpiderRobot){
+                } else if (enemy instanceof SpiderRobot) {
                     gridTable.insertGameObjectIntoGridCell(new DeadSpiderRobot(new Point(enemy.getWorldPossition().getCoordX() - 64, enemy.getWorldPossition().getCoordY() - 64), 128, 128, graphicsContext, monitorWindow));
                 }
-                
+
                 dyingEnemyList.add(enemy);
                 iterator.remove();
             }
@@ -66,11 +66,13 @@ public class EnemyContainer {
         }
     }
 
-    public void paintEnemies(Point playerRobotWorldPossition) {
+    public void paintEnemies(Point playerRobotWorldPossition, boolean paintingEnemiesAbovePlayer) {
         // graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         for (Enemy enemy : enemyList) {
-            enemy.paintGameObject();
-            
+            if ((enemy.isAbovePlayer() && paintingEnemiesAbovePlayer) || (!enemy.isAbovePlayer() && !paintingEnemiesAbovePlayer)) {
+                enemy.paintGameObject();
+            }
+
         }
     }
 

@@ -81,11 +81,11 @@ public class GameMainInfrastructure {
         barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext, playerRobot);
 
         //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 256, 256, 2.3, 20, 30, gameGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
-    //    enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, enemyGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 64, 64, 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 64, 64, 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
-   //     enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 2.3, 20, 30, gameGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
+    //    enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, gameGraphicsContext, gridTable, monitorWindow));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         CreateMap1 createMap1 = new CreateMap1(gameGraphicsContext, monitorWindow, playerRobot, enemyContainer, gridTable);
@@ -207,11 +207,16 @@ public class GameMainInfrastructure {
 
                 enemyContainer.testEnemiesAlive();
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
-                enemyContainer.paintEnemies(playerRobot.getWorldPossition());
+                //paint enemies under player robot
+                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), false);
                 enemyContainer.paintAllDiingEnemies();
                                 
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
+                
+                //paint enemies above player robot
+                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), true);
+                enemyContainer.paintAllDiingEnemies();
 
                 projectileContainer.moveAllProjectiles();
                 projectileContainer.paintAllProjectiles();

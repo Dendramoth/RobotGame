@@ -40,8 +40,8 @@ public class StaticRocketTurret extends Enemy {
     private final List<Point> pointsForDetection = new ArrayList<>();
     private ProjectileContainer projectileContainer;
 
-    public StaticRocketTurret(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, boolean turretOnWall, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
-        super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+    public StaticRocketTurret(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, boolean turretOnWall, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
+        super(possitionInWorld, false, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         this.projectileContainer = projectileContainer;
         this.turretOnWall = turretOnWall;
     }

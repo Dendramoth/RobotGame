@@ -38,8 +38,8 @@ public class EvilDroneMarkTwo extends Enemy{
     private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
     private final List<Point> pointsForDetection = new ArrayList<>();
 
-    public EvilDroneMarkTwo(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
-        super(possitionInWorld, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+    public EvilDroneMarkTwo(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+        super(possitionInWorld, false, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
     }
     
     @Override

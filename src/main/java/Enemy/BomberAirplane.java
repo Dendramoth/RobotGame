@@ -37,7 +37,7 @@ public class BomberAirplane extends Enemy {
     private boolean droppingBombs = false;
 
     public BomberAirplane(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer) {
-        super(possitionInWorld, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+        super(possitionInWorld, true, 64, 64, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         this.projectileContainer = projectileContainer;
         enemyImage = LoadAllResources.getMapOfAllImages().get("bomberIdle");
     }
