@@ -45,6 +45,9 @@ import EnviromentObjects.Rocks.RockMediumTwo;
 import EnviromentObjects.Satelite;
 import EnviromentObjects.Skeletons.DinosaurusSkeleton;
 import EnviromentObjects.SpaceShipWreckage;
+import EnviromentObjects.DryLand.DryLandLargeOne;
+import EnviromentObjects.DryLand.DryLandHorizontal;
+import EnviromentObjects.DryLand.DryLandSmallThree;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import TitanRemains.TitanHead;
@@ -199,6 +202,13 @@ public class CreateMap1 {
         //craterbig
         CraterBig craterBig1 = new CraterBig(new Point(3615,10856), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterBig1);
+        
+        DryLandLargeOne DryLandLargeOne1 = new DryLandLargeOne(new Point(7647,11368), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandLargeOne1);
+        DryLandHorizontal DryLandHorizontal1 = new DryLandHorizontal(new Point(6815,11624), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandHorizontal1);
+        DryLandSmallThree DryLandSmallThree1 = new DryLandSmallThree(new Point(7071,11048), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandSmallThree1);
         
         RoadSmooth roadSmooth = new RoadSmooth(new Point(4995,5182), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(roadSmooth);
