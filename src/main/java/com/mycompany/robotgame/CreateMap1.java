@@ -47,6 +47,7 @@ import EnviromentObjects.Skeletons.DinosaurusSkeleton;
 import EnviromentObjects.SpaceShipWreckage;
 import GameObject.Point;
 import MapGridTable.GridTable;
+import TitanRemains.TitanHead;
 import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -134,6 +135,9 @@ public class CreateMap1 {
         
         DroneBarracks droneBarracks = new DroneBarracks(new Point(3000, 7600), 256, 384, graphicsContext, monitorWindow, playerRobot, enemyContainer, this.gridTable);
         gridTable.insertGameObjectIntoGridCell(droneBarracks);
+        
+        TitanHead titanHead = new TitanHead(new Point(3500, 8000), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(titanHead);
     }
     
     private void generatedObjectsForGameWithoutCollision(GridTable gridTable){

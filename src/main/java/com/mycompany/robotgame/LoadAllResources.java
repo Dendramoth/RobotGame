@@ -85,8 +85,14 @@ public class LoadAllResources {
         loadBomberAirplane();
         loadRoads();
         loadDryLand();
+        loadAncientRemains();
 
         loadAllSounds();
+    }
+    
+    private void loadAncientRemains(){
+        Image image = new Image("/TitanRemains/ancient_face.png", 512, 512, false, false);
+        mapOfAllImages.put("TitanFace", image);
     }
     
     private void loadDryLand() {
