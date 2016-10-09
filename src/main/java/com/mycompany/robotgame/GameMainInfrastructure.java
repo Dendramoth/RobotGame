@@ -209,14 +209,14 @@ public class GameMainInfrastructure {
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 //paint enemies under player robot
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition(), false);
-                enemyContainer.paintAllDiingEnemies();
+                enemyContainer.paintAllDiingEnemies(false);
                                 
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
                 
                 //paint enemies above player robot
                 enemyContainer.paintEnemies(playerRobot.getWorldPossition(), true);
-                enemyContainer.paintAllDiingEnemies();
+                enemyContainer.paintAllDiingEnemies(true);
 
                 projectileContainer.moveAllProjectiles();
                 projectileContainer.paintAllProjectiles();

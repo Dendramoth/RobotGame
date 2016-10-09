@@ -76,12 +76,14 @@ public class EnemyContainer {
         }
     }
 
-    public void paintAllDiingEnemies() {
+    public void paintAllDiingEnemies(boolean paintingEnemiesAbovePlayer) {
         Iterator<Enemy> iterator = dyingEnemyList.iterator();
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
-            if (!enemy.paintDyingEnemyAnimation()) {
-                iterator.remove();
+            if ((enemy.isAbovePlayer() && paintingEnemiesAbovePlayer) || (!enemy.isAbovePlayer() && !paintingEnemiesAbovePlayer)) {
+                if (!enemy.paintDyingEnemyAnimation()) {
+                    iterator.remove();
+                }
             }
         }
     }
