@@ -6,6 +6,7 @@
 package com.mycompany.robotgame;
 
 import CollisionDetection.DetectCollisions;
+import Encounter.Encounter;
 import Enemy.BomberAirplane;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkTwo;
@@ -55,6 +56,8 @@ public class GameMainInfrastructure {
     private BarInterfaceHandler barInterfaceHandler;
     private boolean openInterfaceBar = true;
     private GraphicsContext gameGraphicsContext;
+    
+    private Encounter encounter;
 
     public GameMainInfrastructure(Stage stage, VBox gamePanel) throws Exception {
         StackPane gameCanvasPanel = new StackPane();
@@ -77,6 +80,7 @@ public class GameMainInfrastructure {
 
         gameDynamicEnviroment = new GameDynamicEnviroment(gameGraphicsContext, monitorWindow);
         detectCollisions = new DetectCollisions(playerRobot, gameDynamicEnviroment, gridTable, enemyContainer, projectileContainer);
+        encounter = new Encounter(enemyContainer, gridTable, monitorWindow, gameGraphicsContext);
 
         barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext, playerRobot);
 
@@ -126,14 +130,14 @@ public class GameMainInfrastructure {
     }
 
     private void setUpKeyboardListeners(Stage stage) {
-        stage.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 setUpKeyAsPressed(true, event);
             }
         });
 
-        stage.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+        stage.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 setUpKeyAsPressed(false, event);
@@ -226,6 +230,9 @@ public class GameMainInfrastructure {
                 detectCollisions.detectCollisionsWithPlayerMinigunShots();
                 detectCollisions.detectCollisionOfAllDronesWithPlayerRobot();
                 detectCollisions.detectCollisionOfRocketWithStaticObjectsAndOtherEnemies();
+                
+                encounter.generateNewEncounter();
+                encounter.continuousSummoningOfAddsForAlreadyGeneratedEncounters();
                 
                 barInterfaceHandler.checkChangesInBarsAndPaintThemIfNecessary();
             }
