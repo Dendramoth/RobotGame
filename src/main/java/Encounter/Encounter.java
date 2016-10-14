@@ -9,6 +9,7 @@ import Enemy.EnemyContainer;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -17,6 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Dendra
  */
 public class Encounter {
+
     private EnemyContainer enemyContainer;
     private List<EnemyWithSpecificationForEncounter> listOfEnemies = new ArrayList<>();
     private int timeToGenerateNewEncounter = 600;
@@ -30,22 +32,26 @@ public class Encounter {
         this.monitorWindow = monitorWindow;
         this.graphicsContext = graphicsContext;
     }
-    
-    public void generateNewEncounter(){
+
+    public void generateNewEncounter() {
         timeToGenerateNewEncounter--;
-        if (timeToGenerateNewEncounter <= 0){
-            timeToGenerateNewEncounter = 1200;
+        if (timeToGenerateNewEncounter <= 0) {
+            timeToGenerateNewEncounter = 2000;
             EncounterOne encounterOne = new EncounterOne(gridTable, monitorWindow, graphicsContext);
             listOfEnemies.addAll(encounterOne.getListOfEnemiesForEncounterOne());
         }
     }
-    
-    public void continuousSummoningOfAddsForAlreadyGeneratedEncounters(){
-        for (EnemyWithSpecificationForEncounter enemyWithSpecificationForEncounter : listOfEnemies){
-            enemyContainer.addEnemy(enemyWithSpecificationForEncounter.getEnemy());
+
+    public void continuousSummoningOfAddsForAlreadyGeneratedEncounters() {
+        Iterator<EnemyWithSpecificationForEncounter> iterator = listOfEnemies.iterator();
+        while (iterator.hasNext()) {
+            EnemyWithSpecificationForEncounter enemyWithSpecificationForEncounter = iterator.next();
+            enemyWithSpecificationForEncounter.incrementTimeDelay();
+            if (enemyWithSpecificationForEncounter.getCurrentTimeDelayFromEncounterStart() >= enemyWithSpecificationForEncounter.getDelayToSpawnEnemyInSeconds()) {
+                enemyContainer.addEnemy(enemyWithSpecificationForEncounter.getEnemy());
+                iterator.remove();
+            }
         }
-        listOfEnemies.clear();
     }
-    
-    
 }
+

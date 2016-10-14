@@ -14,10 +14,17 @@ import Enemy.Enemy;
 public class EnemyWithSpecificationForEncounter {
     private Enemy enemy;
     private double angleOfEnemy;
+    private int delayToSpawnEnemyInSeconds;
+    private int currentTimeDelayFromEncounterStart = 0;
 
-    public EnemyWithSpecificationForEncounter(Enemy enemy, double angleOfEnemy) {
+    public EnemyWithSpecificationForEncounter(Enemy enemy, double angleOfEnemy, int delayToSpawnEnemyInSeconds) {
         this.enemy = enemy;
         this.angleOfEnemy = angleOfEnemy;
+        this.delayToSpawnEnemyInSeconds = delayToSpawnEnemyInSeconds;
+    }
+    
+    public void incrementTimeDelay(){
+        currentTimeDelayFromEncounterStart++;
     }
 
     public Enemy getEnemy() {
@@ -26,6 +33,14 @@ public class EnemyWithSpecificationForEncounter {
 
     public double getAngleOfEnemy() {
         return angleOfEnemy;
+    }
+
+    public int getDelayToSpawnEnemyInSeconds() {
+        return delayToSpawnEnemyInSeconds;
+    }
+
+    public int getCurrentTimeDelayFromEncounterStart() {
+        return currentTimeDelayFromEncounterStart;
     }
     
     
