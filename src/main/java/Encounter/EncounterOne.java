@@ -5,7 +5,6 @@
  */
 package Encounter;
 
-import Enemy.EvilDroneMarkTwo;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.MonitorWindow;
@@ -40,19 +39,19 @@ public class EncounterOne {
             int timeDelay = r.nextInt(5) * 60;
             switch (direction){
                 case 0:
-                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX() - 200, monitorWindow.getPositionInWorld().getCoordY() + r.nextInt(1024)), 4, 15, 20, graphicsContext, gridTable, monitorWindow), 0, timeDelay));
+                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new Point( - 200, r.nextInt(1024)), 0, timeDelay, "EvilDroneMarkTwo"));
                     break;
                 case 1:
-                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX() + 2100, monitorWindow.getPositionInWorld().getCoordY() + r.nextInt(1024)), 4, 15, 20, graphicsContext, gridTable, monitorWindow), 0, timeDelay));
+                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new Point( + 2100, r.nextInt(1024)), 0, timeDelay, "EvilDroneMarkTwo"));
                     break;
                 case 2:
-                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX() + r.nextInt(1920), monitorWindow.getPositionInWorld().getCoordY() -200), 4, 15, 20, graphicsContext, gridTable, monitorWindow), 0, timeDelay));
+                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new Point( r.nextInt(1024), - 200), 0, timeDelay, "EvilDroneMarkTwo"));
                     break;
                 case 3:
-                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX()  + r.nextInt(1920), monitorWindow.getPositionInWorld().getCoordY() + 1250), 4, 15, 20, graphicsContext, gridTable, monitorWindow), 0, timeDelay));
+                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new Point( r.nextInt(1024), + 1250), 0, timeDelay, "EvilDroneMarkTwo"));
                     break;
                 default:
-                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX() -200, monitorWindow.getPositionInWorld().getCoordY() -200), 4, 15, 20, graphicsContext, gridTable, monitorWindow), 0, timeDelay));
+                    listOfEnemiesForEncounterOne.add(new EnemyWithSpecificationForEncounter(new Point( - 200, r.nextInt(1024)), 0, timeDelay,"EvilDroneMarkTwo"));
             }
             
        }

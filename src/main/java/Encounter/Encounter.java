@@ -5,7 +5,10 @@
  */
 package Encounter;
 
+import Enemy.Enemy;
 import Enemy.EnemyContainer;
+import Enemy.EvilDroneMarkTwo;
+import GameObject.Point;
 import MapGridTable.GridTable;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
@@ -48,10 +51,20 @@ public class Encounter {
             EnemyWithSpecificationForEncounter enemyWithSpecificationForEncounter = iterator.next();
             enemyWithSpecificationForEncounter.incrementTimeDelay();
             if (enemyWithSpecificationForEncounter.getCurrentTimeDelayFromEncounterStart() >= enemyWithSpecificationForEncounter.getDelayToSpawnEnemyInSeconds()) {
-                enemyContainer.addEnemy(enemyWithSpecificationForEncounter.getEnemy());
+                enemyContainer.addEnemy(createEnemyBasedOnSpecification(enemyWithSpecificationForEncounter));
                 iterator.remove();
             }
         }
+    }
+    
+    private Enemy createEnemyBasedOnSpecification(EnemyWithSpecificationForEncounter enemyWithSpecificationForEncounter){
+        String enemyType = enemyWithSpecificationForEncounter.getEnemyType();
+        switch (enemyType){
+            case "EvilDroneMarkTwo" :
+                return new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX() + enemyWithSpecificationForEncounter.getPositionOffset().getCoordX(), monitorWindow.getPositionInWorld().getCoordY() + enemyWithSpecificationForEncounter.getPositionOffset().getCoordY()), 4, 12, 16, graphicsContext, gridTable, monitorWindow);
+        }
+        
+        return new EvilDroneMarkTwo(new Point(monitorWindow.getPositionInWorld().getCoordX(), monitorWindow.getPositionInWorld().getCoordY()), 4, 12, 16, graphicsContext, gridTable, monitorWindow);
     }
 }
 

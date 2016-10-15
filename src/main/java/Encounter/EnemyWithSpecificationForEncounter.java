@@ -6,29 +6,32 @@
 package Encounter;
 
 import Enemy.Enemy;
+import GameObject.Point;
 
 /**
  *
  * @author Dendra
  */
 public class EnemyWithSpecificationForEncounter {
-    private Enemy enemy;
     private double angleOfEnemy;
     private int delayToSpawnEnemyInSeconds;
     private int currentTimeDelayFromEncounterStart = 0;
+    private Point positionOffset;
+    private String enemyType = "EvilDroneMarkTwo";
 
-    public EnemyWithSpecificationForEncounter(Enemy enemy, double angleOfEnemy, int delayToSpawnEnemyInSeconds) {
-        this.enemy = enemy;
+    public EnemyWithSpecificationForEncounter(Point positionOffset, double angleOfEnemy, int delayToSpawnEnemyInSeconds, String enemyType) {
         this.angleOfEnemy = angleOfEnemy;
         this.delayToSpawnEnemyInSeconds = delayToSpawnEnemyInSeconds;
+        this.positionOffset = positionOffset;
+        this.enemyType = enemyType;
     }
     
     public void incrementTimeDelay(){
         currentTimeDelayFromEncounterStart++;
     }
 
-    public Enemy getEnemy() {
-        return enemy;
+    public Point getPositionOffset() {
+        return positionOffset;
     }
 
     public double getAngleOfEnemy() {
@@ -41,6 +44,10 @@ public class EnemyWithSpecificationForEncounter {
 
     public int getCurrentTimeDelayFromEncounterStart() {
         return currentTimeDelayFromEncounterStart;
+    }
+
+    public String getEnemyType() {
+        return enemyType;
     }
     
     
