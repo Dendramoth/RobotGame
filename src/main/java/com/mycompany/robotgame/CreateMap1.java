@@ -148,6 +148,10 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(rockMediumOne5);
         RockMediumOne rockMediumOne6 = new RockMediumOne(new Point(7711,7976), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockMediumOne6);
+        RockMediumOne rockMediumOne7 = new RockMediumOne(new Point(2527,9512), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumOne7);
+        RockMediumOne rockMediumOne8 = new RockMediumOne(new Point(3871,8296), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumOne8);
         //rockmediumtwo
         RockMediumTwo rockMediumTwo1 = new RockMediumTwo(new Point(2463,10472), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockMediumTwo1);
@@ -167,6 +171,10 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(rockMediumTwo8);
         RockMediumTwo rockMediumTwo9 = new RockMediumTwo(new Point(7903,7720), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockMediumTwo9);
+        RockMediumTwo rockMediumTwo10 = new RockMediumTwo(new Point(3231,9064), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumTwo10);
+        RockMediumTwo rockMediumTwo11 = new RockMediumTwo(new Point(2975,9896), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumTwo11);
         //rockmediumthree
         RockMediumThree rockMediumThree1 = new RockMediumThree(new Point(3295,10216), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockMediumThree1);
@@ -180,11 +188,15 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(rockMediumThree5);
         RockMediumThree rockMediumThree6 = new RockMediumThree(new Point(7903,8232), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockMediumThree6);
+        RockMediumThree rockMediumThree7 = new RockMediumThree(new Point(3231,8808), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockMediumThree7);
         //rock large one
         RockLargeOne rockLargeOne1 = new RockLargeOne(new Point(2911,10664), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockLargeOne1);
         RockLargeOne rockLargeOne2 = new RockLargeOne(new Point(5599,10792), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockLargeOne2);
+        RockLargeOne rockLargeOne3 = new RockLargeOne(new Point(4255,9384), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeOne3);
         //rock large two
         RockLargeTwo rockLargeTwo1 = new RockLargeTwo(new Point(4319,11496), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockLargeTwo1);
@@ -192,6 +204,10 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(rockLargeTwo2);
         RockLargeTwo rockLargeTwo3 = new RockLargeTwo(new Point(7519,8680), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(rockLargeTwo3);
+        RockLargeTwo rockLargeTwo4 = new RockLargeTwo(new Point(2719,8360), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeTwo4);
+        RockLargeTwo rockLargeTwo5 = new RockLargeTwo(new Point(2463,9896), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(rockLargeTwo5);
         
         Satelite satelite = new Satelite(new Point(5087,4136), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(satelite);
@@ -230,6 +246,18 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(craterSmallOne10);
         CraterSmallOne craterSmallOne11 = new CraterSmallOne(new Point(5471,8680), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterSmallOne11);
+        CraterSmallOne craterSmallOne12 = new CraterSmallOne(new Point(4447,5544), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne12);
+        CraterSmallOne craterSmallOne13 = new CraterSmallOne(new Point(4191,4072), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne13);
+        CraterSmallOne craterSmallOne14 = new CraterSmallOne(new Point(4063,3368), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne14);
+        CraterSmallOne craterSmallOne15 = new CraterSmallOne(new Point(4767,2984), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne15);
+        CraterSmallOne craterSmallOne16 = new CraterSmallOne(new Point(5727,3112), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne16);
+        CraterSmallOne craterSmallOne17 = new CraterSmallOne(new Point(6239,5160), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterSmallOne17);
         //cratersmalltwo
         CraterSmallTwo craterSmallTwo1 = new CraterSmallTwo(new Point(2719,11560), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterSmallTwo1);
@@ -295,6 +323,18 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(craterMedium9);
         CraterMedium craterMedium10 = new CraterMedium(new Point(5471,8872), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterMedium10);
+        CraterMedium craterMedium11 = new CraterMedium(new Point(4191,5032), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium11);
+        CraterMedium craterMedium12 = new CraterMedium(new Point(3743,4520), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium12);
+        CraterMedium craterMedium13 = new CraterMedium(new Point(4063,3688), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium13);
+        CraterMedium craterMedium14 = new CraterMedium(new Point(5023,3112), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium14);
+        CraterMedium craterMedium15 = new CraterMedium(new Point(5919,3240), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium15);
+        CraterMedium craterMedium16 = new CraterMedium(new Point(6303,4520), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMedium16);
         //cratermediumtwo
         CraterMediumTwo craterMediumTwo1 = new CraterMediumTwo(new Point(2911,11304), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterMediumTwo1);
@@ -312,6 +352,14 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(craterMediumTwo7);
         CraterMediumTwo craterMediumTwo8 = new CraterMediumTwo(new Point(4831,8552), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterMediumTwo8);
+        CraterMediumTwo craterMediumTwo9 = new CraterMediumTwo(new Point(4063,8872), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMediumTwo9);
+        CraterMediumTwo craterMediumTwo10 = new CraterMediumTwo(new Point(4063,4712), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMediumTwo10);
+        CraterMediumTwo craterMediumTwo11 = new CraterMediumTwo(new Point(6303,3880), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMediumTwo11);
+        CraterMediumTwo craterMediumTwo12 = new CraterMediumTwo(new Point(6111,4840), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterMediumTwo12);
         //craterbig
         CraterBig craterBig1 = new CraterBig(new Point(3615,10856), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterBig1);
@@ -319,7 +367,18 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(craterBig2);
         CraterBig craterBig3 = new CraterBig(new Point(4703,8744), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(craterBig3);
-        
+        CraterBig craterBig4 = new CraterBig(new Point(4063,5352), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig4);
+        CraterBig craterBig5 = new CraterBig(new Point(3935,4264), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig5);
+        CraterBig craterBig6 = new CraterBig(new Point(3679,3560), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig6);
+        CraterBig craterBig7 = new CraterBig(new Point(4447,3112), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig7);
+        CraterBig craterBig8 = new CraterBig(new Point(6431,3560), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig8);
+        CraterBig craterBig9 = new CraterBig(new Point(6367,4840), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(craterBig9);
         
         
         //DryLandSmallOne
@@ -328,17 +387,23 @@ public class CreateMap1 {
         DryLandSmallOne DryLandSmallOne2 = new DryLandSmallOne(new Point(7903,10408), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandSmallOne2);
         //DryLandSmallTwo
+        DryLandSmallTwo DryLandSmallTwo1 = new DryLandSmallTwo(new Point(3551,8872), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandSmallTwo1);
         DryLandSmallTwo DryLandSmallTwo2 = new DryLandSmallTwo(new Point(7647,10024), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandSmallTwo2);
         //DryLandSmallThree
         DryLandSmallThree DryLandSmallThree1 = new DryLandSmallThree(new Point(7071,11048), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandSmallThree1);
         //DryLandHorizontal
+        DryLandHorizontal DryLandHorizontal1 = new DryLandHorizontal(new Point(3103,9448), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandHorizontal1);
         DryLandHorizontal DryLandHorizontal2 = new DryLandHorizontal(new Point(6559,10216), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandHorizontal2);
         //DryLandVertical
         DryLandVertical DryLandVertical1 = new DryLandVertical(new Point(5983,11304), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandVertical1);
+        DryLandVertical DryLandVertical2 = new DryLandVertical(new Point(3999,8104), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandVertical2);
         //DryLandLargeOne
         DryLandLargeOne DryLandLargeOne1 = new DryLandLargeOne(new Point(7647,11368), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandLargeOne1);
@@ -347,7 +412,8 @@ public class CreateMap1 {
         //DryLandLargeTwo
         DryLandLargeTwo DryLandLargeTwo1 = new DryLandLargeTwo(new Point(7199,10344), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(DryLandLargeTwo1);
-            
+        DryLandLargeTwo DryLandLargeTwo2 = new DryLandLargeTwo(new Point(2463,8808), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(DryLandLargeTwo2);    
         
         RoadSmooth roadSmooth = new RoadSmooth(new Point(4995,5182), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(roadSmooth);
