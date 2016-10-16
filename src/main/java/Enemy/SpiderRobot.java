@@ -108,7 +108,7 @@ public class SpiderRobot extends Enemy {
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
             reachedPoints.add(0, new PathfindingPoint(worldPossition.getCoordX(), worldPossition.getCoordY()));
             if (reachedPoints.size() >= 100) {
-                reachedPoints.remove(100);
+                reachedPoints.remove(99);
             }
         }
 
@@ -145,7 +145,7 @@ public class SpiderRobot extends Enemy {
                 && (point.getCoordY() > worldPossition.getCoordY() - 3 && point.getCoordY() < worldPossition.getCoordY() + 3)) { //point was reached
             reachedPoints.add(0, pathPoints.get(0));
             if (reachedPoints.size() >= 100) {
-                reachedPoints.remove(100);
+                reachedPoints.remove(99);
             }
             pathPoints.remove(0);
         }
@@ -178,10 +178,8 @@ public class SpiderRobot extends Enemy {
         createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            System.out.println("false");
             return false;
         }
-        System.out.println("true");
         return true;
     }
 
@@ -192,15 +190,18 @@ public class SpiderRobot extends Enemy {
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
+        System.out.println("zasazem " + positionOfColidingObject.getCoordX() + " " + positionOfColidingObject.getCoordY());
+        System.out.println("spider position: " + worldPossition.getCoordX() + " " + worldPossition.getCoordY());
+
         return new ResultOfDetectColisionWithProjectile(true, new Point(0, 0));
     }
 
     private void createPolygonForDetection() {
         pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(256 + worldPossition.getCoordX() - 32, 0 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(256 + worldPossition.getCoordX() - 32, 256 + worldPossition.getCoordY() - 32));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX() - 32, 256 + worldPossition.getCoordY() - 32));
+        pointsForDetection.add(new Point(32 + worldPossition.getCoordX() - 64, 32 + worldPossition.getCoordY() - 64));
+        pointsForDetection.add(new Point(96 + worldPossition.getCoordX() - 64, 32 + worldPossition.getCoordY() - 64));
+        pointsForDetection.add(new Point(96 + worldPossition.getCoordX() - 64, 96 + worldPossition.getCoordY() - 64));
+        pointsForDetection.add(new Point(32 + worldPossition.getCoordX() - 64, 96 + worldPossition.getCoordY() - 64));
         createPolygon(pointsForDetection);
     }
 

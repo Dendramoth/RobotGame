@@ -105,6 +105,7 @@ public class DetectCollisions {
                     GameObjectWithDistanceDetection gameObjectWithDistanceDetection = iterator.next();
                     ResultOfDetectColisionWithProjectile resultOfDetectColisionWithProjectile = gameObjectWithDistanceDetection.detectCollisionWithProjectile(projectile.getProjectileShape(), projectile.getWorldPossition());
                     if (resultOfDetectColisionWithProjectile.isColiding()) {
+                        System.out.println(projectile.getClass());
                         if (projectile.isFiredFromWall() && projectile.getObjectToIgnore() == null) {
                             projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
                         } else {

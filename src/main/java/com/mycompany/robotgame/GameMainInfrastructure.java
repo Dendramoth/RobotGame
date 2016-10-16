@@ -87,8 +87,8 @@ public class GameMainInfrastructure {
         //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
         enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 2.3, 20, 30, gameGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
     //    enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, gameGraphicsContext, gridTable, monitorWindow));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 2, 20, 30, true, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 2, 20, 30, false, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
+        enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 2, 20, 30, false, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
         enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
@@ -106,7 +106,6 @@ public class GameMainInfrastructure {
         setUpResizeListeners(stage);
 
         buildAndSetGameLoop(stage);
-
     }
 
     private void changeCanvasWidthAndHeighToFullSize() {
@@ -231,8 +230,8 @@ public class GameMainInfrastructure {
                 detectCollisions.detectCollisionOfAllDronesWithPlayerRobot();
                 detectCollisions.detectCollisionOfRocketWithStaticObjectsAndOtherEnemies();
                 
-                encounter.generateNewEncounter();
-                encounter.continuousSummoningOfAddsForAlreadyGeneratedEncounters();
+            //    encounter.generateNewEncounter();
+            //    encounter.continuousSummoningOfAddsForAlreadyGeneratedEncounters();
                 
                 barInterfaceHandler.checkChangesInBarsAndPaintThemIfNecessary();
             }
@@ -241,11 +240,12 @@ public class GameMainInfrastructure {
     }
 
     private void movePlayerRobot() {
+        // sound section was causing lags, commented for now
         if (keyAPressed == true || keySPressed == true || keyWPressed == true || keyDPressed == true) {
-            playerRobot.playRobotMovingSound();
+        //    playerRobot.playRobotMovingSound();
             playerRobot.moveTracks();
         } else {
-            playerRobot.playRobotIdleSound();
+         //   playerRobot.playRobotIdleSound();
         }
 
         if (keyAPressed == true) {
