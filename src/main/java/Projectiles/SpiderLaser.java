@@ -22,12 +22,13 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class SpiderLaser extends Projectile {
-
+    private static int SPIDER_LASER_MAX_LENGTH = 310;
+    
     private int laserCounter = 0;
     private SpiderRobot spiderRobot;
     private GameDynamicEnviroment gameDynamicEnviroment;
-    private Image projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
-    private Image projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
+    private Image projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser81");
+    private Image projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser82");
 
     public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
         super(1, graphicsContext, angleOfFiredShot, position, enemy, 640, 640, false, monitorWindow);
@@ -105,8 +106,8 @@ public class SpiderLaser extends Projectile {
         }
 
         if (laserCounter % 5 == 0) {
-            double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
-            double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
+            double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
+            double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
             gameDynamicEnviroment.generateNewLaserHitOnGround(new Point(endPositionX, endPositionY));
         }
 
@@ -164,8 +165,8 @@ public class SpiderLaser extends Projectile {
 
     @Override
     public Shape getProjectileShape() {
-        double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 320;
-        double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 320;
+        double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
+        double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
         return new Line(worldPossition.getCoordX(), worldPossition.getCoordY(), endPositionX, endPositionY);
     }
 
