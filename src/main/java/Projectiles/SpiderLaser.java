@@ -131,7 +131,6 @@ public class SpiderLaser extends Projectile {
     @Override
     public void doOnCollision(Point collisionPoint) {
         double distanceFromIntersection = Math.sqrt(Math.pow(worldPossition.getCoordX() - collisionPoint.getCoordX(), 2) + Math.pow(worldPossition.getCoordY() - collisionPoint.getCoordY(), 2));
-        //   System.out.println(distanceFromIntersection);
         if (distanceFromIntersection < 96){
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser11");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser12");
@@ -145,19 +144,15 @@ public class SpiderLaser extends Projectile {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser41");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser42");
         } else if (distanceFromIntersection >= 192 && distanceFromIntersection < 224){
-            System.out.println("51");
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser51");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser52");
         } else if (distanceFromIntersection >= 224 && distanceFromIntersection < 256){
-            System.out.println("61");
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser61");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser62");
         } else if (distanceFromIntersection >= 256 && distanceFromIntersection < 288){
-            System.out.println("71");
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser71");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser72");
         } else {
-            System.out.println("81");
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser81");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser82");
         }

@@ -190,9 +190,6 @@ public class SpiderRobot extends Enemy {
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
-        System.out.println("zasazem " + positionOfColidingObject.getCoordX() + " " + positionOfColidingObject.getCoordY());
-        System.out.println("spider position: " + worldPossition.getCoordX() + " " + worldPossition.getCoordY());
-
         return new ResultOfDetectColisionWithProjectile(true, new Point(0, 0));
     }
 
