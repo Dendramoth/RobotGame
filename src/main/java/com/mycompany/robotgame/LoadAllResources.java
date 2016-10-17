@@ -362,6 +362,18 @@ public class LoadAllResources {
 
         image = new Image("/SpiderRobot/Laser/walker_tower_laser_62.png", 512, 512, false, false);
         mapOfAllImages.put("spiderLaser62", image);
+        
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_71.png", 576, 576, false, false);
+        mapOfAllImages.put("spiderLaser71", image);
+
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_72.png", 576, 576, false, false);
+        mapOfAllImages.put("spiderLaser72", image);
+
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_81.png", 640, 640, false, false);
+        mapOfAllImages.put("spiderLaser81", image);
+
+        image = new Image("/SpiderRobot/Laser/walker_tower_laser_82.png", 640, 640, false, false);
+        mapOfAllImages.put("spiderLaser82", image);
     }
 
     private void loadSpiderEnergyShock() {

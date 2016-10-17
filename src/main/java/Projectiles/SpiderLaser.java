@@ -29,8 +29,8 @@ public class SpiderLaser extends Projectile {
     private Image projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser1");
     private Image projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser2");
 
-    public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
-        super(1, graphicsContext, angleOfFiredShot, position, enemy, width, height, false, monitorWindow);
+    public SpiderLaser(GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, MonitorWindow monitorWindow, GameDynamicEnviroment gameDynamicEnviroment) {
+        super(1, graphicsContext, angleOfFiredShot, position, enemy, 640, 640, false, monitorWindow);
         this.spiderRobot = (SpiderRobot) enemy;
         this.gameDynamicEnviroment = gameDynamicEnviroment;
     }
@@ -145,11 +145,21 @@ public class SpiderLaser extends Projectile {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser41");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser42");
         } else if (distanceFromIntersection >= 192 && distanceFromIntersection < 224){
+            System.out.println("51");
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser51");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser52");
-        } else {
+        } else if (distanceFromIntersection >= 224 && distanceFromIntersection < 256){
+            System.out.println("61");
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser61");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser62");
+        } else if (distanceFromIntersection >= 256 && distanceFromIntersection < 288){
+            System.out.println("71");
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser71");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser72");
+        } else {
+            System.out.println("81");
+            projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser81");
+            projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser82");
         }
     }
 
@@ -159,8 +169,8 @@ public class SpiderLaser extends Projectile {
 
     @Override
     public Shape getProjectileShape() {
-        double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
-        double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 250;
+        double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 320;
+        double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * 320;
         return new Line(worldPossition.getCoordX(), worldPossition.getCoordY(), endPositionX, endPositionY);
     }
 

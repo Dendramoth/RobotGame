@@ -82,7 +82,7 @@ public class SpiderRobot extends Enemy {
         }
         if (distanceFromPlayer < 350 && shockCounter >= 320) {
             shockCounter = 0;
-            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, 512, 512, monitorWindow, gameDynamicEnviroment));
+            projectileContainer.addProjectileToContainer(new SpiderLaser(graphicsContext, angleOfSpiderTower, worldPossition, this, monitorWindow, gameDynamicEnviroment));
         }
     }
 
