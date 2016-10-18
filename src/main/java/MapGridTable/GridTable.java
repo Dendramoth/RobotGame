@@ -11,7 +11,6 @@ import GameObject.GameStaticObject;
 import com.mycompany.robotgame.GameMainInfrastructure;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.HashSet;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * cellSize: size of cell in pixels cellVisibility: number of cells next to
@@ -31,11 +30,9 @@ public class GridTable {
     private final int cellCountX;
     private final int cellCountY;
     private final GridCell gridCellField[][];
-    private final GraphicsContext graphicsContext;
-    private MonitorWindow monitorWindow;
+    private final MonitorWindow monitorWindow;
 
-    public GridTable(GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        this.graphicsContext = graphicsContext;
+    public GridTable(MonitorWindow monitorWindow) {
         this.monitorWindow = monitorWindow;
         cellCountX = Math.round(mapWidth / cellSize);
         cellCountY = Math.round(mapHeigh / cellSize);
@@ -68,14 +65,13 @@ public class GridTable {
             for (GamePrimitiveObject gameObject : visibleBackground) {
                 gameObject.paintGameObject();
             }
-            
-            HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
-            for (GameStaticObject gameObject : visibleObjects) {
+            HashSet<GamePrimitiveObject> visibleObjectsWithoutColision = gridCellField[x][y].getObjectVisibleFromCellWithoutColision();
+            for (GamePrimitiveObject gameObject : visibleObjectsWithoutColision) {
                 gameObject.paintGameObject();
             }
             
-            HashSet<GamePrimitiveObject> visibleObjectsWithoutColision = gridCellField[x][y].getObjectVisibleFromCellWithoutColision();
-            for (GamePrimitiveObject gameObject : visibleObjectsWithoutColision) {
+            HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
+            for (GameStaticObject gameObject : visibleObjects) {
                 gameObject.paintGameObject();
             }
         }

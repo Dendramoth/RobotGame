@@ -8,20 +8,21 @@ package MapGridTable;
 import GameObject.GamePrimitiveObject;
 import GameObject.GameStaticObject;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  *
  * @author Dendra
  */
 public class GridCell {
-    private final HashSet<GameStaticObject> objectInCell = new HashSet<GameStaticObject>();
-    private final HashSet<GameStaticObject> objectsVisibleFromCell = new HashSet<GameStaticObject>();
+    private final LinkedHashSet<GameStaticObject> objectInCell = new LinkedHashSet<>();
+    private final LinkedHashSet<GameStaticObject> objectsVisibleFromCell = new LinkedHashSet<>();
     
-    private final HashSet<GamePrimitiveObject> objectInCellWithoutColision = new HashSet<GamePrimitiveObject>();
-    private final HashSet<GamePrimitiveObject> objectVisibleFromCellWithoutColision = new HashSet<GamePrimitiveObject>();
+    private final LinkedHashSet<GamePrimitiveObject> objectInCellWithoutColision = new LinkedHashSet<>();
+    private final LinkedHashSet<GamePrimitiveObject> objectVisibleFromCellWithoutColision = new LinkedHashSet<>();
     
-    private final HashSet<GamePrimitiveObject> backgroundInCell = new HashSet<GamePrimitiveObject>();
-    private final HashSet<GamePrimitiveObject> backgroundVisibleFromCell = new HashSet<GamePrimitiveObject>();
+    private final LinkedHashSet<GamePrimitiveObject> backgroundInCell = new LinkedHashSet<>();
+    private final LinkedHashSet<GamePrimitiveObject> backgroundVisibleFromCell = new LinkedHashSet<>();
 
     public GridCell() {
     }
@@ -51,27 +52,27 @@ public class GridCell {
     }
     
 
-    public HashSet<GameStaticObject> getObjectInCell() {
+    public LinkedHashSet<GameStaticObject> getObjectInCell() {
         return objectInCell;
     }
 
-    public HashSet<GameStaticObject> getObjectsVisibleFromCell() {
+    public LinkedHashSet<GameStaticObject> getObjectsVisibleFromCell() {
         return objectsVisibleFromCell;
     }
 
-    public HashSet<GamePrimitiveObject> getBackgroundInCell() {
+    public LinkedHashSet<GamePrimitiveObject> getBackgroundInCell() {
         return backgroundInCell;
     }
 
-    public HashSet<GamePrimitiveObject> getBackgroundVisibleFromCell() {
+    public LinkedHashSet<GamePrimitiveObject> getBackgroundVisibleFromCell() {
         return backgroundVisibleFromCell;
     }
 
-    public HashSet<GamePrimitiveObject> getObjectInCellWithoutColision() {
+    public LinkedHashSet<GamePrimitiveObject> getObjectInCellWithoutColision() {
         return objectInCellWithoutColision;
     }
 
-    public HashSet<GamePrimitiveObject> getObjectVisibleFromCellWithoutColision() {
+    public LinkedHashSet<GamePrimitiveObject> getObjectVisibleFromCellWithoutColision() {
         return objectVisibleFromCellWithoutColision;
     }
 }

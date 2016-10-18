@@ -73,7 +73,7 @@ public class GameMainInfrastructure {
 
         Point startMonitorWindowPos = new Point(4000, 8000);
         MonitorWindow monitorWindow = new MonitorWindow(startMonitorWindowPos);
-        gridTable = new GridTable(gameGraphicsContext, monitorWindow);
+        gridTable = new GridTable(monitorWindow);
         playerRobot = new PlayerRobot(gameGraphicsContext, new Point(startMonitorWindowPos.getCoordX() + WINDOW_WIDTH / 2, startMonitorWindowPos.getCoordY() + WINDOW_HEIGH / 2), gridTable, monitorWindow);
         enemyContainer = new EnemyContainer(gameGraphicsContext, gridTable, monitorWindow);
         projectileContainer = new ProjectileContainer();
