@@ -77,7 +77,7 @@ public class DetectCollisions {
                 EvilDroneMarkTwo evilDroneMarkTwo = (EvilDroneMarkTwo) enemy;
                 double distance = Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordX() - playerRobot.getWorldPossition().getCoordX()) + Math.abs(evilDroneMarkTwo.getWorldPossition().getCoordY() - playerRobot.getWorldPossition().getCoordY());
                 if (distance < 52) {
-                    evilDroneMarkTwo.doOnCollision(new Point(0,0));
+                    evilDroneMarkTwo.doOnCollision(new Point(0, 0));
                     playerRobot.removeHitPoints(50);
                 }
             }
@@ -85,13 +85,15 @@ public class DetectCollisions {
     }
 
     public void detectCollisionOfRocketWithStaticObjectsAndOtherEnemies() {
+        boolean projectileHittedSomething = false;
+
         if (projectileContainer.getAllFiredProjectiles().size() > 0) {
             for (Projectile projectile : projectileContainer.getAllFiredProjectiles()) {
                 List<GameObjectWithDistanceDetection> visibleObjects = new ArrayList<GameObjectWithDistanceDetection>(gridTable.getAllVisibleObjects());
                 visibleObjects.addAll(enemyContainer.getEnemyList());
                 visibleObjects.add(playerRobot);
                 visibleObjects.remove(projectile.getEnemyWhoShootedThisProjectile());
-                if (projectile.getObjectToIgnore() != null){
+                if (projectile.getObjectToIgnore() != null) {
                     visibleObjects.remove(projectile.getObjectToIgnore());
                 }
 
@@ -109,10 +111,16 @@ public class DetectCollisions {
                             projectile.setObjectToIgnore(gameObjectWithDistanceDetection);
                         } else {
                             projectile.doOnCollision(resultOfDetectColisionWithProjectile.getIntersectionPoint());
-                            // System.out.println(resultOfDetectColisionWithProjectile.getIntersectionPoint().getCoordX() + " " + resultOfDetectColisionWithProjectile.getIntersectionPoint().getCoordY());
+                            projectileHittedSomething = true;
                             gameObjectWithDistanceDetection.doOnBeingHitByProjectile(resultOfDetectColisionWithProjectile.getIntersectionPoint(), projectile);
+                            break; // Projectile already hitted something so we can stop searching for collision.
                         }
                     }
+                }
+                if (!projectileHittedSomething) {
+                    // no collision of projectile with anything.
+                    projectile.doOnProjectileHittingNothing();
+                    projectileHittedSomething = false;
                 }
             }
         }

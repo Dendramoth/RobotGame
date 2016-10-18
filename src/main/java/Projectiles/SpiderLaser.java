@@ -22,8 +22,9 @@ import javafx.scene.shape.Shape;
  * @author Dendra
  */
 public class SpiderLaser extends Projectile {
+
     private static int SPIDER_LASER_MAX_LENGTH = 310;
-    
+
     private int laserCounter = 0;
     private SpiderRobot spiderRobot;
     private GameDynamicEnviroment gameDynamicEnviroment;
@@ -105,11 +106,7 @@ public class SpiderLaser extends Projectile {
             projectileImage = projectileImageA;
         }
 
-        if (laserCounter % 5 == 0) {
-            double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
-            double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
-            gameDynamicEnviroment.generateNewLaserHitOnGround(new Point(endPositionX, endPositionY));
-        }
+        
 
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.save();
@@ -132,25 +129,25 @@ public class SpiderLaser extends Projectile {
     @Override
     public void doOnCollision(Point collisionPoint) {
         double distanceFromIntersection = Math.sqrt(Math.pow(worldPossition.getCoordX() - collisionPoint.getCoordX(), 2) + Math.pow(worldPossition.getCoordY() - collisionPoint.getCoordY(), 2));
-        if (distanceFromIntersection < 96){
+        if (distanceFromIntersection < 96) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser11");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser12");
-        } else if (distanceFromIntersection >= 96 && distanceFromIntersection < 128){
+        } else if (distanceFromIntersection >= 96 && distanceFromIntersection < 128) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser21");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser22");
-        } else if (distanceFromIntersection >= 128 && distanceFromIntersection < 160){
+        } else if (distanceFromIntersection >= 128 && distanceFromIntersection < 160) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser31");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser32");
-        } else if (distanceFromIntersection >= 160 && distanceFromIntersection < 192){
+        } else if (distanceFromIntersection >= 160 && distanceFromIntersection < 192) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser41");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser42");
-        } else if (distanceFromIntersection >= 192 && distanceFromIntersection < 224){
+        } else if (distanceFromIntersection >= 192 && distanceFromIntersection < 224) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser51");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser52");
-        } else if (distanceFromIntersection >= 224 && distanceFromIntersection < 256){
+        } else if (distanceFromIntersection >= 224 && distanceFromIntersection < 256) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser61");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser62");
-        } else if (distanceFromIntersection >= 256 && distanceFromIntersection < 288){
+        } else if (distanceFromIntersection >= 256 && distanceFromIntersection < 288) {
             projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser71");
             projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser72");
         } else {
@@ -174,4 +171,17 @@ public class SpiderLaser extends Projectile {
     public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 
+    @Override
+    public void doOnProjectileHittingNothing() {
+        //reset laser length
+        projectileImageA = LoadAllResources.getMapOfAllImages().get("spiderLaser81");
+        projectileImageB = LoadAllResources.getMapOfAllImages().get("spiderLaser82");
+        
+        //paint burned ground
+        if (laserCounter % 4 == 0) {
+            double endPositionX = worldPossition.getCoordX() - Math.cos(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
+            double endPositionY = worldPossition.getCoordY() - Math.sin(Math.toRadians(spiderRobot.getAngleOfSpiderTower() - 90)) * SPIDER_LASER_MAX_LENGTH;
+            gameDynamicEnviroment.generateNewLaserHitOnGround(new Point(endPositionX, endPositionY));
+        }
+    }
 }

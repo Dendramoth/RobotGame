@@ -7,11 +7,9 @@ package Projectiles;
 
 import Enemy.Enemy;
 import GameObject.GameObjectWithDistanceDetection;
-import GameObject.GamePrimitiveObject;
 import GameObject.ObjectWithCollision;
 import GameObject.Point;
 import com.mycompany.robotgame.MonitorWindow;
-import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Polygon;
@@ -46,6 +44,8 @@ public abstract class Projectile extends GameObjectWithDistanceDetection {
     public abstract boolean projectileExplosion();
 
     public abstract Shape getProjectileShape();
+    
+    public abstract void doOnProjectileHittingNothing();
 
     public Enemy getEnemyWhoShootedThisProjectile() {
         return enemyWhoShootedThisProjectile;

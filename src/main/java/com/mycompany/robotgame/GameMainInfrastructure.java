@@ -89,7 +89,7 @@ public class GameMainInfrastructure {
     //    enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(2000, 8500), 64, 64, 2, 15, 20, gameGraphicsContext, gridTable, monitorWindow));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 2, 20, 30, false, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
         enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 2, 20, 30, false, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
-        enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
+    //    enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
 
         //    enemyContainer.addEnemy(new StaticRocketTurret(new Point(2515, 7600), 64, 64, 2, 20, 30, enemyGraphicsContext, gridTable, monitorWindow, projectileContainer));
         CreateMap1 createMap1 = new CreateMap1(gameGraphicsContext, monitorWindow, playerRobot, enemyContainer, gridTable);

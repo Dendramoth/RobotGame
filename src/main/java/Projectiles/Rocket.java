@@ -147,5 +147,10 @@ public class Rocket extends Projectile {
     @Override
     public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
+    
+    @Override
+    public void doOnProjectileHittingNothing() {
+       //do nothing 
+    }
 
 }

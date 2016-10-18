@@ -121,4 +121,9 @@ public class Bomb extends Projectile {
     public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
     }
 
+    @Override
+    public void doOnProjectileHittingNothing() {
+       //do nothing 
+    }
+    
 }
