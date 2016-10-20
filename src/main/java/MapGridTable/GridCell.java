@@ -7,7 +7,6 @@ package MapGridTable;
 
 import GameObject.GamePrimitiveObject;
 import GameObject.GameStaticObject;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 /**
