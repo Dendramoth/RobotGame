@@ -205,7 +205,7 @@ public class GameMainInfrastructure {
                 showHideInterface();
                 
                 gridTable.paintAllObjectsInMonitorWindow(0);
-          //      gridTable.paintAllObjectsInMonitorWindow(1);
+                gridTable.paintAllObjectsInMonitorWindow(1);
                 gameDynamicEnviroment.paintAllMinigunsHitsOnGround();
                 gameDynamicEnviroment.paintAllLaserHitsOnGround();
 
