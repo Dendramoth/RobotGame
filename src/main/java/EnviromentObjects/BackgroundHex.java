@@ -22,7 +22,7 @@ public class BackgroundHex extends GamePrimitiveObject {
     private GraphicsContext graphicsContext;
 
     public BackgroundHex(Point possition, double width, double heigh, Image image, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, width, heigh, graphicsContext, monitorWindow);
+        super(possition, width, heigh, 0, graphicsContext, monitorWindow);
         this.hexImage = image;
         this.graphicsContext = graphicsContext;
     }

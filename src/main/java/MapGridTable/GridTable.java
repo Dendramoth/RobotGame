@@ -46,7 +46,7 @@ public class GridTable {
         HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
         return visibleObjects;
     }
-    
+
     public HashSet<GamePrimitiveObject> getAllVisibleObjectsWithoutColision() {
         int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
         int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);
@@ -54,8 +54,8 @@ public class GridTable {
         return visibleObjects;
     }
 
-    public void paintAllObjectsInMonitorWindow() {
-    //    graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
+    public void paintAllObjectsInMonitorWindow(int LayerToBePainted) {
+        //    graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
 
         int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
         int y = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordY() + GameMainInfrastructure.WINDOW_HEIGH / 2 - 32);
@@ -63,16 +63,22 @@ public class GridTable {
         if (x < cellCountX - 1 && x >= 0 && y < cellCountY - 1 && y >= 0) {
             HashSet<GamePrimitiveObject> visibleBackground = gridCellField[x][y].getBackgroundVisibleFromCell();
             for (GamePrimitiveObject gameObject : visibleBackground) {
-                gameObject.paintGameObject();
+                if (gameObject.getLayerPosition() == LayerToBePainted) {
+                    gameObject.paintGameObject();
+                }
             }
             HashSet<GamePrimitiveObject> visibleObjectsWithoutColision = gridCellField[x][y].getObjectVisibleFromCellWithoutColision();
             for (GamePrimitiveObject gameObject : visibleObjectsWithoutColision) {
-                gameObject.paintGameObject();
+                if (gameObject.getLayerPosition() == LayerToBePainted) {
+                    gameObject.paintGameObject();
+                }
             }
-            
+
             HashSet<GameStaticObject> visibleObjects = gridCellField[x][y].getObjectsVisibleFromCell();
             for (GameStaticObject gameObject : visibleObjects) {
-                gameObject.paintGameObject();
+                if (gameObject.getLayerPosition() == LayerToBePainted) {
+                    gameObject.paintGameObject();
+                }
             }
         }
     }
@@ -109,7 +115,7 @@ public class GridTable {
             GameStaticObject gameStaticObject = (GameStaticObject) gameObject;
             addObjectToCell(gameStaticObject, x1, x2, y1, y2);
             addVisibleObjectToCell(gameStaticObject, x1, x2, y1, y2);
-        }else{
+        } else {
             addPrimitiveObjectToCell(gameObject, x1, x2, y1, y2);
             addVisiblePrimitiveObjectToCell(gameObject, x1, x2, y1, y2);
         }

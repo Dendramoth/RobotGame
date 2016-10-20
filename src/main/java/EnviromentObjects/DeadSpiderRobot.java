@@ -20,7 +20,7 @@ public class DeadSpiderRobot extends GamePrimitiveObject{
     private Image deadStaticRocketTurretBaseImage = LoadAllResources.getMapOfAllImages().get("spiderCorpse");
 
     public DeadSpiderRobot(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, width, heigh, graphicsContext, monitorWindow);
+        super(possition, width, heigh, 0, graphicsContext, monitorWindow);
     }
 
     @Override

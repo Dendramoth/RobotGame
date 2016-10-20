@@ -20,7 +20,7 @@ public class DryLandLargeOne extends GamePrimitiveObject {
     private final Image craterImage = LoadAllResources.getMapOfAllImages().get("Dry_land_large_one");
 
     public DryLandLargeOne(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 512, 512, graphicsContext, monitorWindow);
+        super(possition, 512, 512, 0, graphicsContext, monitorWindow);
     }
     
     @Override

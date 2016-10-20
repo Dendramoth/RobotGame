@@ -20,7 +20,7 @@ public class RoadSmooth extends GamePrimitiveObject {
     private final Image roadImage = LoadAllResources.getMapOfAllImages().get("Road_end_north_smooth");
 
     public RoadSmooth(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 424, 424, graphicsContext, monitorWindow);
+        super(possition, 424, 424, 0, graphicsContext, monitorWindow);
     }
 
     @Override

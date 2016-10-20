@@ -52,7 +52,7 @@ public class PlayerRobot extends GameObjectWithDistanceDetection {
     private GridTable gridTable;
 
     public PlayerRobot(GraphicsContext robotGraphicsContext, Point worldPossition, GridTable gridTable, MonitorWindow monitorWindow) {
-        super(worldPossition, 64, 64, robotGraphicsContext, monitorWindow);
+        super(worldPossition, 64, 64, 2, robotGraphicsContext, monitorWindow);
         this.robotGraphicsContext = robotGraphicsContext;
         this.gridTable = gridTable;
 

@@ -25,7 +25,7 @@ public class CliffVerticalReversed extends GameStaticObject {
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffVerticalReversed(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffVerticalReversed"));
+        super(getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffVerticalReversed"));
     }
 
     private static List<Point> getPoints(Point possition) {

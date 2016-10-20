@@ -27,7 +27,7 @@ public class RockMediumTwo extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoRock = new ArrayList<>();
 
     public RockMediumTwo(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, 128, 128, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("rockMediumTwo"));
+        super(getPoints(possition), possition, 128, 128, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("rockMediumTwo"));
     }
 
     private static List<Point> getPoints(Point possition) {

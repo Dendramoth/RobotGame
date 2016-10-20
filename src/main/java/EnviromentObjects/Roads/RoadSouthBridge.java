@@ -20,7 +20,7 @@ public class RoadSouthBridge extends GamePrimitiveObject {
     private final Image roadImage = LoadAllResources.getMapOfAllImages().get("Road_end_south_bridge");
 
     public RoadSouthBridge(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 424, 424, graphicsContext, monitorWindow);
+        super(possition, 424, 424, 1, graphicsContext, monitorWindow);
     }
 
     @Override

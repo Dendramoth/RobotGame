@@ -27,7 +27,7 @@ public class DinosaurusSkeleton extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoSkeleton = new ArrayList<>();
 
     public DinosaurusSkeleton(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, 512, 512, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("skeletonDinosaurus"));
+        super(getPoints(possition), possition, 512, 512, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("skeletonDinosaurus"));
     }
     
     private static List<Point> getPoints(Point possition) {

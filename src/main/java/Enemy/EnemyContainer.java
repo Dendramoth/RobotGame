@@ -66,21 +66,21 @@ public class EnemyContainer {
         }
     }
 
-    public void paintEnemies(Point playerRobotWorldPossition, boolean paintingEnemiesAbovePlayer) {
+    public void paintEnemies(Point playerRobotWorldPossition, int enemiesLayerNumber) {
         // graphicsContext.clearRect(0, 0, GameMainInfrastructure.WINDOW_WIDTH, GameMainInfrastructure.WINDOW_HEIGH);
         for (Enemy enemy : enemyList) {
-            if ((enemy.isAbovePlayer() && paintingEnemiesAbovePlayer) || (!enemy.isAbovePlayer() && !paintingEnemiesAbovePlayer)) {
+            if (enemy.getLayerPosition() == enemiesLayerNumber) {
                 enemy.paintGameObject();
             }
 
         }
     }
 
-    public void paintAllDiingEnemies(boolean paintingEnemiesAbovePlayer) {
+    public void paintAllDiingEnemies(int enemiesLayerNumber) {
         Iterator<Enemy> iterator = dyingEnemyList.iterator();
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
-            if ((enemy.isAbovePlayer() && paintingEnemiesAbovePlayer) || (!enemy.isAbovePlayer() && !paintingEnemiesAbovePlayer)) {
+            if ((enemy.getLayerPosition() == enemiesLayerNumber)) {
                 if (!enemy.paintDyingEnemyAnimation()) {
                     iterator.remove();
                 }

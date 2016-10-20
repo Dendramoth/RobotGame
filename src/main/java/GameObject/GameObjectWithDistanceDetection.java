@@ -20,8 +20,8 @@ public abstract class GameObjectWithDistanceDetection extends GamePrimitiveObjec
     private Point rightBottomCorner;
     private double distanceFromComparedObject;
 
-    public GameObjectWithDistanceDetection(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, width, heigh, graphicsContext, monitorWindow);
+    public GameObjectWithDistanceDetection(Point possition, double width, double heigh, int objectlayer, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+        super(possition, width, heigh, objectlayer, graphicsContext, monitorWindow);
         leftTopCorner = possition;
         leftBottomCorner = new Point(possition.getCoordX(), possition.getCoordY() + heigh);
         rightTopCorner = new Point(possition.getCoordX() + width, possition.getCoordY());

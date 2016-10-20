@@ -20,7 +20,7 @@ public class CraterSmallTwo extends GamePrimitiveObject {
     private final Image craterImage = LoadAllResources.getMapOfAllImages().get("crater64_2");
 
     public CraterSmallTwo(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 64, 64, graphicsContext, monitorWindow);
+        super(possition, 64, 64, 0, graphicsContext, monitorWindow);
     }
     
     @Override

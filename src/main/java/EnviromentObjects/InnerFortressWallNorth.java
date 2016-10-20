@@ -26,7 +26,7 @@ public class InnerFortressWallNorth extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoWall = new ArrayList<>();
 
     public InnerFortressWallNorth(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("northWall"));
+        super(getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("northWall"));
     }
 
     private static List<Point> getPoints(Point possition) {

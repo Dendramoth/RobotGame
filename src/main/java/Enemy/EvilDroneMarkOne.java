@@ -36,7 +36,7 @@ public class EvilDroneMarkOne extends Enemy {
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
-        super(possitionInWorld, false, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+        super(possitionInWorld, 0, width, heigh, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         enemyImage = LoadAllResources.getMapOfAllImages().get("bomberMovingA");
     }
 

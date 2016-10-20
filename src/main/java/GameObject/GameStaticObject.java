@@ -27,8 +27,8 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
     private List<Point> listOfPathPoints = new ArrayList<Point>();
     private List<Line> polygonLineList = new ArrayList<Line>();
 
-    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
-        super(possition, width, heigh, graphicsContext, monitorWindow);
+    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, int objectLayer, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
+        super(possition, width, heigh, objectLayer, graphicsContext, monitorWindow);
         this.staticObjectImage = staticObjectImage;
         createPolygon(pointsList);
         createLinesFromPolygonPoints(pointsList);

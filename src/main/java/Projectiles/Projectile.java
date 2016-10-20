@@ -30,7 +30,7 @@ public abstract class Projectile extends GameObjectWithDistanceDetection {
     protected int damage;
 
     public Projectile(int damage, GraphicsContext graphicsContext, double angleOfFiredShot, Point position, Enemy enemy, double width, double height, boolean firedFromWall, MonitorWindow monitorWindow) {
-        super(position, width, height, graphicsContext, monitorWindow);
+        super(position, width, height, 3, graphicsContext, monitorWindow);
         this.damage = damage;
         this.angleOfFiredShot = angleOfFiredShot;
         this.enemyWhoShootedThisProjectile = enemy;

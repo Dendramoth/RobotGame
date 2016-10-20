@@ -19,11 +19,20 @@ public abstract class GamePrimitiveObject {
     protected double width;
     protected double heigh;
     protected MonitorWindow monitorWindow;
+    /**
+     * 0 - bottom
+     * 1 - above bottom under player
+     * 2 - player robot level
+     * 3 - above player
+     */
+    protected int layerPosition = 0;
+    
 
-    public GamePrimitiveObject(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
+    public GamePrimitiveObject(Point possition, double width, double heigh, int layerPosition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
         this.worldPossition = possition;
         this.width = width;
         this.heigh = heigh;
+        this.layerPosition = layerPosition;
         this.graphicsContext = graphicsContext;
         this.monitorWindow = monitorWindow;
         prepareObjectCorners();
@@ -49,6 +58,10 @@ public abstract class GamePrimitiveObject {
     public void setWorldPossition(Point worldPossition) {
         this.worldPossition = worldPossition;
     }
-    
+
+    public int getLayerPosition() {
+        return layerPosition;
+    }
+
     
 }

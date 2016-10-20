@@ -29,11 +29,9 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
     protected int hitPoints;
     protected ArrayList<Explosion> allExplosionsOnEnemy = new ArrayList<>();
     protected GridTable gridTable;
-    protected boolean abovePlayer = false;
 
-    public Enemy(Point possitionInWorld, boolean abovePlayer, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
-        super(possitionInWorld, width, heigh, graphicsContext, monitorWindow);
-        this.abovePlayer = abovePlayer;
+    public Enemy(Point possitionInWorld, int enemyLayer, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {
+        super(possitionInWorld, width, heigh, enemyLayer, graphicsContext, monitorWindow);
         this.movementSpeed = movementSpeed;
         this.damagedStateTreshold = damagedStateTreshold;
         this.hitPoints = hitPoints;
@@ -63,9 +61,5 @@ public abstract class Enemy extends GameObjectWithDistanceDetection{
             gameObjectPolygon.getPoints().add(point.getCoordX());
             gameObjectPolygon.getPoints().add(point.getCoordY());
         }
-    }
-
-    public boolean isAbovePlayer() {
-        return abovePlayer;
     }
 }

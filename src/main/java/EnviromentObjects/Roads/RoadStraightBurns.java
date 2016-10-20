@@ -20,7 +20,7 @@ public class RoadStraightBurns extends GamePrimitiveObject {
     private final Image roadImage = LoadAllResources.getMapOfAllImages().get("Road_straight_north_south_burns");
 
     public RoadStraightBurns(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 424, 424, graphicsContext, monitorWindow);
+        super(possition, 424, 424, 0, graphicsContext, monitorWindow);
     }
 
     @Override

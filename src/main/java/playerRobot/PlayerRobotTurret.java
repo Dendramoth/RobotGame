@@ -23,7 +23,7 @@ public class PlayerRobotTurret {
     private final Image turretIdleImage;
     private final Image turretShootingImage;
     private final GraphicsContext robotGraphicsContext;
-    private final AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
+//    private final AudioClip minigunSound = LoadAllResources.getMapOfAllSounds().get("minigunSound");
 
     private Image turretCurrentImage;
     private double turretAngle = 0;
@@ -52,9 +52,9 @@ public class PlayerRobotTurret {
 
     private void paintMinigunFireOnTurret() {
         if (turretIsShooting) {
-            if (!minigunSound.isPlaying()) {
+        /*    if (!minigunSound.isPlaying()) {
                 minigunSound.play();
-            }
+            }*/
             minigunImageCounter++;
             if (minigunImageCounter <= 4) {
                 shootingMinigunFireImage = LoadAllResources.getMapOfAllImages().get("minigunFire1");
@@ -70,9 +70,9 @@ public class PlayerRobotTurret {
             }
             robotGraphicsContext.drawImage(shootingMinigunFireImage, -shootingMinigunFireImage.getWidth() / 2, -shootingMinigunFireImage.getHeight() / 2);
         } else {
-            if (minigunSound.isPlaying()) {
+      /*      if (minigunSound.isPlaying()) {
                 minigunSound.stop();
-            }
+            }*/
             minigunImageCounter = 0;
         }
     }

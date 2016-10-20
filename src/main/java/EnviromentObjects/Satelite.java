@@ -28,7 +28,7 @@ public class Satelite extends GameStaticObject {
     private int sateliteAngle = 0;
 
     public Satelite(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("sateliteBase"));
+        super(getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("sateliteBase"));
     }
 
     private static List<Point> getPoints(Point possition) {

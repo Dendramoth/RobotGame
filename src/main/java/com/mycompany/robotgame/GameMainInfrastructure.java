@@ -204,22 +204,23 @@ public class GameMainInfrastructure {
                 movePlayerRobot();
                 showHideInterface();
                 
-                gridTable.paintAllObjectsInMonitorWindow();
+                gridTable.paintAllObjectsInMonitorWindow(0);
+          //      gridTable.paintAllObjectsInMonitorWindow(1);
                 gameDynamicEnviroment.paintAllMinigunsHitsOnGround();
                 gameDynamicEnviroment.paintAllLaserHitsOnGround();
 
                 enemyContainer.testEnemiesAlive();
                 enemyContainer.moveEnemies(new Point(playerRobot.getWorldPossition().getCoordX(), playerRobot.getWorldPossition().getCoordY()));
                 //paint enemies under player robot
-                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), false);
-                enemyContainer.paintAllDiingEnemies(false);
+                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), 0); //paint enemies in layer 0 -> under player
+                enemyContainer.paintAllDiingEnemies(0);
                                 
                 playerRobot.paintGameObject();
                 playerRobot.shootFromRobotTurret(mousePressed);
                 
                 //paint enemies above player robot
-                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), true);
-                enemyContainer.paintAllDiingEnemies(true);
+                enemyContainer.paintEnemies(playerRobot.getWorldPossition(), 3); //paint enemies in layer 3 -> above player e.g. planes,..
+                enemyContainer.paintAllDiingEnemies(3);
 
                 projectileContainer.moveAllProjectiles();
                 projectileContainer.paintAllProjectiles();

@@ -20,7 +20,7 @@ public class DryLandHorizontal extends GamePrimitiveObject {
     private final Image craterImage = LoadAllResources.getMapOfAllImages().get("Dry_land_horizontal");
 
     public DryLandHorizontal(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 512, 256, graphicsContext, monitorWindow);
+        super(possition, 512, 256, 0, graphicsContext, monitorWindow);
     }
     
     @Override

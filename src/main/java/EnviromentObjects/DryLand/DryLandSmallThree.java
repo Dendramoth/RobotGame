@@ -20,7 +20,7 @@ public class DryLandSmallThree extends GamePrimitiveObject {
     private final Image craterImage = LoadAllResources.getMapOfAllImages().get("Dry_land_small_three");
 
     public DryLandSmallThree(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 256, 256, graphicsContext, monitorWindow);
+        super(possition, 256, 256, 0, graphicsContext, monitorWindow);
     }
     
     @Override

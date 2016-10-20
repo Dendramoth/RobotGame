@@ -784,7 +784,7 @@ public class LoadAllResources {
     }
 
     private void loadAllSounds() {
-        AudioClip audioClip = new AudioClip(this.getClass().getResource("/Sounds/idleRobot.mp3").toExternalForm());
+   /*     AudioClip audioClip = new AudioClip(this.getClass().getResource("/Sounds/idleRobot.mp3").toExternalForm());
         mapOfAllSounds.put("idleRobotSound", audioClip);
 
         audioClip = new AudioClip(this.getClass().getResource("/Sounds/movingRobot.mp3").toExternalForm());
@@ -797,7 +797,7 @@ public class LoadAllResources {
         mapOfAllSounds.put("minigunSound", audioClip);
 
         audioClip = new AudioClip(this.getClass().getResource("/Sounds/dispatch.mp3").toExternalForm());
-        mapOfAllSounds.put("dispatchSound", audioClip);
+        mapOfAllSounds.put("dispatchSound", audioClip);*/
     }
 
     public static HashMap<String, Image> getMapOfAllImages() {

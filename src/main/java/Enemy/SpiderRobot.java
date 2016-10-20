@@ -50,7 +50,7 @@ public class SpiderRobot extends Enemy {
     private List<PathfindingPoint> reachedPoints = new ArrayList<PathfindingPoint>();
 
     public SpiderRobot(Point possitionInWorld, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow, ProjectileContainer projectileContainer, GameDynamicEnviroment gameDynamicEnviroment) {
-        super(possitionInWorld, false, 256, 256, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
+        super(possitionInWorld, 0, 256, 256, movementSpeed, damagedStateTreshold, hitPoints, graphicsContext, gridTable, monitorWindow);
         enemyImage = LoadAllResources.getMapOfAllImages().get("walker_idle");
         this.projectileContainer = projectileContainer;
         this.gameDynamicEnviroment = gameDynamicEnviroment;

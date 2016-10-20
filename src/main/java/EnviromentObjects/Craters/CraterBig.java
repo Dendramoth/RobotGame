@@ -20,7 +20,7 @@ public class CraterBig extends GamePrimitiveObject{
     private final Image craterImage = LoadAllResources.getMapOfAllImages().get("crater256");
 
     public CraterBig(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(possition, 256, 256, graphicsContext, monitorWindow);
+        super(possition, 256, 256, 0, graphicsContext, monitorWindow);
     }
 
     @Override
