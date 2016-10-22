@@ -40,18 +40,6 @@ public class DinosaurusSkeleton extends GameStaticObject {
         pointList.add(new Point(331 + possition.getCoordX(), 431 + possition.getCoordY()));
         return pointList;
     }
-    
-    @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(450 + worldPossition.getCoordX(), 493 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(410 + worldPossition.getCoordX(), 25 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(57 + worldPossition.getCoordX(), 154 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(244 + worldPossition.getCoordX(), 209 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(85 + worldPossition.getCoordX(), 504 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(331 + worldPossition.getCoordX(), 431 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
 
     @Override
     public void paintGameObject() {

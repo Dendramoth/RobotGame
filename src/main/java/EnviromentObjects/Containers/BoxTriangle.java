@@ -40,16 +40,6 @@ public class BoxTriangle extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(30 + worldPossition.getCoordX(), 238 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(233 + worldPossition.getCoordX(), 238 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(233 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(30 + worldPossition.getCoordX(), 10 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());

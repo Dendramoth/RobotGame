@@ -60,16 +60,6 @@ public class CliffVertical extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(162 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(162 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(165 + worldPossition.getCoordX(), 1024 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(165 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void doOnCollision(Point collisionPoint) {
     }
 

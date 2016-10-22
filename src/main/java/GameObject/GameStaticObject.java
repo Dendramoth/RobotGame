@@ -77,13 +77,10 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
         return angle;
     }
 
-    public abstract void createPolygonForDetection();
-
     @Override
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape projectileTrajectoryLine, Point trajectoryStartPosition) {
         Point intersectionPoint = new Point(0, 0);
 
-        createPolygonForDetection();
         Shape intersect = Shape.intersect(projectileTrajectoryLine, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));

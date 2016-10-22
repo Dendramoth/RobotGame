@@ -59,16 +59,6 @@ public class CliffHorizontalReversed extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 158 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 158 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(1024 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 150 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void doOnCollision(Point collisionPoint) {
     }
 

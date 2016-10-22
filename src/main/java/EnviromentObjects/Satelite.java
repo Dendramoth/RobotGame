@@ -79,16 +79,6 @@ public class Satelite extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(256 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(256 + worldPossition.getCoordX(), 256 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 256 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void doOnCollision(Point collisionPoint) {
     }
 

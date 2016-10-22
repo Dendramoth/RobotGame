@@ -40,16 +40,6 @@ public class SimpleBox extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(14 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(118 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(118 + worldPossition.getCoordX(), 14 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(14 + worldPossition.getCoordX(), 14 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());

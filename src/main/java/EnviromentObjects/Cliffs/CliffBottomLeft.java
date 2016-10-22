@@ -57,19 +57,6 @@ public class CliffBottomLeft extends GameStaticObject{
     public ResultOfDetectColisionWithProjectile detectCollisionWithProjectile(Shape shape, Point positionOfColidingObject) {
         return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
     }
-    
-    
-    @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(112 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(128 + worldPossition.getCoordX(), 117 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(255 + worldPossition.getCoordX(), 142 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(255 + worldPossition.getCoordX(), 170 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(90 + worldPossition.getCoordX(), 170 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(90 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
 
     @Override
     public void doOnCollision(Point collisionPoint) {

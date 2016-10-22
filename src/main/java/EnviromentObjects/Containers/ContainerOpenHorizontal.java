@@ -40,16 +40,6 @@ public class ContainerOpenHorizontal extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(245 + worldPossition.getCoordX(), 118 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(245 + worldPossition.getCoordX(), 13 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(10 + worldPossition.getCoordX(), 13 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());

@@ -60,18 +60,6 @@ public class CliffBottomRight extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 142 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(117 + worldPossition.getCoordX(), 129 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(138 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(180 + worldPossition.getCoordX(), 0 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(180 + worldPossition.getCoordX(), 165 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(0 + worldPossition.getCoordX(), 165 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void doOnCollision(Point collisionPoint) {
     }
 

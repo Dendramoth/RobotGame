@@ -66,16 +66,6 @@ public class InnerFortressWallSouth extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(17 + worldPossition.getCoordX(), 24 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(475 + worldPossition.getCoordX(), 24 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(475 + worldPossition.getCoordX(), 84 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(17 + worldPossition.getCoordX(), 84 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void doOnCollision(Point collisionPoint) {
     }
 

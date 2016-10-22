@@ -57,20 +57,6 @@ public class DroneBarracks extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(25 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(75 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(75 + worldPossition.getCoordX(), 225 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(177 + worldPossition.getCoordX(), 225 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(177 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(231 + worldPossition.getCoordX(), 294 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(231 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(25 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         imageCounter++;

@@ -40,16 +40,6 @@ public class RockMediumOne extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(18 + worldPossition.getCoordX(), 114 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(110 + worldPossition.getCoordX(), 114 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(110 + worldPossition.getCoordX(), 14 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(18 + worldPossition.getCoordX(), 14 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void paintGameObject() {
         Point monitorPossition = monitorWindow.getPositionInWorld();
         graphicsContext.drawImage(staticObjectImage, worldPossition.getCoordX() - monitorPossition.getCoordX(), worldPossition.getCoordY() - monitorPossition.getCoordY());

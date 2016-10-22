@@ -58,22 +58,11 @@ public class InnerFortressWallNorth extends GameStaticObject {
 
     @Override
     public boolean detectCollision(Shape shape) {
-        createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(16 + worldPossition.getCoordX(), 29 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(473 + worldPossition.getCoordX(), 29 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(473 + worldPossition.getCoordX(), 86 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(16 + worldPossition.getCoordX(), 86 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
     }
 
     @Override

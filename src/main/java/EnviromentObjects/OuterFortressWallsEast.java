@@ -82,32 +82,6 @@ public class OuterFortressWallsEast extends GameStaticObject {
     }
 
     @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(33 + worldPossition.getCoordX(), 1498 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 1498 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 923 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(480 + worldPossition.getCoordX(), 923 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(480 + worldPossition.getCoordX(), 602 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 602 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(608 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(32 + worldPossition.getCoordX(), 27 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(32 + worldPossition.getCoordX(), 227 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(96 + worldPossition.getCoordX(), 227 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(96 + worldPossition.getCoordX(), 89 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 89 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 538 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(416 + worldPossition.getCoordX(), 538 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(416 + worldPossition.getCoordX(), 985 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 985 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(545 + worldPossition.getCoordX(), 1435 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(95 + worldPossition.getCoordX(), 1435 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(95 + worldPossition.getCoordX(), 1300 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(33 + worldPossition.getCoordX(), 1300 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
-
-    @Override
     public void doOnCollision(Point collisionPoint) {
     }
 

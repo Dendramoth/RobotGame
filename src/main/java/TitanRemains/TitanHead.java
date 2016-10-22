@@ -40,18 +40,6 @@ public class TitanHead extends GameStaticObject {
         pointList.add(new Point(95 + possition.getCoordX(), 138 + possition.getCoordY()));
         return pointList;
     }
-    
-    @Override
-    public void createPolygonForDetection() {
-        pointsForDetection.clear();
-        pointsForDetection.add(new Point(60 + worldPossition.getCoordX(), 235 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(309 + worldPossition.getCoordX(), 416 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(434 + worldPossition.getCoordX(), 356 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(420 + worldPossition.getCoordX(), 236 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(183 + worldPossition.getCoordX(), 97 + worldPossition.getCoordY()));
-        pointsForDetection.add(new Point(95 + worldPossition.getCoordX(), 138 + worldPossition.getCoordY()));
-        createPolygon(pointsForDetection);
-    }
 
     @Override
     public void paintGameObject() {
