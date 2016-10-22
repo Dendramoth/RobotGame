@@ -24,10 +24,12 @@ public class Pathfinding {
     private List<PathfindingPoint> listOfPathPoints = new ArrayList<PathfindingPoint>();
     private boolean pathWasGeneratedBefore = false;
     private boolean finalPointIsDirectlyVisible = true;
+    int sizeOfEnemy;
 
-    public Pathfinding(List<GameStaticObject> gameStaticObjectsList, GraphicsContext graphicsContext, List<PathfindingPoint> listOfPathPoints) {
+    public Pathfinding(int sizeOfEnemy ,List<GameStaticObject> gameStaticObjectsList, GraphicsContext graphicsContext, List<PathfindingPoint> listOfPathPoints) {
         this.gameStaticObjectsList = gameStaticObjectsList;
         this.listOfPathPoints = listOfPathPoints;
+        this.sizeOfEnemy = sizeOfEnemy;
         pathWasGeneratedBefore = listOfPathPoints != null && !listOfPathPoints.isEmpty();
     }
 
@@ -38,7 +40,7 @@ public class Pathfinding {
         for (GameStaticObject gameStaticObject : gameStaticObjectsList) {
             Line line = new Line(currentPoint.getCoordX(), currentPoint.getCoordY(), targetPointX, targetPointY);
 
-            Shape intersection = gameStaticObject.detectIntersection(line);
+            Shape intersection = gameStaticObject.detectIntersection(sizeOfEnemy, line);
             if (!(intersection.getLayoutBounds().getHeight() <= 0 || intersection.getLayoutBounds().getWidth() <= 0)) {
                 finalPointIsDirectlyVisible = false;
                 if (pathWasGeneratedBefore == true){

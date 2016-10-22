@@ -24,6 +24,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
 
     protected Image staticObjectImage;
     protected final Polygon gameObjectPolygon = new Polygon();
+    protected final Polygon gameObjectPolygon64 = new Polygon();
     private List<Point> listOfPathPoints = new ArrayList<Point>();
     private List<Line> polygonLineList = new ArrayList<Line>();
 
@@ -113,8 +114,13 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
         return new ResultOfDetectColisionWithProjectile(true, intersectionPoint);
     }
 
-    public Shape detectIntersection(Shape lineDetection) {
-        return Shape.intersect(gameObjectPolygon, lineDetection);
+    public Shape detectIntersection(int enemySize, Shape lineDetection) {
+        switch (enemySize){
+            case 64:
+                return Shape.intersect(gameObjectPolygon, lineDetection);
+            default: 
+                return Shape.intersect(gameObjectPolygon, lineDetection);
+        }
     }
 
     public Polygon getGameObjectPolygon() {

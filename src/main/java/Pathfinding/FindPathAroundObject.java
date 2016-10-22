@@ -8,7 +8,6 @@ package Pathfinding;
 import GameObject.GameStaticObject;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -27,10 +26,10 @@ public class FindPathAroundObject {
     private boolean pathFoundToTheRight;
     private boolean pathFoundToTheLeft;
 
-    private GameStaticObject gameObject;
-    private List<PathfindingPoint> leftListOfPathPointsAroundObject = new ArrayList<PathfindingPoint>();
-    private List<PathfindingPoint> rightListOfPathPointsAroundObject = new ArrayList<PathfindingPoint>();
-    private List<PathfindingPoint> listOfPathPoints = new ArrayList<PathfindingPoint>();
+    private final GameStaticObject gameObject;
+    private final List<PathfindingPoint> leftListOfPathPointsAroundObject = new ArrayList<>();
+    private final List<PathfindingPoint> rightListOfPathPointsAroundObject = new ArrayList<>();
+    private final List<PathfindingPoint> listOfPathPoints;
 
     public FindPathAroundObject(double targetX, double targetY, GameStaticObject gameObject, List<PathfindingPoint> listOfPathPoints) {
         this.targetX = targetX;

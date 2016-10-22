@@ -121,7 +121,6 @@ public class DroneBarracks extends GameStaticObject {
 
     @Override
     public boolean detectCollision(Shape shape) {
-        createPolygonForDetection();
         Shape intersect = Shape.intersect(shape, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
             return false;

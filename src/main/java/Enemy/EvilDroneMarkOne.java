@@ -204,7 +204,7 @@ public class EvilDroneMarkOne extends Enemy {
 
     private void findPathToPlayer(Point playerWorldPosition) {
         List<GameStaticObject> visibleStaticObjects = new ArrayList<GameStaticObject>(gridTable.getAllVisibleObjects());
-        Pathfinding pathfinding = new Pathfinding(visibleStaticObjects, graphicsContext, pathPoints);
+        Pathfinding pathfinding = new Pathfinding(64, visibleStaticObjects, graphicsContext, pathPoints);
         pathPoints = pathfinding.createPath(this, playerWorldPosition.getCoordX(), playerWorldPosition.getCoordY());
     }
 
