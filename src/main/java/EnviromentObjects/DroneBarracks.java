@@ -37,7 +37,7 @@ public class DroneBarracks extends GameStaticObject {
     private GridTable gridTable;
 
     public DroneBarracks(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow, PlayerRobot playerRobot, EnemyContainer enemyContainer, GridTable gridTable) {
-        super(getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("droneBarracks1"));
+        super(getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("droneBarracks1"));
         this.playerRobot = playerRobot;
         this.enemyContainer = enemyContainer;
         this.gridTable = gridTable;

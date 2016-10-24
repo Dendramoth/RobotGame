@@ -26,7 +26,7 @@ public class CliffVertical extends GameStaticObject {
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffVertical(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffVertical"));
+        super(getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffVertical"));
     }
 
     private static List<Point> getPoints(Point possition) {

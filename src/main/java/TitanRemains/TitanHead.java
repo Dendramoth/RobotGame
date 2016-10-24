@@ -27,7 +27,7 @@ public class TitanHead extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoTitanHead = new ArrayList<>();
 
     public TitanHead(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), possition, 512, 512, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("TitanFace"));
+        super(getPoints(possition), getPoints(possition), possition, 512, 512, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("TitanFace"));
     }
     
     private static List<Point> getPoints(Point possition) {

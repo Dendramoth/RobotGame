@@ -39,6 +39,10 @@ public class GridTable {
         gridCellField = new GridCell[cellCountX][cellCountY];
         createGrid();
     }
+    
+    public HashSet<GameStaticObject> getStaticObjectsInGridCell(int x, int y){
+        return gridCellField[x][y].getObjectInCell();
+    }
 
     public HashSet<GameStaticObject> getAllVisibleObjects() {
         int x = bottomIndexInGrid(monitorWindow.getPositionInWorld().getCoordX() + GameMainInfrastructure.WINDOW_WIDTH / 2 - 32);
@@ -258,6 +262,14 @@ public class GridTable {
 
     private int topIndexInGrid(double coordination) {
         return (int) Math.floor((coordination - 1) / cellSize);
+    }
+
+    public int getCellCountX() {
+        return cellCountX;
+    }
+
+    public int getCellCountY() {
+        return cellCountY;
     }
 
 }

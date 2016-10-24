@@ -6,7 +6,6 @@
 package GameObject;
 
 import EnviromentObjects.MinigunHitIntoStaticObject;
-import com.mycompany.robotgame.LoadAllResources;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,21 +24,42 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
     protected Image staticObjectImage;
     protected final Polygon gameObjectPolygon = new Polygon();
     protected final Polygon gameObjectPolygon64 = new Polygon();
-    private List<Point> listOfPathPoints = new ArrayList<Point>();
-    private List<Line> polygonLineList = new ArrayList<Line>();
+    private final List<Line> polygonLineList = new ArrayList<>();
+    private final List<Line> polygonLineList64 = new ArrayList<>();
+    
+    private List<Point> pointsList;
+    private List<Point> pointsList64;
 
-    public GameStaticObject(List<Point> pointsList, Point possition, double width, double heigh, int objectLayer, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
+    public GameStaticObject(List<Point> pointsList, List<Point> pointsList64, Point possition, double width, double heigh, int objectLayer, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
         super(possition, width, heigh, objectLayer, graphicsContext, monitorWindow);
         this.staticObjectImage = staticObjectImage;
-        createPolygon(pointsList);
-        createLinesFromPolygonPoints(pointsList);
+        this.pointsList = pointsList;
+        this.pointsList64 = pointsList64;
+        
+        if (pointsList != null) {
+            createPolygon(pointsList);
+            createLinesFromPolygonPoints(pointsList);
+        }
+
+        if (pointsList64 != null) {
+            createPolygon64(pointsList64);
+            createLinesFromPolygonPoints64(pointsList64);
+        }
     }
 
-    protected final void createPolygon(List<Point> pointsList) {
+    private void createPolygon(List<Point> pointsList) {
         gameObjectPolygon.getPoints().clear();
         for (Point point : pointsList) {
             gameObjectPolygon.getPoints().add(point.getCoordX());
             gameObjectPolygon.getPoints().add(point.getCoordY());
+        }
+    }
+
+    private void createPolygon64(List<Point> pointsList) {
+        gameObjectPolygon64.getPoints().clear();
+        for (Point point : pointsList) {
+            gameObjectPolygon64.getPoints().add(point.getCoordX());
+            gameObjectPolygon64.getPoints().add(point.getCoordY());
         }
     }
 
@@ -52,6 +72,18 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
                 line = new Line(pointsList.get(i).getCoordX(), pointsList.get(i).getCoordY(), pointsList.get(0).getCoordX(), pointsList.get(0).getCoordY());
             }
             polygonLineList.add(line);
+        }
+    }
+
+    private void createLinesFromPolygonPoints64(List<Point> pointsList) {
+        Line line;
+        for (int i = 0; i < pointsList.size(); i++) {
+            if (i < pointsList.size() - 1) {
+                line = new Line(pointsList.get(i).getCoordX(), pointsList.get(i).getCoordY(), pointsList.get(i + 1).getCoordX(), pointsList.get(i + 1).getCoordY());
+            } else {
+                line = new Line(pointsList.get(i).getCoordX(), pointsList.get(i).getCoordY(), pointsList.get(0).getCoordX(), pointsList.get(0).getCoordY());
+            }
+            polygonLineList64.add(line);
         }
     }
 
@@ -83,14 +115,14 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
 
         Shape intersect = Shape.intersect(projectileTrajectoryLine, gameObjectPolygon);
         if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-            return new ResultOfDetectColisionWithProjectile(false, new Point(0,0));
+            return new ResultOfDetectColisionWithProjectile(false, new Point(0, 0));
         }
 
         Point possibleIntersectionOne = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMaxY());
         Point possibleIntersectionTwo = new Point(intersect.getLayoutBounds().getMinX(), intersect.getLayoutBounds().getMaxY());
         Point possibleIntersectionThree = new Point(intersect.getLayoutBounds().getMaxX(), intersect.getLayoutBounds().getMinY());
         Point possibleIntersectionFour = new Point(intersect.getLayoutBounds().getMinX(), intersect.getLayoutBounds().getMinY());
-        
+
         double distancePointOne = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionOne.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionOne.getCoordY());
         double distancePointTwo = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionTwo.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionTwo.getCoordY());
         double distancePointThree = Math.abs(trajectoryStartPosition.getCoordX() - possibleIntersectionThree.getCoordX()) + Math.abs(trajectoryStartPosition.getCoordY() - possibleIntersectionThree.getCoordY());
@@ -98,33 +130,53 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
 
         if (distancePointOne <= distancePointTwo && distancePointOne <= distancePointThree && distancePointOne <= distancePointFour) {
             intersectionPoint = possibleIntersectionOne;
-        } else if(distancePointTwo <= distancePointOne && distancePointTwo <= distancePointThree && distancePointTwo <= distancePointFour){
+        } else if (distancePointTwo <= distancePointOne && distancePointTwo <= distancePointThree && distancePointTwo <= distancePointFour) {
             intersectionPoint = possibleIntersectionTwo;
-        } else if (distancePointThree <= distancePointOne && distancePointThree <= distancePointTwo && distancePointThree <= distancePointFour){
+        } else if (distancePointThree <= distancePointOne && distancePointThree <= distancePointTwo && distancePointThree <= distancePointFour) {
             intersectionPoint = possibleIntersectionThree;
-        }else{
+        } else {
             intersectionPoint = possibleIntersectionFour;
         }
-        
+
         intersectionPoint.setCoordX(intersectionPoint.getCoordX() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         intersectionPoint.setCoordY(intersectionPoint.getCoordY() - MinigunHitIntoStaticObject.explosionImageSize / 2);
         return new ResultOfDetectColisionWithProjectile(true, intersectionPoint);
     }
 
     public Shape detectIntersection(int enemySize, Shape lineDetection) {
-        switch (enemySize){
+        switch (enemySize) {
             case 64:
-                return Shape.intersect(gameObjectPolygon, lineDetection);
-            default: 
+                return Shape.intersect(gameObjectPolygon64, lineDetection);
+            default:
                 return Shape.intersect(gameObjectPolygon, lineDetection);
         }
     }
 
-    public Polygon getGameObjectPolygon() {
-        return gameObjectPolygon;
+    public Polygon getGameObjectPolygon(int enemySize) {
+        switch (enemySize) {
+            case 64:
+                return gameObjectPolygon64;
+            default:
+                return gameObjectPolygon;
+        }
+
     }
 
-    public List<Line> getPolygonLineList() {
-        return polygonLineList;
+    public List<Line> getPolygonLineList(int enemySize) {
+        switch (enemySize) {
+            case 64:
+                return polygonLineList64;
+            default:
+                return polygonLineList;
+        }
     }
+
+    public List<Point> getPointsList() {
+        return pointsList;
+    }
+
+    public List<Point> getPointsList64() {
+        return pointsList64;
+    }
+
 }
