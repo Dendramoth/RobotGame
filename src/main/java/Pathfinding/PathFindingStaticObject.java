@@ -7,40 +7,31 @@ package Pathfinding;
 
 import GameObject.GameStaticObject;
 import GameObject.Point;
-import Projectiles.Projectile;
-import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 
 /**
  *
  * @author Dendra
  */
-public class PathFindingStaticObject extends GameStaticObject {
+public class PathFindingStaticObject {
 
     private List<Line> finalUnionObjectLineList = new ArrayList<>();
     private List<Point> finalUnionObjectPointList = new ArrayList<>();
 
-    public PathFindingStaticObject(int enemySize, GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB, Point possition, double width, double heigh, int objectLayer, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
-        super(null, null, possition, width, heigh, objectLayer, graphicsContext, monitorWindow, staticObjectImage);
+    public PathFindingStaticObject(int enemySize, GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB) {
         createUnionOfTwoInputObjects(enemySize, gameStaticObjectA, gameStaticObjectB);
     }
 
     private void createUnionOfTwoInputObjects(int enemySize, GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB) {
-        List<Line> objectAPointList = new ArrayList<>();
-        List<Line> objectBPointList = new ArrayList<>();
+        List<Line> objectALineList = new ArrayList<>(gameStaticObjectA.getPolygonLineList(enemySize));
+        List<Line> objectBLineList = new ArrayList<>(gameStaticObjectB.getPolygonLineList(enemySize));
 
-        objectAPointList = gameStaticObjectA.getPolygonLineList(enemySize);
-        objectBPointList = gameStaticObjectB.getPolygonLineList(enemySize);
+        findTheObjectMoreLeftAndTop(objectALineList, objectBLineList);
 
-        findTheObjectMoreLeftAndTop(objectAPointList, objectBPointList);
-
-        finalUnionObjectPointList.add(new Point(objectAPointList.get(0).getStartX(), objectAPointList.get(0).getStartY()));
-        createLineListOfTheUnionObject(objectAPointList, objectBPointList);
+        finalUnionObjectPointList.add(new Point(objectALineList.get(0).getStartX(), objectALineList.get(0).getStartY()));
+        createLineListOfTheUnionObject(objectALineList, objectBLineList);
     }
 
     private void createLineListOfTheUnionObject(List<Line> objectAPointList, List<Line> objectBPointList) {
@@ -148,6 +139,7 @@ public class PathFindingStaticObject extends GameStaticObject {
     }
 
     private void findTheObjectMoreLeftAndTop(List<Line> objectAPointList, List<Line> objectBPointList) {
+        //get most left-top point
         Point objectAFirstPoint = new Point(objectAPointList.get(0).getStartX(), objectAPointList.get(0).getStartY());
         Point objectBFirstPoint = new Point(objectBPointList.get(0).getStartX(), objectBPointList.get(0).getStartY());
 
@@ -164,31 +156,14 @@ public class PathFindingStaticObject extends GameStaticObject {
     }
 
     private void switchObjectsOrder(List<Line> objectAPointList, List<Line> objectBPointList) {
-        List<Line> objectSwitchPointList = new ArrayList<>(objectAPointList);
-        objectAPointList = new ArrayList<>(objectBPointList);
-        objectBPointList = new ArrayList<>(objectSwitchPointList);
-
-    }
-
-    @Override
-    public void paintGameObject() {
-    }
-
-    @Override
-    public boolean detectCollision(Shape shape) {
-        return false;
-    }
-
-    @Override
-    public void doOnCollision(Point collisionPoint) {
-    }
-
-    @Override
-    public void doOnBeingHitByMinigun(Point intersectionPoint) {
-    }
-
-    @Override
-    public void doOnBeingHitByProjectile(Point intersectionPoint, Projectile projectile) {
+        List<Line> objectSwitchPointList = new ArrayList<>();
+        objectSwitchPointList.addAll(objectAPointList);
+        
+        objectAPointList.clear();
+        objectAPointList.addAll(objectBPointList);
+        
+        objectBPointList.clear();
+        objectBPointList.addAll(objectSwitchPointList);
     }
 
 }

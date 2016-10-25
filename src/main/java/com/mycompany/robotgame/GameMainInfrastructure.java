@@ -97,7 +97,7 @@ public class GameMainInfrastructure {
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
         
-        MergeOverlapingObjects mergeOverlapingObjects = new MergeOverlapingObjects(gridTable);
+        MergeOverlapingObjects mergeOverlapingObjects = new MergeOverlapingObjects(gridTable, 64);
 
         VBox gameVerticalPanel = new VBox();
         gameVerticalPanel.getChildren().add(gameCanvasPanel);

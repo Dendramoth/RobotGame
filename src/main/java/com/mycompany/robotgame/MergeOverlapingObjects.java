@@ -6,10 +6,9 @@
 package com.mycompany.robotgame;
 
 import EnviromentObjects.Containers.SimpleBox;
-import GameObject.GameObjectWithDistanceDetection;
 import GameObject.GameStaticObject;
-import GameObject.ResultOfDetectColisionWithProjectile;
 import MapGridTable.GridTable;
+import Pathfinding.PathFindingStaticObject;
 import java.util.HashSet;
 import java.util.Iterator;
 import javafx.scene.shape.Polygon;
@@ -22,9 +21,11 @@ import javafx.scene.shape.Shape;
 public class MergeOverlapingObjects {
 
     private GridTable gridTable;
+    private int enemySize;
 
-    public MergeOverlapingObjects(GridTable gridTable) {
+    public MergeOverlapingObjects(GridTable gridTable, int enemySize) {
         this.gridTable = gridTable;
+        this.enemySize = enemySize;
         checkAllSectionsOfTheGrid();
     }
 
@@ -32,7 +33,7 @@ public class MergeOverlapingObjects {
         for (int x = 0; x < gridTable.getCellCountX(); x++) {
             for (int y = 0; y < gridTable.getCellCountY(); y++) {
                 HashSet<GameStaticObject> gameStaticObjects = gridTable.getStaticObjectsInGridCell(x, y);
-                mergeOverlapingObjects(gameStaticObjects, 64);
+                mergeOverlapingObjects(gameStaticObjects, enemySize);
             }
         }
     }
@@ -53,18 +54,20 @@ public class MergeOverlapingObjects {
             if (gameStaticObject != comperatorObject) {
                 Shape intersect = Polygon.intersect(gameStaticObject.getGameObjectPolygon(enemySize), comperatorObject.getGameObjectPolygon(enemySize));
                 if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-                    System.out.println("-----------------");
-                    
-                    // intersection
+                    // NO intersection
                 } else {
+                    // Intersection found
                     System.out.println("INTERSECTION");
                     if (gameStaticObject instanceof SimpleBox) {
                         System.out.println("Simple BOX!");
                     }
-                    // no intersection
                 }
             }
         }
+    }
+    
+    private void mergeTwoObjectsIntoOne(GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB){
+        PathFindingStaticObject pathFindingStaticObject = new PathFindingStaticObject(enemySize, gameStaticObjectA, gameStaticObjectB);
     }
 
 }
