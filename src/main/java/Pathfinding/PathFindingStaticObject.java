@@ -86,8 +86,9 @@ public class PathFindingStaticObject {
                     }
 
                     //intersection point:
-                    double xIntersection = (lineInObjectA.getStartX() + lineInObjectA.getEndX()) / 2;  // ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-                    double yIntersection = (lineInObjectA.getStartY() + lineInObjectA.getEndY()) / 2;  // ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+                    Point intersectionPoint = intersectionPointOfTwoLineSegment(x1, y1, x2, y2, x3, y3, x4, y4);
+                    double xIntersection = intersectionPoint.getCoordX();
+                    double yIntersection = intersectionPoint.getCoordY();
 
                     Line newLine = new Line(x1, y1, xIntersection, yIntersection); //from old object up to intersection
                     finalUnionObjectLineList.add(newLine);
@@ -118,7 +119,7 @@ public class PathFindingStaticObject {
                 indexOfContinuationLineInObjectB = (i + 1) % objectBLineList.size();
             }
         }
-        
+
         finalUnionObjectPointList.add(new Point(objectBLineList.get(indexOfContinuationLineInObjectB).getStartX(), objectBLineList.get(indexOfContinuationLineInObjectB).getStartY()));
         System.out.println("union object vlozeny: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
@@ -141,8 +142,9 @@ public class PathFindingStaticObject {
 
                 if (xCondition && yCondition) {
                     //intersection point:
-                    double xi = (lineInObjectA.getStartX() + lineInObjectA.getEndX()) / 2;  // ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-                    double yi = (lineInObjectA.getStartY() + lineInObjectA.getEndY()) / 2;  // ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+                    Point intersectionPoint = intersectionPointOfTwoLineSegment(x1, y1, x2, y2, x3, y3, x4, y4);
+                    double xi = intersectionPoint.getCoordX();
+                    double yi = intersectionPoint.getCoordY();
 
                     Line newLine = new Line(x1, y1, xi, yi); //from old object up to intersection
                     finalUnionObjectLineList.add(newLine);
@@ -221,6 +223,14 @@ public class PathFindingStaticObject {
 
         objectBPointList.clear();
         objectBPointList.addAll(objectSwitchPointList);
+    }
+
+    private Point intersectionPointOfTwoLineSegment(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+        double x = ((y2 - y1) * (x4 - x3) * x1 + (x2 - x1) * (x4 - x3) * (y3 - y1) - (y4 - y3) * (x2 - x1) * x3)
+                / ((y2 - y1) * (x4 - x3) - (x2 - x1) * (y4 - y3));
+        double y = ((y1 - y2) * (y3 - y4) * (x1 - x3) + (x3 - x4) * (y1 - y2) * y3 - (y3 - y4) * (x1 - x2) * y1)
+                / ((y1 - y2) * (x3 - x4) - (y3 - y4) * (x1 - x2));
+        return new Point(x, y);
     }
 
     public List<Line> getFinalUnionObjectLineList() {
