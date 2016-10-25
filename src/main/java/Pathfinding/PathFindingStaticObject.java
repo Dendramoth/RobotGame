@@ -53,7 +53,8 @@ public class PathFindingStaticObject {
             double y1 = lineInObjectA.getStartY();
             double y2 = lineInObjectA.getEndY();
 
-            for (Line lineInObjectB : objectBPointList) {
+            for (int i = 0; i < objectBPointList.size(); i++) {
+                Line lineInObjectB = objectBPointList.get(i);
                 System.out.println("line in object B: " + lineInObjectB.getStartX() + " " + lineInObjectB.getStartY() + " , " + lineInObjectB.getEndX() + " " + lineInObjectB.getEndY());
 
                 double x3 = lineInObjectB.getStartX();
@@ -61,20 +62,41 @@ public class PathFindingStaticObject {
                 double y3 = lineInObjectB.getStartY();
                 double y4 = lineInObjectB.getEndY();
 
-                double d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-                if (d != 0) {
+                //      double d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+                boolean xCondition = (x3 >= x1 && x3 <= x2) || (x3 >= x2 && x3 <= x1) || (x4 >= x1 && x4 <= x2) || (x4 >= x2 && x4 <= x1);
+                boolean yCondition = (y3 >= y1 && y3 <= y2) || (y3 >= y2 && y3 <= y1) || (y4 >= y1 && y4 <= y2) || (y4 >= y2 && y4 <= y1);
+
+                if (xCondition && yCondition) {
+
+                    //check if next is also coliding
+                    if (xCondition && yCondition) {
+                        Line futureLineInObjectB = objectBPointList.get((i + 1) % objectBPointList.size());
+                        double x5 = futureLineInObjectB.getStartX();
+                        double x6 = futureLineInObjectB.getEndX();
+                        double y5 = futureLineInObjectB.getStartY();
+                        double y6 = futureLineInObjectB.getEndY();
+
+                        boolean xConditionFuture = (x5 >= x1 && x5 <= x2) || (x5 >= x2 && x5 <= x1) || (x6 >= x1 && x6 <= x2) || (x6 >= x2 && x6 <= x1);
+                        boolean yConditionFuture = (y5 >= y1 && y5 <= y2) || (y5 >= y2 && y5 <= y1) || (y6 >= y1 && y6 <= y2) || (y6 >= y2 && y6 <= y1);
+
+                        if (xConditionFuture && yConditionFuture) {
+                            System.out.println("future line B is also colliding");
+                            lineInObjectB = futureLineInObjectB;
+                        }
+                    }
+
                     //intersection point:
-                    double xIntersection = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-                    double yIntersection = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+                    double xIntersection = (lineInObjectA.getStartX() + lineInObjectA.getEndX()) / 2;  // ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
+                    double yIntersection = (lineInObjectA.getStartY() + lineInObjectA.getEndY()) / 2;  // ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
 
                     Line newLine = new Line(x1, y1, xIntersection, yIntersection); //from old object up to intersection
                     finalUnionObjectLineList.add(newLine);
                     finalUnionObjectPointList.add(new Point(xIntersection, yIntersection));
                     System.out.println("union object1: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
-                    newLine = new Line(xIntersection, yIntersection, x4, y4); // from intersection to the end of the line in the second object
+                    newLine = new Line(xIntersection, yIntersection, x2, y2); // from intersection to the end of the line in the second object
                     finalUnionObjectLineList.add(newLine);
-                    finalUnionObjectPointList.add(new Point(x4, y4));
+                    finalUnionObjectPointList.add(new Point(x2, y2));
                     System.out.println("union object2: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
                     continueInObjectBWithAddingLinesAndPointForNewUnionShape(lineInObjectB, objectAPointList, objectBPointList);
@@ -96,6 +118,9 @@ public class PathFindingStaticObject {
                 indexOfContinuationLineInObjectB = (i + 1) % objectBLineList.size();
             }
         }
+        
+        finalUnionObjectPointList.add(new Point(objectBLineList.get(indexOfContinuationLineInObjectB).getStartX(), objectBLineList.get(indexOfContinuationLineInObjectB).getStartY()));
+        System.out.println("union object vlozeny: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
         for (int i = indexOfContinuationLineInObjectB; i < objectBLineList.size(); i++) {
             Line lineInObjectB = objectBLineList.get(i);
@@ -111,23 +136,25 @@ public class PathFindingStaticObject {
                 double y3 = lineInObjectA.getStartY();
                 double y4 = lineInObjectA.getEndY();
 
-                double d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-                if (d != 0) {
+                boolean xCondition = (x3 >= x1 && x3 <= x2) || (x3 >= x2 && x3 <= x1) || (x4 >= x1 && x4 <= x2) || (x4 >= x2 && x4 <= x1);
+                boolean yCondition = (y3 >= y1 && y3 <= y2) || (y3 >= y2 && y3 <= y1) || (y4 >= y1 && y4 <= y2) || (y4 >= y2 && y4 <= y1);
+
+                if (xCondition && yCondition) {
                     //intersection point:
-                    double xi = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-                    double yi = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+                    double xi = (lineInObjectA.getStartX() + lineInObjectA.getEndX()) / 2;  // ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
+                    double yi = (lineInObjectA.getStartY() + lineInObjectA.getEndY()) / 2;  // ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
 
                     Line newLine = new Line(x1, y1, xi, yi); //from old object up to intersection
                     finalUnionObjectLineList.add(newLine);
                     finalUnionObjectPointList.add(new Point(xi, yi));
                     System.out.println("union object4: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
-                    newLine = new Line(xi, yi, x4, y4); // from intersection to the end of the line in the second object
+                    newLine = new Line(xi, yi, x2, y2); // from intersection to the end of the line in the second object
                     finalUnionObjectLineList.add(newLine);
-                    finalUnionObjectPointList.add(new Point(x4, y4));
+                    finalUnionObjectPointList.add(new Point(x2, y2));
                     System.out.println("union object5: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
-                    if (finalUnionObjectPointList.get(0).getCoordX() == x4 && finalUnionObjectPointList.get(0).getCoordY() == y4) {
+                    if (finalUnionObjectPointList.get(0).getCoordX() == x2 && finalUnionObjectPointList.get(0).getCoordY() == y2) {
                         return; // end
                     }
                     finishInObjectAWithAddingLinesAndPoints(lineInObjectA, objectALineList, objectBLineList);
