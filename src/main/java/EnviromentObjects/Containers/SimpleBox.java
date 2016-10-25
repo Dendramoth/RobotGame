@@ -31,19 +31,19 @@ public class SimpleBox extends GameStaticObject {
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(14 + possition.getCoordX(), 118 + possition.getCoordY()));
-        pointList.add(new Point(118 + possition.getCoordX(), 118 + possition.getCoordY()));
-        pointList.add(new Point(118 + possition.getCoordX(), 14 + possition.getCoordY()));
         pointList.add(new Point(14 + possition.getCoordX(), 14 + possition.getCoordY()));
+        pointList.add(new Point(118 + possition.getCoordX(), 14 + possition.getCoordY()));
+        pointList.add(new Point(118 + possition.getCoordX(), 118 + possition.getCoordY()));
+        pointList.add(new Point(14 + possition.getCoordX(), 118 + possition.getCoordY()));
         return pointList;
     }
     
     private static List<Point> getPoints64(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(-18 + possition.getCoordX(), 150 + possition.getCoordY()));
-        pointList.add(new Point(150 + possition.getCoordX(), 150 + possition.getCoordY()));
-        pointList.add(new Point(150 + possition.getCoordX(), -18 + possition.getCoordY()));
         pointList.add(new Point(-18 + possition.getCoordX(), -18 + possition.getCoordY()));
+        pointList.add(new Point(150 + possition.getCoordX(), -18 + possition.getCoordY()));
+        pointList.add(new Point(150 + possition.getCoordX(), 150 + possition.getCoordY()));
+        pointList.add(new Point(-18 + possition.getCoordX(), 150 + possition.getCoordY()));
         return pointList;
     }
 

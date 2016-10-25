@@ -7,6 +7,7 @@ package com.mycompany.robotgame;
 
 import EnviromentObjects.Containers.SimpleBox;
 import GameObject.GameStaticObject;
+import GameObject.Point;
 import MapGridTable.GridTable;
 import Pathfinding.PathFindingStaticObject;
 import java.util.HashSet;
@@ -58,16 +59,35 @@ public class MergeOverlapingObjects {
                 } else {
                     // Intersection found
                     System.out.println("INTERSECTION");
-                    if (gameStaticObject instanceof SimpleBox) {
-                        System.out.println("Simple BOX!");
-                    }
+                    mergeTwoObjectsIntoOne(gameStaticObject, comperatorObject);
                 }
             }
         }
     }
-    
-    private void mergeTwoObjectsIntoOne(GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB){
+
+    private void mergeTwoObjectsIntoOne(GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB) {
         PathFindingStaticObject pathFindingStaticObject = new PathFindingStaticObject(enemySize, gameStaticObjectA, gameStaticObjectB);
+
+        System.out.println("ObjectA: ");
+        for (Point point : gameStaticObjectA.getPointsList64()) {
+            System.out.println(point.getCoordX() + " " + point.getCoordY());
+        }
+        
+        System.out.println();
+        System.out.println("ObjectB: ");
+        for (Point point : gameStaticObjectB.getPointsList64()) {
+            System.out.println(point.getCoordX() + " " + point.getCoordY());
+        }
+        
+        System.out.println();
+        System.out.println("Union Object: ");
+        for (Point point : pathFindingStaticObject.getFinalUnionObjectPointList()) {
+            System.out.println(point.getCoordX() + " " + point.getCoordY());
+        }
+        
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 
 }

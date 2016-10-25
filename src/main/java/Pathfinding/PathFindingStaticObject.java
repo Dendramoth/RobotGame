@@ -29,21 +29,32 @@ public class PathFindingStaticObject {
         List<Line> objectBLineList = new ArrayList<>(gameStaticObjectB.getPolygonLineList(enemySize));
 
         //merge the object in the correct order
+        System.out.println(objectALineList.get(0).getStartX() + " " + objectALineList.get(0).getStartY());
+        System.out.println(objectBLineList.get(0).getStartX() + " " + objectBLineList.get(0).getStartY());
         findTheObjectMoreLeftAndTop(objectALineList, objectBLineList);
+
+        System.out.println("after swap");
+
+        System.out.println(objectALineList.get(0).getStartX() + " " + objectALineList.get(0).getStartY());
+        System.out.println(objectBLineList.get(0).getStartX() + " " + objectBLineList.get(0).getStartY());
 
         //add First point into newly created union shape
         finalUnionObjectPointList.add(new Point(objectALineList.get(0).getStartX(), objectALineList.get(0).getStartY()));
+        System.out.println("union object: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
         createLineListOfTheUnionObject(objectALineList, objectBLineList);
     }
 
     private void createLineListOfTheUnionObject(List<Line> objectAPointList, List<Line> objectBPointList) {
 
         for (Line lineInObjectA : objectAPointList) {
+            System.out.println("line in object A: " + lineInObjectA.getStartX() + " " + lineInObjectA.getStartY() + " , " + lineInObjectA.getEndX() + " " + lineInObjectA.getEndY());
+            double x1 = lineInObjectA.getStartX();
+            double x2 = lineInObjectA.getEndX();
+            double y1 = lineInObjectA.getStartY();
+            double y2 = lineInObjectA.getEndY();
+
             for (Line lineInObjectB : objectBPointList) {
-                double x1 = lineInObjectA.getStartX();
-                double x2 = lineInObjectA.getEndX();
-                double y1 = lineInObjectA.getStartY();
-                double y2 = lineInObjectA.getEndY();
+                System.out.println("line in object B: " + lineInObjectB.getStartX() + " " + lineInObjectB.getStartY() + " , " + lineInObjectB.getEndX() + " " + lineInObjectB.getEndY());
 
                 double x3 = lineInObjectB.getStartX();
                 double x4 = lineInObjectB.getEndX();
@@ -59,10 +70,12 @@ public class PathFindingStaticObject {
                     Line newLine = new Line(x1, y1, xIntersection, yIntersection); //from old object up to intersection
                     finalUnionObjectLineList.add(newLine);
                     finalUnionObjectPointList.add(new Point(xIntersection, yIntersection));
+                    System.out.println("union object1: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
                     newLine = new Line(xIntersection, yIntersection, x4, y4); // from intersection to the end of the line in the second object
                     finalUnionObjectLineList.add(newLine);
                     finalUnionObjectPointList.add(new Point(x4, y4));
+                    System.out.println("union object2: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
                     continueInObjectBWithAddingLinesAndPointForNewUnionShape(lineInObjectB, objectAPointList, objectBPointList);
                     return; //end
@@ -71,6 +84,7 @@ public class PathFindingStaticObject {
 
             finalUnionObjectLineList.add(lineInObjectA);
             finalUnionObjectPointList.add(new Point(lineInObjectA.getEndX(), lineInObjectA.getEndY()));
+            System.out.println("union object3: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
         }
     }
@@ -106,12 +120,14 @@ public class PathFindingStaticObject {
                     Line newLine = new Line(x1, y1, xi, yi); //from old object up to intersection
                     finalUnionObjectLineList.add(newLine);
                     finalUnionObjectPointList.add(new Point(xi, yi));
+                    System.out.println("union object4: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
                     newLine = new Line(xi, yi, x4, y4); // from intersection to the end of the line in the second object
                     finalUnionObjectLineList.add(newLine);
                     finalUnionObjectPointList.add(new Point(x4, y4));
+                    System.out.println("union object5: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
-                    if (finalUnionObjectPointList.get(0).getCoordX() == x4 && finalUnionObjectPointList.get(0).getCoordY() == y4){
+                    if (finalUnionObjectPointList.get(0).getCoordX() == x4 && finalUnionObjectPointList.get(0).getCoordY() == y4) {
                         return; // end
                     }
                     finishInObjectAWithAddingLinesAndPoints(lineInObjectA, objectALineList, objectBLineList);
@@ -121,6 +137,7 @@ public class PathFindingStaticObject {
             //line in Object B was not crossed by any line in object A
             finalUnionObjectLineList.add(lineInObjectB);
             finalUnionObjectPointList.add(new Point(lineInObjectB.getEndX(), lineInObjectB.getEndY()));
+            System.out.println("union object6: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
 
         }
     }
@@ -141,6 +158,7 @@ public class PathFindingStaticObject {
             } else {
                 finalUnionObjectLineList.add(lineInObjectA);
                 finalUnionObjectPointList.add(new Point(lineInObjectA.getEndX(), lineInObjectA.getEndY()));
+                System.out.println("union object7: " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordX() + " " + finalUnionObjectPointList.get(finalUnionObjectPointList.size() - 1).getCoordY());
             }
         }
 
@@ -151,14 +169,18 @@ public class PathFindingStaticObject {
         Point objectAFirstPoint = new Point(objectAPointList.get(0).getStartX(), objectAPointList.get(0).getStartY());
         Point objectBFirstPoint = new Point(objectBPointList.get(0).getStartX(), objectBPointList.get(0).getStartY());
 
-        if (objectAFirstPoint.getCoordX() < objectBFirstPoint.getCoordY()) {
+        if (objectAFirstPoint.getCoordX() < objectBFirstPoint.getCoordX()) {
+            System.out.println("objectAX < objectBX");
             //its OK, object A is the first one.
-        } else if (objectAFirstPoint.getCoordX() > objectBFirstPoint.getCoordY()) {
+        } else if (objectAFirstPoint.getCoordX() > objectBFirstPoint.getCoordX()) {
             //its not OK, the object more to the left is second, change their order.
+            System.out.println("objectAX > objectBX");
             switchObjectsOrder(objectAPointList, objectBPointList);
         } else if (objectAFirstPoint.getCoordY() < objectBFirstPoint.getCoordY()) {
+            System.out.println("objectAY < objectAY");
             //its OK
         } else {
+            System.out.println("objectAY > objectBY");
             switchObjectsOrder(objectAPointList, objectBPointList);
         }
     }
@@ -172,6 +194,14 @@ public class PathFindingStaticObject {
 
         objectBPointList.clear();
         objectBPointList.addAll(objectSwitchPointList);
+    }
+
+    public List<Line> getFinalUnionObjectLineList() {
+        return finalUnionObjectLineList;
+    }
+
+    public List<Point> getFinalUnionObjectPointList() {
+        return finalUnionObjectPointList;
     }
 
 }

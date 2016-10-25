@@ -83,7 +83,7 @@ public class CreateMap1 {
     public void generatedObjectForGame(GridTable gridTable) {
         generatedObjectsForGameWithoutCollision(gridTable);
         
-        SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(6431, 8040), 512, 512, graphicsContext, monitorWindow);
+    /*    SpaceShipWreckage spaceShipWreckage = new SpaceShipWreckage(new Point(6431, 8040), 512, 512, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(spaceShipWreckage);
         
         OuterFortressWallsWest outerFortressWallsWest = new OuterFortressWallsWest(new Point(4447,3496), 1536, 1536, graphicsContext, monitorWindow);
@@ -100,15 +100,15 @@ public class CreateMap1 {
         InnerFortressWallNorth innerFortressWallNorth1 = new InnerFortressWallNorth(new Point(3615,6696), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallNorth1);
         InnerFortressWallSouth innerFortressWallSouth1 = new InnerFortressWallSouth(new Point(3615,7848), 1536, 1536, graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth1);
+        gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth1);*/
         
-        SimpleBox simpleBox1 = new SimpleBox(new Point(4703, 4648), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(simpleBox1);
+   //     SimpleBox simpleBox1 = new SimpleBox(new Point(4703, 4648), graphicsContext, monitorWindow);
+   //     gridTable.insertGameObjectIntoGridCell(simpleBox1);
         SimpleBox simpleBox2 = new SimpleBox(new Point(3551, 7016), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox2);
         SimpleBox simpleBox3 = new SimpleBox(new Point(3551, 7144), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox3);
-        SimpleBox simpleBox4 = new SimpleBox(new Point(3551, 7272), graphicsContext, monitorWindow);
+   /*     SimpleBox simpleBox4 = new SimpleBox(new Point(3551, 7272), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox4);
         SimpleBox simpleBox5 = new SimpleBox(new Point(3551, 7400), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox5);
@@ -259,7 +259,7 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(droneBarracks);
         
         TitanHead titanHead = new TitanHead(new Point(6175,5800), graphicsContext, monitorWindow);
-        gridTable.insertGameObjectIntoGridCell(titanHead);
+        gridTable.insertGameObjectIntoGridCell(titanHead);*/
     }
     
     private void generatedObjectsForGameWithoutCollision(GridTable gridTable){
