@@ -32,7 +32,7 @@ public class EvilDroneMarkOne extends Enemy {
     private double lastAngleToAvoidCollision = 0;
     private boolean collisionDetectedInLastTest = false;
 
-    private List<PathfindingPoint> pathPoints = new ArrayList<PathfindingPoint>();
+    private List<PathfindingPoint> pathPoints = new ArrayList<>();
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public EvilDroneMarkOne(Point possitionInWorld, double width, double heigh, double movementSpeed, double damagedStateTreshold, int hitPoints, GraphicsContext graphicsContext, GridTable gridTable, MonitorWindow monitorWindow) {

@@ -8,13 +8,11 @@ package Pathfinding;
 import GameObject.GameObjectWithDistanceDetection;
 import GameObject.GameStaticObject;
 import GameObject.Point;
-import Projectiles.Projectile;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 /**
@@ -41,6 +39,7 @@ public class Pathfinding {
         PathfindingPoint currentPoint = new PathfindingPoint(startGameObject.getWorldPossition().getCoordX(), startGameObject.getWorldPossition().getCoordY());
 
         for (GameStaticObject gameStaticObject : gameStaticObjectsList) {
+            System.out.println(gameStaticObject.getClass());
             Line line = new Line(currentPoint.getCoordX(), currentPoint.getCoordY(), targetPointX, targetPointY);
 
             Shape intersection = gameStaticObject.detectIntersection(sizeOfEnemy, line);
@@ -51,10 +50,11 @@ public class Pathfinding {
                 }
 
                 PathfindingPoint intersectionPoint = getIntersectionPointCoordinates(intersection, startGameObject, targetPointX, targetPointY);
-                FindPathAroundObject findPathAroundObject = new FindPathAroundObject(sizeOfEnemy, targetPointX, targetPointY, gameStaticObject, listOfPathPoints);
-                currentPoint = findPathAroundObject.findPathAroundObject(intersectionPoint);
-                listOfPathPoints.add(currentPoint);
-            }
+                FindPathAroundObjectTwo findPathAroundObject = new FindPathAroundObjectTwo(sizeOfEnemy, new Point(targetPointX, targetPointY), gameStaticObject);
+                List<PathfindingPoint> listOfPointToGoAroundObject = findPathAroundObject.findPathAroundObject(intersectionPoint);
+                listOfPathPoints.addAll(listOfPointToGoAroundObject);
+                currentPoint = listOfPathPoints.get(listOfPathPoints.size() - 1);
+            } 
         }
 
         if (finalPointIsDirectlyVisible) {
@@ -89,19 +89,4 @@ public class Pathfinding {
         }
         Collections.sort(gameStaticObjectsList);
     }
-/*
-    private void mergeOverlapingObjectsIntoOne(int enemySize, GameStaticObject crossedObject) {
-        List<GameStaticObject> mergingList = new ArrayList<>(gameStaticObjectsList);
-        mergingList.remove(crossedObject);
-
-        for (GameStaticObject gameStaticObject : mergingList) {
-            Shape intersect = Polygon.intersect(gameStaticObject.getGameObjectPolygon(enemySize), crossedObject.getGameObjectPolygon(enemySize));
-            if (intersect.getLayoutBounds().getHeight() <= 0 || intersect.getLayoutBounds().getWidth() <= 0) {
-                // no intersection
-            } else {
-                // intersection, merge them
-            }
-        }
-    }*/
-
 }

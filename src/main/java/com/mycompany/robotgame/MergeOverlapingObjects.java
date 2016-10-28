@@ -5,7 +5,6 @@
  */
 package com.mycompany.robotgame;
 
-import EnviromentObjects.Containers.SimpleBox;
 import GameObject.GameStaticObject;
 import GameObject.Point;
 import MapGridTable.GridTable;
@@ -21,8 +20,8 @@ import javafx.scene.shape.Shape;
  */
 public class MergeOverlapingObjects {
 
-    private GridTable gridTable;
-    private int enemySize;
+    private final GridTable gridTable;
+    private final int enemySize;
 
     public MergeOverlapingObjects(GridTable gridTable, int enemySize) {
         this.gridTable = gridTable;
@@ -66,28 +65,33 @@ public class MergeOverlapingObjects {
     }
 
     private void mergeTwoObjectsIntoOne(GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB) {
-        PathFindingStaticObject pathFindingStaticObject = new PathFindingStaticObject(enemySize, gameStaticObjectA, gameStaticObjectB);
+        if (gameStaticObjectA.getPointsList(enemySize) != gameStaticObjectB.getPointsList(enemySize)) {
+            PathFindingStaticObject pathFindingStaticObject = new PathFindingStaticObject(enemySize, gameStaticObjectA, gameStaticObjectB);
 
-        System.out.println("ObjectA: ");
-        for (Point point : gameStaticObjectA.getPointsList64()) {
-            System.out.println(point.getCoordX() + " " + point.getCoordY());
+            System.out.println("ObjectA: ");
+            for (Point point : gameStaticObjectA.getPointsList(enemySize)) {
+                System.out.println(point.getCoordX() + " " + point.getCoordY());
+            }
+
+            System.out.println();
+            System.out.println("ObjectB: ");
+            for (Point point : gameStaticObjectB.getPointsList(enemySize)) {
+                System.out.println(point.getCoordX() + " " + point.getCoordY());
+            }
+
+            System.out.println();
+            System.out.println("Union Object: ");
+            for (Point point : pathFindingStaticObject.getFinalUnionObjectPointList()) {
+                System.out.println(point.getCoordX() + " " + point.getCoordY());
+            }
+
+            gameStaticObjectA.setPointsListFake(pathFindingStaticObject.getFinalUnionObjectPointList(), enemySize);
+            gameStaticObjectB.setPointsListFake2(pathFindingStaticObject.getFinalUnionObjectPointList(), enemySize);
+
+            System.out.println();
+            System.out.println();
+            System.out.println();
         }
-        
-        System.out.println();
-        System.out.println("ObjectB: ");
-        for (Point point : gameStaticObjectB.getPointsList64()) {
-            System.out.println(point.getCoordX() + " " + point.getCoordY());
-        }
-        
-        System.out.println();
-        System.out.println("Union Object: ");
-        for (Point point : pathFindingStaticObject.getFinalUnionObjectPointList()) {
-            System.out.println(point.getCoordX() + " " + point.getCoordY());
-        }
-        
-        System.out.println();
-        System.out.println();
-        System.out.println();
     }
 
 }

@@ -522,7 +522,7 @@ public class CreateMap1 {
     }
 
     public void generateGameMapBorders(GridTable gridTable) {
-        CliffBottomLeft cliffBottomLeft = new CliffBottomLeft(new Point(2015, 12072), 256, 256, graphicsContext, monitorWindow);
+    /*    CliffBottomLeft cliffBottomLeft = new CliffBottomLeft(new Point(2015, 12072), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffBottomLeft);
         CliffBottomRight cliffBottomRight = new CliffBottomRight(new Point(8400, 12072), 256, 256, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(cliffBottomRight);
@@ -549,7 +549,7 @@ public class CreateMap1 {
         for (int i = 1; i < 10; i++) {
             CliffVerticalReversed cliffVerticalReversed = new CliffVerticalReversed(new Point(8415, 12072 - i * 1024), 256, 1024, graphicsContext, monitorWindow);
             gridTable.insertGameObjectIntoGridCell(cliffVerticalReversed);
-        }
+        }*/
     }
 
     public void generateBackground(GridTable gridTable) {
