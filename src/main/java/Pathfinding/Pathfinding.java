@@ -39,7 +39,6 @@ public class Pathfinding {
         PathfindingPoint currentPoint = new PathfindingPoint(startGameObject.getWorldPossition().getCoordX(), startGameObject.getWorldPossition().getCoordY());
 
         for (GameStaticObject gameStaticObject : gameStaticObjectsList) {
-            System.out.println(gameStaticObject.getClass());
             Line line = new Line(currentPoint.getCoordX(), currentPoint.getCoordY(), targetPointX, targetPointY);
 
             Shape intersection = gameStaticObject.detectIntersection(sizeOfEnemy, line);

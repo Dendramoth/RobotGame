@@ -28,13 +28,11 @@ public class FindPathAroundObjectTwo {
     private int currentRightLineIndex = 0;
 
     public FindPathAroundObjectTwo(int enemySize, Point targetPosition, GameStaticObject gameObjectToFindPathAround) {
-        System.out.println("Finding path around object 22w");
         this.targetPosition = targetPosition;
         objectToFindPathAroundLineList = gameObjectToFindPathAround.getPolygonLineList(enemySize);
     }
 
     public List<PathfindingPoint> findPathAroundObject(PathfindingPoint intersectionWithObject) {
-        System.out.println("Finding path around object");
         int indexOfCrossedLine = findTheIndexOfCrossedLine(intersectionWithObject);
         currentLeftLineIndex = indexOfCrossedLine;
         currentRightLineIndex = indexOfCrossedLine;
