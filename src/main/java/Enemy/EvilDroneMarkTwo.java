@@ -45,7 +45,7 @@ public class EvilDroneMarkTwo extends Enemy{
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
         timerForRecalculationOfPathfinding++;
-        if (pathPoints.size() < 1 || timerForRecalculationOfPathfinding >= 20) {
+        if (timerForRecalculationOfPathfinding >= 20 || pathPoints.isEmpty()) {   // pathPoints.size() < 1 || 
             timerForRecalculationOfPathfinding = 0;
             findPathToPlayer(new Point(playerPossitionX, playerPossitionY));
         }

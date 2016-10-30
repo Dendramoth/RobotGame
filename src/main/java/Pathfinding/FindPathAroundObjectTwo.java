@@ -10,6 +10,8 @@ import GameObject.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -42,13 +44,11 @@ public class FindPathAroundObjectTwo {
 
         for (int i = 0; i < objectToFindPathAroundLineList.size(); i++) {
             if (comulativeDistanceLeft <= comulativeDistanceRight) {
-                if (detectTargetVisibilityForLeftWiseDetection()){
+                if (detectTargetVisibilityForLeftWiseDetection()) {
                     return leftPathPoints;
                 }
-            } else {
-                if (detectTargetVisibilityForRightWiseDetection()){
-                    return rightPathPoints;
-                }
+            } else if (detectTargetVisibilityForRightWiseDetection()) {
+                return rightPathPoints;
             }
         }
         System.out.println("Path was not found.");
@@ -62,7 +62,7 @@ public class FindPathAroundObjectTwo {
         boolean targetIsVisible = testIfTargetIsVisibleFromPoint(pointToTest, currentLine, nextLine);
         comulativeDistanceLeft = comulativeDistanceLeft + getDistanceBetweenPoints(pointToTest, leftPathPoints.get(leftPathPoints.size() - 1));
         currentLeftLineIndex++;
-        
+
         leftPathPoints.add(pointToTest);
         return targetIsVisible;
     }
@@ -73,13 +73,13 @@ public class FindPathAroundObjectTwo {
         PathfindingPoint pointToTest = new PathfindingPoint(currentLine.getStartX(), currentLine.getStartY());
         boolean targetIsVisible = testIfTargetIsVisibleFromPoint(pointToTest, previousLine, currentLine);
         comulativeDistanceRight = comulativeDistanceRight + getDistanceBetweenPoints(pointToTest, rightPathPoints.get(rightPathPoints.size() - 1));
-        currentRightLineIndex++;
-        
+        currentRightLineIndex--;
+
         rightPathPoints.add(pointToTest);
         return targetIsVisible;
     }
-    
-    private double getDistanceBetweenPoints(PathfindingPoint pointA, PathfindingPoint PointB){
+
+    private double getDistanceBetweenPoints(PathfindingPoint pointA, PathfindingPoint PointB) {
         return Math.abs(pointA.getCoordX() - PointB.getCoordX()) + Math.abs(pointA.getCoordY() - PointB.getCoordY());
     }
 
@@ -87,7 +87,8 @@ public class FindPathAroundObjectTwo {
         Line detectionLine = new Line(pointToTest.getCoordX(), pointToTest.getCoordY(), targetPosition.getCoordX(), targetPosition.getCoordY());
         for (Line lineInObject : objectToFindPathAroundLineList) {
             if ((lineInObject != lineToIgnoreOne) && (lineInObject != lineToIgnoreTwo)) {
-                if (detectionLine.intersects(lineInObject.getBoundsInParent())) {
+                //if (detectionLine.intersects(lineInObject.getBoundsInParent())) {
+                if (((Path) Shape.intersect(lineInObject, detectionLine)).getElements().size() > 0) {
                     //lines have intersection
                     return false;
                 }
@@ -107,7 +108,6 @@ public class FindPathAroundObjectTwo {
                 return i;
             }
         }
-        System.out.println("Error in initial intersection detection");
         return 0;
     }
 }

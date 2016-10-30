@@ -85,7 +85,7 @@ public class MergeOverlapingObjects {
                 System.out.println(point.getCoordX() + " " + point.getCoordY());
             }
 
-            gameStaticObjectA.setPointsListFake(pathFindingStaticObject.getFinalUnionObjectPointList(), enemySize);
+            gameStaticObjectA.setPointsList(pathFindingStaticObject.getFinalUnionObjectPointList(), enemySize);
             gameStaticObjectB.setPointsListFake2(pathFindingStaticObject.getFinalUnionObjectPointList(), enemySize);
 
             System.out.println();
