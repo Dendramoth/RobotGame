@@ -102,13 +102,13 @@ public class CreateMap1 {
         InnerFortressWallSouth innerFortressWallSouth1 = new InnerFortressWallSouth(new Point(3615,7848), 1536, 1536, graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(innerFortressWallSouth1);*/
         
-   //     SimpleBox simpleBox1 = new SimpleBox(new Point(4703, 4648), graphicsContext, monitorWindow);
-   //     gridTable.insertGameObjectIntoGridCell(simpleBox1);
+        SimpleBox simpleBox1 = new SimpleBox(new Point(4703, 4648), graphicsContext, monitorWindow);
+        gridTable.insertGameObjectIntoGridCell(simpleBox1);
         SimpleBox simpleBox2 = new SimpleBox(new Point(3551, 7016), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox2);
         SimpleBox simpleBox3 = new SimpleBox(new Point(3551, 7144), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox3);
-   /*     SimpleBox simpleBox4 = new SimpleBox(new Point(3551, 7272), graphicsContext, monitorWindow);
+        SimpleBox simpleBox4 = new SimpleBox(new Point(3551, 7272), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox4);
         SimpleBox simpleBox5 = new SimpleBox(new Point(3551, 7400), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox5);
@@ -120,7 +120,8 @@ public class CreateMap1 {
         gridTable.insertGameObjectIntoGridCell(simpleBox8);
         SimpleBox simpleBox9 = new SimpleBox(new Point(3807, 7400), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox9);
-        BoxTriangle triangleBox1 = new BoxTriangle(new Point(4575,3624), graphicsContext, monitorWindow);
+        
+   /*     BoxTriangle triangleBox1 = new BoxTriangle(new Point(4575,3624), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(triangleBox1);
         BoxTriangle triangleBox2 = new BoxTriangle(new Point(2975,6696), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(triangleBox2);

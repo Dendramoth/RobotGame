@@ -8,6 +8,7 @@ package GameObject;
 import EnviromentObjects.MinigunHitIntoStaticObject;
 import com.mycompany.robotgame.MonitorWindow;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,16 +27,18 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
     protected final Polygon gameObjectPolygon64 = new Polygon();
     private final List<Line> polygonLineList = new ArrayList<>();
     private final List<Line> polygonLineList64 = new ArrayList<>();
-    
+
     private List<Point> pointsList;
     private List<Point> pointsList64;
+
+    private HashSet<GameStaticObject> objectToUpdateWhenUpdated = new HashSet<>();
 
     public GameStaticObject(List<Point> pointsList, List<Point> pointsList64, Point possition, double width, double heigh, int objectLayer, GraphicsContext graphicsContext, MonitorWindow monitorWindow, Image staticObjectImage) {
         super(possition, width, heigh, objectLayer, graphicsContext, monitorWindow);
         this.staticObjectImage = staticObjectImage;
         this.pointsList = pointsList;
         this.pointsList64 = pointsList64;
-        
+
         if (pointsList != null) {
             createPolygon(pointsList);
             createLinesFromPolygonPoints(pointsList);
@@ -177,23 +180,23 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
         switch (enemySize) {
             case 64:
                 this.pointsList64.clear();
-                this.pointsList64 = pointsList;
+                this.pointsList64.addAll(pointsList);
                 createPolygon64(pointsList64);
                 createLinesFromPolygonPoints64(pointsList64);
                 break;
             default:
                 this.pointsList.clear();
-                this.pointsList = pointsList;
+                this.pointsList.addAll(pointsList);
                 createPolygon(pointsList);
                 createLinesFromPolygonPoints(pointsList);
         }
     }
-    
-    public void setPointsListFake(List<Point> notUsedList,int enemySize) {
+
+    public void setPointsListFake(List<Point> notUsedList, int enemySize) {
         switch (enemySize) {
             case 64:
                 this.pointsList64.clear();
-                pointsList64.add(new Point(3533 , 6998));
+                pointsList64.add(new Point(3533, 6998));
                 pointsList64.add(new Point(3701, 6998));
                 pointsList64.add(new Point(3701, 7294));
                 pointsList64.add(new Point(3533, 7294));
@@ -202,7 +205,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
                 break;
             default:
                 this.pointsList.clear();
-                pointsList.add(new Point(3533 , 6998));
+                pointsList.add(new Point(3533, 6998));
                 pointsList.add(new Point(3701, 6998));
                 pointsList.add(new Point(3701, 7294));
                 pointsList.add(new Point(3533, 7294));
@@ -210,25 +213,25 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
                 createLinesFromPolygonPoints(pointsList);
         }
     }
-    
-    public void setPointsListFake2(List<Point> notUsedList,int enemySize) {
+
+    public void setPointsListFake2(List<Point> notUsedList, int enemySize) {
         switch (enemySize) {
             case 64:
                 this.pointsList64.clear();
-                pointsList64.add(new Point(0 , 0));
+                pointsList64.add(new Point(0, 0));
                 pointsList64.add(new Point(1, 0));
-       /*         pointsList64.add(new Point(3701, 7126));
+                /*         pointsList64.add(new Point(3701, 7126));
                 pointsList64.add(new Point(3701, 7166));*/
                 pointsList64.add(new Point(1, 1));
                 pointsList64.add(new Point(0, 1));
-          //      pointsList64.add(new Point(3533, 7166));
-          //      pointsList64.add(new Point(3533, 7126));
+                //      pointsList64.add(new Point(3533, 7166));
+                //      pointsList64.add(new Point(3533, 7126));
                 createPolygon64(pointsList64);
                 createLinesFromPolygonPoints64(pointsList64);
                 break;
             default:
                 this.pointsList.clear();
-                pointsList.add(new Point(0 , 0));
+                pointsList.add(new Point(0, 0));
                 pointsList.add(new Point(1, 0));
                 pointsList.add(new Point(1, 1));
                 pointsList.add(new Point(0, 1));
@@ -236,7 +239,7 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
                 createLinesFromPolygonPoints(pointsList);
         }
     }
-    
+
     public List<Point> getPointsList(int enemySize) {
         switch (enemySize) {
             case 64:
@@ -246,6 +249,14 @@ public abstract class GameStaticObject extends GameObjectWithDistanceDetection {
         }
     }
 
+    public HashSet<GameStaticObject> getObjectToUpdateWhenUpdated() {
+        return objectToUpdateWhenUpdated;
+    }
 
+    public void updateAllMergedObjects(List<Point> pointsList, int enemySize) {
+        for (GameStaticObject gameStaticObject : objectToUpdateWhenUpdated){
+            gameStaticObject.setPointsList(pointsList, enemySize);
+        }
+    }
 
 }
