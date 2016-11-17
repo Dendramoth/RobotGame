@@ -34,14 +34,13 @@ public class MergeOverlapingObjects {
     private void checkAllSectionsOfTheGrid() {
         for (int x = 0; x < gridTable.getCellCountX(); x++) {
             for (int y = 0; y < gridTable.getCellCountY(); y++) {
-                HashSet<GameStaticObject> gameStaticObjects = gridTable.getStaticObjectsInGridCell(x, y);
+                HashSet<GameStaticObject> gameStaticObjects = new HashSet<>(gridTable.getStaticObjectsInGridCell(x, y));
                 mergeOverlapingObjects(gameStaticObjects, enemySize);
             }
         }
     }
 
     private void mergeOverlapingObjects(HashSet<GameStaticObject> gameStaticObjects, int enemySize) {
-
         Iterator<GameStaticObject> iterator = gameStaticObjects.iterator();
         while (iterator.hasNext()) {
             GameStaticObject gameStaticObject = iterator.next();
@@ -52,6 +51,7 @@ public class MergeOverlapingObjects {
     }
 
     private void compareOverlapOffAllObjectInListAgainstOne(HashSet<GameStaticObject> gameStaticObjects, GameStaticObject comperatorObject) {
+        
         for (GameStaticObject gameStaticObject : gameStaticObjects) {
             if ((gameStaticObject != comperatorObject) && !(gameStaticObject.getPointsList(enemySize).equals(comperatorObject.getPointsList(enemySize)))) {
                 Shape intersect = Polygon.intersect(gameStaticObject.getGameObjectPolygon(enemySize), comperatorObject.getGameObjectPolygon(enemySize));
@@ -59,7 +59,7 @@ public class MergeOverlapingObjects {
                     // NO intersection
                 } else {
                     // Intersection found
-                    System.out.println("INTERSECTION");
+                   // System.out.println("INTERSECTION");
                     mergeTwoObjectsIntoOne(gameStaticObject, comperatorObject);
                 }
             }
@@ -67,50 +67,31 @@ public class MergeOverlapingObjects {
     }
 
     private void mergeTwoObjectsIntoOne(GameStaticObject gameStaticObjectA, GameStaticObject gameStaticObjectB) {
+
         if (gameStaticObjectA.getPointsList(enemySize) != gameStaticObjectB.getPointsList(enemySize)) {
             PathFindingStaticObject pathFindingStaticObject = new PathFindingStaticObject(enemySize, gameStaticObjectA, gameStaticObjectB);
 
-            System.out.println("ObjectA: ");
-            for (Point point : gameStaticObjectA.getPointsList(enemySize)) {
-                System.out.println(point.getCoordX() + " " + point.getCoordY());
-            }
-
-            System.out.println();
-            System.out.println("ObjectB: ");
-            for (Point point : gameStaticObjectB.getPointsList(enemySize)) {
-                System.out.println(point.getCoordX() + " " + point.getCoordY());
-            }
-
-            System.out.println();
-            System.out.println("Union Object: ");
-            for (Point point : pathFindingStaticObject.getFinalUnionObjectPointList()) {
-                System.out.println(point.getCoordX() + " " + point.getCoordY());
-            }
-
             List<Point> finalUnionPointList  = new ArrayList<>(pathFindingStaticObject.getFinalUnionObjectPointList());
-            
+                
             
             gameStaticObjectA.setPointsList(finalUnionPointList, enemySize);
-            gameStaticObjectA.getObjectToUpdateWhenUpdated().add(gameStaticObjectB);
-            gameStaticObjectA.getObjectToUpdateWhenUpdated().addAll(gameStaticObjectB.getObjectToUpdateWhenUpdated());
-            for (GameStaticObject gameStaticObject : gameStaticObjectA.getObjectToUpdateWhenUpdated()) {
-                gameStaticObject.getObjectToUpdateWhenUpdated().addAll(gameStaticObjectA.getObjectToUpdateWhenUpdated());
+            gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize).add(gameStaticObjectB);
+            gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize).addAll(gameStaticObjectB.getObjectToUpdateWhenUpdated(enemySize));
+            for (GameStaticObject gameStaticObject : gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize)) {
+                gameStaticObject.getObjectToUpdateWhenUpdated(enemySize).addAll(gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize));
                 gameStaticObject.setPointsList(finalUnionPointList, enemySize);
             }
-            gameStaticObjectA.getObjectToUpdateWhenUpdated().remove(gameStaticObjectA);
+            gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize).remove(gameStaticObjectA);
             
             gameStaticObjectB.setPointsList(finalUnionPointList, enemySize);
-            gameStaticObjectB.getObjectToUpdateWhenUpdated().add(gameStaticObjectA);
-            gameStaticObjectB.getObjectToUpdateWhenUpdated().addAll(gameStaticObjectA.getObjectToUpdateWhenUpdated());
-            for (GameStaticObject gameStaticObject : gameStaticObjectB.getObjectToUpdateWhenUpdated()) {
-                gameStaticObject.getObjectToUpdateWhenUpdated().addAll(gameStaticObjectB.getObjectToUpdateWhenUpdated());
+            gameStaticObjectB.getObjectToUpdateWhenUpdated(enemySize).add(gameStaticObjectA);
+            gameStaticObjectB.getObjectToUpdateWhenUpdated(enemySize).addAll(gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize));
+            for (GameStaticObject gameStaticObject : gameStaticObjectB.getObjectToUpdateWhenUpdated(enemySize)) {
+                gameStaticObject.getObjectToUpdateWhenUpdated(enemySize).addAll(gameStaticObjectB.getObjectToUpdateWhenUpdated(enemySize));
                 gameStaticObject.setPointsList(finalUnionPointList, enemySize);
             }
-            gameStaticObjectB.getObjectToUpdateWhenUpdated().remove(gameStaticObjectB);
+            gameStaticObjectB.getObjectToUpdateWhenUpdated(enemySize).remove(gameStaticObjectB);
 
-            System.out.println();
-            System.out.println();
-            System.out.println();
         }
     }
 

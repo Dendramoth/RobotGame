@@ -26,7 +26,7 @@ public class OuterFortressWallsWest extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
 
     public OuterFortressWallsWest(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("outerWallWest"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("outerWallWest"));
     }
 
     private static List<Point> getPoints(Point possition) {

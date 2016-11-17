@@ -27,7 +27,7 @@ public class ContainerOpenVertical extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoBox = new ArrayList<>();
 
     public ContainerOpenVertical(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, 128, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container1"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, 128, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container1"));
     }
 
     private static List<Point> getPoints(Point possition) {

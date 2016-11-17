@@ -26,7 +26,7 @@ public class SimpleBox extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoSimpleBox = new ArrayList<>();
 
     public SimpleBox(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints64(possition), possition, 128, 128, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box1"));
+        super(getPoints(possition), getPoints64(possition), getPoints256(possition), possition, 128, 128, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box1"));
     }
 
     private static List<Point> getPoints(Point possition) {
@@ -39,6 +39,15 @@ public class SimpleBox extends GameStaticObject {
     }
     
     private static List<Point> getPoints64(Point possition) {
+        List<Point> pointList = new ArrayList<>();
+        pointList.add(new Point(-18 + possition.getCoordX(), -18 + possition.getCoordY()));
+        pointList.add(new Point(150 + possition.getCoordX(), -18 + possition.getCoordY()));
+        pointList.add(new Point(150 + possition.getCoordX(), 150 + possition.getCoordY()));
+        pointList.add(new Point(-18 + possition.getCoordX(), 150 + possition.getCoordY()));
+        return pointList;
+    }
+    
+    private static List<Point> getPoints256(Point possition) {
         List<Point> pointList = new ArrayList<>();
         pointList.add(new Point(-18 + possition.getCoordX(), -18 + possition.getCoordY()));
         pointList.add(new Point(150 + possition.getCoordX(), -18 + possition.getCoordY()));

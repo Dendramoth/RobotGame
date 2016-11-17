@@ -27,7 +27,7 @@ public class BoxTriangle extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoTriangleBox = new ArrayList<>();
 
     public BoxTriangle(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, 256, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box2"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, 256, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box2"));
     }
 
     private static List<Point> getPoints(Point possition) {

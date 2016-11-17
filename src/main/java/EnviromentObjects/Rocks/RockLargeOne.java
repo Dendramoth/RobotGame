@@ -27,7 +27,7 @@ public class RockLargeOne extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoRock = new ArrayList<>();
 
     public RockLargeOne(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, 256, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("rockLargeOne"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, 256, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("rockLargeOne"));
     }
     
     private static List<Point> getPoints(Point possition) {

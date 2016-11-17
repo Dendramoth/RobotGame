@@ -39,7 +39,7 @@ public class Pathfinding {
         HashSet<GameStaticObject> finalObjectListToWorkWith = new HashSet<>(gameStaticObjectsList);
         for (GameStaticObject gameStaticObject : gameStaticObjectsList) {
             if (finalObjectListToWorkWith.contains(gameStaticObject)) {
-                HashSet<GameStaticObject> objectsToRemove = gameStaticObject.getObjectToUpdateWhenUpdated();
+                HashSet<GameStaticObject> objectsToRemove = gameStaticObject.getObjectToUpdateWhenUpdated(sizeOfEnemy);
                 objectsToRemove.remove(gameStaticObject);
                 finalObjectListToWorkWith.removeAll(objectsToRemove);
             }

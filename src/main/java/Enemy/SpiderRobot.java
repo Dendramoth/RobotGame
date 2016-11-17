@@ -59,20 +59,20 @@ public class SpiderRobot extends Enemy {
     @Override
     public void moveEnemy(double playerPossitionX, double playerPossitionY) {
         double distanceFromPlayer = distanceFromPlayer(playerPossitionX, playerPossitionY);
-        if (distanceFromPlayer > 325) {
+      //  if (distanceFromPlayer > 325) {
             // move spider closer to player
             moveSpiderToPlayer(playerPossitionX, playerPossitionY);
-        } else if (distanceFromPlayer <= 325 && distanceFromPlayer > 300) {
+    //    } else if (distanceFromPlayer <= 325 && distanceFromPlayer > 300) {
             // don not move just rotate turret on player
-            rotateSpiderRobotTurretToPlayer(playerPossitionX, playerPossitionY);
-        } else {
+  //          rotateSpiderRobotTurretToPlayer(playerPossitionX, playerPossitionY);
+   //     } else {
             // if you have way to go back retreat from player, otherwise just rotate turret on player
-            if (reachedPoints.size() > 0) {
+    /*        if (reachedPoints.size() > 0) {
                 moveSpiderFromPlayer(playerPossitionX, playerPossitionY);
             } else {
                 rotateSpiderRobotTurretToPlayer(playerPossitionX, playerPossitionY);
-            }
-        }
+            }*/
+   //     }
         laserControler(distanceFromPlayer);
     }
 

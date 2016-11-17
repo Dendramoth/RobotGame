@@ -9,6 +9,7 @@ import CollisionDetection.DetectCollisions;
 import Encounter.Encounter;
 import Enemy.EnemyContainer;
 import Enemy.EvilDroneMarkTwo;
+import Enemy.SpiderRobot;
 import GameObject.Point;
 import MapGridTable.GridTable;
 import Projectiles.ProjectileContainer;
@@ -82,8 +83,8 @@ public class GameMainInfrastructure {
         barInterfaceHandler = new BarInterfaceHandler(interfaceGraphicsContext, playerRobot);
 
         //    enemyContainer.addEnemy(new EvilDroneMarkOne(new Point(1800, 8000), 64, 64, 3, 20, 30, enemyGraphicsContext, gridTable, monitorWindow));
-     //   enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 2.3, 20, 30, gameGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
-        enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(3450, 7066), 2, 15, 20, gameGraphicsContext, gridTable, monitorWindow));
+        enemyContainer.addEnemy(new SpiderRobot(new Point(4000, 8500), 2.3, 20, 30, gameGraphicsContext, gridTable, monitorWindow, projectileContainer, gameDynamicEnviroment)); //2.3
+     //   enemyContainer.addEnemy(new EvilDroneMarkTwo(new Point(3450, 7066), 2, 15, 20, gameGraphicsContext, gridTable, monitorWindow));
      //   enemyContainer.addEnemy(new StaticRocketTurret(new Point(4175, 7466), 2, 20, 30, false, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
      //   enemyContainer.addEnemy(new StaticRocketTurret(new Point(4515, 7466), 2, 20, 30, false, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
      //   enemyContainer.addEnemy(new BomberAirplane(new Point(3700,8500), 7, 10, 20, gameGraphicsContext, gridTable, monitorWindow, projectileContainer));
@@ -94,7 +95,8 @@ public class GameMainInfrastructure {
         createMap1.generateGameMapBorders(gridTable);
         createMap1.generateBackground(gridTable);
         
-        MergeOverlapingObjects mergeOverlapingObjects = new MergeOverlapingObjects(gridTable, 64);
+        MergeOverlapingObjects mergeOverlapingObjects64 = new MergeOverlapingObjects(gridTable, 64);
+        MergeOverlapingObjects mergeOverlapingObjects256 = new MergeOverlapingObjects(gridTable, 256);
 
         VBox gameVerticalPanel = new VBox();
         gameVerticalPanel.getChildren().add(gameCanvasPanel);

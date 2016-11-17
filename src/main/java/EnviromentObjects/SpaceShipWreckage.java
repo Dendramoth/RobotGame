@@ -26,7 +26,7 @@ public class SpaceShipWreckage extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoSpaceShip = new ArrayList<>();
 
     public SpaceShipWreckage(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("spaceShipWreckage"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("spaceShipWreckage"));
     }
 
     private static List<Point> getPoints(Point possition) {

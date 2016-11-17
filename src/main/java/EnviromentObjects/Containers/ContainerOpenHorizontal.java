@@ -27,7 +27,7 @@ public class ContainerOpenHorizontal extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoBox = new ArrayList<>();
 
     public ContainerOpenHorizontal(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, 256, 128, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container2"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, 256, 128, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("container2"));
     }
 
     private static List<Point> getPoints(Point possition) {

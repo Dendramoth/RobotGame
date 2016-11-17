@@ -25,7 +25,7 @@ public class CliffBottomRight extends GameStaticObject {
     private final List<Point> pointsForDetection = new ArrayList<>();
 
     public CliffBottomRight(Point possition, double width, double heigh, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffBottomRightCorner"));
+        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, width, heigh, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("cliffBottomRightCorner"));
     }
 
     private static List<Point> getPoints(Point possition) {
