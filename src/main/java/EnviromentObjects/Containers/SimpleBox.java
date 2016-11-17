@@ -49,10 +49,10 @@ public class SimpleBox extends GameStaticObject {
     
     private static List<Point> getPoints256(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(-18 + possition.getCoordX(), -18 + possition.getCoordY()));
-        pointList.add(new Point(150 + possition.getCoordX(), -18 + possition.getCoordY()));
-        pointList.add(new Point(150 + possition.getCoordX(), 150 + possition.getCoordY()));
-        pointList.add(new Point(-18 + possition.getCoordX(), 150 + possition.getCoordY()));
+        pointList.add(new Point(-50 + possition.getCoordX(), -50 + possition.getCoordY()));
+        pointList.add(new Point(182 + possition.getCoordX(), -50 + possition.getCoordY()));
+        pointList.add(new Point(182 + possition.getCoordX(), 182 + possition.getCoordY()));
+        pointList.add(new Point(-50 + possition.getCoordX(), 182 + possition.getCoordY()));
         return pointList;
     }
 
