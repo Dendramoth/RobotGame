@@ -10,6 +10,7 @@ import GameObject.GameStaticObject;
 import GameObject.Point;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Line;
@@ -21,17 +22,29 @@ import javafx.scene.shape.Shape;
  */
 public class Pathfinding {
 
-    private List<GameStaticObject> gameStaticObjectsList = new ArrayList<GameStaticObject>();
-    private List<PathfindingPoint> listOfPathPoints = new ArrayList<PathfindingPoint>();
+    private List<GameStaticObject> gameStaticObjectsList;
+    private List<PathfindingPoint> listOfPathPoints;
     private boolean pathWasGeneratedBefore = false;
     private boolean finalPointIsDirectlyVisible = true;
     int sizeOfEnemy;
 
     public Pathfinding(int sizeOfEnemy, List<GameStaticObject> gameStaticObjectsList, GraphicsContext graphicsContext, List<PathfindingPoint> listOfPathPoints) {
-        this.gameStaticObjectsList = gameStaticObjectsList;
         this.listOfPathPoints = listOfPathPoints;
         this.sizeOfEnemy = sizeOfEnemy;
         pathWasGeneratedBefore = listOfPathPoints != null && !listOfPathPoints.isEmpty();
+        this.gameStaticObjectsList = new ArrayList<>(objectListWithSameObjectsRemoved(gameStaticObjectsList));
+    }
+    
+    private HashSet<GameStaticObject> objectListWithSameObjectsRemoved(List<GameStaticObject> gameStaticObjectsList){
+        HashSet<GameStaticObject> finalObjectListToWorkWith = new HashSet<>(gameStaticObjectsList);
+        for (GameStaticObject gameStaticObject : gameStaticObjectsList) {
+            if (finalObjectListToWorkWith.contains(gameStaticObject)) {
+                HashSet<GameStaticObject> objectsToRemove = gameStaticObject.getObjectToUpdateWhenUpdated();
+                objectsToRemove.remove(gameStaticObject);
+                finalObjectListToWorkWith.removeAll(objectsToRemove);
+            }
+        }
+        return finalObjectListToWorkWith;
     }
 
     public List<PathfindingPoint> createPath(GameObjectWithDistanceDetection startGameObject, double targetPointX, double targetPointY) {
@@ -53,7 +66,7 @@ public class Pathfinding {
                 List<PathfindingPoint> listOfPointToGoAroundObject = findPathAroundObject.findPathAroundObject(intersectionPoint);
                 listOfPathPoints.addAll(listOfPointToGoAroundObject);
                 currentPoint = listOfPathPoints.get(listOfPathPoints.size() - 1);
-            } 
+            }
         }
 
         if (finalPointIsDirectlyVisible) {
