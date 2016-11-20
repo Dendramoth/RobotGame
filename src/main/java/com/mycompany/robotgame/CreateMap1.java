@@ -121,13 +121,13 @@ public class CreateMap1 {
         SimpleBox simpleBox9 = new SimpleBox(new Point(3807, 7400), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(simpleBox9);
         
-   /*     BoxTriangle triangleBox1 = new BoxTriangle(new Point(4575,3624), graphicsContext, monitorWindow);
+        BoxTriangle triangleBox1 = new BoxTriangle(new Point(4575,3624), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(triangleBox1);
         BoxTriangle triangleBox2 = new BoxTriangle(new Point(2975,6696), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(triangleBox2);
         BoxTriangle triangleBox3 = new BoxTriangle(new Point(3935,7016), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(triangleBox3);
-        ContainerOpenHorizontal containerOpenHorizontal1 = new ContainerOpenHorizontal(new Point(5599,3880), graphicsContext, monitorWindow);
+/*        ContainerOpenHorizontal containerOpenHorizontal1 = new ContainerOpenHorizontal(new Point(5599,3880), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(containerOpenHorizontal1);
         ContainerOpenHorizontal containerOpenHorizontal2 = new ContainerOpenHorizontal(new Point(2975,7848), graphicsContext, monitorWindow);
         gridTable.insertGameObjectIntoGridCell(containerOpenHorizontal2);

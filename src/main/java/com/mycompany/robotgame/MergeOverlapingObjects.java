@@ -71,8 +71,21 @@ public class MergeOverlapingObjects {
         if (gameStaticObjectA.getPointsList(enemySize) != gameStaticObjectB.getPointsList(enemySize)) {
             PathFindingStaticObject pathFindingStaticObject = new PathFindingStaticObject(enemySize, gameStaticObjectA, gameStaticObjectB);
 
+            System.out.println("ObjectA:");
+            for (Point point : gameStaticObjectA.getPointsList(enemySize)){
+                System.out.println(point.getCoordX() + " " + point.getCoordY());
+            }
+            System.out.println("ObjectB:");
+            for (Point point : gameStaticObjectB.getPointsList(enemySize)){
+                System.out.println(point.getCoordX() + " " + point.getCoordY());
+            }
+            
             List<Point> finalUnionPointList  = new ArrayList<>(pathFindingStaticObject.getFinalUnionObjectPointList());
-                
+            
+            System.out.println("Union:");
+            for (Point point : finalUnionPointList){
+                System.out.println(point.getCoordX() + " " + point.getCoordY());
+            }
             
             gameStaticObjectA.setPointsList(finalUnionPointList, enemySize);
             gameStaticObjectA.getObjectToUpdateWhenUpdated(enemySize).add(gameStaticObjectB);

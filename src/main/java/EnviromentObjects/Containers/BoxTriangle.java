@@ -27,15 +27,33 @@ public class BoxTriangle extends GameStaticObject {
     private final List<MinigunHitIntoStaticObject> allHitsIntoTriangleBox = new ArrayList<>();
 
     public BoxTriangle(Point possition, GraphicsContext graphicsContext, MonitorWindow monitorWindow) {
-        super(getPoints(possition), getPoints(possition), getPoints(possition), possition, 256, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box2"));
+        super(getPoints(possition), getPoints64(possition), getPoints256(possition), possition, 256, 256, 0, graphicsContext, monitorWindow, LoadAllResources.getMapOfAllImages().get("box2"));
     }
 
     private static List<Point> getPoints(Point possition) {
         List<Point> pointList = new ArrayList<>();
-        pointList.add(new Point(30 + possition.getCoordX(), 238 + possition.getCoordY()));
-        pointList.add(new Point(233 + possition.getCoordX(), 238 + possition.getCoordY()));
-        pointList.add(new Point(233 + possition.getCoordX(), 10 + possition.getCoordY()));
         pointList.add(new Point(30 + possition.getCoordX(), 10 + possition.getCoordY()));
+        pointList.add(new Point(233 + possition.getCoordX(), 10 + possition.getCoordY()));
+        pointList.add(new Point(233 + possition.getCoordX(), 238 + possition.getCoordY()));
+        pointList.add(new Point(30 + possition.getCoordX(), 238 + possition.getCoordY()));
+        return pointList;
+    }
+    
+    private static List<Point> getPoints64(Point possition) {
+        List<Point> pointList = new ArrayList<>();
+        pointList.add(new Point(-2 + possition.getCoordX(), -22 + possition.getCoordY()));
+        pointList.add(new Point(265 + possition.getCoordX(), -22 + possition.getCoordY()));
+        pointList.add(new Point(265 + possition.getCoordX(), 270 + possition.getCoordY()));
+        pointList.add(new Point(-2 + possition.getCoordX(), 270 + possition.getCoordY()));
+        return pointList;
+    }
+    
+    private static List<Point> getPoints256(Point possition) {
+        List<Point> pointList = new ArrayList<>();
+        pointList.add(new Point(-34 + possition.getCoordX(), -54 + possition.getCoordY()));
+        pointList.add(new Point(297 + possition.getCoordX(), -54 + possition.getCoordY()));
+        pointList.add(new Point(297 + possition.getCoordX(), 302 + possition.getCoordY()));
+        pointList.add(new Point(-34 + possition.getCoordX(), 302 + possition.getCoordY()));
         return pointList;
     }
 
